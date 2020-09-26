@@ -4,7 +4,7 @@
 
 import React from "react";
 import { Divider } from "antd";
-import { Title } from "components";
+import { Title } from "common";
 
 const EmpavaNotes = ({ name }) => {
   const Section = (

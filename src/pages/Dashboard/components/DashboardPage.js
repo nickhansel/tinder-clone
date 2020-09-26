@@ -8,15 +8,16 @@ import CardItem from "./CardItem";
 import MoodFilter from "./MoodFilter";
 import "./Dashboard.css";
 import { mockData } from "utils/mock";
-import { Layout } from "components";
+import { Layout } from "common";
+import { DASHBOARD_TITLE } from "../constants";
 
 const DashboardPage = ({ history }) => {
   const [filteredData, setMoodAction] = useState(mockData);
+  const moodFilter = <MoodFilter setMoodAction={setMoodAction} />;
 
   const renderCards = () => {
     return (
       <div>
-        <MoodFilter setMoodAction={setMoodAction} />
         <div className="wrapper">
           <div className="cards_wrap">
             {filteredData.map((client, index) => {
@@ -30,7 +31,7 @@ const DashboardPage = ({ history }) => {
 
   // Render table
   return (
-    <Layout>
+    <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
       <div> {renderCards()}</div>
     </Layout>
   );

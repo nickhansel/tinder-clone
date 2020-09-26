@@ -6,22 +6,21 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import JSignOut from "../../auth/SignOut";
 import { getLocationName } from "utils";
-import { Title } from "../Typography";
-import { ContentContainer, IconStyled } from "./style";
+import { SearchInput, H4, Profile } from "common";
+import {
+  ContentContainer,
+  IconStyled,
+  HeaderStyled,
+  HeaderActions,
+} from "./style";
 import { iconPulse, iconGear, iconPerson, iconLogo } from "media/svg";
 import "./Layout.css";
 
 import { Layout as AntLayout, Menu } from "antd";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
 
-const { Header, Sider } = AntLayout;
+const { Sider } = AntLayout;
 
-const Layout = ({ children }) => {
+const Layout = ({ children, title, extra = null }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggle = () => {
@@ -32,7 +31,7 @@ const Layout = ({ children }) => {
     <AntLayout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo-side-bar">
-          <img src={iconLogo} alt="logo side bar" />
+          <img src={iconLogo} onClick={() => toggle()} alt="logo side bar" />
         </div>
         <Menu defaultSelectedKeys={["1"]}>
           <Menu.Item
@@ -56,15 +55,14 @@ const Layout = ({ children }) => {
         </Menu>
       </Sider>
       <AntLayout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "trigger",
-              onClick: toggle,
-            }
-          )}
-        </Header>
+        <HeaderStyled>
+          <H4>{title}</H4>
+          <HeaderActions>
+            <SearchInput />
+            <Profile />
+          </HeaderActions>
+        </HeaderStyled>
+        {extra}
         <ContentContainer>{children}</ContentContainer>
       </AntLayout>
     </AntLayout>

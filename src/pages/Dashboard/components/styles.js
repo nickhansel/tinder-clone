@@ -3,18 +3,28 @@
  */
 
 import styled from "styled-components";
+import { mainColors } from "utils";
 
+export const MoodFilterWrapper = styled.div`
+  background-color: ${mainColors.white};
+  width: 100%;
+`;
 export const MoodFilterContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+  min-width: 330px;
   width: 50%;
 
   button {
     border: none;
     background: none;
-    color: #838c95;
+    color: ${mainColors.grey2};
     outline: none;
     padding: 0;
+
+    p {
+      margin: 0;
+    }
   }
 
   button:hover {

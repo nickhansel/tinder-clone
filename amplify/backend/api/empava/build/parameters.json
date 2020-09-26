@@ -1,0 +1,8 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "empava",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-authcra-dev-231551-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/b41e6943e882e89a4a0c935a51fffc57b27bc722"
+}

@@ -1,0 +1,4 @@
+type Subscribe @model {
+  id: ID!
+  email_name: String!
+}

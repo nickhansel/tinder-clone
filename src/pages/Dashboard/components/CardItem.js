@@ -26,7 +26,8 @@ const CardItem = ({
       <div className="card_inner">
         <div className="card_avatar">
           <img
-            src={require(`../../media/gifs/${clientMood || "boy_happy.gif"}`)}
+            src={require(`../../../media/gifs/${clientMood ||
+              "boy_happy.gif"}`)}
             alt=""
           />
         </div>

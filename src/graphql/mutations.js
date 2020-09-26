@@ -1,180 +1,42 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createSubscription = /* GraphQL */ `
-  mutation CreateSubscription(
-    $input: CreateSubscriptionInput!
-    $condition: ModelSubscriptionConditionInput
+export const createSubscribe = /* GraphQL */ `
+  mutation CreateSubscribe(
+    $input: CreateSubscribeInput!
+    $condition: ModelSubscribeConditionInput
   ) {
-    createSubscription(input: $input, condition: $condition) {
+    createSubscribe(input: $input, condition: $condition) {
       id
       email_name
-      onCreateSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
-      onUpdateSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
-      onDeleteSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const updateSubscription = /* GraphQL */ `
-  mutation UpdateSubscription(
-    $input: UpdateSubscriptionInput!
-    $condition: ModelSubscriptionConditionInput
+export const updateSubscribe = /* GraphQL */ `
+  mutation UpdateSubscribe(
+    $input: UpdateSubscribeInput!
+    $condition: ModelSubscribeConditionInput
   ) {
-    updateSubscription(input: $input, condition: $condition) {
+    updateSubscribe(input: $input, condition: $condition) {
       id
       email_name
-      onCreateSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
-      onUpdateSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
-      onDeleteSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const deleteSubscription = /* GraphQL */ `
-  mutation DeleteSubscription(
-    $input: DeleteSubscriptionInput!
-    $condition: ModelSubscriptionConditionInput
+export const deleteSubscribe = /* GraphQL */ `
+  mutation DeleteSubscribe(
+    $input: DeleteSubscribeInput!
+    $condition: ModelSubscribeConditionInput
   ) {
-    deleteSubscription(input: $input, condition: $condition) {
+    deleteSubscribe(input: $input, condition: $condition) {
       id
       email_name
-      onCreateSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
-      onUpdateSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
-      onDeleteSubscription {
-        id
-        email_name
-        onCreateSubscription {
-          id
-          email_name
-        }
-        onUpdateSubscription {
-          id
-          email_name
-        }
-        onDeleteSubscription {
-          id
-          email_name
-        }
-      }
+      createdAt
+      updatedAt
     }
   }
 `;

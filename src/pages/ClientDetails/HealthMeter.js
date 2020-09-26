@@ -5,7 +5,7 @@
 import React from "react";
 import { Divider } from "antd";
 import { iconHealth } from "media/svg";
-import { SubTitle } from "components";
+import { SubTitle } from "common";
 
 const iconStyle = {
   height: 10,

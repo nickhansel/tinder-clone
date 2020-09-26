@@ -4,7 +4,7 @@
 
 import React from "react";
 import { Divider } from "antd";
-import { SubTitle } from "components";
+import { SubTitle } from "common";
 
 const ProfileSection = ({ header, content, extra }) => {
   const renderContent = (

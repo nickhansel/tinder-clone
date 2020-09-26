@@ -1,6 +1,7 @@
 import React from "react";
-import { MoodFilterContainer } from "./styles";
+import { MoodFilterContainer, MoodFilterWrapper } from "./styles";
 import { moodFilterData, filterDataByMood } from "utils";
+import { Note1 } from "common";
 
 const MoodFilter = ({ setMoodAction }) => {
   const handleMoodClick = (moodId) => {
@@ -11,7 +12,7 @@ const MoodFilter = ({ setMoodAction }) => {
 
   const filterButton = ({ id, name }) => (
     <button id={id} onClick={() => handleMoodClick(id)}>
-      {name}
+      <Note1>{name}</Note1>
     </button>
   );
   const renderFilterButtons = (
@@ -22,7 +23,11 @@ const MoodFilter = ({ setMoodAction }) => {
     </>
   );
 
-  return <MoodFilterContainer>{renderFilterButtons}</MoodFilterContainer>;
+  return (
+    <MoodFilterWrapper>
+      <MoodFilterContainer>{renderFilterButtons}</MoodFilterContainer>
+    </MoodFilterWrapper>
+  );
 };
 
 export default MoodFilter;
