@@ -4,9 +4,14 @@
 
 import React from "react";
 import { Row } from "antd";
-import CardItem from "./CardItem";
+import { ClientCard } from "common";
+import { mockMoods } from "utils/mock";
 
 const ClientList = ({ data, minVal, maxVal, history }) => {
+  const handleCardClick = (clientId) => {
+    history.push(`client/${clientId}`);
+  };
+
   return (
     <div>
       <Row justify="center">
@@ -15,7 +20,7 @@ const ClientList = ({ data, minVal, maxVal, history }) => {
           data
             .slice(minVal, maxVal)
             .map((client, index) => (
-              <CardItem key={index} {...client} history={history} />
+              <ClientCard action={handleCardClick} {...client} />
             ))}
       </Row>
     </div>

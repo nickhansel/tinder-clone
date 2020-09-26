@@ -18,9 +18,17 @@
   border-right: 0px !important;
 }
 
+.ant-menu-item img {
+  opacity: 0.4;
+}
+
+.ant-menu-item-selected img {
+  opacity: 1;
+}
+
 .ant-menu-item-active {
   background-color: #14709f !important;
-  color: #ffff;
+  color: #ffff !important;
   font-weight: 500;
 }
 
