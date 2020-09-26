@@ -1,0 +1,133 @@
+/* header styles */
+.header {
+  position: relative;
+  z-index: 100;
+}
+.header-container {
+  box-sizing: border-box;
+  background-color: #376aed;
+  height: 70px;
+  position: relative;
+  width: 100%;
+}
+
+.header-container a {
+  color: #ffffff;
+}
+
+.header-content {
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 15px 30px;
+}
+.header-logo {
+  height: 40px;
+  width: 150px;
+}
+.header-shadow {
+  box-shadow: 0px -20px 20px 8px rgb(128, 128, 128);
+  height: 70px;
+  position: fixed;
+  width: 100%;
+}
+.header-shadow-helper {
+  background-color: #fff;
+  height: 10px;
+  position: absolute;
+  top: 70px;
+  width: 100%;
+}
+
+.header .nav {
+  margin-right: 10px;
+}
+.header .nav a {
+  line-height: 14px;
+}
+.header .nav a:hover {
+  text-decoration: underline;
+}
+
+.nav .nav-bar {
+  display: flex;
+}
+
+.nav .nav-dropdown {
+  display: none;
+  font-size: 22px;
+  margin-right: -30px;
+}
+
+.section {
+  padding: 50px;
+}
+
+.section-container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.bucket-card {
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(128, 128, 128, 0.25);
+  border-radius: 40px;
+  max-width: 350px;
+  margin: 15px;
+  min-width: 200px;
+  min-height: 400px;
+  padding: 40px;
+}
+.bucket {
+  margin: 15px;
+  max-width: 250px;
+  padding: 25px;
+}
+.bucket h3,
+.bucket p {
+  margin: 15px 0 0;
+}
+.bucket-card h3,
+.bucket-card p {
+  margin: 15px 0 0;
+  padding: 0;
+}
+.bucket-button {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.my-dots-class button {
+  background-color: #376aed !important;
+  border-radius: 50px !important;
+  height: 14px !important;
+  margin-top: 50px;
+  margin-right: 20px;
+  width: 14px !important;
+}
+
+/* Demo section */
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media (max-width: 540px) {
+  .nav .nav-bar {
+    display: none;
+  }
+
+  .nav .nav-dropdown {
+    display: flex;
+    position: absolute;
+    right: 45px;
+    top: 25px;
+  }
+}

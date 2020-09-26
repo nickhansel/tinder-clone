@@ -1,0 +1,9 @@
+export const primaryBlue = "#376AED";
+export const primaryGreen = "#48C4AA";
+export const primaryRed = "#F8555F";
+export const bgLightBlue = "#F0F5FF";
+export const contactBlue = "#9AB4F5";
+export const mintGreen = "#20CDAE";
+export const mustardYellow = "#F9CD34";
+export const roseRed = "#FD6A65";
+export const slateGrey = "#F2F2F2";

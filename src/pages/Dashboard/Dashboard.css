@@ -1,0 +1,92 @@
+.card_avatar img {
+  border-radius: 8px;
+  display: block;
+  height: 300px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  margin: 20px auto;
+  margin-top: 100px;
+}
+
+.cards_wrap {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards_wrap .card_item {
+  width: 25%;
+  padding: 5px;
+}
+
+.cards_wrap .card_inner {
+  background: #fff;
+}
+
+.cards_wrap .card_top {
+  width: 100%;
+  min-height: 205px;
+  padding-bottom: 0;
+}
+
+.cards_wrap .card_inner {
+  padding: 15px;
+  box-shadow: 2px 2px 5px lightgray;
+  border-radius: 8px;
+}
+
+.cards_wrap .card_inner .card_category {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cards_wrap .card_inner .card_avatar .title {
+  color: #0071bc;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.card_info {
+  font-size: 13px;
+  line-height: 22px;
+  padding-top: 15px;
+  text-align: left;
+}
+
+.card_company {
+  padding-bottom: 5px;
+}
+
+.card_client_name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card_activity {
+  padding-top: 5px;
+}
+
+@media (max-width: 1024px) {
+  .cards_wrap .card_item {
+    width: 33.3%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards_wrap .card_item {
+    width: 50%;
+  }
+}
+
+@media (max-width: 528px) {
+  .cards_wrap .card_top {
+    height: auto;
+  }
+  .cards_wrap .card_item {
+    width: 100%;
+  }
+}
