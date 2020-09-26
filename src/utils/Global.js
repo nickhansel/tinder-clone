@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    width: 90%;
+    width: 100%;
     margin: auto;
   }
 

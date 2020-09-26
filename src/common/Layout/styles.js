@@ -10,6 +10,8 @@ const { Header } = Layout;
 
 export const ContentContainer = styled(Layout.Content)`
   background-color: ${slateGrey};
+  min-width: 1180px;
+  padding: 20px;
 `;
 
 export const IconStyled = styled.img`
@@ -22,7 +24,7 @@ export const HeaderStyled = styled(Header)`
   background-color: ${mainColors.white};
   display: flex;
   justify-content: space-between;
-  min-width: 460px;
+  min-width: 480px;
   padding: 15px 15px 15px 24px;
 `;
 

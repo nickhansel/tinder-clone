@@ -4,35 +4,49 @@
 
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import CardItem from "./CardItem";
+import { Pagination } from "antd";
+import ClientsList from "./ClientsList";
 import MoodFilter from "./MoodFilter";
-import "./Dashboard.css";
 import { mockData } from "utils/mock";
 import { Layout } from "common";
 import { DASHBOARD_TITLE } from "../constants";
+import "./Dashboard.css";
+
+const numEachPage = 8;
 
 const DashboardPage = ({ history }) => {
   const [filteredData, setMoodAction] = useState(mockData);
+  const [page, setPage] = useState(1);
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(8);
+
   const moodFilter = <MoodFilter setMoodAction={setMoodAction} />;
 
-  const renderCards = () => {
-    return (
-      <div>
-        <div className="wrapper">
-          <div className="cards_wrap">
-            {filteredData.map((client, index) => {
-              return <CardItem key={index} {...client} history={history} />;
-            })}
-          </div>
-        </div>
-      </div>
-    );
+  const onChange = (page) => {
+    // Pagination
+    setPage(page);
+    setMinVal((page - 1) * numEachPage);
+    setMaxVal(page * numEachPage);
   };
 
-  // Render table
+  const cardListProps = {
+    minVal,
+    maxVal,
+    data: filteredData,
+  };
+  const paginationProps = {
+    current: page,
+    defaultCurrent: 1,
+    onChange: onChange,
+    pageSize: 8,
+    showTotal: (total) => `Total ${filteredData.length} clients`,
+    total: filteredData.length,
+  };
+
   return (
     <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
-      <div> {renderCards()}</div>
+      <ClientsList {...cardListProps} />
+      <Pagination {...paginationProps} />
     </Layout>
   );
 };

@@ -1,19 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { iconBug, iconAttention, iconEscalate, iconNewContact } from "media/svg";
+import {
+  iconBug,
+  iconAttention,
+  iconEscalate,
+  iconNewContact,
+} from "media/svg";
 import { BudgeStyled } from "./styles";
 
 const statusData = {
   attention: iconAttention,
   bug: iconBug,
   escalate: iconEscalate,
-  contact: iconNewContact
-}
+  contact: iconNewContact,
+};
 
 const Budge = ({ strategy }) => {
   const handleBudgeClick = () => {
     // open modal
-  }
+  };
 
   return (
     <BudgeStyled onClick={handleBudgeClick}>

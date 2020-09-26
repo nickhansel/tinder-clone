@@ -33,3 +33,9 @@
 aside .ant-layout-sider {
   flex: 0 0 64px !important;
 }
+
+.ant-layout {
+  min-height: 700px;
+  /* overflow: auto;
+  width: 1380px; */
+}

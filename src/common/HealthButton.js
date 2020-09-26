@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import iconHealth from "media/images/icon-health.png";
 import { ButtonHealthStyled } from "./styles";
 import { mintGreen, roseRed, mustardYellow } from "utils";
+import { Note1 } from "common";
 
 const HealthButton = ({ healthScore }) => {
   let healthColor = mintGreen;

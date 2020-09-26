@@ -61,16 +61,19 @@ export const Text = styled.p`
   font-size: ${typeScaleSm.text};
   font-weight: ${weightScale.regular};
   line-height: 24px;
+  margin: 0;
 `;
 export const Note1 = styled.p`
   font-family: ${fonts.roboto};
   font-size: ${typeScaleSm.note1};
   font-weight: ${weightScale.medium};
   line-height: 20px;
+  margin-bottom: 5px;
 `;
 export const Note2 = styled.p`
   font-family: ${fonts.roboto};
   font-size: ${typeScaleSm.note2};
   font-weight: ${weightScale.regular};
   line-height: 20px;
+  margin-bottom: 5px;
 `;

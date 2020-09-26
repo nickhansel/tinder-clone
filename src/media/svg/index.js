@@ -10,6 +10,7 @@ import iconGear from "./icon-gear.svg";
 import iconLogo from "./icon-logo.svg";
 import iconPerson from "./icon-person.svg";
 import iconSearch from "./icon-search.svg";
+import iconBack from "./icon-back.svg";
 
 export {
   iconBug,
@@ -24,4 +25,5 @@ export {
   iconLogo,
   iconPerson,
   iconSearch,
+  iconBack,
 };

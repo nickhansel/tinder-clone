@@ -5,14 +5,13 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import JSignOut from "../../auth/SignOut";
-import { getLocationName } from "utils";
-import { SearchInput, H4, Profile } from "common";
+import { SearchInput, SubH1, Profile } from "common";
 import {
   ContentContainer,
   IconStyled,
   HeaderStyled,
   HeaderActions,
-} from "./style";
+} from "./styles";
 import { iconPulse, iconGear, iconPerson, iconLogo } from "media/svg";
 import "./Layout.css";
 
@@ -20,7 +19,7 @@ import { Layout as AntLayout, Menu } from "antd";
 
 const { Sider } = AntLayout;
 
-const Layout = ({ children, title, extra = null }) => {
+const Layout = ({ prefix, children, title, extra = null }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggle = () => {
@@ -56,7 +55,7 @@ const Layout = ({ children, title, extra = null }) => {
       </Sider>
       <AntLayout className="site-layout">
         <HeaderStyled>
-          <H4>{title}</H4>
+          <SubH1>{title}</SubH1>
           <HeaderActions>
             <SearchInput />
             <Profile />

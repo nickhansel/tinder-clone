@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "antd";
 import { iconSearch } from "media/svg";
-import "./style.css";
+import "./styles.css";
 
 const SearchInput = () => {
   const inputProps = {
