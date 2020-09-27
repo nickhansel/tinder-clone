@@ -1,20 +1,17 @@
 import { combineReducers } from "redux";
 import global from "reducers/global";
-import { landingSlice } from "pages/Langing";
-import { dashboardSlice } from "pages/Dashboard";
+import landingSlice from "pages/Landing/reducers";
+import dashboardSlice from "pages/Dashboard/reducers";
+import { connectRouter } from "connected-react-router";
 
-console.log("landingSlice 11");
-
-console.log(landingSlice);
-
-console.log("dashboardSlice");
-console.log(dashboardSlice);
-
-export default function createReducer(injectedReducers = {}) {
+const createRootReducer = (history, injectedReducers = {}) => {
   return combineReducers({
+    router: connectRouter(history),
     global,
     landingSlice,
     dashboardSlice,
     ...injectedReducers,
   });
-}
+};
+
+export default createRootReducer;

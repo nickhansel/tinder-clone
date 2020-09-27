@@ -27,7 +27,6 @@ export const subscribe = createAsyncThunk(
 );
 
 const initialState = {
-  paymentModalVisible: false,
   subscribePending: false,
   subscribeSuccess: false,
 };

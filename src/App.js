@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import "./App.css";
 import { withAuthenticator } from "aws-amplify-react";
 import Amplify, { Auth } from "aws-amplify";
 import aws_exports from "./aws-exports";
@@ -15,7 +14,7 @@ import { GlobalStyle } from "utils";
 
 Amplify.configure(aws_exports);
 
-// TODO
+// TODO set this routes private
 const Routes = (
   <Switch>
     <Route exact path="/dashboard" component={DashboardPage} />

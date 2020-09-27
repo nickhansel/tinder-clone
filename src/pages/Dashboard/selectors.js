@@ -2,13 +2,11 @@
   Dashboard  Selector
  */
 
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 const selectDashboardState = (state) => {
-  console.log(state);
-
-  return state.dashboard;
+  return state.dashboardSlice;
 };
 
 export const selectClients = () =>
-  createSelector(selectDashboardState, (state) => state.clients);
+  createSelector(selectDashboardState, (state) => state);

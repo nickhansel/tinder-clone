@@ -4,12 +4,12 @@
 }
 
 .ant-layout-sider-dark {
-  background-color: #0e3860;
+  background-color: #0e3860 !important;
 }
 
 .ant-menu {
-  background-color: #0e3860;
-  color: #6e88a0;
+  background-color: #0e3860 !important;
+  color: #6e88a0 !important;
 }
 
 .ant-menu-inline,
@@ -34,7 +34,7 @@
 
 .ant-menu-item-selected {
   background-color: #14709f !important;
-  color: #ffff;
+  color: #ffff !important;
   font-weight: 500;
 }
 
