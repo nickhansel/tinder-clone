@@ -9,7 +9,7 @@ import { mockMoods } from "utils/mock";
 
 const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   const handleCardClick = (clientId) => {
-    history.push(`client/${clientId}`);
+    history.push(`dashboard/client/${clientId}`);
   };
 
   return (

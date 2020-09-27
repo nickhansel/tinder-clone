@@ -19,54 +19,35 @@ export const getClient = (searchString) => {
   return targetClient;
 };
 
-/*
-   Temporary helper to get location name for nav bar
- */
-export const getLocationName = (pathname) => {
-  if (pathname === "/") {
-    return "Client Dashboard";
-  }
+const filterHelper = (data, moods) => {
+  const dataCopy = [...data];
 
-  if (pathname.includes("client")) {
-    let cl = "";
-    const client = getClient(pathname);
-
-    return client ? client.name : cl;
-  }
-
-  if (pathname.includes("settings")) {
-    return "Settings";
-  }
-
-  if (pathname.includes("insights")) {
-    return "Insights";
-  }
-};
-
-const filterHelper = (moods) => {
-  const mockCopy = [...mockData];
-
-  const filtered = mockCopy.filter((clientItem) => {
+  const filtered = dataCopy.filter((clientItem) => {
     return moods.includes(clientItem.status);
   });
 
   return filtered;
 };
 
-export const filterDataByMood = (moodId) => {
+export const filterDataByMood = (data, moodId) => {
   switch (moodId) {
     case "all":
-      return mockData;
+      return data;
     case "champ":
-      return filterHelper(["champBoy", "champGirl", "happyBoy", "happyGirl"]);
+      return filterHelper(data, [
+        "champBoy",
+        "champGirl",
+        "happyBoy",
+        "happyGirl",
+      ]);
     case "attention":
-      return filterHelper(["curiousBoy", "curiousBoy"]);
+      return filterHelper(data, ["curiousBoy", "curiousBoy"]);
     case "cold":
-      return filterHelper(["indiffBoy", "indiffGirl"]);
+      return filterHelper(data, ["indiffBoy", "indiffGirl"]);
     case "risk":
-      return filterHelper(["sadBoy", "sadGirl"]);
+      return filterHelper(data, ["sadBoy", "sadGirl"]);
     default:
-      return mockData;
+      return data;
   }
 };
 

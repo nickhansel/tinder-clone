@@ -7,9 +7,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { message } from "antd";
 import { getError } from "utils";
+import { BRANCH_NAME } from "../constants";
 
 export const subscribe = createAsyncThunk(
-  "landing/subscribe",
+  `${BRANCH_NAME}/subscribe`,
   async (param, { extra, rejectWithValue }) => {
     const { api } = extra;
     const { email } = param || {};
@@ -32,7 +33,7 @@ const initialState = {
 };
 
 const landingSlice = createSlice({
-  name: "landing",
+  name: BRANCH_NAME,
   initialState,
   extraReducers: {
     [subscribe.fulfilled]: (state) => {

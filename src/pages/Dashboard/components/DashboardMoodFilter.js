@@ -1,13 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { MoodFilterContainer, MoodFilterWrapper } from "./styles";
-import { MOOD_FILTER, filterDataByMood } from "utils";
+import { MOOD_FILTER } from "../constants";
 import { Note1 } from "common";
+import { setFilter } from "../reducers/dashboardSlice";
 
 const MoodFilter = ({ setMoodAction }) => {
-  const handleMoodClick = (moodId) => {
-    const data = filterDataByMood(moodId);
+  const dispatch = useDispatch();
 
-    setMoodAction(data);
+  const handleMoodClick = (moodId) => {
+    dispatch(setFilter(moodId));
   };
 
   const filterButton = ({ id, name }) => (

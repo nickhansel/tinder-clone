@@ -8,10 +8,10 @@ import { Note1 } from "common";
 const HealthButton = ({ healthScore }) => {
   let healthColor = mintGreen;
 
-  if (healthColor < 4 && healthColor >= 3) {
+  if (healthScore < 4 && healthScore >= 3) {
     healthColor = mustardYellow;
   }
-  if (healthColor < 3) {
+  if (healthScore < 3) {
     healthColor = roseRed;
   }
 

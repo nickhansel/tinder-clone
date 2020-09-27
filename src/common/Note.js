@@ -6,7 +6,7 @@ import React from "react";
 import { Divider } from "antd";
 import { Title } from "common";
 
-const EmpavaNotes = ({ name }) => {
+const Note = ({ name }) => {
   const Section = (
     <div>
       <h4>
@@ -32,4 +32,4 @@ const EmpavaNotes = ({ name }) => {
   );
 };
 
-export default EmpavaNotes;
+export default Note;

@@ -5,19 +5,30 @@ import { ClientCardStyled, ContainerFlex, DividerStyled } from "./styles";
 import { SubH1, Note2 } from "./Typography";
 import { mainColors } from "utils";
 
-const ClientCard = ({ name, position, company }) => {
+const ClientCard = ({
+  name,
+  position,
+  company,
+  health,
+  activity,
+  strategy,
+}) => {
+  const renderBudges = strategy.map((strategyItem) => (
+    <Budge strategy={strategyItem} />
+  ));
+
   return (
     <ClientCardStyled>
       <AvatarContainer />
-      <SubH1>Name</SubH1>
-      <Note2>Director of Marketing at Jones & Waller</Note2>
-      <Note2 style={{ color: mainColors.grey2 }}>
-        Last activity is at 9:23PM on 24/08/2020
+      <SubH1>{name}</SubH1>
+      <Note2>
+        {position} at {company}
       </Note2>
+      <Note2 style={{ color: mainColors.grey2 }}>{activity}</Note2>
       <DividerStyled />
       <ContainerFlex style={{ paddingTop: 7 }}>
-        <HealthButton healthScore={3} />
-        <Budge strategy="bug" />
+        <HealthButton healthScore={health} />
+        <div>{renderBudges}</div>
       </ContainerFlex>
     </ClientCardStyled>
   );
@@ -27,6 +38,9 @@ ClientCard.propTypes = {
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
   company: PropTypes.string.isRequired,
+  health: PropTypes.number.isRequired,
+  activity: PropTypes.string.isRequired,
+  strategy: PropTypes.array,
 };
 
 export default ClientCard;

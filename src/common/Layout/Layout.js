@@ -13,7 +13,7 @@ import {
   HeaderActions,
 } from "./styles";
 import { iconPulse, iconGear, iconPerson, iconLogo } from "media/svg";
-import "./Layout.css";
+import "./styles.css";
 
 import { Layout as AntLayout, Menu } from "antd";
 
