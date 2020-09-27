@@ -1,6 +1,6 @@
 import React from "react";
 import { MoodFilterContainer, MoodFilterWrapper } from "./styles";
-import { moodFilterData, filterDataByMood } from "utils";
+import { MOOD_FILTER, filterDataByMood } from "utils";
 import { Note1 } from "common";
 
 const MoodFilter = ({ setMoodAction }) => {
@@ -11,13 +11,13 @@ const MoodFilter = ({ setMoodAction }) => {
   };
 
   const filterButton = ({ id, name }) => (
-    <button id={id} onClick={() => handleMoodClick(id)}>
+    <button id={id} key={id} onClick={() => handleMoodClick(id)}>
       <Note1>{name}</Note1>
     </button>
   );
   const renderFilterButtons = (
     <>
-      {moodFilterData.map((item) => {
+      {MOOD_FILTER.map((item) => {
         return filterButton({ ...item });
       })}
     </>

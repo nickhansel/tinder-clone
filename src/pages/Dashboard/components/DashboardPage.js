@@ -5,14 +5,17 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Pagination } from "antd";
-import ClientsList from "./ClientsList";
-import MoodFilter from "./MoodFilter";
-import { mockData } from "utils/mock";
+import DashboardClientList from "./DashboardClientsList";
+import MoodFilter from "./DashboardMoodFilter";
 import { Layout } from "common";
 import { DASHBOARD_TITLE } from "../constants";
+import { mockData } from "utils/mock";
+import { selectClients } from "../selectors";
 import "./Dashboard.css";
 
 const numEachPage = 8;
+console.log("selectClients");
+console.log(selectClients());
 
 const DashboardPage = ({ history }) => {
   const [filteredData, setMoodAction] = useState(mockData);
@@ -45,7 +48,7 @@ const DashboardPage = ({ history }) => {
 
   return (
     <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
-      <ClientsList {...cardListProps} />
+      <DashboardClientList {...cardListProps} />
       <Pagination {...paginationProps} />
     </Layout>
   );

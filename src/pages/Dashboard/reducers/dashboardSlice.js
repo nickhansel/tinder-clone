@@ -1,13 +1,12 @@
 /*
- *
  * Dashboard slice
- *
  */
 
 import { createSlice } from "@reduxjs/toolkit";
+import { mockData } from "utils/mock";
 
 const initialState = {
-  clients: [],
+  clients: mockData,
 };
 
 const dashboardSlice = createSlice({

@@ -7,7 +7,7 @@ import { Row } from "antd";
 import { ClientCard } from "common";
 import { mockMoods } from "utils/mock";
 
-const ClientList = ({ data, minVal, maxVal, history }) => {
+const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   const handleCardClick = (clientId) => {
     history.push(`client/${clientId}`);
   };
@@ -20,11 +20,11 @@ const ClientList = ({ data, minVal, maxVal, history }) => {
           data
             .slice(minVal, maxVal)
             .map((client, index) => (
-              <ClientCard action={handleCardClick} {...client} />
+              <ClientCard key={index} action={handleCardClick} {...client} />
             ))}
       </Row>
     </div>
   );
 };
 
-export default ClientList;
+export default DashboardClientList;
