@@ -4,6 +4,7 @@
 
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientsList";
 import MoodFilter from "./DashboardMoodFilter";
@@ -14,14 +15,14 @@ import { selectClients } from "../selectors";
 import "./Dashboard.css";
 
 const numEachPage = 8;
-console.log("selectClients");
-console.log(selectClients());
 
 const DashboardPage = ({ history }) => {
   const [filteredData, setMoodAction] = useState(mockData);
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(8);
+  console.log("selectClients");
+  console.log(useSelector(selectClients()));
 
   const moodFilter = <MoodFilter setMoodAction={setMoodAction} />;
 
