@@ -3,7 +3,6 @@
  */
 
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientsList";
@@ -28,9 +27,10 @@ const DashboardPage = ({ history }) => {
   };
 
   const cardListProps = {
+    data: clientsData,
+    history,
     minVal,
     maxVal,
-    data: clientsData,
   };
   const paginationProps = {
     current: page,
@@ -49,4 +49,4 @@ const DashboardPage = ({ history }) => {
   );
 };
 
-export default withRouter(DashboardPage);
+export default DashboardPage;

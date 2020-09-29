@@ -19,3 +19,9 @@ export const selectFilteredClients = () =>
 
     return filteredClients;
   });
+
+export const selectBadgeModal = () =>
+  createSelector(selectDashboardState, (state) => state.isBadgeModal);
+
+export const selectClient = () =>
+  createSelector(selectDashboardState, (state) => state.selectedClientId);

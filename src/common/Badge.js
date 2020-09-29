@@ -15,20 +15,20 @@ const statusData = {
   contact: iconNewContact,
 };
 
-const Budge = ({ strategy }) => {
-  const handleBudgeClick = () => {
+const Badge = ({ strategy }) => {
+  const handleBadgeClick = () => {
     // open modal
   };
 
   return (
-    <BudgeStyled onClick={handleBudgeClick}>
+    <BudgeStyled onClick={handleBadgeClick}>
       <img src={statusData[strategy]} alt="health score" />
     </BudgeStyled>
   );
 };
 
-Budge.propTypes = {
+Badge.propTypes = {
   strategy: PropTypes.string.isRequired,
 };
 
-export default Budge;
+export default Badge;

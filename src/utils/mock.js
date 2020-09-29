@@ -8,6 +8,7 @@ export const mockData = [
     status: "happyBoy",
     health: 4.5,
     strategy: [],
+    renewalDate: "12/10/2020",
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const mockData = [
     status: "champBoy",
     health: 5,
     strategy: [],
+    renewalDate: "02/10/2021",
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ export const mockData = [
     status: "sadBoy",
     health: 2,
     strategy: ["attention"],
+    renewalDate: "12/10/2020",
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ export const mockData = [
     status: "indiffBoy",
     health: 2.4,
     strategy: ["attention", "bug"],
+    renewalDate: "12/20/2020",
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ export const mockData = [
     status: "indiffBoy",
     health: 2.4,
     strategy: ["bug"],
+    renewalDate: "11/18/2020",
   },
   {
     id: 6,
@@ -58,6 +63,7 @@ export const mockData = [
     status: "happyGirl",
     health: 4.5,
     strategy: [],
+    renewalDate: "12/10/2020",
   },
   {
     id: 7,
@@ -68,6 +74,7 @@ export const mockData = [
     status: "champBoy",
     health: 5,
     strategy: [],
+    renewalDate: "12/10/2020",
   },
   {
     id: 8,
@@ -78,6 +85,7 @@ export const mockData = [
     status: "curiousBoy",
     health: 3,
     strategy: [],
+    renewalDate: "12/10/2020",
   },
   {
     id: 9,
@@ -88,6 +96,7 @@ export const mockData = [
     status: "happyBoy",
     health: 4.3,
     strategy: [],
+    renewalDate: "12/10/2020",
   },
   {
     id: 10,
@@ -98,6 +107,7 @@ export const mockData = [
     status: "champGirl",
     health: 4.9,
     strategy: [],
+    renewalDate: "12/10/2020",
   },
   {
     id: 11,
@@ -108,6 +118,7 @@ export const mockData = [
     status: "sadGirl",
     health: 1.9,
     strategy: ["escalate", "contact"],
+    renewalDate: "12/10/2020",
   },
   {
     id: 12,
@@ -118,6 +129,7 @@ export const mockData = [
     status: "indiffBoy",
     health: 3.1,
     strategy: [],
+    renewalDate: "11/10/2020",
   },
   {
     id: 13,
@@ -128,6 +140,7 @@ export const mockData = [
     status: "indiffBoy",
     health: 3.2,
     strategy: [],
+    renewalDate: "12/10/2021",
   },
   {
     id: 14,
@@ -138,6 +151,7 @@ export const mockData = [
     status: "happyGirl",
     health: 4.2,
     strategy: [],
+    renewalDate: "05/20/2021",
   },
   {
     id: 15,
@@ -148,6 +162,7 @@ export const mockData = [
     status: "happyBoy",
     health: 4.2,
     strategy: [],
+    renewalDate: "04/10/2021",
   },
 ];
 
@@ -157,3 +172,42 @@ export const mockMoods = {
   champBoy: "boy_champ.gif",
   indiffBoy: "boy_indifferent.gif",
 };
+
+export const notesMock = [
+  {
+    id: 20,
+    clientId: 4,
+    contactId: 2,
+    createdAt: "6/19/20 1:34 PM",
+    title: "Video chat going over our new features",
+    text:
+      "I went over our new features in our latest update to make sure Mike is comfortable using them and understands the value they can add for his team. I will follow up on this with an email next week.",
+  },
+  {
+    id: 21,
+    clientId: 4,
+    contactId: 2,
+    createdAt: "6/19/20 1:34 PM",
+    title: "More focus on social marketing",
+    text:
+      "I’ve been sending more email touchpoints with a social marketing focus lately. I think our social marketing features will really help AirNinja grow their social presence. Mike seems interested in utilizing more of our...",
+  },
+  {
+    id: 22,
+    clientId: 4,
+    contactId: 2,
+    createdAt: "6/19/20 1:34 PM",
+    title: "Video chat going over our new features",
+    text:
+      "Chatted with Mike about a bug he is currently experiencing. He is having trouble getting his other team members signed up on the platform. I assigned a bug badge with further notes to the account and will follow...",
+  },
+  {
+    id: 26,
+    clientId: 4,
+    contactId: 2,
+    createdAt: "6/19/20 1:34 PM",
+    title: "Video chat going over our new features",
+    text:
+      "Chatted with Mike about a bug he is currently experiencing. He is having trouble getting his other team members signed up on the platform. I assigned a bug badge with further notes to the account and will follow...",
+  },
+];

@@ -7,25 +7,9 @@ export const SIZES = {
   CARD_MAX_CONSTRAINT: 2500,
 };
 
-export const MOOD_FILTER = [
-  {
-    id: "all",
-    name: "All",
-  },
-  {
-    id: "champ",
-    name: "Champion",
-  },
-  {
-    id: "sad",
-    name: "Need Attention",
-  },
-  {
-    id: "cold",
-    name: "Cold",
-  },
-  {
-    id: "risk",
-    name: "At Risk",
-  },
-];
+export const BASE_URLS = {
+  dashboard: "dashboard",
+  insights: "insigts",
+  settings: "settings",
+  clients: "clients",
+};

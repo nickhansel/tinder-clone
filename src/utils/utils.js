@@ -2,6 +2,7 @@
    Helper methods
  */
 import { mockData } from "./mock";
+import { mintGreen, roseRed, mustardYellow } from "utils";
 
 /*
    Temporary helper to search for client based on location
@@ -69,4 +70,37 @@ export const getError = (err) => {
 
   console.error(err);
   return msg;
+};
+
+export const getHealthColor = (healthScore) => {
+  const code = getHealthCode();
+  const colors = {
+    high: mintGreen,
+    mid: mustardYellow,
+    low: roseRed,
+  };
+
+  return colors[code];
+};
+export const getHealthLen = (healthScore) => {
+  const code = getHealthCode();
+  const len = {
+    high: "95%",
+    mid: "70%",
+    low: "35%",
+  };
+
+  return len[code];
+};
+export const getHealthCode = (healthScore) => {
+  let healthCode = "high";
+
+  if (healthScore < 4 && healthScore >= 3) {
+    healthCode = "mid";
+  }
+  if (healthScore < 3) {
+    healthCode = "low";
+  }
+
+  return healthCode;
 };

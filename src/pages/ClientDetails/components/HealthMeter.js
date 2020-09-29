@@ -3,36 +3,46 @@
  */
 
 import React from "react";
-import { Divider } from "antd";
-import { iconHealth } from "media/svg";
-import { SubTitle } from "common";
+import { Note1Grey, DividerStyled, SpaceBetween } from "common";
+import { getHealthColor, getHealthLen } from "utils";
 
-const iconStyle = {
-  height: 10,
-};
-const iconContainerStyle = {
-  background: "#8B929F",
-  borderColor: "#8B929F",
-  borderRadius: 10,
-  borderStyle: "solid",
-  borderWidth: 2,
-  paddingRight: 10,
-};
-const rateStyle = {
-  color: "#199F4E",
-  fontWeight: 700,
-  textAlign: "center",
-};
+const HealthMeter = ({ healthScore }) => {
+  const healthColor = getHealthColor(healthScore);
+  const healthLen = getHealthLen(healthScore);
 
-const HealthMeter = () => {
+  const iconContainerStyle = {
+    background: "#ffffff",
+    borderColor: "#BDBDBD",
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 0.8,
+    height: 18,
+    paddingRight: 10,
+    width: 264,
+  };
+  const healthStyle = {
+    backgroundColor: healthColor,
+    borderRadius: 24,
+    height: 12,
+    marginTop: 2,
+    marginLeft: 2,
+    width: healthLen,
+  };
+  const rateStyle = {
+    color: "#199F4E",
+    fontWeight: 700,
+    textAlign: "center",
+  };
+
   return (
     <div style={{ marginTop: 10 }}>
-      <SubTitle>Health Meter</SubTitle>
+      <SpaceBetween>
+        <Note1Grey>Health Meter</Note1Grey>
+        <span style={rateStyle}>4.8/5</span>
+      </SpaceBetween>
       <div style={iconContainerStyle}>
-        <img style={iconStyle} src={iconHealth} alt="" />
+        <div style={healthStyle} />
       </div>
-      <div style={rateStyle}>4.8/5</div>
-      <Divider style={{ marginTop: 10 }} />
     </div>
   );
 };

@@ -3,15 +3,24 @@
  */
 
 import { createSlice } from "@reduxjs/toolkit";
-import { mockData } from "utils/mock";
+import { mockData, notesMock } from "utils/mock";
 
 const initialState = {
-  selectedClient: null,
+  clientId: null,
+  client: {
+    ...mockData[3],
+  },
+  notes: notesMock,
 };
 
 const clientDetailsSlice = createSlice({
   name: "clientDetails",
   initialState,
+  reducers: {
+    setClientDetailsId(state, action) {
+      state.clientId = action.payload;
+    },
+  },
 });
 
 export default clientDetailsSlice.reducer;

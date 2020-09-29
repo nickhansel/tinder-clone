@@ -3,40 +3,62 @@
  */
 
 import React from "react";
+import { Row, Divider } from "antd";
 import HealthMeter from "./HealthMeter";
 import ProfileSection from "./ProfileSection";
-import { AvatarContainer } from "./styles";
+import {
+  AvatarContainer,
+  SubH1,
+  Note1,
+  Note2,
+  Note1Grey,
+  Badge,
+  DividerStyled,
+} from "common";
 import { mockMoods } from "utils/mock";
-import { iconAttention } from "media/svg";
+import { iconMenu } from "media/svg";
 
 const iconProps = {
-  height: 30,
-  width: 30,
+  height: 24,
+  width: 24,
 };
 
-const ClientProfile = ({ name, position, company, status }) => {
+const ClientProfile = ({ name, position, company, status, strategy }) => {
   const clientMood = mockMoods[status];
-  const toolIcons = <img style={iconProps} src={iconAttention} alt="" />;
+  const iconMenuImg = <img style={iconProps} src={iconMenu} alt="" />;
+  const renderBadges = strategy.map((strategyItem) => (
+    <Badge strategy={strategyItem} />
+  ));
 
   return (
-    <div style={{ display: "flex" }}>
-      <AvatarContainer>
-        <img
-          src={require(`../../../media/gifs/${clientMood || "boy_happy.gif"}`)}
-          alt=""
-        />
-      </AvatarContainer>
-      <div>
+    <Row>
+      <AvatarContainer mode="full" />
+      <div style={{ paddingLeft: 20 }}>
         <ProfileSection
-          header={name}
-          content={[position, company]}
-          extra={toolIcons}
+          header={<SubH1>{name}</SubH1>}
+          content={[
+            <Note1Grey>{position}</Note1Grey>,
+            <Note2>{company}</Note2>,
+          ]}
+          extra={iconMenuImg}
         />
+        <DividerStyled />
         <HealthMeter />
-        <ProfileSection header="Renewal Date" content={["09/22/21"]} />
-        <ProfileSection header="Contract" content={["$100,00/year"]} />
+        <Row>
+          <ProfileSection
+            header={<Note1Grey>Renewal Date</Note1Grey>}
+            content={[<Note1>09/22/21</Note1>]}
+          />
+          <Divider type="vertical" />
+          <ProfileSection
+            header={<Note1Grey style={{ marginLeft: 20 }}>Contract</Note1Grey>}
+            content={[<Note1>$100,00/year</Note1>]}
+          />
+        </Row>
+        <DividerStyled />
+        <Row>{renderBadges}</Row>
       </div>
-    </div>
+    </Row>
   );
 };
 

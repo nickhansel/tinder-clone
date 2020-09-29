@@ -12,10 +12,17 @@ const sharedButtonStyles = css`
   padding: 0;
 `;
 
+export const Flex = styled.div`
+  display: flex;
+`;
+
+export const SpaceBetween = styled(Flex)`
+  justify-content: space-between;
+`;
+
 export const AvatarStyled = styled.div`
   background-color: ${mainColors.grey1};
   border-radius: 8px;
-  height: 246px;
   width: 225px;
 `;
 
@@ -67,4 +74,13 @@ export const ContainerFlex = styled.div`
 
 export const DividerStyled = styled(Divider)`
   margin: 10px 0;
+`;
+
+export const SearchInputStyled = styled.div`
+  .ant-input-affix-wrapper {
+    border-radius: 40px;
+    height: 40px;
+    line-height: 10;
+    width: 180px;
+  }
 `;

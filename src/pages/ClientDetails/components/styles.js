@@ -3,7 +3,12 @@
  */
 
 import styled from "styled-components";
-import { Card } from "antd";
+
+export const ClientProfileStyled = styled.div`
+  display: flex;
+  height: 320px;
+  width: 544px;
+`;
 
 export const AvatarContainer = styled.div`
   border-radius: 8px;
@@ -14,12 +19,9 @@ export const AvatarContainer = styled.div`
   }
 `;
 
-export const ProfileContainer = styled.div`
-  display: flex;
-`;
-
-export const StyledCard = styled(Card)`
-  height: 100%;
+export const StyledProfileCard = styled.div`
   border-radius: 8px;
-  padding: 20px;
+  background-color: #ffff;
+  margin: 8px;
+  padding: 15px;
 `;

@@ -1,26 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AvatarContainer, HealthButton, Budge } from "common";
+import { AvatarContainer, HealthButton, Badge } from "common";
 import { ClientCardStyled, ContainerFlex, DividerStyled } from "./styles";
 import { SubH1, Note2 } from "./Typography";
 import { mainColors } from "utils";
 
 const ClientCard = ({
-  name,
-  position,
+  activity,
+  cardAction,
   company,
   health,
-  activity,
+  id,
+  infoAction,
+  name,
+  position,
   strategy,
 }) => {
-  const renderBudges = strategy.map((strategyItem) => (
-    <Budge strategy={strategyItem} />
+  const renderBadges = strategy.map((strategyItem) => (
+    <Badge strategy={strategyItem} />
   ));
 
   return (
     <ClientCardStyled>
-      <AvatarContainer />
-      <SubH1>{name}</SubH1>
+      <AvatarContainer mode="croped" onClick={() => cardAction(id)} />
+      <div onClick={() => cardAction(id)}>
+        <SubH1>{name}</SubH1>
+      </div>
       <Note2>
         {position} at {company}
       </Note2>
@@ -28,7 +33,7 @@ const ClientCard = ({
       <DividerStyled />
       <ContainerFlex style={{ paddingTop: 7 }}>
         <HealthButton healthScore={health} />
-        <div>{renderBudges}</div>
+        <div onClick={() => infoAction(true, id)}>{renderBadges}</div>
       </ContainerFlex>
     </ClientCardStyled>
   );
@@ -41,6 +46,8 @@ ClientCard.propTypes = {
   health: PropTypes.number.isRequired,
   activity: PropTypes.string.isRequired,
   strategy: PropTypes.array,
+  cardAction: PropTypes.func.isRequired,
+  infoAction: PropTypes.func.isRequired,
 };
 
 export default ClientCard;

@@ -2,18 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import iconHealth from "media/images/icon-health.png";
 import { ButtonHealthStyled } from "./styles";
-import { mintGreen, roseRed, mustardYellow } from "utils";
+import { getHealthColor } from "utils";
 import { Note1 } from "common";
 
 const HealthButton = ({ healthScore }) => {
-  let healthColor = mintGreen;
-
-  if (healthScore < 4 && healthScore >= 3) {
-    healthColor = mustardYellow;
-  }
-  if (healthScore < 3) {
-    healthColor = roseRed;
-  }
+  const healthColor = getHealthColor(healthScore);
 
   return (
     <ButtonHealthStyled style={{ backgroundColor: healthColor }}>

@@ -2,54 +2,67 @@
    Client Page
  */
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Col, Row } from "antd";
-import { Layout, Note } from "common";
+import { Layout, Note, H3 } from "common";
 import ClientProfile from "./ClientProfile";
 import ClientTouchPoints from "./ClientTouchPoints";
 import Toolbox from "./Toolbox";
-import { StyledCard } from "./styles";
+import ClientDetailCard from "./ClientDetailCard";
+import { selectClient, selectClientNotes } from "../selectors";
 import { getClient } from "utils";
 import { iconBack } from "media/svg";
 import "./styles.css";
 
-const ClientCard = ({ size, children }) => (
-  <Col flex={`1 2 ${size}px`}>
-    <StyledCard>{children}</StyledCard>
-  </Col>
-);
-
 const ClientDetailsPage = ({ history, location }) => {
   // Get client from db in future
   const client = getClient(location.pathname);
+  const notes = useSelector(selectClientNotes());
   const clientTitle = `${client.company} - ${client.name}`;
   const goBack = <img src={iconBack} alt="" />;
+
+  const getCardProps = (mode, width) => {
+    return {
+      mode,
+      width,
+    };
+  };
+  const profileProps = getCardProps("lrg", 544);
+  const touchPointProps = getCardProps("lrg", 368);
+  const toolboxProps = getCardProps("lrg", 192);
+  const noteProps = getCardProps("md", 560);
+
+  const renderNotes = (
+    <>
+      {notes.map((note) => (
+        <ClientDetailCard {...noteProps}>
+          <Note name={client.name} note={note} />
+        </ClientDetailCard>
+      ))}
+    </>
+  );
 
   return (
     <Layout title={clientTitle} prefix={goBack}>
       <div>
-        <Row gutter={[8, 8]}>
-          <ClientCard size={300}>
+        <Row>
+          <ClientDetailCard {...profileProps}>
             <ClientProfile {...client} />
-          </ClientCard>
-          <ClientCard size={300}>
+          </ClientDetailCard>
+          <ClientDetailCard {...touchPointProps}>
             <ClientTouchPoints name={client.name} />
-          </ClientCard>
-          <ClientCard size={200}>
+          </ClientDetailCard>
+          <ClientDetailCard {...toolboxProps}>
             <Toolbox />
-          </ClientCard>
+          </ClientDetailCard>
         </Row>
-        <Row gutter={[8, 8]}>
-          <ClientCard size={400}>
-            <Note name={client.name} />
-          </ClientCard>
-          <ClientCard size={400}>
-            <Note name={client.name} />
-          </ClientCard>
+        <Row style={{ marginLeft: 8 }}>
+          <H3>Notes</H3>
         </Row>
+        <Row>{renderNotes}</Row>
       </div>
     </Layout>
   );
 };
 
-export default withRouter(ClientDetailsPage);
+export default ClientDetailsPage;

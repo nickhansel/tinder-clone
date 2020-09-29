@@ -88,7 +88,7 @@ const Section = ({ imgSourse, text, title, isLeft, bg }) => {
             <div>
               <h2>{title}</h2>
               <p>{text}</p>
-              <a href="/#section3">
+              <a href="/dashboard">
                 <ButtonPrimaryBlue>Know More</ButtonPrimaryBlue>
               </a>
             </div>

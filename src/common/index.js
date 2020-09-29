@@ -4,7 +4,7 @@
 import Layout from "./Layout";
 import ResizableCard from "./ResizableCard";
 import AvatarContainer from "./AvatarContainer";
-import Budge from "./Budge";
+import Badge from "./Badge";
 import ClientCard from "./ClientCard";
 import HealthButton from "./HealthButton";
 import NavBar from "./NavBar";
@@ -16,7 +16,7 @@ export {
   Layout,
   ResizableCard,
   AvatarContainer,
-  Budge,
+  Badge,
   ClientCard,
   HealthButton,
   NavBar,
@@ -27,3 +27,4 @@ export {
 
 // Styled Components
 export * from "./Typography";
+export * from "./styles";

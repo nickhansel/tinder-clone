@@ -4,7 +4,8 @@ import { Provider } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import * as serviceWorker from "./serviceWorker";
-import configureStore, { history } from "configureStore";
+import configureStore from "configureStore";
+import { browserHistory as history } from "lib/history";
 import App from "./App";
 import "./index.css";
 

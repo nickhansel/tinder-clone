@@ -70,6 +70,10 @@ export const Note1 = styled.p`
   line-height: 20px;
   margin-bottom: 5px;
 `;
+export const Note1Grey = styled(Note1)`
+  color: #838c95;
+  fontweight: 400;
+`;
 export const Note2 = styled.p`
   font-family: ${fonts.roboto};
   font-size: ${typeScaleSm.note2};

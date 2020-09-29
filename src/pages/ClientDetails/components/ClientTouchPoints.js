@@ -3,24 +3,28 @@
  */
 
 import React from "react";
-import { Title } from "common";
+import { SubH2, Text, Note1Grey, Flex } from "common";
+import { iconMail } from "media/svg";
 
-const ClientTouchPoints = ({ name }) => {
+const ClientTouchPoints = ({ name, note }) => {
   const renderPoint = (
-    <div>
-      <h4>
-        3/19/20 1:34 PM by <span style={{ color: "#052F7B" }}>{name}</span>
-      </h4>
-      <p>
-        Lorem ipsum dolor sit amet, consect s adipiscing elit, sed dos eat oaset
+    <div style={{ paddingBottom: 22 }}>
+      <Flex>
+        <img src={iconMail} alt="" />
+        <Note1Grey style={{ paddingRight: 8, paddingLeft: 8 }}>
+          3/19/20 1:34 PM by{" "}
+        </Note1Grey>
+        <span style={{ color: "#115CE5" }}>{name}</span>
+      </Flex>
+      <Text>
+        Lorem ipsum dolor sit amet, consect s acing elit, sed dos eat oaset
         read.
-      </p>
+      </Text>
     </div>
   );
   return (
     <div>
-      <Title>Latest Touch Points</Title>
-      {renderPoint}
+      <SubH2>Latest Touch Points</SubH2>
       {renderPoint}
       {renderPoint}
     </div>

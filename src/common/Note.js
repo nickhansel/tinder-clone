@@ -3,31 +3,31 @@
  */
 
 import React from "react";
-import { Divider } from "antd";
-import { Title } from "common";
+import { SubH2, Text, SpaceBetween } from "common";
+import { iconTrash } from "media/svg";
 
-const Note = ({ name }) => {
+const Note = ({ name, note }) => {
+  const NoteAction = (
+    <SpaceBetween style={{ marginTop: 20 }}>
+      <span style={{ color: "#115CE5" }}>Read more</span>
+      <img src={iconTrash} alt="note trash icon" />
+    </SpaceBetween>
+  );
   const Section = (
     <div>
       <h4>
-        3/19/20 1:34 PM by <span style={{ color: "#052F7B" }}>{name}</span>
+        <span style={{ color: "#838C95" }}>{note.createdAt} by </span>
+        <span style={{ color: "#115CE5" }}>{name}</span>
       </h4>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat...
-      </p>
-      <Divider />
+      <Text>{note.text}</Text>
     </div>
   );
 
   return (
     <div>
-      <Title>Empava Notes</Title>
+      <SubH2>{note.title}</SubH2>
       {Section}
-      {Section}
-      {Section}
+      {NoteAction}
     </div>
   );
 };

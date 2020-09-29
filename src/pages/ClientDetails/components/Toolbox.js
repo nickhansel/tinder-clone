@@ -4,7 +4,7 @@
 
 import React from "react";
 import { Col, Row } from "antd";
-import { Title } from "common";
+import { SubH2, Note2 } from "common";
 import {
   iconBug,
   iconAdd,
@@ -15,9 +15,9 @@ import {
 } from "media/svg";
 
 const iconStyle = {
-  height: 50,
-  margin: 12,
-  width: 50,
+  height: 48,
+  margin: 8,
+  width: 48,
 };
 const iconContainerStyle = {
   fontSize: 12,
@@ -26,10 +26,10 @@ const iconContainerStyle = {
   width: "max-content",
 };
 const renderActionIcon = (icon, name) => (
-  <Col span={6}>
+  <Col>
     <div style={iconContainerStyle}>
       <img src={icon} style={iconStyle} alt="" />
-      <p>{name}</p>
+      <Note2>{name}</Note2>
     </div>
   </Col>
 );
@@ -37,7 +37,7 @@ const renderActionIcon = (icon, name) => (
 const Toolbox = () => {
   return (
     <div>
-      <Title>Toolbox</Title>
+      <SubH2>Toolbox</SubH2>
       <Row justify="space-around">
         {renderActionIcon(iconAttention, "Attention")}
         {renderActionIcon(iconBug, "Bug")}

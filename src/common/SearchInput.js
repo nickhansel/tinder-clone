@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "antd";
 import { iconSearch } from "media/svg";
-import "./styles.css";
+import { SearchInputStyled } from "./styles";
 
 const SearchInput = () => {
   const inputProps = {
@@ -9,7 +9,11 @@ const SearchInput = () => {
     prefix: <img src={iconSearch} alt="seacrh icon" />,
   };
 
-  return <Input {...inputProps} />;
+  return (
+    <SearchInputStyled>
+      <Input {...inputProps} />
+    </SearchInputStyled>
+  );
 };
 
 export default SearchInput;

@@ -4,13 +4,13 @@
 
 import styled from "styled-components";
 import { slateGrey, mainColors } from "utils";
-import { Layout } from "antd";
+import { Layout, Divider } from "antd";
 
 const { Header } = Layout;
 
 export const ContentContainer = styled(Layout.Content)`
   background-color: ${slateGrey};
-  min-width: 1180px;
+  min-width: 1195px;
   padding: 20px;
 `;
 
@@ -25,7 +25,7 @@ export const HeaderStyled = styled(Header)`
   display: flex;
   justify-content: space-between;
   min-width: 480px;
-  padding: 15px 15px 15px 24px;
+  padding: 14px 24px;
 `;
 
 export const HeaderActions = styled.div`
@@ -39,4 +39,8 @@ export const HeaderActions = styled.div`
     margint-right: 30px;
     width: 220px;
   }
+`;
+
+export const StyledDivider = styled(Divider)`
+  margin: 0;
 `;

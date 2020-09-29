@@ -18,11 +18,7 @@ Amplify.configure(aws_exports);
 const Routes = (
   <Switch>
     <Route exact path="/dashboard" component={DashboardPage} />
-    <Route
-      exact
-      path="/dashboard/client/:clientId"
-      component={ClientDetailsPage}
-    />
+    <Route exact path="/clients/:clientId" component={ClientDetailsPage} />
     <Route exact path="/settings" component={SettingsPage} />
     <Route exact path="/insights" component={InsightsPage} />
   </Switch>
