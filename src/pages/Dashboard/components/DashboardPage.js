@@ -4,53 +4,47 @@
 
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientsList";
 import MoodFilter from "./DashboardMoodFilter";
-import { Layout } from "common";
-import { DASHBOARD_TITLE } from "../constants";
-import { mockData } from "utils/mock";
-import { selectClients } from "../selectors";
-import "./Dashboard.css";
-
-const numEachPage = 8;
+import { Layout, Note2 } from "common";
+import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
+import { selectFilteredClients } from "../selectors";
+import "./styles.css";
 
 const DashboardPage = ({ history }) => {
-  const [filteredData, setMoodAction] = useState(mockData);
+  const clientsData = useSelector(selectFilteredClients());
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
-  const [maxVal, setMaxVal] = useState(8);
-  console.log("selectClients");
-  console.log(useSelector(selectClients()));
-
-  const moodFilter = <MoodFilter setMoodAction={setMoodAction} />;
+  const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+  const moodFilter = <MoodFilter />;
 
   const onChange = (page) => {
     // Pagination
     setPage(page);
-    setMinVal((page - 1) * numEachPage);
-    setMaxVal(page * numEachPage);
+    setMinVal((page - 1) * NUM_EACH_PAGE);
+    setMaxVal(page * NUM_EACH_PAGE);
   };
 
   const cardListProps = {
     minVal,
     maxVal,
-    data: filteredData,
+    data: clientsData,
   };
   const paginationProps = {
     current: page,
     defaultCurrent: 1,
     onChange: onChange,
     pageSize: 8,
-    showTotal: (total) => `Total ${filteredData.length} clients`,
-    total: filteredData.length,
+    showTotal: (total) => <Note2>Total {clientsData.length} clients</Note2>,
+    total: clientsData.length,
   };
 
   return (
     <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
       <DashboardClientList {...cardListProps} />
-      <Pagination {...paginationProps} />
+      <Pagination style={{ marginLeft: 20 }} {...paginationProps} />
     </Layout>
   );
 };

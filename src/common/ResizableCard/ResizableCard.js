@@ -6,7 +6,7 @@ import { Card } from "antd";
 import { ResizableBox } from "react-resizable";
 // Helpers
 import { SIZES } from "utils";
-import "./ResizableCard.css";
+import "./styles.css";
 
 const ResizableCard = ({ item, index, cardSize, children }) => {
   const [width, setWidth] = useState(

@@ -1,19 +1,17 @@
 /*
    Client Page
  */
-
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { Col, Row } from "antd";
+import { Layout, Note } from "common";
 import ClientProfile from "./ClientProfile";
 import ClientTouchPoints from "./ClientTouchPoints";
 import Toolbox from "./Toolbox";
-import EmpavaNotes from "./EmpavaNotes";
-import { Layout } from "common";
 import { StyledCard } from "./styles";
 import { getClient } from "utils";
 import { iconBack } from "media/svg";
-import "./ClientDetails.css";
+import "./styles.css";
 
 const ClientCard = ({ size, children }) => (
   <Col flex={`1 2 ${size}px`}>
@@ -43,10 +41,10 @@ const ClientDetailsPage = ({ history, location }) => {
         </Row>
         <Row gutter={[8, 8]}>
           <ClientCard size={400}>
-            <EmpavaNotes name={client.name} />
+            <Note name={client.name} />
           </ClientCard>
           <ClientCard size={400}>
-            <EmpavaNotes name={client.name} />
+            <Note name={client.name} />
           </ClientCard>
         </Row>
       </div>

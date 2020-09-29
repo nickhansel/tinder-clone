@@ -33,4 +33,10 @@ export const HeaderActions = styled.div`
   justify-content: space-evenly;
   height: 60px;
   width: 300px;
+
+  .ant-input-affix-wrapper {
+    border-radius: 50px;
+    margint-right: 30px;
+    width: 220px;
+  }
 `;

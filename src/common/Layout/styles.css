@@ -43,7 +43,5 @@ aside .ant-layout-sider {
 }
 
 .ant-layout {
-  min-height: 700px;
-  /* overflow: auto;
-  width: 1380px; */
+  min-height: 900px !important;
 }

@@ -8,6 +8,7 @@ import Budge from "./Budge";
 import ClientCard from "./ClientCard";
 import HealthButton from "./HealthButton";
 import NavBar from "./NavBar";
+import Note from "./Note";
 import Profile from "./Profile";
 import SearchInput from "./SearchInput";
 
@@ -19,6 +20,7 @@ export {
   ClientCard,
   HealthButton,
   NavBar,
+  Note,
   Profile,
   SearchInput,
 };
