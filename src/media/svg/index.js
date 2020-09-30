@@ -2,6 +2,7 @@ import iconAdd from "./icon-add.svg";
 import iconAttention from "./icon-attention.svg";
 import iconBack from "./icon-back.svg";
 import iconBug from "./icon-bug.svg";
+import iconEdit from "./icon-edit.svg";
 import iconEscalate from "./icon-escalation.svg";
 import iconGear from "./icon-gear.svg";
 import iconHealth from "./icon-health.svg";
@@ -20,6 +21,7 @@ export {
   iconAttention,
   iconBack,
   iconBug,
+  iconEdit,
   iconEscalate,
   iconGear,
   iconHealth,

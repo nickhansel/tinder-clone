@@ -14,7 +14,6 @@ import {
   Note1Grey,
   Badge,
   DividerStyled,
-  SpaceBetween,
 } from "common";
 import { mockMoods } from "utils/mock";
 import { iconMenu } from "media/svg";
@@ -24,7 +23,14 @@ const iconProps = {
   width: 24,
 };
 
-const ClientProfile = ({ name, position, company, status, strategy }) => {
+const ClientProfile = ({
+  name,
+  position,
+  company,
+  status,
+  strategy,
+  health,
+}) => {
   const clientMood = mockMoods[status];
   const iconMenuImg = <img style={iconProps} src={iconMenu} alt="" />;
   const renderBadges = strategy.map((strategyItem) => (
@@ -58,7 +64,7 @@ const ClientProfile = ({ name, position, company, status, strategy }) => {
           extra={iconMenuImg}
         />
         <DividerStyled />
-        <HealthMeter />
+        <HealthMeter healthScore={health} />
         <Row>
           <ProfileSection header={sectionHeader} content={[]} />
         </Row>

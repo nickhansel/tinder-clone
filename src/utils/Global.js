@@ -27,4 +27,11 @@ export const GlobalStyle = createGlobalStyle`
   h1, h2 {
     font-family: ${secondaryFont}
   }
+
+  .ant-typography-expand {
+    font-size: 12px;
+  } 
+  .ant-pagination-total-text {
+    height: 25px;
+  }
 `;

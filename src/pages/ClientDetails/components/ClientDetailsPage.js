@@ -12,6 +12,7 @@ import ClientDetailCard from "./ClientDetailCard";
 import Toolbox from "./Toolbox";
 import { RowPagination } from "./styles";
 import { selectClientNotes, selectTouchPoints } from "../selectors";
+import { selectUser } from "reducers/selector";
 import { getClient } from "utils";
 import { iconBack } from "media/svg";
 import "./styles.css";
@@ -26,6 +27,7 @@ const ClientDetailsPage = ({ history, location }) => {
   const client = getClient(location.pathname);
   const notes = useSelector(selectClientNotes());
   const touchPoints = useSelector(selectTouchPoints());
+  const user = useSelector(selectUser());
 
   const onPageChange = (page) => {
     // Pagination
@@ -54,7 +56,7 @@ const ClientDetailsPage = ({ history, location }) => {
     notesData: notes,
     minVal,
     maxVal,
-    authorName: "contact name",
+    authorName: user.name,
   };
   const paginationProps = {
     current: page,
@@ -78,7 +80,10 @@ const ClientDetailsPage = ({ history, location }) => {
               <ClientProfile {...client} />
             </ClientDetailCard>
             <ClientDetailCard {...touchPointProps}>
-              <ClientTouchPoints name={client.name} touchPoints={touchPoints} />
+              <ClientTouchPoints
+                authorName={user.name}
+                touchPoints={touchPoints}
+              />
             </ClientDetailCard>
             <ClientDetailCard {...toolboxProps}>
               <Toolbox />

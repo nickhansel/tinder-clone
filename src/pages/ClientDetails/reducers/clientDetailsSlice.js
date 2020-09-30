@@ -25,11 +25,17 @@ const clientDetailsSlice = createSlice({
     togglePointsModal(state, action) {
       state.isPointsModal = action.payload;
     },
+    deleteNote(state, action) {
+      const noteId = action.payload;
+      const newNotes = state.notes.filter((note) => note.id !== noteId);
+      state.notes = newNotes;
+    },
   },
 });
 
 export const {
   setClientDetailsId,
   togglePointsModal,
+  deleteNote,
 } = clientDetailsSlice.actions;
 export default clientDetailsSlice.reducer;

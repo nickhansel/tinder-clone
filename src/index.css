@@ -22,7 +22,3 @@ html {
   --color-primary: #052f7b;
   --gutter: 16px;
 }
-
-.ant-pagination-total-text {
-  height: 25px;
-}

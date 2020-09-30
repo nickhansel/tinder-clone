@@ -8,6 +8,12 @@ const globalSlice = createSlice({
   name: "global",
   initialState: {
     appPending: true,
+    user: {
+      id: 12,
+      teamId: 22,
+      name: "Blake",
+      password: "",
+    },
   },
   reducers: {
     setAppReady(state) {

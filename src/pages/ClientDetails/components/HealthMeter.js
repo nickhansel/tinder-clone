@@ -3,7 +3,8 @@
  */
 
 import React from "react";
-import { Note1Grey, DividerStyled, SpaceBetween } from "common";
+import PropTypes from "prop-types";
+import { Note1Grey, SpaceBetween } from "common";
 import { getHealthColor, getHealthLen } from "utils";
 
 const HealthMeter = ({ healthScore }) => {
@@ -29,7 +30,7 @@ const HealthMeter = ({ healthScore }) => {
     width: healthLen,
   };
   const rateStyle = {
-    color: "#199F4E",
+    color: healthColor,
     fontWeight: 700,
     textAlign: "center",
   };
@@ -38,13 +39,17 @@ const HealthMeter = ({ healthScore }) => {
     <div style={{ marginTop: 10 }}>
       <SpaceBetween>
         <Note1Grey>Health Meter</Note1Grey>
-        <span style={rateStyle}>4.8/5</span>
+        <span style={rateStyle}>{healthScore}/5</span>
       </SpaceBetween>
       <div style={iconContainerStyle}>
         <div style={healthStyle} />
       </div>
     </div>
   );
+};
+
+HealthMeter.propTypes = {
+  healthScore: PropTypes.number.isRequired,
 };
 
 export default HealthMeter;

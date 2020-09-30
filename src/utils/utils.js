@@ -73,7 +73,7 @@ export const getError = (err) => {
 };
 
 export const getHealthColor = (healthScore) => {
-  const code = getHealthCode();
+  const code = getHealthCode(healthScore);
   const colors = {
     high: mintGreen,
     mid: mustardYellow,
@@ -83,7 +83,7 @@ export const getHealthColor = (healthScore) => {
   return colors[code];
 };
 export const getHealthLen = (healthScore) => {
-  const code = getHealthCode();
+  const code = getHealthCode(healthScore);
   const len = {
     high: "95%",
     mid: "70%",

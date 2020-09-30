@@ -37,24 +37,28 @@ export const H3 = styled.h3`
   font-size: ${typeScaleSm.headline3};
   font-weight: ${weightScale.bold};
   line-height: 48px;
+  margin: 0;
 `;
 export const H4 = styled.h4`
   font-family: ${fonts.roboto};
   font-size: ${typeScaleSm.headline4};
   font-weight: ${weightScale.bold};
   line-height: 32px;
+  margin: 0;
 `;
 export const SubH1 = styled.h5`
   font-family: ${fonts.roboto};
   font-size: ${typeScaleSm.subline1};
   font-weight: ${weightScale.bold};
   line-height: 28px;
+  margin: 0;
 `;
 export const SubH2 = styled.h6`
   font-family: ${fonts.roboto};
   font-size: ${typeScaleSm.subline2};
   font-weight: ${weightScale.bold};
   line-height: 24px;
+  margin: 0;
 `;
 export const Text = styled.p`
   font-family: ${fonts.roboto};

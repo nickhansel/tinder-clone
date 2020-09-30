@@ -22,6 +22,7 @@ const ClientTouchPoints = ({ authorName, touchPoints }) => {
   const paragraphProps = {
     ellipsis: { rows: 2, expandable: true, symbol: "more" },
   };
+
   const renderTouchPoints = (
     <>
       {touchPoints.map((point) => {
