@@ -21,6 +21,7 @@ const ClientDetailsPage = ({ history, location }) => {
   const clientTitle = `${client.company} - ${client.name}`;
   const goBack = <img src={iconBack} alt="" />;
 
+  // Props
   const getCardProps = (mode, width) => {
     return {
       mode,
@@ -31,6 +32,9 @@ const ClientDetailsPage = ({ history, location }) => {
   const touchPointProps = getCardProps("lrg", 368);
   const toolboxProps = getCardProps("lrg", 192);
   const noteProps = getCardProps("md", 560);
+  const rowProps = {
+    justify: "center",
+  };
 
   const renderNotes = (
     <>
@@ -44,23 +48,21 @@ const ClientDetailsPage = ({ history, location }) => {
 
   return (
     <Layout title={clientTitle} prefix={goBack}>
-      <div>
-        <Row>
-          <ClientDetailCard {...profileProps}>
-            <ClientProfile {...client} />
-          </ClientDetailCard>
-          <ClientDetailCard {...touchPointProps}>
-            <ClientTouchPoints name={client.name} />
-          </ClientDetailCard>
-          <ClientDetailCard {...toolboxProps}>
-            <Toolbox />
-          </ClientDetailCard>
-        </Row>
-        <Row style={{ marginLeft: 8 }}>
-          <H3>Notes</H3>
-        </Row>
-        <Row>{renderNotes}</Row>
-      </div>
+      <Row {...rowProps}>
+        <ClientDetailCard {...profileProps}>
+          <ClientProfile {...client} />
+        </ClientDetailCard>
+        <ClientDetailCard {...touchPointProps}>
+          <ClientTouchPoints name={client.name} />
+        </ClientDetailCard>
+        <ClientDetailCard {...toolboxProps}>
+          <Toolbox />
+        </ClientDetailCard>
+      </Row>
+      <Row style={{ marginLeft: 8 }}>
+        <H3>Notes</H3>
+      </Row>
+      <Row {...rowProps}>{renderNotes}</Row>
     </Layout>
   );
 };

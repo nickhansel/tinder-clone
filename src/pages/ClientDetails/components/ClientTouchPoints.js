@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { SubH2, Text, Note1Grey, Flex } from "common";
+import { SubH2, Text, Note1Grey, Flex, DividerStyled } from "common";
 import { iconMail } from "media/svg";
 
 const ClientTouchPoints = ({ name, note }) => {
@@ -22,11 +22,21 @@ const ClientTouchPoints = ({ name, note }) => {
       </Text>
     </div>
   );
+  const renderAction = (
+    <>
+      <DividerStyled />
+      <Flex style={{ justifyContent: "center" }}>
+        <SubH2 style={{ margin: 0 }}>View All</SubH2>
+      </Flex>
+    </>
+  );
+
   return (
     <div>
       <SubH2>Latest Touch Points</SubH2>
       {renderPoint}
       {renderPoint}
+      {renderAction}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const ProfileSection = ({ header, content, extra }) => {
   );
 
   return (
-    <div style={{ marginTop: 10 }}>
+    <div style={{ marginTop: 10, width: "100%" }}>
       <SpaceBetween>
         {header}
         {extra}

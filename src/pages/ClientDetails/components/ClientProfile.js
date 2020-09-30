@@ -14,6 +14,7 @@ import {
   Note1Grey,
   Badge,
   DividerStyled,
+  SpaceBetween,
 } from "common";
 import { mockMoods } from "utils/mock";
 import { iconMenu } from "media/svg";
@@ -30,6 +31,20 @@ const ClientProfile = ({ name, position, company, status, strategy }) => {
     <Badge strategy={strategyItem} />
   ));
 
+  const sectionHeader = (
+    <>
+      <ProfileSection
+        header={<Note1Grey>Renewal Date</Note1Grey>}
+        content={[<Note1>09/22/21</Note1>]}
+      />
+      <Divider type="vertical" style={{ height: 56 }} />
+      <ProfileSection
+        header={<Note1Grey style={{ marginLeft: 20 }}>Contract</Note1Grey>}
+        content={[<Note1 style={{ marginLeft: 14 }}>$100,00/year</Note1>]}
+      />
+    </>
+  );
+
   return (
     <Row>
       <AvatarContainer mode="full" />
@@ -45,15 +60,7 @@ const ClientProfile = ({ name, position, company, status, strategy }) => {
         <DividerStyled />
         <HealthMeter />
         <Row>
-          <ProfileSection
-            header={<Note1Grey>Renewal Date</Note1Grey>}
-            content={[<Note1>09/22/21</Note1>]}
-          />
-          <Divider type="vertical" />
-          <ProfileSection
-            header={<Note1Grey style={{ marginLeft: 20 }}>Contract</Note1Grey>}
-            content={[<Note1>$100,00/year</Note1>]}
-          />
+          <ProfileSection header={sectionHeader} content={[]} />
         </Row>
         <DividerStyled />
         <Row>{renderBadges}</Row>

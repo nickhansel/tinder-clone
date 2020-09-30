@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import JSignOut from "../../auth/SignOut";
-import { SearchInput, SubH1, Profile } from "common";
+import { SearchInput, SubH1, Profile, Flex } from "common";
 import {
   ContentContainer,
   IconStyled,
@@ -21,7 +21,7 @@ import { Layout as AntLayout, Menu } from "antd";
 const { Sider } = AntLayout;
 
 const Layout = ({ prefix, children, title, extra = null }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   let history = useHistory();
 
   const toggle = () => {
@@ -47,7 +47,7 @@ const Layout = ({ prefix, children, title, extra = null }) => {
           </Menu.Item>
           <Menu.Item
             key="2"
-            // onClick={() => handleMenuItemClick(BASE_URLS.insights)}
+            // onClick={() => handleMenuItemClick(BASE_URLS.insights)} // TODO uncomment when the views are ready
             icon={<IconStyled src={iconPulse} alt="logo insights" />}
           >
             Insights
@@ -63,7 +63,15 @@ const Layout = ({ prefix, children, title, extra = null }) => {
       </Sider>
       <AntLayout className="site-layout">
         <HeaderStyled>
-          <SubH1>{title}</SubH1>
+          <Flex>
+            <span
+              onClick={() => handleMenuItemClick(BASE_URLS.dashboard)}
+              style={{ lineHeight: 2.8, paddingRight: 10 }}
+            >
+              {prefix}
+            </span>
+            <SubH1 style={{ lineHeight: 2 }}>{title}</SubH1>
+          </Flex>
           <HeaderActions>
             <SearchInput />
             <Profile />
