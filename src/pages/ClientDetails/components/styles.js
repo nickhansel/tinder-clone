@@ -3,6 +3,7 @@
  */
 
 import styled from "styled-components";
+import { Row } from "antd";
 
 export const ClientProfileStyled = styled.div`
   display: flex;
@@ -24,4 +25,14 @@ export const StyledProfileCard = styled.div`
   background-color: #ffff;
   margin: 8px;
   padding: 15px;
+`;
+
+export const RowPagination = styled(Row)`
+  margin-left: 8px;
+  width: 1140px;
+  justify-content: space-between;
+
+  .ant-pagination {
+    padding-top: 20px;
+  }
 `;

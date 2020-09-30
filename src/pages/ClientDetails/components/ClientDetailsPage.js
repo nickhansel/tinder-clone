@@ -1,30 +1,38 @@
 /*
    Client Page
  */
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Row } from "antd";
-import { Layout, Note, H3 } from "common";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Row, Pagination } from "antd";
+import { Layout, Note2, H3, SpaceBetween } from "common";
 import ClientProfile from "./ClientProfile";
 import ClientTouchPoints from "./ClientTouchPoints";
-import Toolbox from "./Toolbox";
+import ClientDetailsNotesList from "./ClientDetailsNotesList";
 import ClientDetailCard from "./ClientDetailCard";
-import {
-  selectClient,
-  selectClientNotes,
-  selectTouchPoints,
-} from "../selectors";
+import Toolbox from "./Toolbox";
+import { RowPagination } from "./styles";
+import { selectClientNotes, selectTouchPoints } from "../selectors";
 import { getClient } from "utils";
 import { iconBack } from "media/svg";
 import "./styles.css";
 
+const NOTES_EACH_PAGE = 4;
+
 const ClientDetailsPage = ({ history, location }) => {
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
+  const [page, setPage] = useState(1);
   // Get client from db in future
   const client = getClient(location.pathname);
   const notes = useSelector(selectClientNotes());
   const touchPoints = useSelector(selectTouchPoints());
-  const clientTitle = `${client.company} - ${client.name}`;
-  const goBack = <img src={iconBack} alt="" />;
+
+  const onPageChange = (page) => {
+    // Pagination
+    setPage(page);
+    setMinVal((page - 1) * NOTES_EACH_PAGE);
+    setMaxVal(page * NOTES_EACH_PAGE);
+  };
 
   // Props
   const getCardProps = (mode, width) => {
@@ -39,35 +47,52 @@ const ClientDetailsPage = ({ history, location }) => {
   const noteProps = getCardProps("md", 560);
   const rowProps = {
     justify: "center",
+    style: { width: "1200px" },
+  };
+  const noteListProps = {
+    noteProps,
+    notesData: notes,
+    minVal,
+    maxVal,
+    authorName: "contact name",
+  };
+  const paginationProps = {
+    current: page,
+    defaultCurrent: 1,
+    onChange: onPageChange,
+    pageSize: NOTES_EACH_PAGE,
+    showTotal: (total) => <Note2>Total {notes.length} notes</Note2>,
+    total: notes.length,
+  };
+  const layoutProps = {
+    title: `${client.company} - ${client.name}`,
+    prefix: <img src={iconBack} alt="" />,
   };
 
-  const renderNotes = (
-    <>
-      {notes.map((note) => (
-        <ClientDetailCard {...noteProps}>
-          <Note name={client.name} note={note} />
-        </ClientDetailCard>
-      ))}
-    </>
-  );
-
   return (
-    <Layout title={clientTitle} prefix={goBack}>
+    <Layout {...layoutProps}>
       <Row {...rowProps}>
-        <ClientDetailCard {...profileProps}>
-          <ClientProfile {...client} />
-        </ClientDetailCard>
-        <ClientDetailCard {...touchPointProps}>
-          <ClientTouchPoints name={client.name} touchPoints={touchPoints} />
-        </ClientDetailCard>
-        <ClientDetailCard {...toolboxProps}>
-          <Toolbox />
-        </ClientDetailCard>
+        <div>
+          <Row>
+            <ClientDetailCard {...profileProps}>
+              <ClientProfile {...client} />
+            </ClientDetailCard>
+            <ClientDetailCard {...touchPointProps}>
+              <ClientTouchPoints name={client.name} touchPoints={touchPoints} />
+            </ClientDetailCard>
+            <ClientDetailCard {...toolboxProps}>
+              <Toolbox />
+            </ClientDetailCard>
+          </Row>
+          <RowPagination>
+            <H3>Notes</H3>
+            <Pagination {...paginationProps} />
+          </RowPagination>
+          <Row>
+            <ClientDetailsNotesList {...noteListProps} />
+          </Row>
+        </div>
       </Row>
-      <Row style={{ marginLeft: 8 }}>
-        <H3>Notes</H3>
-      </Row>
-      <Row {...rowProps}>{renderNotes}</Row>
     </Layout>
   );
 };

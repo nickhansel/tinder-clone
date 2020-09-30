@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientsList";
 import MoodFilter from "./DashboardMoodFilter";
-import { Layout, Note2 } from "common";
+import { Layout, Note2, Flex } from "common";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
 import { selectFilteredClients } from "../selectors";
 import "./styles.css";
@@ -43,8 +43,10 @@ const DashboardPage = ({ history }) => {
 
   return (
     <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
+      <Flex style={{ justifyContent: "flex-end" }}>
+        <Pagination style={{ marginLeft: 20 }} {...paginationProps} />
+      </Flex>
       <DashboardClientList {...cardListProps} />
-      <Pagination style={{ marginLeft: 20 }} {...paginationProps} />
     </Layout>
   );
 };
