@@ -13,6 +13,7 @@ const initialState = {
   notes: notesMock,
   touchPoints: touchPointsMock,
   isPointsModal: false,
+  isNewNoteModal: false,
 };
 
 const clientDetailsSlice = createSlice({
@@ -25,10 +26,19 @@ const clientDetailsSlice = createSlice({
     togglePointsModal(state, action) {
       state.isPointsModal = action.payload;
     },
+    toggleNewNoteModal(state, action) {
+      state.isNewNoteModal = action.payload;
+    },
     deleteNote(state, action) {
       const noteId = action.payload;
       const newNotes = state.notes.filter((note) => note.id !== noteId);
       state.notes = newNotes;
+    },
+    createNote(state, action) {
+      // TODO add create in db
+      const notesCopy = [...state.notes];
+      notesCopy.unshift(action.payload);
+      state.notes = notesCopy;
     },
   },
 });
@@ -36,6 +46,8 @@ const clientDetailsSlice = createSlice({
 export const {
   setClientDetailsId,
   togglePointsModal,
+  toggleNewNoteModal,
   deleteNote,
+  createNote,
 } = clientDetailsSlice.actions;
 export default clientDetailsSlice.reducer;

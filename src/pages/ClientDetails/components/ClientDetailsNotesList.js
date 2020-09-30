@@ -14,6 +14,9 @@ const ClientDetailsNotesList = ({
   maxVal,
   authorName,
 }) => {
+  console.log("notesData");
+  console.log(notesData);
+
   return (
     <>
       {notesData &&

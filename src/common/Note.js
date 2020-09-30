@@ -2,9 +2,10 @@
    Empava Notes
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Spin, Typography, Tooltip, Popconfirm, message } from "antd";
+import moment from "moment";
+import { Spin, Typography, Popconfirm, message } from "antd";
 import { SubH2, SpaceBetween, Note1Grey } from "common";
 import { iconTrash } from "media/svg";
 
@@ -14,6 +15,11 @@ const Note = ({ authorName, note, deleteNote }) => {
   const [noteText, setNoteText] = useState(note.text);
   const [isSpinning, toggleSpinning] = useState(false);
   const dispatch = useDispatch();
+
+  // rerender text when note updated
+  useEffect(() => {
+    setNoteText(note.text);
+  }, [note]);
 
   function confirm(e) {
     dispatch(deleteNote(note.id));
@@ -47,7 +53,7 @@ const Note = ({ authorName, note, deleteNote }) => {
   const Section = (
     <div>
       <Note1Grey>
-        <span>{note.createdAt} by </span>
+        <span>{moment(note.createdAt).format("MM/D/YYYY hh:mm")} by </span>
         <span style={{ color: "#115CE5" }}>{authorName}</span>
       </Note1Grey>
       <Paragraph {...paragraphProps}> {noteText}</Paragraph>

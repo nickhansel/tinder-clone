@@ -1,3 +1,5 @@
+import iconAddCircle from "./icon-add-circle.svg";
+import iconAddLrg from "./icon-add-lrg.svg";
 import iconAdd from "./icon-add.svg";
 import iconAttention from "./icon-attention.svg";
 import iconBack from "./icon-back.svg";
@@ -17,6 +19,8 @@ import iconSearch from "./icon-search.svg";
 import iconTrash from "./icon-trash.svg";
 
 export {
+  iconAddCircle,
+  iconAddLrg,
   iconAdd,
   iconAttention,
   iconBack,

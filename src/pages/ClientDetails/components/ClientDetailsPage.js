@@ -2,19 +2,21 @@
    Client Page
  */
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Row, Pagination } from "antd";
-import { Layout, Note2, H3, SpaceBetween } from "common";
+import { useSelector, useDispatch } from "react-redux";
+import { Row, Pagination, Tooltip } from "antd";
+import { Layout, Note2, H3 } from "common";
+import ClientDetailCard from "./ClientDetailCard";
+import ClientDetailsNewNote from "./ClientDetailsNewNote";
+import ClientDetailsNotesList from "./ClientDetailsNotesList";
 import ClientProfile from "./ClientProfile";
 import ClientTouchPoints from "./ClientTouchPoints";
-import ClientDetailsNotesList from "./ClientDetailsNotesList";
-import ClientDetailCard from "./ClientDetailCard";
 import Toolbox from "./Toolbox";
 import { RowPagination } from "./styles";
 import { selectClientNotes, selectTouchPoints } from "../selectors";
 import { selectUser } from "reducers/selector";
+import { toggleNewNoteModal } from "../reducers/clientDetailsSlice";
 import { getClient } from "utils";
-import { iconBack } from "media/svg";
+import { iconBack, iconAddCircle } from "media/svg";
 import "./styles.css";
 
 const NOTES_EACH_PAGE = 4;
@@ -28,6 +30,7 @@ const ClientDetailsPage = ({ history, location }) => {
   const notes = useSelector(selectClientNotes());
   const touchPoints = useSelector(selectTouchPoints());
   const user = useSelector(selectUser());
+  const dispatch = useDispatch();
 
   const onPageChange = (page) => {
     // Pagination
@@ -90,7 +93,17 @@ const ClientDetailsPage = ({ history, location }) => {
             </ClientDetailCard>
           </Row>
           <RowPagination>
-            <H3>Notes</H3>
+            <H3>
+              Notes{" "}
+              <Tooltip title="Add Note">
+                <img
+                  onClick={() => dispatch(toggleNewNoteModal(true))}
+                  style={{ cursor: "pointer" }}
+                  src={iconAddCircle}
+                  alt="add note"
+                />
+              </Tooltip>
+            </H3>
             <Pagination {...paginationProps} />
           </RowPagination>
           <Row>
@@ -98,6 +111,9 @@ const ClientDetailsPage = ({ history, location }) => {
           </Row>
         </div>
       </Row>
+      <ClientDetailsNewNote
+        handleToggle={() => dispatch(toggleNewNoteModal(false))}
+      />
     </Layout>
   );
 };

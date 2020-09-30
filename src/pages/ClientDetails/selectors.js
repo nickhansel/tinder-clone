@@ -16,3 +16,5 @@ export const selectTouchPoints = () =>
   createSelector(selectClientDetailsState, (state) => state.touchPoints);
 export const selectPointsModal = () =>
   createSelector(selectClientDetailsState, (state) => state.isPointsModal);
+export const selectNewNoteModal = () =>
+  createSelector(selectClientDetailsState, (state) => state.isNewNoteModal);
