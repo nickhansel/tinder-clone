@@ -173,6 +173,39 @@ export const mockMoods = {
   indiffBoy: "boy_indifferent.gif",
 };
 
+export const touchPointsMock = [
+  {
+    text: `Lorem ipsum dolor sit amet, consect s acing elit, 
+    sed dos eat oaset Lorem ipsum dolor sit amet, consect s acing 
+    elit, sed dos eat oaset `,
+    createdAt: "6/19/20 1:34 PM",
+  },
+  {
+    text: `Lorem ipsum dolor sit amet, consect s acing elit, 
+    sed dos eat oaset Lorem ipsum dolor sit amet, consect s acing 
+    elit, sed dos eat oaset `,
+    createdAt: "6/19/20 1:34 PM",
+  },
+  {
+    text: `Lorem ipsum dolor sit amet, consect s acing elit, 
+    sed dos eat oaset Lorem ipsum dolor sit amet, consect s acing 
+    elit, sed dos eat oaset `,
+    createdAt: "6/19/20 1:34 PM",
+  },
+  {
+    text: `Lorem ipsum dolor sit amet, consect s acing elit, 
+    sed dos eat oaset Lorem ipsum dolor sit amet, consect s acing 
+    elit, sed dos eat oaset `,
+    createdAt: "6/19/20 1:34 PM",
+  },
+  {
+    text: `Lorem ipsum dolor sit amet, consect s acing elit, 
+    sed dos eat oaset Lorem ipsum dolor sit amet, consect s acing 
+    elit, sed dos eat oaset `,
+    createdAt: "6/19/20 1:34 PM",
+  },
+];
+
 export const notesMock = [
   {
     id: 20,
@@ -203,6 +236,24 @@ export const notesMock = [
   },
   {
     id: 26,
+    clientId: 4,
+    contactId: 2,
+    createdAt: "6/19/20 1:34 PM",
+    title: "Video chat going over our new features",
+    text:
+      "Chatted with Mike about a bug he is currently experiencing. He is having trouble getting his other team members signed up on the platform. I assigned a bug badge with further notes to the account and will follow...",
+  },
+  {
+    id: 28,
+    clientId: 4,
+    contactId: 2,
+    createdAt: "6/19/20 1:34 PM",
+    title: "Video chat going over our new features",
+    text:
+      "Chatted with Mike about a bug he is currently experiencing. He is having trouble getting his other team members signed up on the platform. I assigned a bug badge with further notes to the account and will follow...",
+  },
+  {
+    id: 29,
     clientId: 4,
     contactId: 2,
     createdAt: "6/19/20 1:34 PM",

@@ -70,9 +70,11 @@ export const Note1 = styled.p`
   line-height: 20px;
   margin-bottom: 5px;
 `;
-export const Note1Grey = styled(Note1)`
+export const Note1Reg = styled(Note1)`
+  font-weight: 400;
+`;
+export const Note1Grey = styled(Note1Reg)`
   color: #838c95;
-  fontweight: 400;
 `;
 export const Note2 = styled.p`
   font-family: ${fonts.roboto};

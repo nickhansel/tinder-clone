@@ -3,13 +3,17 @@
  */
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Col, Row } from "antd";
+import { Row } from "antd";
 import { Layout, Note, H3 } from "common";
 import ClientProfile from "./ClientProfile";
 import ClientTouchPoints from "./ClientTouchPoints";
 import Toolbox from "./Toolbox";
 import ClientDetailCard from "./ClientDetailCard";
-import { selectClient, selectClientNotes } from "../selectors";
+import {
+  selectClient,
+  selectClientNotes,
+  selectTouchPoints,
+} from "../selectors";
 import { getClient } from "utils";
 import { iconBack } from "media/svg";
 import "./styles.css";
@@ -18,6 +22,7 @@ const ClientDetailsPage = ({ history, location }) => {
   // Get client from db in future
   const client = getClient(location.pathname);
   const notes = useSelector(selectClientNotes());
+  const touchPoints = useSelector(selectTouchPoints());
   const clientTitle = `${client.company} - ${client.name}`;
   const goBack = <img src={iconBack} alt="" />;
 
@@ -53,7 +58,7 @@ const ClientDetailsPage = ({ history, location }) => {
           <ClientProfile {...client} />
         </ClientDetailCard>
         <ClientDetailCard {...touchPointProps}>
-          <ClientTouchPoints name={client.name} />
+          <ClientTouchPoints name={client.name} touchPoints={touchPoints} />
         </ClientDetailCard>
         <ClientDetailCard {...toolboxProps}>
           <Toolbox />
