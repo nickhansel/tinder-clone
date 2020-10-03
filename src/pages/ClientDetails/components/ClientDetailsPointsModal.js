@@ -1,12 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
 import { Modal } from "antd";
-import { selectPointsModal } from "../selectors";
 
-const ClientDetailsPointsModal = ({ handleToggle, content }) => {
-  const isPointsModal = useSelector(selectPointsModal());
-
+const ClientDetailsPointsModal = ({ isOpen, handleToggle, content }) => {
   const contentProps = {
     style: {
       overflow: "auto",
@@ -16,9 +12,9 @@ const ClientDetailsPointsModal = ({ handleToggle, content }) => {
 
   return (
     <Modal
-      visible={isPointsModal}
+      visible={isOpen}
       title="Client Touch Points"
-      onCancel={() => handleToggle(false, null)}
+      onCancel={() => handleToggle(false)}
       footer={[]}
     >
       <div {...contentProps}>{content}</div>

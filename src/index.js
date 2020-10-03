@@ -1,24 +1,45 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { Switch, Route } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import configureStore from "configureStore";
 import { browserHistory as history } from "lib/history";
+import { ApolloProvider } from "@apollo/react-hooks";
 import App from "./App";
 import "./index.css";
+import { ApolloLink } from "apollo-link";
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { createAuthLink } from "aws-appsync-auth-link";
+import { createHttpLink } from "apollo-link-http";
+import { AUTH_TYPE } from "aws-appsync";
+import Amplify from "aws-amplify";
+import awsExports from "./aws-exports";
 
-const store = configureStore({});
+Amplify.configure(awsExports);
+
+const url = awsExports.aws_appsync_graphqlEndpoint;
+const region = awsExports.aws_appsync_region;
+const auth = {
+  type: AUTH_TYPE.API_KEY,
+  apiKey: awsExports.aws_appsync_apiKey,
+};
+const link = ApolloLink.from([
+  createAuthLink({ url, region, auth }),
+  createHttpLink({ uri: url }),
+]);
+export const client = new ApolloClient({
+  link,
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
+  <ApolloProvider client={client}>
+    <BrowserRouter>
       <Switch>
         <Route path="/" component={App} />
       </Switch>
-    </ConnectedRouter>
-  </Provider>,
+    </BrowserRouter>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 

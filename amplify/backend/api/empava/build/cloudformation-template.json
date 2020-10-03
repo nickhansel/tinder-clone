@@ -114,14 +114,14 @@
                         "ApiId"
                     ]
                 },
-                "Description": "empava api",
+                "Description": "ampava api",
                 "Expires": {
                     "Fn::If": [
                         "APIKeyExpirationEpochIsPositive",
                         {
                             "Ref": "APIKeyExpirationEpoch"
                         },
-                        1632642374
+                        1627642013
                     ]
                 }
             },

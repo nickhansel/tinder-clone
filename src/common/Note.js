@@ -3,7 +3,6 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import moment from "moment";
 import { Spin, Typography, Popconfirm, message } from "antd";
 import { SubH2, SpaceBetween, Note1Grey } from "common";
@@ -14,15 +13,14 @@ const { Paragraph } = Typography;
 const Note = ({ authorName, note, deleteNote }) => {
   const [noteText, setNoteText] = useState(note.text);
   const [isSpinning, toggleSpinning] = useState(false);
-  const dispatch = useDispatch();
 
   // rerender text when note updated
-  useEffect(() => {
-    setNoteText(note.text);
-  }, [note]);
+  // useEffect(() => {
+  //   setNoteText(note.text);
+  // }, [note]);
 
   function confirm(e) {
-    dispatch(deleteNote(note.id));
+    // TODO delete note
     message.success("Deleted");
     toggleSpinning(false);
   }
@@ -39,10 +37,6 @@ const Note = ({ authorName, note, deleteNote }) => {
       marginBottom: 0,
       overflow: "auto",
     },
-    editable: {
-      tooltip: "Edit",
-      onChange: setNoteText,
-    },
     ellipsis: {
       rows: 4,
       expandable: true,
@@ -56,7 +50,7 @@ const Note = ({ authorName, note, deleteNote }) => {
         <span>{moment(note.createdAt).format("MM/D/YYYY hh:mm")} by </span>
         <span style={{ color: "#115CE5" }}>{authorName}</span>
       </Note1Grey>
-      <Paragraph {...paragraphProps}> {noteText}</Paragraph>
+      <Paragraph editable={{ onChange: setNoteText }}> {noteText}</Paragraph>
     </div>
   );
 

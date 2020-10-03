@@ -72,6 +72,9 @@ export const getError = (err) => {
   return msg;
 };
 
+/*
+Calculate the color based on health score
+*/
 export const getHealthColor = (healthScore) => {
   const code = getHealthCode(healthScore);
   const colors = {
@@ -82,6 +85,10 @@ export const getHealthColor = (healthScore) => {
 
   return colors[code];
 };
+
+/*
+Calculate the displayed length for the health meter health score
+*/
 export const getHealthLen = (healthScore) => {
   const code = getHealthCode(healthScore);
   const len = {
@@ -92,6 +99,10 @@ export const getHealthLen = (healthScore) => {
 
   return len[code];
 };
+
+/*
+Calculate the code for the health based on health score
+*/
 export const getHealthCode = (healthScore) => {
   let healthCode = "high";
 
@@ -103,4 +114,18 @@ export const getHealthCode = (healthScore) => {
   }
 
   return healthCode;
+};
+
+/*
+Generate random id
+*/
+export const generateId = () => {
+  return (
+    Math.random()
+      .toString(36)
+      .substring(2, 15) +
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+  );
 };

@@ -9,8 +9,8 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "empava api"
+              "apiKeyExpirationDays": 300,
+              "description": "ampava api"
             }
           },
           "additionalAuthenticationProviders": []

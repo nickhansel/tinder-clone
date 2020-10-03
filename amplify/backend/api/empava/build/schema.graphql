@@ -1,6 +1,6 @@
 type Subscribe {
   id: ID!
-  email_name: String!
+  email: String!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -90,7 +90,7 @@ input ModelSizeInput {
 
 input ModelSubscribeFilterInput {
   id: ModelIDInput
-  email_name: ModelStringInput
+  email: ModelStringInput
   and: [ModelSubscribeFilterInput]
   or: [ModelSubscribeFilterInput]
   not: ModelSubscribeFilterInput
@@ -116,12 +116,12 @@ type Query {
 
 input CreateSubscribeInput {
   id: ID
-  email_name: String!
+  email: String!
 }
 
 input UpdateSubscribeInput {
   id: ID!
-  email_name: String
+  email: String
 }
 
 input DeleteSubscribeInput {
@@ -135,7 +135,7 @@ type Mutation {
 }
 
 input ModelSubscribeConditionInput {
-  email_name: ModelStringInput
+  email: ModelStringInput
   and: [ModelSubscribeConditionInput]
   or: [ModelSubscribeConditionInput]
   not: ModelSubscribeConditionInput

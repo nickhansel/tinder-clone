@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { withAuthenticator } from "aws-amplify-react";
-import Amplify, { Auth } from "aws-amplify";
-import aws_exports from "./aws-exports";
 import {
   SettingsPage,
   InsightsPage,
@@ -11,8 +9,6 @@ import {
   LandingPage,
 } from "pages";
 import { GlobalStyle } from "utils";
-
-Amplify.configure(aws_exports);
 
 // TODO set this routes private
 const Routes = (

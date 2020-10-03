@@ -8,7 +8,7 @@ export const createSubscribe = /* GraphQL */ `
   ) {
     createSubscribe(input: $input, condition: $condition) {
       id
-      email_name
+      email
       createdAt
       updatedAt
     }
@@ -21,7 +21,7 @@ export const updateSubscribe = /* GraphQL */ `
   ) {
     updateSubscribe(input: $input, condition: $condition) {
       id
-      email_name
+      email
       createdAt
       updatedAt
     }
@@ -34,7 +34,7 @@ export const deleteSubscribe = /* GraphQL */ `
   ) {
     deleteSubscribe(input: $input, condition: $condition) {
       id
-      email_name
+      email
       createdAt
       updatedAt
     }

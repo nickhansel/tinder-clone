@@ -5,7 +5,7 @@ export const getSubscribe = /* GraphQL */ `
   query GetSubscribe($id: ID!) {
     getSubscribe(id: $id) {
       id
-      email_name
+      email
       createdAt
       updatedAt
     }
@@ -20,7 +20,7 @@ export const listSubscribes = /* GraphQL */ `
     listSubscribes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        email_name
+        email
         createdAt
         updatedAt
       }
