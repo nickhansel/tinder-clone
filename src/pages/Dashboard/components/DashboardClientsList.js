@@ -2,26 +2,21 @@
   Client List component
  */
 
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
 import { Row } from "antd";
 import { ClientCard } from "common";
 import DashboardClientModal from "./DashboardClientModal";
-import { selectBadgeModal, selectClient } from "../selectors";
-import {
-  toggleBadgeModal,
-  setSelectedClient,
-} from "../reducers/dashboardSlice";
 
 const DashboardClientList = ({ data, minVal, maxVal, history }) => {
-  const dispatch = useDispatch();
+  const [isBadgeModal, toggleBadgeModal] = useState(false);
+  const [selectedClientId, setSelectedClient] = useState(null);
 
   const handleCardClick = (clientId) => {
     history.push(`clients/${clientId}`);
   };
   const handleToggle = (state, id) => {
-    dispatch(toggleBadgeModal(state));
-    dispatch(setSelectedClient(id));
+    toggleBadgeModal(state);
+    setSelectedClient(id);
   };
 
   return (
@@ -40,7 +35,11 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
               />
             ))}
       </Row>
-      <DashboardClientModal handleToggle={handleToggle} />
+      <DashboardClientModal
+        isBadgeModal={isBadgeModal}
+        handleToggle={handleToggle}
+        selectedClientId={selectedClientId}
+      />
     </>
   );
 };

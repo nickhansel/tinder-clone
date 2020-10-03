@@ -1,21 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
 import { Modal, Form, Input, Button, message } from "antd";
-import { selectNewNoteModal } from "../selectors";
-import { createNote } from "../reducers/clientDetailsSlice";
 
 const { TextArea } = Input;
 
-const ClientDetailsNewNote = ({ handleToggle }) => {
-  const isNewNoteModal = useSelector(selectNewNoteModal());
-  const dispatch = useDispatch();
-
+const ClientDetailsNewNote = ({
+  isNewNoteModal,
+  toggleNewNoteModal,
+  handleToggle,
+}) => {
   const onFinish = (values) => {
     values.id = Date.now();
     values.createdAt = Date.now();
 
-    dispatch(createNote(values));
+    // TODO Create Note
     message.success("Note created");
     handleToggle();
   };
@@ -64,9 +62,9 @@ const ClientDetailsNewNote = ({ handleToggle }) => {
     <Modal
       visible={isNewNoteModal}
       title="Add Note"
-      onCancel={() => handleToggle(false)}
+      onCancel={() => toggleNewNoteModal(false)}
       footer={[
-        <Button key="back" onClick={handleToggle}>
+        <Button key="back" onClick={() => toggleNewNoteModal(false)}>
           Cancel
         </Button>,
       ]}

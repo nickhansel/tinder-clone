@@ -2,22 +2,19 @@
    Client Page
  */
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Row, Pagination, Tooltip } from "antd";
 import { Layout, Note2, H3 } from "common";
 import ClientDetailCard from "./ClientDetailCard";
 import ClientDetailsNewNote from "./ClientDetailsNewNote";
 import ClientDetailsNotesList from "./ClientDetailsNotesList";
-import ClientProfile from "./ClientProfile";
-import ClientTouchPoints from "./ClientTouchPoints";
+import ClientProfile from "./ClientDetailsProfile";
+import ClientDetailsTouchPoints from "./ClientDetailsTouchPoints";
 import Toolbox from "./Toolbox";
 import { RowPagination } from "./styles";
-import { selectClientNotes, selectTouchPoints } from "../selectors";
-import { selectUser } from "reducers/selector";
-import { toggleNewNoteModal } from "../reducers/clientDetailsSlice";
 import { getClient } from "utils";
 import { iconBack, iconAddCircle } from "media/svg";
 import "./styles.css";
+import { mockData, notesMock, touchPointsMock } from "utils/mock";
 
 const NOTES_EACH_PAGE = 4;
 
@@ -25,12 +22,12 @@ const ClientDetailsPage = ({ history, location }) => {
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
   const [page, setPage] = useState(1);
+  const [isNewNoteModal, toggleNewNoteModal] = useState(false);
+
   // Get client from db in future
   const client = getClient(location.pathname);
-  const notes = useSelector(selectClientNotes());
-  const touchPoints = useSelector(selectTouchPoints());
-  const user = useSelector(selectUser());
-  const dispatch = useDispatch();
+  const [notes, setNotes] = useState(notesMock);
+  const [touchPoints, setPoints] = useState(touchPointsMock);
 
   const onPageChange = (page) => {
     // Pagination
@@ -55,11 +52,13 @@ const ClientDetailsPage = ({ history, location }) => {
     style: { width: "1200px" },
   };
   const noteListProps = {
+    isNewNoteModal,
+    toggleNewNoteModal,
     noteProps,
     notesData: notes,
     minVal,
     maxVal,
-    authorName: user.name,
+    authorName: "Blake", // TODO get user
   };
   const paginationProps = {
     current: page,
@@ -83,8 +82,8 @@ const ClientDetailsPage = ({ history, location }) => {
               <ClientProfile {...client} />
             </ClientDetailCard>
             <ClientDetailCard {...touchPointProps}>
-              <ClientTouchPoints
-                authorName={user.name}
+              <ClientDetailsTouchPoints
+                authorName={"Blake"} // TODO get user
                 touchPoints={touchPoints}
               />
             </ClientDetailCard>
@@ -97,7 +96,7 @@ const ClientDetailsPage = ({ history, location }) => {
               Notes{" "}
               <Tooltip title="Add Note">
                 <img
-                  onClick={() => dispatch(toggleNewNoteModal(true))}
+                  onClick={() => toggleNewNoteModal(true)}
                   style={{ cursor: "pointer" }}
                   src={iconAddCircle}
                   alt="add note"
@@ -111,9 +110,7 @@ const ClientDetailsPage = ({ history, location }) => {
           </Row>
         </div>
       </Row>
-      <ClientDetailsNewNote
-        handleToggle={() => dispatch(toggleNewNoteModal(false))}
-      />
+      <ClientDetailsNewNote handleToggle={() => toggleNewNoteModal(false)} />
     </Layout>
   );
 };

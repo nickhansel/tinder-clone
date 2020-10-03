@@ -2,19 +2,17 @@
    Client Touch Points
  */
 
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Typography } from "antd";
 import { SubH2, Note1Grey, Flex, DividerStyled } from "common";
 import ClientDetailsPointsModal from "./ClientDetailsPointsModal";
-import { togglePointsModal } from "../reducers/clientDetailsSlice";
 import { iconMail } from "media/svg";
 
 const { Paragraph } = Typography;
 
-const ClientTouchPoints = ({ authorName, touchPoints }) => {
-  const dispatch = useDispatch();
+const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
+  const [isModalOpen, togglePointsModal] = useState(false);
 
   const styleAuthor = {
     color: "#115CE5",
@@ -56,7 +54,7 @@ const ClientTouchPoints = ({ authorName, touchPoints }) => {
       <DividerStyled style={{ width: 340 }} />
       <Flex style={{ justifyContent: "center" }}>
         <SubH2
-          onClick={() => dispatch(togglePointsModal(true))}
+          onClick={() => togglePointsModal(true)}
           style={{ ...actionTextStyle }}
         >
           View All
@@ -80,16 +78,17 @@ const ClientTouchPoints = ({ authorName, touchPoints }) => {
       <div style={{ ...contentStyle }}>{renderTouchPoints}</div>
       {renderAction}
       <ClientDetailsPointsModal
-        handleToggle={() => dispatch(togglePointsModal(false))}
+        isOpen={isModalOpen}
+        handleToggle={() => togglePointsModal(false)}
         content={renderTouchPoints}
       />
     </div>
   );
 };
 
-ClientTouchPoints.propTypes = {
+ClientDetailsTouchPoints.propTypes = {
   authorName: PropTypes.string.isRequired,
   touchPoints: PropTypes.array.isRequired,
 };
 
-export default ClientTouchPoints;
+export default ClientDetailsTouchPoints;

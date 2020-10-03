@@ -3,20 +3,20 @@
  */
 
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientsList";
 import MoodFilter from "./DashboardMoodFilter";
 import { Layout, Note2, Flex } from "common";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
-import { selectFilteredClients } from "../selectors";
 import "./styles.css";
+import { mockData } from "utils";
 
 const DashboardPage = ({ history }) => {
-  const clientsData = useSelector(selectFilteredClients());
+  const [clientsData, setClientData] = useState(mockData);
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+
   const moodFilter = <MoodFilter />;
 
   const onChange = (page) => {
