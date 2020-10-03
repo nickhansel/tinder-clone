@@ -52,7 +52,7 @@ export const TopBackgroundContainer = styled.div`
 `;
 
 export const MainHeaderText = styled.div`
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   justify-content: center;
   max-width: 600px;
@@ -72,7 +72,7 @@ export const MainHeaderText = styled.div`
     font-size: 17px;
     line-height: 26px;
     margin-top: 0;
-    padding-bottom: 30px;
+    padding-bottom: 0px;
   }
 
   @media (max-width: 650px) {

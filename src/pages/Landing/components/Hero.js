@@ -66,9 +66,6 @@ const Hero = () => {
               powerful visual and interactive tools to keep engagement up and
               relationships strong
             </p>
-            <a href="/#section3">
-              <ButtonPrimaryGreen>Learn More</ButtonPrimaryGreen>
-            </a>
           </MainHeaderText>
         </Col>
       </Row>
