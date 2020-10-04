@@ -2,3 +2,70 @@ type Subscribe @model {
   id: ID!
   email: String!
 }
+
+type Team @model {
+  id: ID!
+  name: String!
+  account: [Account] @connection(name: "TeamAccount")
+  teamMembers: [User] @connection(name: "TeamUsers")
+  renewalDate: Int
+}
+
+type User @model {
+  id: ID!
+  team: Team @connection(name: "TeamUsers")
+  name: String!
+  email: String!
+  password: String!
+  profileImg: String
+  isAdmin: Boolean
+  clients: [Client] @connection(name: "UserClient")
+  clientNotes: [ClientNote] @connection(name: "UserNote")
+  clientStrategies: [Strategy] @connection(name: "UserStrategy")
+}
+
+type Account @model {
+  id: ID!
+  team: Team @connection(name: "TeamAccount")
+  companyName: String!
+  renewalDate: Int
+  accountMembers: [Client] @connection(name: "AccountClient")
+}
+
+type Client @model {
+  id: ID!
+  accountId: Account @connection(name: "AccountClient")
+  contactId: User @connection(name: "UserClient")
+  noteId: [ClientNote] @connection(name: "ClientNote")
+  avatarId: String!
+  salesforceId: ID
+  name: String!
+  strategy: [Strategy] @connection(name: "ClientStrategy")
+  position: String
+  healthScore: Int
+  lastContact: Int
+}
+
+type ClientNote @model {
+  id: ID!
+  clientId: Client @connection(name: "ClientNote")
+  ownerId: User @connection(name: "UserNote")
+  content: String
+}
+
+type Strategy @model {
+  id: ID!
+  badgeName: String!
+  clientId: Client @connection(name: "ClientStrategy")
+  ownerId: User @connection(name: "UserStrategy")
+  title: String!
+  description: String
+}
+
+type Avatar @model {
+  id: ID!
+  gender: String!
+  link: String
+  Animation: String
+  mood: String
+}
