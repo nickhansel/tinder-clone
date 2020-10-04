@@ -1,5 +1,12 @@
 {
-  "auth": {},
+  "auth": {
+    "authcra91a82637": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
   "api": {
     "api": {
       "service": "AppSync",
