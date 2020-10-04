@@ -4,12 +4,7 @@
 
 import React from "react";
 import { Row, Col, Carousel } from "antd";
-import {
-  CarouselStyled,
-  MainHeaderText,
-  ButtonPrimaryGreen,
-  HeroBgContainer,
-} from "./styles";
+import { CarouselStyled, MainHeaderText, HeroBgContainer } from "./styles";
 import carouselOne from "media/landing/dashboard.png";
 import carouselTwo from "media/landing/relationship.jpg";
 import carouselThree from "media/landing/client-profile.jpg";
