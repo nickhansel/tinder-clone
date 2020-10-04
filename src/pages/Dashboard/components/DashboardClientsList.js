@@ -36,6 +36,7 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
             ))}
       </Row>
       <DashboardClientModal
+        data={data}
         isBadgeModal={isBadgeModal}
         handleToggle={handleToggle}
         selectedClientId={selectedClientId}

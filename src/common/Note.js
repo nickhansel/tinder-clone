@@ -4,16 +4,16 @@
 
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Checkbox, Spin, Typography, Popconfirm, message } from "antd";
-import { SubH2, SpaceBetween, Note1Grey } from "common";
+import { Spin, Typography, Popconfirm, message } from "antd";
+import { SubH2, SpaceBetween, Note1Grey, Badge, Flex } from "common";
 import { iconTrash } from "media/svg";
 
 const { Paragraph } = Typography;
 
-const Note = ({ authorName, note, deleteNote, extra }) => {
+const Note = ({ type, authorName, note, deleteNote }) => {
   const [noteText, setNoteText] = useState(note.text);
   const [isSpinning, toggleSpinning] = useState(false);
-
+  console.log(note);
   // rerender text when note updated
   useEffect(() => {
     setNoteText(note.text);
@@ -46,10 +46,6 @@ const Note = ({ authorName, note, deleteNote, extra }) => {
 
   const Section = (
     <div>
-      <Note1Grey>
-        <span>{moment(note.createdAt).format("MM/D/YYYY hh:mm")} by </span>
-        <span style={{ color: "#115CE5" }}>{authorName}</span>
-      </Note1Grey>
       <Paragraph {...paragraphProps} editable={{ onChange: setNoteText }}>
         {" "}
         {noteText}
@@ -72,16 +68,26 @@ const Note = ({ authorName, note, deleteNote, extra }) => {
       />
     </Popconfirm>
   ) : null;
+  const renderBadge =
+    type === "strategy" ? <Badge strategy={note.name} /> : null;
 
   return (
     <div>
       <Spin spinning={isSpinning}>
         <SpaceBetween>
-          <SubH2>{note.title}</SubH2>
-          <div>
-            <Checkbox />
-            {renderDelete}
-          </div>
+          <Flex>
+            {renderBadge}
+            <div>
+              <SubH2>{note.title}</SubH2>
+              <Note1Grey>
+                <span>
+                  {moment(note.createdAt).format("MM/D/YYYY hh:mm")} by{" "}
+                </span>
+                <span style={{ color: "#115CE5" }}>{authorName}</span>
+              </Note1Grey>
+            </div>
+          </Flex>
+          {renderDelete}
         </SpaceBetween>
         {Section}
       </Spin>

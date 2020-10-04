@@ -3,10 +3,27 @@ import { Modal } from "antd";
 import { Note } from "common";
 
 const DashboardClientModal = ({
+  data,
   selectedClientId,
   handleToggle,
   isBadgeModal,
 }) => {
+  const selectedClient = selectedClientId
+    ? data.filter((item) => item.id === selectedClientId)
+    : false;
+  const renderNotes = selectedClient
+    ? selectedClient[0].strategy.map((item) => {
+        return (
+          <Note
+            type={"strategy"}
+            authorName={"Blake"}
+            note={item}
+            deleteNote={() => console.log("delete")}
+          />
+        );
+      })
+    : null;
+
   return (
     <Modal
       visible={isBadgeModal}
@@ -14,15 +31,7 @@ const DashboardClientModal = ({
       onCancel={() => handleToggle(false, null)}
       footer={[]}
     >
-      <Note
-        authorName={"Blake"}
-        note={{
-          text:
-            "Alex is not getting full use out of our platform and seems confused by certain features. I will make a point to reach out weekly with tips and strateges relevent to AirNinja’s needs to provide more tangible value.",
-          title: "Extra Attention",
-        }}
-        deleteNote={() => console.log("delete")}
-      />
+      {renderNotes}
     </Modal>
   );
 };

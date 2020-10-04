@@ -30,9 +30,7 @@ export const BudgeStyled = styled.button`
   ${sharedButtonStyles};
   background-color: ${mainColors.white};
   border-radius: 50%;
-  height: 32px;
   margin-right: 10px;
-  width: 32px;
 
   img {
     height: 32px;

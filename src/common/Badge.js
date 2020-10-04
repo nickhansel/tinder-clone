@@ -15,13 +15,20 @@ const statusData = {
   contact: iconNewContact,
 };
 
-const Badge = ({ strategy }) => {
-  const handleBadgeClick = () => {
-    // open modal
+const Badge = ({ strategy, size }) => {
+  let dimentions = 32;
+
+  if (size === "lrg") {
+    dimentions = 50;
+  }
+
+  const style = {
+    height: dimentions,
+    width: dimentions,
   };
 
   return (
-    <BudgeStyled onClick={handleBadgeClick}>
+    <BudgeStyled style={style}>
       <img src={statusData[strategy]} alt="health score" />
     </BudgeStyled>
   );

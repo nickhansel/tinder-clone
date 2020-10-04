@@ -16,8 +16,8 @@ const ClientCard = ({
   position,
   strategy,
 }) => {
-  const renderBadges = strategy.map((strategyItem) => (
-    <Badge strategy={strategyItem} />
+  const renderBadges = strategy.map((strategyItem, index) => (
+    <Badge key={index} strategy={strategyItem.name} />
   ));
 
   return (

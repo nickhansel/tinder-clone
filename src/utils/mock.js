@@ -29,7 +29,26 @@ export const mockData = [
     activity: "Last activity is at 9:23PM on 24/08/2020",
     status: "sadBoy",
     health: 2,
-    strategy: ["attention"],
+    strategy: [
+      {
+        name: "attention",
+        title: "Extra Attention",
+        text: `Alex is not getting full use out of our platform and seems confused by certain features. 
+    I will make a point to reach out weekly 
+    with tips and strateges relevent to AirNinja’s 
+    needs to provide more tangible value.`,
+      },
+      {
+        name: "bug",
+        title: "Bug - Add User Issue",
+        text: `Alex is not able to add his Team Member Alison to our
+         platform. This is disapointing becasue he is trying to 
+         increase adoption internally at Airninja but is enoutering a 
+         bug on our end preventing this. He says Alison is not recieving 
+         the confirmation email. I will follow up with the support team
+          to get this resolved. `,
+      },
+    ],
     renewalDate: "12/10/2020",
   },
   {
@@ -40,7 +59,16 @@ export const mockData = [
     activity: "Last activity is at 9:23PM on 24/08/2020",
     status: "indiffBoy",
     health: 2.4,
-    strategy: ["attention", "bug"],
+    strategy: [
+      {
+        name: "attention",
+        title: "Extra Attention",
+        text: `Alex is not getting full use out of our platform and seems confused by certain features. 
+    I will make a point to reach out weekly 
+    with tips and strateges relevent to AirNinja’s 
+    needs to provide more tangible value.`,
+      },
+    ],
     renewalDate: "12/20/2020",
   },
   {
@@ -51,7 +79,18 @@ export const mockData = [
     activity: "Last activity is at 9:23PM on 24/08/2020",
     status: "indiffBoy",
     health: 2.4,
-    strategy: ["bug"],
+    strategy: [
+      {
+        name: "bug",
+        title: "Bug - Add User Issue",
+        text: `Alex is not able to add his Team Member Alison to our
+       platform. This is disapointing becasue he is trying to 
+       increase adoption internally at Airninja but is enoutering a 
+       bug on our end preventing this. He says Alison is not recieving 
+       the confirmation email. I will follow up with the support team
+        to get this resolved. `,
+      },
+    ],
     renewalDate: "11/18/2020",
   },
   {
@@ -117,7 +156,23 @@ export const mockData = [
     activity: "Last activity is at 9:23PM on 24/08/2020",
     status: "sadGirl",
     health: 1.9,
-    strategy: ["escalate", "contact"],
+    strategy: [
+      {
+        name: "escalate",
+        title: "Escalate - Add User Issue",
+        text: `Alex is not able to add his Team Member Alison to our
+       platform. This is disapointing becasue he is trying to 
+       increase adoption internally at Airninja but is enoutering a 
+       bug on our end preventing this.`,
+      },
+      {
+        name: "contact",
+        title: "Add New Contact",
+        text: `Alex is not able to add his Team Member Alison to our
+       platform. This is disapointing becasue he is trying to 
+  `,
+      },
+    ],
     renewalDate: "12/10/2020",
   },
   {
