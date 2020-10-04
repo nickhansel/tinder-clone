@@ -1,7 +1,7 @@
 {
   "auth": {},
   "api": {
-    "empava": {
+    "api": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -10,7 +10,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 300,
-              "description": "ampava api"
+              "description": "api key"
             }
           },
           "additionalAuthenticationProviders": []
