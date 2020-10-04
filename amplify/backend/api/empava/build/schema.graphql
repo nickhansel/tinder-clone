@@ -5,6 +5,87 @@ type Subscribe {
   updatedAt: AWSDateTime!
 }
 
+type Team {
+  id: ID!
+  name: String!
+  account(filter: ModelAccountFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelAccountConnection
+  teamMembers(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
+  renewalDate: Int
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type User {
+  id: ID!
+  team: Team
+  name: String!
+  email: String!
+  password: String!
+  profileImg: String
+  isAdmin: Boolean
+  clients(filter: ModelClientFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientConnection
+  clientNotes(filter: ModelClientNoteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientNoteConnection
+  clientStrategies(filter: ModelStrategyFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStrategyConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Account {
+  id: ID!
+  team: Team
+  companyName: String!
+  renewalDate: Int
+  accountMembers(filter: ModelClientFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Client {
+  id: ID!
+  accountId: Account
+  contactId: User
+  noteId(filter: ModelClientNoteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientNoteConnection
+  avatarId: String!
+  salesforceId: ID
+  name: String!
+  strategy(filter: ModelStrategyFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStrategyConnection
+  position: String
+  healthScore: Int
+  lastContact: Int
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ClientNote {
+  id: ID!
+  clientId: Client
+  ownerId: User
+  content: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Strategy {
+  id: ID!
+  badgeName: String!
+  clientId: Client
+  ownerId: User
+  title: String!
+  description: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Avatar {
+  id: ID!
+  gender: String!
+  link: String
+  Animation: String
+  mood: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
 enum ModelSortDirection {
   ASC
   DESC
@@ -112,6 +193,20 @@ enum ModelAttributeTypes {
 type Query {
   getSubscribe(id: ID!): Subscribe
   listSubscribes(filter: ModelSubscribeFilterInput, limit: Int, nextToken: String): ModelSubscribeConnection
+  getTeam(id: ID!): Team
+  listTeams(filter: ModelTeamFilterInput, limit: Int, nextToken: String): ModelTeamConnection
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getAccount(id: ID!): Account
+  listAccounts(filter: ModelAccountFilterInput, limit: Int, nextToken: String): ModelAccountConnection
+  getClient(id: ID!): Client
+  listClients(filter: ModelClientFilterInput, limit: Int, nextToken: String): ModelClientConnection
+  getClientNote(id: ID!): ClientNote
+  listClientNotes(filter: ModelClientNoteFilterInput, limit: Int, nextToken: String): ModelClientNoteConnection
+  getStrategy(id: ID!): Strategy
+  listStrategys(filter: ModelStrategyFilterInput, limit: Int, nextToken: String): ModelStrategyConnection
+  getAvatar(id: ID!): Avatar
+  listAvatars(filter: ModelAvatarFilterInput, limit: Int, nextToken: String): ModelAvatarConnection
 }
 
 input CreateSubscribeInput {
@@ -132,6 +227,27 @@ type Mutation {
   createSubscribe(input: CreateSubscribeInput!, condition: ModelSubscribeConditionInput): Subscribe
   updateSubscribe(input: UpdateSubscribeInput!, condition: ModelSubscribeConditionInput): Subscribe
   deleteSubscribe(input: DeleteSubscribeInput!, condition: ModelSubscribeConditionInput): Subscribe
+  createTeam(input: CreateTeamInput!, condition: ModelTeamConditionInput): Team
+  updateTeam(input: UpdateTeamInput!, condition: ModelTeamConditionInput): Team
+  deleteTeam(input: DeleteTeamInput!, condition: ModelTeamConditionInput): Team
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createAccount(input: CreateAccountInput!, condition: ModelAccountConditionInput): Account
+  updateAccount(input: UpdateAccountInput!, condition: ModelAccountConditionInput): Account
+  deleteAccount(input: DeleteAccountInput!, condition: ModelAccountConditionInput): Account
+  createClient(input: CreateClientInput!, condition: ModelClientConditionInput): Client
+  updateClient(input: UpdateClientInput!, condition: ModelClientConditionInput): Client
+  deleteClient(input: DeleteClientInput!, condition: ModelClientConditionInput): Client
+  createClientNote(input: CreateClientNoteInput!, condition: ModelClientNoteConditionInput): ClientNote
+  updateClientNote(input: UpdateClientNoteInput!, condition: ModelClientNoteConditionInput): ClientNote
+  deleteClientNote(input: DeleteClientNoteInput!, condition: ModelClientNoteConditionInput): ClientNote
+  createStrategy(input: CreateStrategyInput!, condition: ModelStrategyConditionInput): Strategy
+  updateStrategy(input: UpdateStrategyInput!, condition: ModelStrategyConditionInput): Strategy
+  deleteStrategy(input: DeleteStrategyInput!, condition: ModelStrategyConditionInput): Strategy
+  createAvatar(input: CreateAvatarInput!, condition: ModelAvatarConditionInput): Avatar
+  updateAvatar(input: UpdateAvatarInput!, condition: ModelAvatarConditionInput): Avatar
+  deleteAvatar(input: DeleteAvatarInput!, condition: ModelAvatarConditionInput): Avatar
 }
 
 input ModelSubscribeConditionInput {
@@ -145,4 +261,343 @@ type Subscription {
   onCreateSubscribe: Subscribe @aws_subscribe(mutations: ["createSubscribe"])
   onUpdateSubscribe: Subscribe @aws_subscribe(mutations: ["updateSubscribe"])
   onDeleteSubscribe: Subscribe @aws_subscribe(mutations: ["deleteSubscribe"])
+  onCreateTeam: Team @aws_subscribe(mutations: ["createTeam"])
+  onUpdateTeam: Team @aws_subscribe(mutations: ["updateTeam"])
+  onDeleteTeam: Team @aws_subscribe(mutations: ["deleteTeam"])
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateAccount: Account @aws_subscribe(mutations: ["createAccount"])
+  onUpdateAccount: Account @aws_subscribe(mutations: ["updateAccount"])
+  onDeleteAccount: Account @aws_subscribe(mutations: ["deleteAccount"])
+  onCreateClient: Client @aws_subscribe(mutations: ["createClient"])
+  onUpdateClient: Client @aws_subscribe(mutations: ["updateClient"])
+  onDeleteClient: Client @aws_subscribe(mutations: ["deleteClient"])
+  onCreateClientNote: ClientNote @aws_subscribe(mutations: ["createClientNote"])
+  onUpdateClientNote: ClientNote @aws_subscribe(mutations: ["updateClientNote"])
+  onDeleteClientNote: ClientNote @aws_subscribe(mutations: ["deleteClientNote"])
+  onCreateStrategy: Strategy @aws_subscribe(mutations: ["createStrategy"])
+  onUpdateStrategy: Strategy @aws_subscribe(mutations: ["updateStrategy"])
+  onDeleteStrategy: Strategy @aws_subscribe(mutations: ["deleteStrategy"])
+  onCreateAvatar: Avatar @aws_subscribe(mutations: ["createAvatar"])
+  onUpdateAvatar: Avatar @aws_subscribe(mutations: ["updateAvatar"])
+  onDeleteAvatar: Avatar @aws_subscribe(mutations: ["deleteAvatar"])
+}
+
+type ModelTeamConnection {
+  items: [Team]
+  nextToken: String
+}
+
+input ModelTeamFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  renewalDate: ModelIntInput
+  and: [ModelTeamFilterInput]
+  or: [ModelTeamFilterInput]
+  not: ModelTeamFilterInput
+}
+
+input CreateTeamInput {
+  id: ID
+  name: String!
+  renewalDate: Int
+}
+
+input UpdateTeamInput {
+  id: ID!
+  name: String
+  renewalDate: Int
+}
+
+input DeleteTeamInput {
+  id: ID
+}
+
+input ModelTeamConditionInput {
+  name: ModelStringInput
+  renewalDate: ModelIntInput
+  and: [ModelTeamConditionInput]
+  or: [ModelTeamConditionInput]
+  not: ModelTeamConditionInput
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  email: ModelStringInput
+  password: ModelStringInput
+  profileImg: ModelStringInput
+  isAdmin: ModelBooleanInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input CreateUserInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  profileImg: String
+  isAdmin: Boolean
+  userTeamId: ID
+}
+
+input UpdateUserInput {
+  id: ID!
+  name: String
+  email: String
+  password: String
+  profileImg: String
+  isAdmin: Boolean
+  userTeamId: ID
+}
+
+input DeleteUserInput {
+  id: ID
+}
+
+input ModelUserConditionInput {
+  name: ModelStringInput
+  email: ModelStringInput
+  password: ModelStringInput
+  profileImg: ModelStringInput
+  isAdmin: ModelBooleanInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+type ModelAccountConnection {
+  items: [Account]
+  nextToken: String
+}
+
+input ModelAccountFilterInput {
+  id: ModelIDInput
+  companyName: ModelStringInput
+  renewalDate: ModelIntInput
+  and: [ModelAccountFilterInput]
+  or: [ModelAccountFilterInput]
+  not: ModelAccountFilterInput
+}
+
+input CreateAccountInput {
+  id: ID
+  companyName: String!
+  renewalDate: Int
+  accountTeamId: ID
+}
+
+input UpdateAccountInput {
+  id: ID!
+  companyName: String
+  renewalDate: Int
+  accountTeamId: ID
+}
+
+input DeleteAccountInput {
+  id: ID
+}
+
+input ModelAccountConditionInput {
+  companyName: ModelStringInput
+  renewalDate: ModelIntInput
+  and: [ModelAccountConditionInput]
+  or: [ModelAccountConditionInput]
+  not: ModelAccountConditionInput
+}
+
+type ModelClientConnection {
+  items: [Client]
+  nextToken: String
+}
+
+input ModelClientFilterInput {
+  id: ModelIDInput
+  avatarId: ModelStringInput
+  salesforceId: ModelIDInput
+  name: ModelStringInput
+  position: ModelStringInput
+  healthScore: ModelIntInput
+  lastContact: ModelIntInput
+  and: [ModelClientFilterInput]
+  or: [ModelClientFilterInput]
+  not: ModelClientFilterInput
+}
+
+input CreateClientInput {
+  id: ID
+  avatarId: String!
+  salesforceId: ID
+  name: String!
+  position: String
+  healthScore: Int
+  lastContact: Int
+  clientAccountIdId: ID
+  clientContactIdId: ID
+}
+
+input UpdateClientInput {
+  id: ID!
+  avatarId: String
+  salesforceId: ID
+  name: String
+  position: String
+  healthScore: Int
+  lastContact: Int
+  clientAccountIdId: ID
+  clientContactIdId: ID
+}
+
+input DeleteClientInput {
+  id: ID
+}
+
+input ModelClientConditionInput {
+  avatarId: ModelStringInput
+  salesforceId: ModelIDInput
+  name: ModelStringInput
+  position: ModelStringInput
+  healthScore: ModelIntInput
+  lastContact: ModelIntInput
+  and: [ModelClientConditionInput]
+  or: [ModelClientConditionInput]
+  not: ModelClientConditionInput
+}
+
+type ModelClientNoteConnection {
+  items: [ClientNote]
+  nextToken: String
+}
+
+input ModelClientNoteFilterInput {
+  id: ModelIDInput
+  content: ModelStringInput
+  and: [ModelClientNoteFilterInput]
+  or: [ModelClientNoteFilterInput]
+  not: ModelClientNoteFilterInput
+}
+
+input CreateClientNoteInput {
+  id: ID
+  content: String
+  clientNoteClientIdId: ID
+  clientNoteOwnerIdId: ID
+}
+
+input UpdateClientNoteInput {
+  id: ID!
+  content: String
+  clientNoteClientIdId: ID
+  clientNoteOwnerIdId: ID
+}
+
+input DeleteClientNoteInput {
+  id: ID
+}
+
+input ModelClientNoteConditionInput {
+  content: ModelStringInput
+  and: [ModelClientNoteConditionInput]
+  or: [ModelClientNoteConditionInput]
+  not: ModelClientNoteConditionInput
+}
+
+type ModelStrategyConnection {
+  items: [Strategy]
+  nextToken: String
+}
+
+input ModelStrategyFilterInput {
+  id: ModelIDInput
+  badgeName: ModelStringInput
+  title: ModelStringInput
+  description: ModelStringInput
+  and: [ModelStrategyFilterInput]
+  or: [ModelStrategyFilterInput]
+  not: ModelStrategyFilterInput
+}
+
+input CreateStrategyInput {
+  id: ID
+  badgeName: String!
+  title: String!
+  description: String
+  strategyClientIdId: ID
+  strategyOwnerIdId: ID
+}
+
+input UpdateStrategyInput {
+  id: ID!
+  badgeName: String
+  title: String
+  description: String
+  strategyClientIdId: ID
+  strategyOwnerIdId: ID
+}
+
+input DeleteStrategyInput {
+  id: ID
+}
+
+input ModelStrategyConditionInput {
+  badgeName: ModelStringInput
+  title: ModelStringInput
+  description: ModelStringInput
+  and: [ModelStrategyConditionInput]
+  or: [ModelStrategyConditionInput]
+  not: ModelStrategyConditionInput
+}
+
+type ModelAvatarConnection {
+  items: [Avatar]
+  nextToken: String
+}
+
+input ModelAvatarFilterInput {
+  id: ModelIDInput
+  gender: ModelStringInput
+  link: ModelStringInput
+  Animation: ModelStringInput
+  mood: ModelStringInput
+  and: [ModelAvatarFilterInput]
+  or: [ModelAvatarFilterInput]
+  not: ModelAvatarFilterInput
+}
+
+input CreateAvatarInput {
+  id: ID
+  gender: String!
+  link: String
+  Animation: String
+  mood: String
+}
+
+input UpdateAvatarInput {
+  id: ID!
+  gender: String
+  link: String
+  Animation: String
+  mood: String
+}
+
+input DeleteAvatarInput {
+  id: ID
+}
+
+input ModelAvatarConditionInput {
+  gender: ModelStringInput
+  link: ModelStringInput
+  Animation: ModelStringInput
+  mood: ModelStringInput
+  and: [ModelAvatarConditionInput]
+  or: [ModelAvatarConditionInput]
+  not: ModelAvatarConditionInput
 }

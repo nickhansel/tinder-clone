@@ -1,0 +1,1334 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "An auto-generated nested stack.",
+    "Metadata": {},
+    "Parameters": {
+        "DynamoDBModelTableReadIOPS": {
+            "Type": "Number",
+            "Description": "The number of read IOPS the table should support.",
+            "Default": 5
+        },
+        "DynamoDBModelTableWriteIOPS": {
+            "Type": "Number",
+            "Description": "The number of write IOPS the table should support.",
+            "Default": 5
+        },
+        "DynamoDBBillingMode": {
+            "Type": "String",
+            "Description": "Configure @model types to create DynamoDB tables with PAY_PER_REQUEST or PROVISIONED billing modes.",
+            "Default": "PAY_PER_REQUEST",
+            "AllowedValues": [
+                "PAY_PER_REQUEST",
+                "PROVISIONED"
+            ]
+        },
+        "DynamoDBEnablePointInTimeRecovery": {
+            "Type": "String",
+            "Description": "Whether to enable Point in Time Recovery on the table",
+            "Default": "false",
+            "AllowedValues": [
+                "true",
+                "false"
+            ]
+        },
+        "DynamoDBEnableServerSideEncryption": {
+            "Type": "String",
+            "Description": "Enable server side encryption powered by KMS.",
+            "Default": "true",
+            "AllowedValues": [
+                "true",
+                "false"
+            ]
+        },
+        "AppSyncApiName": {
+            "Type": "String",
+            "Description": "The name of the AppSync API",
+            "Default": "AppSyncSimpleTransform"
+        },
+        "APIKeyExpirationEpoch": {
+            "Type": "Number",
+            "Description": "The epoch time in seconds when the API Key should expire. Setting this to 0 will default to 7 days from the deployment date. Setting this to -1 will not create an API Key.",
+            "Default": 0,
+            "MinValue": -1
+        },
+        "CreateAPIKey": {
+            "Type": "Number",
+            "Description": "The boolean value to control if an API Key will be created or not. The value of the property is automatically set by the CLI. If the value is set to 0 no API Key will be created.",
+            "Default": 0,
+            "MinValue": 0,
+            "MaxValue": 1
+        },
+        "AuthCognitoUserPoolId": {
+            "Type": "String",
+            "Description": "The id of an existing User Pool to connect. If this is changed, a user pool will not be created for you.",
+            "Default": "NONE"
+        },
+        "env": {
+            "Type": "String",
+            "Description": "The environment name. e.g. Dev, Test, or Production",
+            "Default": "NONE"
+        },
+        "S3DeploymentBucket": {
+            "Type": "String",
+            "Description": "The S3 bucket containing all deployment assets for the project."
+        },
+        "S3DeploymentRootKey": {
+            "Type": "String",
+            "Description": "An S3 key relative to the S3DeploymentBucket that points to the root of the deployment directory."
+        },
+        "AppSyncApiId": {
+            "Type": "String",
+            "Description": "The id of the AppSync API associated with this project."
+        },
+        "GetAttGraphQLAPIApiId": {
+            "Type": "String",
+            "Description": "Auto-generated parameter that forwards Fn.GetAtt(GraphQLAPI, ApiId) through to nested stacks."
+        }
+    },
+    "Resources": {
+        "TeamaccountResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "AccountDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "account",
+                "TypeName": "Team",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Team",
+                                        "account",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Team",
+                                        "account",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "TeamteamMembersResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "UserDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "teamMembers",
+                "TypeName": "Team",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Team",
+                                        "teamMembers",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Team",
+                                        "teamMembers",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "UserteamResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "TeamDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "team",
+                "TypeName": "User",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "team",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "team",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "UserclientsResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "ClientDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "clients",
+                "TypeName": "User",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "clients",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "clients",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "UserclientNotesResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "ClientNoteDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "clientNotes",
+                "TypeName": "User",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "clientNotes",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "clientNotes",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "UserclientStrategiesResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "StrategyDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "clientStrategies",
+                "TypeName": "User",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "clientStrategies",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "User",
+                                        "clientStrategies",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "AccountteamResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "TeamDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "team",
+                "TypeName": "Account",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Account",
+                                        "team",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Account",
+                                        "team",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "AccountaccountMembersResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "ClientDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "accountMembers",
+                "TypeName": "Account",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Account",
+                                        "accountMembers",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Account",
+                                        "accountMembers",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ClientaccountIdResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "AccountDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "accountId",
+                "TypeName": "Client",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "accountId",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "accountId",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ClientcontactIdResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "UserDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "contactId",
+                "TypeName": "Client",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "contactId",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "contactId",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ClientnoteIdResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "ClientNoteDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "noteId",
+                "TypeName": "Client",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "noteId",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "noteId",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ClientstrategyResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "StrategyDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "strategy",
+                "TypeName": "Client",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "strategy",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Client",
+                                        "strategy",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ClientNoteclientIdResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "ClientDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "clientId",
+                "TypeName": "ClientNote",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "ClientNote",
+                                        "clientId",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "ClientNote",
+                                        "clientId",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ClientNoteownerIdResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "UserDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "ownerId",
+                "TypeName": "ClientNote",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "ClientNote",
+                                        "ownerId",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "ClientNote",
+                                        "ownerId",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "StrategyclientIdResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "ClientDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "clientId",
+                "TypeName": "Strategy",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Strategy",
+                                        "clientId",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Strategy",
+                                        "clientId",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "StrategyownerIdResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Ref": "GetAttGraphQLAPIApiId"
+                },
+                "DataSourceName": {
+                    "Fn::ImportValue": {
+                        "Fn::Join": [
+                            ":",
+                            [
+                                {
+                                    "Ref": "AppSyncApiId"
+                                },
+                                "GetAtt",
+                                "UserDataSource",
+                                "Name"
+                            ]
+                        ]
+                    }
+                },
+                "FieldName": "ownerId",
+                "TypeName": "Strategy",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Strategy",
+                                        "ownerId",
+                                        "req",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Sub": [
+                        "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/${ResolverFileName}",
+                        {
+                            "S3DeploymentBucket": {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "S3DeploymentRootKey": {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "ResolverFileName": {
+                                "Fn::Join": [
+                                    ".",
+                                    [
+                                        "Strategy",
+                                        "ownerId",
+                                        "res",
+                                        "vtl"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "Outputs": {},
+    "Mappings": {},
+    "Conditions": {
+        "ShouldUsePayPerRequestBilling": {
+            "Fn::Equals": [
+                {
+                    "Ref": "DynamoDBBillingMode"
+                },
+                "PAY_PER_REQUEST"
+            ]
+        },
+        "ShouldUsePointInTimeRecovery": {
+            "Fn::Equals": [
+                {
+                    "Ref": "DynamoDBEnablePointInTimeRecovery"
+                },
+                "true"
+            ]
+        },
+        "ShouldUseServerSideEncryption": {
+            "Fn::Equals": [
+                {
+                    "Ref": "DynamoDBEnableServerSideEncryption"
+                },
+                "true"
+            ]
+        },
+        "ShouldCreateAPIKey": {
+            "Fn::Equals": [
+                {
+                    "Ref": "CreateAPIKey"
+                },
+                1
+            ]
+        },
+        "APIKeyExpirationEpochIsPositive": {
+            "Fn::And": [
+                {
+                    "Fn::Not": [
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "APIKeyExpirationEpoch"
+                                },
+                                -1
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "Fn::Not": [
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "APIKeyExpirationEpoch"
+                                },
+                                0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "HasEnvironmentParameter": {
+            "Fn::Not": [
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "env"
+                        },
+                        "NONE"
+                    ]
+                }
+            ]
+        }
+    }
+}
