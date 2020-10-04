@@ -23,9 +23,9 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
 
   const renderTouchPoints = (
     <>
-      {touchPoints.map((point) => {
+      {touchPoints.map((point, index) => {
         return (
-          <>
+          <span key={index}>
             <Flex>
               <img src={iconMail} alt="icon mail last touch points" />
               <Note1Grey style={{ padding: "0px 8px" }}>
@@ -34,7 +34,7 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
               <span style={{ ...styleAuthor }}>{authorName}</span>
             </Flex>
             <Paragraph {...paragraphProps}>{point.text}</Paragraph>
-          </>
+          </span>
         );
       })}
     </>

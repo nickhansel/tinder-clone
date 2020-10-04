@@ -30,11 +30,12 @@ const ClientProfile = ({
   status,
   strategy,
   health,
+  mood,
 }) => {
   const clientMood = mockMoods[status];
   const iconMenuImg = <img style={iconProps} src={iconMenu} alt="" />;
-  const renderBadges = strategy.map((strategyItem) => (
-    <Badge strategy={strategyItem} />
+  const renderBadges = strategy.map((strategyItem, index) => (
+    <Badge key={index} strategy={strategyItem.name} />
   ));
 
   const sectionHeader = (
@@ -53,7 +54,7 @@ const ClientProfile = ({
 
   return (
     <Row>
-      <AvatarContainer mode="full" />
+      <AvatarContainer mood={clientMood} mode="full" />
       <div style={{ paddingLeft: 20 }}>
         <ProfileSection
           header={<SubH1>{name}</SubH1>}

@@ -8,8 +8,8 @@ import { DividerStyled, SpaceBetween } from "common";
 const ProfileSection = ({ header, content, extra }) => {
   const renderContent = (
     <>
-      {content.map((item) => {
-        return item;
+      {content.map((item, index) => {
+        return <span key={index}>{item}</span>;
       })}
     </>
   );
