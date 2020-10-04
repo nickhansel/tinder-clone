@@ -21,9 +21,17 @@ export const SpaceBetween = styled(Flex)`
 `;
 
 export const AvatarStyled = styled.div`
-  background-color: ${mainColors.grey1};
+  background-color: #ebebeb;
   border-radius: 8px;
   width: 225px;
+  overflow: hidden;
+
+  img {
+    border-radius: 8px;
+    display: block;
+    height: 300px;
+    object-fit: cover;
+  }
 `;
 
 export const BudgeStyled = styled.button`

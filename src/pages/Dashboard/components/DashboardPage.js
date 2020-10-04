@@ -9,15 +9,22 @@ import MoodFilter from "./DashboardMoodFilter";
 import { Layout, Note2, Flex } from "common";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
 import "./styles.css";
-import { mockData } from "utils";
+import { mockData, filterDataByMood } from "utils";
 
 const DashboardPage = ({ history }) => {
+  const [moodId, setMoodId] = useState("all");
   const [clientsData, setClientData] = useState(mockData);
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
 
-  const moodFilter = <MoodFilter />;
+  const moodFilter = (
+    <MoodFilter
+      setClientData={setClientData}
+      setMoodId={setMoodId}
+      clientsData={clientsData}
+    />
+  );
 
   const onChange = (page) => {
     // Pagination

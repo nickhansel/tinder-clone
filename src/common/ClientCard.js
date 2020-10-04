@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { AvatarContainer, HealthButton, Badge } from "common";
 import { ClientCardStyled, ContainerFlex, DividerStyled } from "./styles";
 import { SubH1, Note2 } from "./Typography";
-import { mainColors } from "utils";
+import { mainColors, mockMoods } from "utils";
 
 const ClientCard = ({
   activity,
@@ -15,14 +15,20 @@ const ClientCard = ({
   name,
   position,
   strategy,
+  status,
 }) => {
+  const clientMood = mockMoods[status];
   const renderBadges = strategy.map((strategyItem, index) => (
     <Badge key={index} strategy={strategyItem.name} />
   ));
 
   return (
     <ClientCardStyled>
-      <AvatarContainer mode="croped" onClick={() => cardAction(id)} />
+      <AvatarContainer
+        mood={clientMood}
+        mode="croped"
+        onClick={() => cardAction(id)}
+      />
       <div onClick={() => cardAction(id)}>
         <SubH1>{name}</SubH1>
       </div>

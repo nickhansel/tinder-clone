@@ -57,7 +57,7 @@ export const mockData = [
     position: "Position",
     company: "RGC",
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "indiffBoy",
+    status: "impatientGirl",
     health: 2.4,
     strategy: [
       {
@@ -77,7 +77,7 @@ export const mockData = [
     position: "Marketing Manager",
     company: "RGC",
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "indiffBoy",
+    status: "sadBoy",
     health: 2.4,
     strategy: [
       {
@@ -110,7 +110,7 @@ export const mockData = [
     position: "General Manager",
     company: "Walk About",
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "champBoy",
+    status: "champGirl",
     health: 5,
     strategy: [],
     renewalDate: "12/10/2020",
@@ -121,7 +121,7 @@ export const mockData = [
     position: "Marketing Executive",
     company: "Looking Glass",
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "curiousBoy",
+    status: "curiousGirl",
     health: 3,
     strategy: [],
     renewalDate: "12/10/2020",
@@ -154,7 +154,7 @@ export const mockData = [
     position: "Communication Manager",
     company: "BlockFlow",
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "sadGirl",
+    status: "impatientGirl",
     health: 1.9,
     strategy: [
       {
@@ -181,7 +181,7 @@ export const mockData = [
     position: "Position",
     company: "Facebook",
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "indiffBoy",
+    status: "sadBoy",
     health: 3.1,
     strategy: [],
     renewalDate: "11/10/2020",
@@ -203,7 +203,7 @@ export const mockData = [
     position: "Region Assistant Manager",
     company: "Jumpr",
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "happyGirl",
+    status: "indiffBoy",
     health: 4.2,
     strategy: [],
     renewalDate: "05/20/2021",
@@ -226,6 +226,10 @@ export const mockMoods = {
   sadBoy: "boy_sad.gif",
   champBoy: "boy_champ.gif",
   indiffBoy: "boy_indifferent.gif",
+  champGirl: "girl_champ.gif",
+  happyGirl: "girl_happy.gif",
+  impatientGirl: "girl_impatient.gif",
+  curiousGirl: "girl_curious.gif",
 };
 
 export const touchPointsMock = [

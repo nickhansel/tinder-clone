@@ -69,7 +69,7 @@ const Note = ({ type, authorName, note, deleteNote }) => {
     </Popconfirm>
   ) : null;
   const renderBadge =
-    type === "strategy" ? <Badge strategy={note.name} /> : null;
+    type === "strategy" ? <Badge size="lrg" strategy={note.name} /> : null;
 
   return (
     <div>
