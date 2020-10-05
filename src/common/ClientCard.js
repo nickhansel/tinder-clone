@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { AvatarContainer, HealthButton, Badge } from "common";
-import { ClientCardStyled, ContainerFlex, DividerStyled } from "./styles";
 import { SubH1, Note2 } from "./Typography";
+import { ClientCardStyled, ContainerFlex, DividerStyled } from "./styles";
 import { mainColors, mockMoods } from "utils";
 
 const ClientCard = ({
@@ -22,22 +22,28 @@ const ClientCard = ({
     <Badge key={index} strategy={strategyItem.name} />
   ));
 
+  // Props
+  const avatarProps = {
+    mood: clientMood,
+    mode: "croped",
+    onClick: () => cardAction(id),
+  };
+  const noteProps = {
+    style: { color: mainColors.grey2 },
+  };
+
   return (
     <ClientCardStyled>
-      <AvatarContainer
-        mood={clientMood}
-        mode="croped"
-        onClick={() => cardAction(id)}
-      />
+      <AvatarContainer {...avatarProps} />
       <div onClick={() => cardAction(id)}>
         <SubH1>{name}</SubH1>
       </div>
       <Note2>
         {position} at {company}
       </Note2>
-      <Note2 style={{ color: mainColors.grey2 }}>{activity}</Note2>
+      <Note2 {...noteProps}>{activity}</Note2>
       <DividerStyled />
-      <ContainerFlex style={{ paddingTop: 7 }}>
+      <ContainerFlex>
         <HealthButton healthScore={health} />
         <div onClick={() => infoAction(true, id)}>{renderBadges}</div>
       </ContainerFlex>

@@ -1,18 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Tooltip } from "antd";
 import {
   iconBug,
   iconAttention,
   iconEscalate,
   iconNewContact,
+  iconNewFeature,
+  iconCustom,
 } from "media/svg";
 import { BudgeStyled } from "./styles";
 
 const statusData = {
   attention: iconAttention,
   bug: iconBug,
-  escalate: iconEscalate,
+  escalation: iconEscalate,
   contact: iconNewContact,
+  feature: iconNewFeature,
+  custom: iconCustom,
 };
 
 const Badge = ({ strategy, size }) => {
@@ -29,7 +34,9 @@ const Badge = ({ strategy, size }) => {
 
   return (
     <BudgeStyled style={style}>
-      <img src={statusData[strategy]} alt="health score" />
+      <Tooltip title={strategy.toUpperCase()}>
+        <img src={statusData[strategy]} alt="health score" />
+      </Tooltip>
     </BudgeStyled>
   );
 };

@@ -20,13 +20,6 @@ export const AvatarContainer = styled.div`
   }
 `;
 
-export const StyledProfileCard = styled.div`
-  border-radius: 8px;
-  background-color: #ffff;
-  margin: 8px;
-  padding: 15px;
-`;
-
 export const RowPagination = styled(Row)`
   margin-left: 8px;
   width: 1140px;

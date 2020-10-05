@@ -8,8 +8,17 @@ export const SIZES = {
 };
 
 export const BASE_URLS = {
-  dashboard: "dashboard",
-  insights: "insigts",
-  settings: "settings",
-  clients: "clients",
+  DASHBOARD: "dashboard",
+  INSIGHTS: "insights",
+  SETTINGS: "settings",
+  CLIENTS: "clients",
+};
+
+export const BADGES = {
+  ATTENTION: "attention",
+  CONTACT: "contact",
+  FEATURE: "feature",
+  BUG: "bug",
+  ESCALATION: "escalation",
+  CUSTOM: "custom",
 };

@@ -5,7 +5,9 @@ import Layout from "./Layout";
 import ResizableCard from "./ResizableCard";
 import AvatarContainer from "./AvatarContainer";
 import Badge from "./Badge";
+import CardContainer from "./CardContainer";
 import ClientCard from "./ClientCard";
+import Direction from "./Direction";
 import HealthButton from "./HealthButton";
 import NavBar from "./NavBar";
 import Note from "./Note";
@@ -17,7 +19,9 @@ export {
   ResizableCard,
   AvatarContainer,
   Badge,
+  CardContainer,
   ClientCard,
+  Direction,
   HealthButton,
   NavBar,
   Note,

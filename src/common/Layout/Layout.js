@@ -40,21 +40,21 @@ const Layout = ({ prefix, children, title, extra = null }) => {
         <Menu defaultSelectedKeys={["1"]}>
           <Menu.Item
             key="1"
-            onClick={() => handleMenuItemClick(BASE_URLS.dashboard)}
+            onClick={() => handleMenuItemClick(BASE_URLS.DASHBOARD)}
             icon={<IconStyled src={iconPerson} alt="logo dashboard" />}
           >
             Dashboard
           </Menu.Item>
           <Menu.Item
             key="2"
-            // onClick={() => handleMenuItemClick(BASE_URLS.insights)} // TODO uncomment when the views are ready
+            onClick={() => handleMenuItemClick(BASE_URLS.INSIGHTS)} // TODO uncomment when the views are ready
             icon={<IconStyled src={iconPulse} alt="logo insights" />}
           >
             Insights
           </Menu.Item>
           <Menu.Item
             key="3"
-            // onClick={() => handleMenuItemClick(BASE_URLS.settings)}
+            // onClick={() => handleMenuItemClick(BASE_URLS.SETTIGNS)}
             icon={<IconStyled src={iconGear} alt="logo settings" />}
           >
             Settings
