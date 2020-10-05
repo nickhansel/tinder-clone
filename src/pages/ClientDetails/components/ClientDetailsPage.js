@@ -3,8 +3,7 @@
  */
 import React, { useState } from "react";
 import { Row, Pagination, Tooltip } from "antd";
-import { Layout, Note2, H3 } from "common";
-import ClientDetailCard from "./ClientDetailCard";
+import { Layout, Note2, H3, CardContainer } from "common";
 import ClientDetailsNewNote from "./ClientDetailsNewNote";
 import ClientDetailsNotesList from "./ClientDetailsNotesList";
 import ClientProfile from "./ClientDetailsProfile";
@@ -46,7 +45,7 @@ const ClientDetailsPage = ({ history, location }) => {
   const profileProps = getCardProps("lrg", 544);
   const touchPointProps = getCardProps("lrg", 368);
   const toolboxProps = getCardProps("lrg", 192);
-  const noteProps = getCardProps("md", 560);
+  const noteProps = getCardProps("sm", 560);
   const rowProps = {
     justify: "center",
     style: { width: "1200px" },
@@ -78,18 +77,18 @@ const ClientDetailsPage = ({ history, location }) => {
       <Row {...rowProps}>
         <div>
           <Row>
-            <ClientDetailCard {...profileProps}>
+            <CardContainer {...profileProps}>
               <ClientProfile {...client} />
-            </ClientDetailCard>
-            <ClientDetailCard {...touchPointProps}>
+            </CardContainer>
+            <CardContainer {...touchPointProps}>
               <ClientDetailsTouchPoints
                 authorName={"Blake"} // TODO get user
                 touchPoints={touchPoints}
               />
-            </ClientDetailCard>
-            <ClientDetailCard {...toolboxProps}>
+            </CardContainer>
+            <CardContainer {...toolboxProps}>
               <Toolbox />
-            </ClientDetailCard>
+            </CardContainer>
           </Row>
           <RowPagination>
             <H3>

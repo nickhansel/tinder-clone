@@ -21,9 +21,7 @@ const ResizableCard = ({ item, index, cardSize, children }) => {
     setHeight(size.height);
   };
   let cardWidth = "auto";
-  console.log("cardWidth");
 
-  console.log(cardWidth);
   return (
     <>
       <Card

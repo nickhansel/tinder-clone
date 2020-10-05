@@ -4,6 +4,9 @@
 
 import React, { useState } from "react";
 import { Pagination } from "antd";
+import gql from "graphql-tag";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { listUsers } from "graphql/queries";
 import DashboardClientList from "./DashboardClientsList";
 import MoodFilter from "./DashboardMoodFilter";
 import { Layout, Note2, Flex } from "common";
@@ -12,11 +15,15 @@ import "./styles.css";
 import { mockData, filterDataByMood } from "utils";
 
 const DashboardPage = ({ history }) => {
+  const { loading, data, error } = useQuery(gql(listUsers));
   const [moodId, setMoodId] = useState("all");
   const [clientsData, setClientData] = useState(mockData);
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+
+  console.log("2222");
+  console.log(data);
 
   const moodFilter = (
     <MoodFilter

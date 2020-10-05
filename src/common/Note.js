@@ -13,7 +13,7 @@ const { Paragraph } = Typography;
 const Note = ({ type, authorName, note, deleteNote }) => {
   const [noteText, setNoteText] = useState(note.text);
   const [isSpinning, toggleSpinning] = useState(false);
-  console.log(note);
+
   // rerender text when note updated
   useEffect(() => {
     setNoteText(note.text);

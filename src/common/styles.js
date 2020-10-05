@@ -54,6 +54,13 @@ export const ClientCardStyled = styled.div`
   width: 264px;
 `;
 
+export const StyledCardContainer = styled.div`
+  border-radius: 8px;
+  background-color: #ffff;
+  margin: 8px;
+  padding: 15px;
+`;
+
 export const ButtonHealthStyled = styled.button`
   ${sharedButtonStyles};
   border-radius: 4px;
@@ -75,6 +82,7 @@ export const ButtonHealthStyled = styled.button`
 
 export const ContainerFlex = styled.div`
   display: flex;
+  padding-top: 7px;
   justify-content: space-between;
 `;
 

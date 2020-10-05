@@ -321,3 +321,34 @@ export const notesMock = [
       "Chatted with Mike about a bug he is currently experiencing. He is having trouble getting his other team members signed up on the platform. I assigned a bug badge with further notes to the account and will follow...",
   },
 ];
+
+export const clientNames = [
+  {
+    name: "Jackie at FNN",
+    change: "up",
+  },
+  {
+    name: "David at Mooble",
+    change: "down",
+  },
+  {
+    name: "Emma at StartTech",
+    change: "up",
+  },
+  {
+    name: "David at Spotter",
+    change: "up",
+  },
+  {
+    name: "Alex at RockSlide",
+    change: "down",
+  },
+  {
+    name: "Anna at Grabr",
+    change: "up",
+  },
+  {
+    name: "Sarah at Jones & Waller",
+    change: "down",
+  },
+];
