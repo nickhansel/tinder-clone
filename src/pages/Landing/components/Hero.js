@@ -27,13 +27,17 @@ const renderCarousel = (
     >
       <div>
         {" "}
-        <img style={carouselStyle} src={carouselOne} alt="carousel dashboard" />
+        <img
+          style={carouselStyle}
+          src={"https://empava-storage.s3.amazonaws.com/dashboard.png"}
+          alt="carousel dashboard"
+        />
       </div>
       <div>
         {" "}
         <img
           style={carouselStyle}
-          src={carouselTwo}
+          src={"https://empava-storage.s3.amazonaws.com/client-profile.jpg"}
           alt="carousel dashboard client"
         />
       </div>
@@ -41,7 +45,7 @@ const renderCarousel = (
         {" "}
         <img
           style={carouselStyle}
-          src={carouselThree}
+          src={"https://empava-storage.s3.amazonaws.com/relationship.jpg"}
           alt="carousel relationship"
         />
       </div>
