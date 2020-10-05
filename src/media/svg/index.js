@@ -5,7 +5,6 @@ import iconAttention from "./icon-attention.svg";
 import iconBack from "./icon-back.svg";
 import iconBug from "./icon-bug.svg";
 import iconCustom from "./icon-custom.svg";
-import iconDownSmile from "./icon-down-smile.svg";
 import iconDown from "./icon-down.svg";
 import iconEdit from "./icon-edit.svg";
 import iconEscalate from "./icon-escalation.svg";
@@ -20,7 +19,8 @@ import iconPulse from "./icon-pulse.svg";
 import iconPerson from "./icon-person.svg";
 import iconSearch from "./icon-search.svg";
 import iconTrash from "./icon-trash.svg";
-import iconUpSmile from "./icon-up-smile.svg";
+import iconSmileDown from "./icon-smile-down.svg";
+import iconSmile from "./icon-smile.svg";
 import iconUp from "./icon-up.svg";
 
 export {
@@ -31,7 +31,7 @@ export {
   iconBack,
   iconBug,
   iconCustom,
-  iconDownSmile,
+  iconSmileDown,
   iconDown,
   iconEdit,
   iconEscalate,
@@ -46,6 +46,6 @@ export {
   iconPulse,
   iconSearch,
   iconTrash,
-  iconUpSmile,
+  iconSmile,
   iconUp,
 };

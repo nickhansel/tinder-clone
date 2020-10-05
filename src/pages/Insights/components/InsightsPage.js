@@ -8,12 +8,11 @@ import InsightsOverallScore from "./InsightsOverallScore";
 import InsightsMood from "./InsightsMood";
 import InsightsQuater from "./InsightsQuater";
 import InsightsStrategy from "./InsightsStrategy";
-import { Layout, ClientCard, CardContainer, Note1, Flex } from "common";
+import { Layout, ClientCard, CardContainer, Flex, SubH2 } from "common";
+import { StyledSmileIcon } from "./styles";
+import { iconSmile, iconSmileDown } from "media/svg";
 import { mockData, clientNames } from "utils";
 import { PAGE_TITLE } from "../constants";
-import { iconUpSmile, iconDownSmile } from "media/svg";
-import iconRed from "media/images/icon-red.png";
-import iconSmile from "media/svg/icon-smile.svg";
 
 const InsightsPage = () => {
   const clientTop = mockData[0];
@@ -23,6 +22,28 @@ const InsightsPage = () => {
     title: PAGE_TITLE,
   };
 
+  const renderCardHeader = (backgroundColor, icon, title) => {
+    return (
+      <Flex>
+        <StyledSmileIcon style={{ backgroundColor }}>
+          <img src={icon} alt={`icon ${title}`} />
+        </StyledSmileIcon>
+        <SubH2>{title}</SubH2>
+      </Flex>
+    );
+  };
+
+  const HigherScoreHeader = renderCardHeader(
+    "#20CDAE",
+    iconSmile,
+    "Client with Highest Score"
+  );
+  const LowestScoreHeader = renderCardHeader(
+    "#FD6A65",
+    iconSmileDown,
+    "Client with Lowest Score"
+  );
+
   return (
     <Layout {...layoutProps}>
       <Row justify="center">
@@ -30,27 +51,11 @@ const InsightsPage = () => {
           <InsightsOverallScore />
         </CardContainer>
         <div>
-          <Flex>
-            <div
-              style={{
-                backgroundColor: "green",
-                width: 24,
-                height: 24,
-                padding: 2,
-              }}
-            >
-              {" "}
-              <img style={{ verticalAlign: "top" }} src={iconSmile} alt="" />
-            </div>
-            <Note1>Client with Highest Score</Note1>
-          </Flex>
+          {HigherScoreHeader}
           <ClientCard {...clientTop} />
         </div>
         <div>
-          <Flex>
-            <img src={iconRed} alt="" />
-            <Note1>Client with Lowest Score</Note1>
-          </Flex>
+          {LowestScoreHeader}
           <ClientCard {...clientLow} />
         </div>
       </Row>
