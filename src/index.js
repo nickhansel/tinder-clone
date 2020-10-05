@@ -27,6 +27,8 @@ const link = ApolloLink.from([
   createAuthLink({ url, region, auth }),
   createHttpLink({ uri: url }),
 ]);
+console.log("awsExports!!");
+console.log(awsExports);
 export const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),

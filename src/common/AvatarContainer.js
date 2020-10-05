@@ -7,8 +7,7 @@ const AvatarContainer = ({ strategy, mood, mode = "croped" }) => {
     full: 289,
     croped: 249,
   };
-  console.log("mood");
-  console.log(mood);
+
   return (
     <AvatarStyled style={{ height: size[mode] }}>
       <img src={mood} alt="" />
