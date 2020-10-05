@@ -10,7 +10,7 @@ const { Header } = Layout;
 
 export const ContentContainer = styled(Layout.Content)`
   background-color: ${slateGrey};
-  min-width: 1195px;
+  // min-width: 1195px;
   padding: 20px;
 `;
 
