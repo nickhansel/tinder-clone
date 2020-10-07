@@ -3,6 +3,7 @@
  */
 
 import React from "react";
+import { useDrag } from "react-dnd";
 import { Col, Row } from "antd";
 import { SubH2, Note2 } from "common";
 import {
@@ -34,7 +35,7 @@ const renderActionIcon = (icon, name) => (
   </Col>
 );
 
-const Toolbox = () => {
+const ClientDetailsToolbox = () => {
   return (
     <div>
       <SubH2>Toolbox</SubH2>
@@ -54,4 +55,4 @@ const Toolbox = () => {
   );
 };
 
-export default Toolbox;
+export default ClientDetailsToolbox;

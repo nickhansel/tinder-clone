@@ -2,13 +2,15 @@
    Client Page
  */
 import React, { useState } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { Row, Pagination, Tooltip } from "antd";
-import { Layout, Note2, H3, CardContainer } from "common";
 import ClientDetailsNewNote from "./ClientDetailsNewNote";
 import ClientDetailsNotesList from "./ClientDetailsNotesList";
 import ClientProfile from "./ClientDetailsProfile";
 import ClientDetailsTouchPoints from "./ClientDetailsTouchPoints";
-import Toolbox from "./Toolbox";
+import ClientDetailsToolbox from "./ClientDetailsToolbox";
+import { Layout, Note2, H3, CardContainer } from "common";
 import { RowPagination } from "./styles";
 import { getClient } from "utils";
 import { iconBack, iconAddCircle } from "media/svg";
@@ -74,8 +76,8 @@ const ClientDetailsPage = ({ history, location }) => {
 
   return (
     <Layout {...layoutProps}>
-      <Row {...rowProps}>
-        <div>
+      <DndProvider backend={HTML5Backend}>
+        <Row {...rowProps}>
           <Row>
             <CardContainer {...profileProps}>
               <ClientProfile {...client} />
@@ -87,7 +89,7 @@ const ClientDetailsPage = ({ history, location }) => {
               />
             </CardContainer>
             <CardContainer {...toolboxProps}>
-              <Toolbox />
+              <ClientDetailsToolbox />
             </CardContainer>
           </Row>
           <RowPagination>
@@ -107,9 +109,9 @@ const ClientDetailsPage = ({ history, location }) => {
           <Row>
             <ClientDetailsNotesList {...noteListProps} />
           </Row>
-        </div>
-      </Row>
-      <ClientDetailsNewNote handleToggle={() => toggleNewNoteModal(false)} />
+        </Row>
+        <ClientDetailsNewNote handleToggle={() => toggleNewNoteModal(false)} />
+      </DndProvider>
     </Layout>
   );
 };

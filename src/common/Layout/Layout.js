@@ -65,7 +65,7 @@ const Layout = ({ prefix, children, title, extra = null }) => {
         <HeaderStyled>
           <Flex>
             <span
-              onClick={() => handleMenuItemClick(BASE_URLS.dashboard)}
+              onClick={() => handleMenuItemClick(BASE_URLS.DASHBOARD)}
               style={{ lineHeight: 2.8, paddingRight: 10 }}
             >
               {prefix}
