@@ -24,8 +24,4 @@ export const RowPagination = styled(Row)`
   margin-left: 8px;
   width: 1140px;
   justify-content: space-between;
-
-  .ant-pagination {
-    padding-top: 20px;
-  }
 `;

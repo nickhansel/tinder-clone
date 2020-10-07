@@ -26,11 +26,14 @@ const ClientCard = ({
   const avatarProps = {
     mood: clientMood,
     mode: "croped",
-    onClick: () => cardAction(id),
   };
+  if (cardAction) {
+    avatarProps.onClick = () => cardAction(id);
+  }
   const noteProps = {
     style: { color: mainColors.grey2 },
   };
+  const badgeProps = infoAction ? { onClick: () => infoAction(true, id) } : {};
 
   return (
     <ClientCardStyled>
@@ -45,7 +48,7 @@ const ClientCard = ({
       <DividerStyled />
       <ContainerFlex>
         <HealthButton healthScore={health} />
-        <div onClick={() => infoAction(true, id)}>{renderBadges}</div>
+        <div {...badgeProps}>{renderBadges}</div>
       </ContainerFlex>
     </ClientCardStyled>
   );
@@ -58,8 +61,8 @@ ClientCard.propTypes = {
   health: PropTypes.number.isRequired,
   activity: PropTypes.string.isRequired,
   strategy: PropTypes.array,
-  cardAction: PropTypes.func.isRequired,
-  infoAction: PropTypes.func.isRequired,
+  cardAction: PropTypes.func,
+  infoAction: PropTypes.func,
 };
 
 export default ClientCard;

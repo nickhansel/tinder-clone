@@ -47,26 +47,24 @@ const InsightsPage = () => {
   return (
     <Layout {...layoutProps}>
       <Row justify="center">
-        <CardContainer mode="xxl" width={560}>
+        <CardContainer style={{ minHeight: 300, minWidth: 300, width: 500 }}>
           <InsightsOverallScore />
         </CardContainer>
-        <div>
+        <div style={{ marginBottom: 15 }}>
           {HigherScoreHeader}
           <ClientCard {...clientTop} />
         </div>
-        <div>
+        <div style={{ marginBottom: 15 }}>
           {LowestScoreHeader}
           <ClientCard {...clientLow} />
         </div>
-      </Row>
-      <Row justify="center">
-        <CardContainer mode="xl" width={312}>
+        <CardContainer height={440} width={312}>
           <InsightsStrategy />
         </CardContainer>
-        <CardContainer mode="xl" width={376}>
+        <CardContainer height={440} width={376}>
           <InsightsMood clients={clientNames} />
         </CardContainer>
-        <CardContainer mode="md" width={400}>
+        <CardContainer heigth={328} width={400}>
           <InsightsQuater />
         </CardContainer>
       </Row>
