@@ -158,7 +158,7 @@ export const mockData = [
     health: 1.9,
     strategy: [
       {
-        name: "escalate",
+        name: "escalation",
         title: "Escalate - Add User Issue",
         text: `Alex is not able to add his Team Member Alison to our
        platform. This is disapointing becasue he is trying to 

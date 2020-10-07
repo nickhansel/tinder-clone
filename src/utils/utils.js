@@ -129,3 +129,8 @@ export const generateId = () => {
       .substring(2, 15)
   );
 };
+
+export const getAvg = (data) => {
+  const total = data.reduce((acc, c) => acc + c, 0);
+  return Math.floor(total / data.length);
+};

@@ -6,11 +6,10 @@ import styled from "styled-components";
 import { slateGrey, mainColors } from "utils";
 import { Layout, Divider } from "antd";
 
-const { Header } = Layout;
+const { Header, Sider } = Layout;
 
 export const ContentContainer = styled(Layout.Content)`
   background-color: ${slateGrey};
-  // min-width: 1195px;
   padding: 20px;
 `;
 
@@ -43,4 +42,24 @@ export const HeaderActions = styled.div`
 
 export const StyledDivider = styled(Divider)`
   margin: 0;
+`;
+
+export const StyledSider = styled(Sider)`
+  @media (max-width: 400px) {
+    display: none;
+  }
+`;
+export const StyledTopHeader = styled(Header)`
+  background-color: #0e3860;
+  display: none;
+  padding: 15px 30px 0;
+  justify-content: flex-end;
+
+  img {
+    margin-right: 8px;
+  }
+
+  @media (max-width: 400px) {
+    display: flex;
+  }
 `;
