@@ -43,5 +43,5 @@ aside .ant-layout-sider {
 }
 
 .ant-layout {
-  min-height: 900px !important;
+  height: 100vh;
 }

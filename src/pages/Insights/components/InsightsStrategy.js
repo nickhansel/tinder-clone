@@ -10,31 +10,37 @@ const InsightsStrategy = () => {
       name: BADGES.ATTENTION,
       title: "Attention",
       score: 13,
+      percent: 60,
     },
     {
       name: BADGES.CONTACT,
       title: "New Contact",
       score: 10,
+      percent: 50,
     },
     {
       name: BADGES.FEATURE,
       title: "New Feature",
       score: 5,
+      percent: 10,
     },
     {
       name: BADGES.BUG,
       title: "Bug",
       score: 6,
+      percent: 12,
     },
     {
       name: BADGES.ESCALATION,
       title: "Escalation",
       score: 2,
+      percent: 6,
     },
     {
       name: BADGES.CUSTOM,
       title: "Custom",
       score: 6,
+      percent: 12,
     },
   ];
 
@@ -55,7 +61,7 @@ const InsightsStrategy = () => {
             showInfo={false}
             strokeWidth={12}
             strokeColor={mainColors.brightBlue}
-            percent={50}
+            percent={badge.percent}
           />
         </div>
       </Flex>

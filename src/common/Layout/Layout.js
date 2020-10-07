@@ -11,6 +11,8 @@ import {
   IconStyled,
   HeaderStyled,
   HeaderActions,
+  StyledSider,
+  StyledTopHeader,
 } from "./styles";
 import { BASE_URLS } from "utils";
 import { iconPulse, iconGear, iconPerson, iconLogo } from "media/svg";
@@ -18,7 +20,7 @@ import "./styles.css";
 
 import { Layout as AntLayout, Menu } from "antd";
 
-const { Sider } = AntLayout;
+const { Sider, Header } = AntLayout;
 
 const Layout = ({ prefix, children, title, extra = null }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -31,37 +33,46 @@ const Layout = ({ prefix, children, title, extra = null }) => {
     history.push(`/${url}`);
   };
 
+  const renderIconGear = <IconStyled src={iconGear} alt="logo settings" />;
+  const renderIconPulse = (
+    <IconStyled
+      onClick={() => handleMenuItemClick(BASE_URLS.INSIGHTS)} // TODO uncomment when the views are ready
+      src={iconPulse}
+      alt="logo insights"
+    />
+  );
+  const renderIconPerson = (
+    <IconStyled
+      onClick={() => handleMenuItemClick(BASE_URLS.DASHBOARD)}
+      src={iconPerson}
+      alt="logo dashboard"
+    />
+  );
+
   return (
     <AntLayout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <StyledSider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo-side-bar">
           <img src={iconLogo} onClick={() => toggle()} alt="logo side bar" />
         </div>
         <Menu defaultSelectedKeys={["1"]}>
-          <Menu.Item
-            key="1"
-            onClick={() => handleMenuItemClick(BASE_URLS.DASHBOARD)}
-            icon={<IconStyled src={iconPerson} alt="logo dashboard" />}
-          >
+          <Menu.Item key="1" icon={renderIconPerson}>
             Dashboard
           </Menu.Item>
-          <Menu.Item
-            key="2"
-            onClick={() => handleMenuItemClick(BASE_URLS.INSIGHTS)} // TODO uncomment when the views are ready
-            icon={<IconStyled src={iconPulse} alt="logo insights" />}
-          >
+          <Menu.Item key="2" icon={renderIconPulse}>
             Insights
           </Menu.Item>
-          <Menu.Item
-            key="3"
-            // onClick={() => handleMenuItemClick(BASE_URLS.SETTIGNS)}
-            icon={<IconStyled src={iconGear} alt="logo settings" />}
-          >
+          <Menu.Item key="3" icon={renderIconGear}>
             Settings
           </Menu.Item>
         </Menu>
-      </Sider>
+      </StyledSider>
       <AntLayout className="site-layout">
+        <StyledTopHeader>
+          {renderIconPerson}
+          {renderIconPulse}
+          {renderIconGear}
+        </StyledTopHeader>
         <HeaderStyled>
           <Flex>
             <span

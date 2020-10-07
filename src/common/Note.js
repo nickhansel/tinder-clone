@@ -52,7 +52,7 @@ const Note = ({ type, authorName, note, deleteNote }) => {
       </Paragraph>
     </div>
   );
-  const renderDelete = deleteNote ? (
+  const renderDelete = (
     <Popconfirm
       title="Are you sure?"
       onConfirm={confirm}
@@ -67,7 +67,7 @@ const Note = ({ type, authorName, note, deleteNote }) => {
         alt="note trash icon"
       />
     </Popconfirm>
-  ) : null;
+  );
   const renderBadge =
     type === "strategy" ? <Badge size="lrg" strategy={note.name} /> : null;
 

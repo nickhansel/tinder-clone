@@ -37,24 +37,24 @@ const ClientDetailsPage = ({ history, location }) => {
     setMaxVal(page * NOTES_EACH_PAGE);
   };
 
-  // Props
-  const getCardProps = (mode, width) => {
+  // Helper
+  const getCardProps = (heigth, width) => {
     return {
-      mode,
+      heigth,
       width,
     };
   };
-  const profileProps = getCardProps("lrg", 544);
-  const touchPointProps = getCardProps("lrg", 368);
-  const toolboxProps = getCardProps("lrg", 192);
-  const noteProps = getCardProps("sm", 560);
+
+  // Props
+  const profileProps = getCardProps(320, 544);
+  const touchPointProps = getCardProps(320, 368);
+  const toolboxProps = getCardProps(320, 192);
+  const noteProps = getCardProps(200, 560);
   const rowProps = {
     justify: "center",
     style: { width: "1200px" },
   };
   const noteListProps = {
-    isNewNoteModal,
-    toggleNewNoteModal,
     noteProps,
     notesData: notes,
     minVal,
@@ -110,7 +110,10 @@ const ClientDetailsPage = ({ history, location }) => {
             <ClientDetailsNotesList {...noteListProps} />
           </Row>
         </Row>
-        <ClientDetailsNewNote handleToggle={() => toggleNewNoteModal(false)} />
+        <ClientDetailsNewNote
+          isNewNoteModal={isNewNoteModal}
+          handleToggle={() => toggleNewNoteModal(false)}
+        />
       </DndProvider>
     </Layout>
   );
