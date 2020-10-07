@@ -8,6 +8,7 @@ import {
   iconNewContact,
   iconNewFeature,
   iconCustom,
+  iconAdd,
 } from "media/svg";
 import { BudgeStyled } from "./styles";
 
@@ -18,6 +19,7 @@ const statusData = {
   contact: iconNewContact,
   feature: iconNewFeature,
   custom: iconCustom,
+  add: iconAdd,
 };
 
 const Badge = ({ strategy, size }) => {

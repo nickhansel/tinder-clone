@@ -8,6 +8,7 @@ import Badge from "./Badge";
 import CardContainer from "./CardContainer";
 import ClientCard from "./ClientCard";
 import Direction from "./Direction";
+import DragDropContainer from "./DragDropContainer";
 import HealthButton from "./HealthButton";
 import NavBar from "./NavBar";
 import Note from "./Note";
@@ -21,6 +22,7 @@ export {
   Badge,
   CardContainer,
   ClientCard,
+  DragDropContainer,
   Direction,
   HealthButton,
   NavBar,

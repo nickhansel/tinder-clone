@@ -3,6 +3,7 @@
  */
 
 import React from "react";
+import { useDrop } from "react-dnd";
 import { Row, Divider } from "antd";
 import HealthMeter from "./HealthMeter";
 import ProfileSection from "./ProfileSection";
@@ -18,11 +19,6 @@ import {
 import { mockMoods } from "utils/mock";
 import { iconMenu } from "media/svg";
 
-const iconProps = {
-  height: 24,
-  width: 24,
-};
-
 const ClientProfile = ({
   name,
   position,
@@ -30,10 +26,22 @@ const ClientProfile = ({
   status,
   strategy,
   health,
+  renewalDate,
   mood,
 }) => {
-  const clientMood = mockMoods[status];
-  const iconMenuImg = <img style={iconProps} src={iconMenu} alt="" />;
+  const clientMood = mockMoods[status]; // TODO change to real data
+  const [{ canDrop, isOver }, drop] = useDrop({
+    accept: "icon",
+    drop: () => ({
+      name: `Dustbin`,
+      allowedDropEffect: "any",
+    }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  });
+  const isActive = canDrop && isOver;
   const renderBadges = strategy.map((strategyItem, index) => (
     <Badge key={index} strategy={strategyItem.name} />
   ));
@@ -42,7 +50,7 @@ const ClientProfile = ({
     <>
       <ProfileSection
         header={<Note1Grey>Renewal Date</Note1Grey>}
-        content={[<Note1>09/22/21</Note1>]}
+        content={[<Note1>{renewalDate}</Note1>]}
       />
       <Divider type="vertical" style={{ height: 56 }} />
       <ProfileSection
@@ -52,9 +60,16 @@ const ClientProfile = ({
     </>
   );
 
+  const iconProps = {
+    height: 24,
+    width: 24,
+  };
+
   return (
     <Row>
-      <AvatarContainer mood={clientMood} mode="full" />
+      <div ref={drop} style={{ opacity: isActive ? 0.5 : 1 }}>
+        <AvatarContainer mood={clientMood} mode="full" />
+      </div>
       <div style={{ paddingLeft: 20 }}>
         <ProfileSection
           header={<SubH1>{name}</SubH1>}
@@ -62,7 +77,7 @@ const ClientProfile = ({
             <Note1Grey>{position}</Note1Grey>,
             <Note2>{company}</Note2>,
           ]}
-          extra={iconMenuImg}
+          extra={<img style={iconProps} src={iconMenu} alt="" />}
         />
         <DividerStyled />
         <HealthMeter healthScore={health} />

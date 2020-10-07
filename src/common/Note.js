@@ -11,13 +11,14 @@ import { iconTrash } from "media/svg";
 const { Paragraph } = Typography;
 
 const Note = ({ type, authorName, note, deleteNote }) => {
-  const [noteText, setNoteText] = useState(note.text);
+  const str = note.text || "";
+  const [noteText, setNoteText] = useState(str);
   const [isSpinning, toggleSpinning] = useState(false);
 
   // rerender text when note updated
-  useEffect(() => {
-    setNoteText(note.text);
-  }, [note]);
+  // useEffect(() => {
+  //   setNoteText(note.text);
+  // }, [note]);
 
   function confirm(e) {
     // TODO delete note
@@ -47,7 +48,6 @@ const Note = ({ type, authorName, note, deleteNote }) => {
   const Section = (
     <div>
       <Paragraph {...paragraphProps} editable={{ onChange: setNoteText }}>
-        {" "}
         {noteText}
       </Paragraph>
     </div>

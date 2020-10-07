@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Modal, Form, Input, Button, message } from "antd";
+import { Modal, Form, Input, Button, Typography, message } from "antd";
+import { Badge, Flex } from "common";
 
 const { TextArea } = Input;
+const { Paragraph } = Typography;
 
 const ClientDetailsNewStrategy = ({
-  isNewNoteModal,
-  handleToggle,
+  selectedStrategy,
+  isNewStrategyModal,
   handleToggle,
 }) => {
-  const onFinish = (values) => {
-    values.id = Date.now();
-    values.createdAt = Date.now();
+  const [editableStr, setEditableStr] = useState("Enter your note..");
 
-    // TODO Create Note
-    message.success("Note created");
+  const onFinish = (values) => {
+    message.success("Strategy created");
     handleToggle();
   };
   const onFinishFailed = (errorInfo) => {
@@ -57,11 +57,12 @@ const ClientDetailsNewStrategy = ({
       </Form.Item>
     </Form>
   );
+  const selected = selectedStrategy || "";
 
   return (
     <Modal
-      visible={isNewNoteModal}
-      title="Add Note"
+      visible={isNewStrategyModal}
+      title={`Add New Strategy`}
       onCancel={() => handleToggle(false)}
       footer={[
         <Button key="back" onClick={() => handleToggle(false)}>
@@ -69,7 +70,14 @@ const ClientDetailsNewStrategy = ({
         </Button>,
       ]}
     >
-      <div>New strategy</div>
+      <Flex>
+        <div style={{ paddingRight: 30 }}>
+          <Badge strategy={selectedStrategy} />
+        </div>
+        <Paragraph editable={{ onChange: setEditableStr }}>
+          {editableStr}
+        </Paragraph>
+      </Flex>
     </Modal>
   );
 };

@@ -21,4 +21,15 @@ export const BADGES = {
   BUG: "bug",
   ESCALATION: "escalation",
   CUSTOM: "custom",
+  ADD: "add",
+};
+
+export const STRATEGIES = {
+  ATTENTION: "Attention",
+  CONTACT: "New Contact",
+  FEATURE: "New Feature",
+  BUG: "Bug",
+  ESCALATION: "Escalation",
+  CUSTOM: "Custom",
+  ADD: "Add",
 };

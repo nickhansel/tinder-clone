@@ -6,6 +6,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Row, Pagination, Tooltip } from "antd";
 import ClientDetailsNewNote from "./ClientDetailsNewNote";
+import ClientDetailsNewStrategy from "./ClientDetailsNewStrategy";
 import ClientDetailsNotesList from "./ClientDetailsNotesList";
 import ClientProfile from "./ClientDetailsProfile";
 import ClientDetailsTouchPoints from "./ClientDetailsTouchPoints";
@@ -24,6 +25,8 @@ const ClientDetailsPage = ({ history, location }) => {
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
   const [page, setPage] = useState(1);
   const [isNewNoteModal, toggleNewNoteModal] = useState(false);
+  const [isNewStrategyModal, toggleNewStrategyModal] = useState(false);
+  const [selectedStrategy, setSelectedStrategy] = useState(null);
 
   // Get client from db in future
   const client = getClient(location.pathname);
@@ -89,7 +92,10 @@ const ClientDetailsPage = ({ history, location }) => {
               />
             </CardContainer>
             <CardContainer {...toolboxProps}>
-              <ClientDetailsToolbox />
+              <ClientDetailsToolbox
+                setSelectedStrategy={setSelectedStrategy}
+                handleToggle={() => toggleNewStrategyModal(true)}
+              />
             </CardContainer>
           </Row>
           <RowPagination>
@@ -113,6 +119,11 @@ const ClientDetailsPage = ({ history, location }) => {
         <ClientDetailsNewNote
           isNewNoteModal={isNewNoteModal}
           handleToggle={() => toggleNewNoteModal(false)}
+        />
+        <ClientDetailsNewStrategy
+          selectedStrategy={selectedStrategy}
+          isNewStrategyModal={isNewStrategyModal}
+          handleToggle={() => toggleNewStrategyModal(false)}
         />
       </DndProvider>
     </Layout>
