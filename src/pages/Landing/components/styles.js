@@ -12,6 +12,7 @@ import {
 } from "utils";
 import heroBgImgSm from "media/landing/hero-bg-mobile.jpg";
 import heroBgImgLg from "media/landing/bg-hero.png";
+import heroBg from "media/landing/bg-mb.png";
 
 const sharedButtonStyles = css`
   border: none;
@@ -82,7 +83,6 @@ export const MainHeaderText = styled.div`
   }
   @media (max-width: 480px) {
     margin-top: 40px;
-    text-align: left;
 
     button {
       display: none;
@@ -262,7 +262,7 @@ export const HeroBgContainer = styled.div`
   background-size: cover;
 
   @media screen and (max-width: 500px) {
-    background-image: url(${heroBgImgSm});
+    background-image: url(${heroBg});
     background-size: cover;
     height: 700px;
   }
@@ -270,7 +270,7 @@ export const HeroBgContainer = styled.div`
 
 export const CarouselStyled = styled.div`
   img {
-    width: 500px;
+    width: 700px;
   }
 
   @media screen and (max-width: 500px) {

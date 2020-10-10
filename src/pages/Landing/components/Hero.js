@@ -23,7 +23,7 @@ const renderCarousel = (
       speed={500}
       effect="fade"
       easing="linear"
-      style={{ width: 500 }}
+      style={{ width: 700 }}
     >
       <div>
         {" "}
@@ -58,10 +58,10 @@ const Hero = () => {
     <HeroBgContainer>
       <Row justify="center">
         <Col>
-          <MainHeaderText>
+          <MainHeaderText justify="center">
             <h1>Empowering Client Relationships.</h1>
             <p>
-              Empava brings your client realtionships into the digital era wit
+              Empava brings your client realtionships into the digital era with
               powerful visual and interactive tools to keep engagement up and
               relationships strong
             </p>
