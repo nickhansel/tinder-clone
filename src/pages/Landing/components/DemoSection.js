@@ -7,6 +7,7 @@ import { Col } from "antd";
 import bgVideo from "media/landing/bg-video.png";
 import { RowDemo, Container, StyledInfoSection } from "./styles";
 import ReactPlayer from "react-player";
+import { DEMO_URL } from "../constants";
 import "./styles.css";
 
 const DemoSection = () => {
@@ -46,7 +47,7 @@ const DemoSection = () => {
                 className="react-player"
                 height="100%"
                 width="100%"
-                url="https://www.youtube.com/embed/LIAV7EKf3nI?color=red&modestbranding=1"
+                url={DEMO_URL}
               />
             </div>
           </Col>
