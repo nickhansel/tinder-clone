@@ -23,8 +23,10 @@ export const SpaceBetween = styled(Flex)`
 export const AvatarStyled = styled.div`
   background-color: #ebebeb;
   border-radius: 8px;
-  width: 225px;
+  display: flex;
+  justify-content: center;
   overflow: hidden;
+  margin-bottom: 5px;
 
   img {
     border-radius: 8px;
@@ -49,9 +51,18 @@ export const BudgeStyled = styled.button`
 export const ClientCardStyled = styled.div`
   background-color: ${mainColors.white};
   height: 420px;
-  margin: 10px;
+  margin: 15px 8px 10px;
   padding: 15px;
-  width: 264px;
+  width: 254px;
+
+  @media (min-width: 1274px) {
+    margin: 15px 10px 10px;
+    width: 264px;
+  }
+  @media (min-width: 1400px) {
+    margin: 15px 18px 18px;
+    width: 290px;
+  }
 `;
 
 export const StyledCardContainer = styled.div`

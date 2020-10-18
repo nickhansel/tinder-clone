@@ -5,15 +5,15 @@ import PropTypes from "prop-types";
 import { Card } from "antd";
 import { ResizableBox } from "react-resizable";
 // Helpers
-import { SIZES } from "utils";
+import { CARD_SIZES } from "utils";
 import "./styles.css";
 
 const ResizableCard = ({ item, index, cardSize, children }) => {
   const [width, setWidth] = useState(
-    cardSize === "sm" ? SIZES.CARD_SM_WIDTH : SIZES.CARD_WIDTH
+    cardSize === "sm" ? CARD_SIZES.CARD_SM_WIDTH : CARD_SIZES.CARD_WIDTH
   );
   const [height, setHeight] = useState(
-    cardSize === "sm" ? SIZES.CARD_SM_HEIGHT : SIZES.CARD_HEIGHT
+    cardSize === "sm" ? CARD_SIZES.CARD_SM_HEIGHT : CARD_SIZES.CARD_HEIGHT
   );
 
   const onResize = (event, { element, size }) => {
@@ -40,12 +40,12 @@ const ResizableCard = ({ item, index, cardSize, children }) => {
           width={width}
           height={height}
           minConstraints={[
-            SIZES.CARD_MIN_CONSTRAINT,
-            SIZES.CARD_MIN_CONSTRAINT,
+            CARD_SIZES.CARD_MIN_CONSTRAINT,
+            CARD_SIZES.CARD_MIN_CONSTRAINT,
           ]}
           maxConstraints={[
-            SIZES.CARD_MAX_CONSTRAINT,
-            SIZES.CARD_MAX_CONSTRAINT,
+            CARD_SIZES.CARD_MAX_CONSTRAINT,
+            CARD_SIZES.CARD_MAX_CONSTRAINT,
           ]}
         >
           Hello

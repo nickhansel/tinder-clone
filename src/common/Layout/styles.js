@@ -3,13 +3,16 @@
  */
 
 import styled from "styled-components";
-import { slateGrey, mainColors } from "utils";
+import { slateGrey, mainColors, LAYOUT_SIZES } from "utils";
 import { Layout, Divider } from "antd";
+
+const { MAX_CONTENT_WIDTH } = LAYOUT_SIZES;
 
 const { Header, Sider } = Layout;
 
 export const ContentContainer = styled(Layout.Content)`
   background-color: ${slateGrey};
+  max-width: ${MAX_CONTENT_WIDTH}px;
   padding: 20px;
 `;
 

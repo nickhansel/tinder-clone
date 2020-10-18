@@ -1,4 +1,4 @@
-export const SIZES = {
+export const CARD_SIZES = {
   CARD_SM_WIDTH: 400,
   CARD_SM_HEIGHT: 350,
   CARD_WIDTH: 600,
@@ -32,4 +32,8 @@ export const STRATEGIES = {
   ESCALATION: "Escalation",
   CUSTOM: "Custom",
   ADD: "Add",
+};
+
+export const LAYOUT_SIZES = {
+  MAX_CONTENT_WIDTH: 1500,
 };
