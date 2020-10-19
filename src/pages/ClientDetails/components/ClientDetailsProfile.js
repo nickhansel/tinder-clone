@@ -70,7 +70,7 @@ const ClientProfile = ({
       <div ref={drop} style={{ opacity: isActive ? 0.5 : 1 }}>
         <AvatarContainer mood={clientMood} mode="full" />
       </div>
-      <div style={{ paddingLeft: 20 }}>
+      <div className="details-profile-info">
         <ProfileSection
           header={<SubH1>{name}</SubH1>}
           content={[

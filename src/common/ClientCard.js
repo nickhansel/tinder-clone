@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AvatarContainer, HealthButton, Badge } from "common";
 import { SubH1, Note2 } from "./Typography";
-import { ClientCardStyled, ContainerFlex, DividerStyled } from "./styles";
+import {
+  ClientCardStyled,
+  ContainerFlex,
+  DividerStyled,
+  BoldStyled,
+} from "./styles";
 import { mainColors, mockMoods } from "utils";
 
 const ClientCard = ({
@@ -42,7 +47,7 @@ const ClientCard = ({
         <SubH1>{name}</SubH1>
       </div>
       <Note2>
-        {position} at {company}
+        {position} at <BoldStyled>{company}</BoldStyled>
       </Note2>
       <Note2 {...noteProps}>{activity}</Note2>
       <DividerStyled />

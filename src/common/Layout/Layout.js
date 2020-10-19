@@ -20,8 +20,6 @@ import "./styles.css";
 
 import { Layout as AntLayout, Menu } from "antd";
 
-const { Sider, Header } = AntLayout;
-
 const Layout = ({ prefix, children, title, extra = null }) => {
   const [collapsed, setCollapsed] = useState(true);
   let history = useHistory();

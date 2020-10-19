@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Progress } from "antd";
 import { Note1Grey, Note1, SubH2, Flex, SpaceBetween, Badge } from "common";
-import { BADGES, mainColors } from "utils";
+import { BADGES, mainColors, mintGreen } from "utils";
+import { ButtonCharts } from "./styles";
+import { METRICS_STATE } from "../constants";
 
 const InsightsStrategy = () => {
+  const [stateWins, setState] = useState(false);
+
+  const handleToggle = () => {
+    setState(!stateWins);
+  };
+
   // TODO add db data
   const currentBadges = [
     {
@@ -43,6 +51,44 @@ const InsightsStrategy = () => {
       percent: 12,
     },
   ];
+  const winsBadges = [
+    {
+      name: BADGES.ATTENTION,
+      title: "Attention",
+      score: 10,
+      percent: 50,
+    },
+    {
+      name: BADGES.CONTACT,
+      title: "New Contact",
+      score: 0,
+      percent: 0,
+    },
+    {
+      name: BADGES.FEATURE,
+      title: "New Feature",
+      score: 13,
+      percent: 18,
+    },
+    {
+      name: BADGES.BUG,
+      title: "Bug",
+      score: 16,
+      percent: 25,
+    },
+    {
+      name: BADGES.ESCALATION,
+      title: "Escalation",
+      score: 1,
+      percent: 3,
+    },
+    {
+      name: BADGES.CUSTOM,
+      title: "Custom",
+      score: 2,
+      percent: 6,
+    },
+  ];
 
   const lineProps = {
     style: {
@@ -51,7 +97,19 @@ const InsightsStrategy = () => {
     },
   };
 
-  const rederMetrics = currentBadges.map((badge) => (
+  let buttonName = METRICS_STATE.ASSIGNED;
+  let title = "Badges currently assigned";
+  let progressColor = mainColors.brightBlue;
+  let data = currentBadges;
+
+  if (stateWins) {
+    buttonName = METRICS_STATE.WINS;
+    title = "Badge wins this quater";
+    progressColor = mintGreen;
+    data = winsBadges;
+  }
+
+  const rederMetrics = data.map((badge) => (
     <SpaceBetween style={{ paddingBottom: 20 }}>
       <Flex style={{ width: 260 }}>
         <Badge strategy={badge.name} />
@@ -60,7 +118,7 @@ const InsightsStrategy = () => {
           <Progress
             showInfo={false}
             strokeWidth={12}
-            strokeColor={mainColors.brightBlue}
+            strokeColor={progressColor}
             percent={badge.percent}
           />
         </div>
@@ -78,8 +136,11 @@ const InsightsStrategy = () => {
 
   return (
     <div>
-      <SubH2>Strategy Based Metrica</SubH2>
-      <Note1Grey {...titleProps}>Badges currently assigned</Note1Grey>
+      <SpaceBetween>
+        <SubH2>Strategy Based Metrica</SubH2>
+        <ButtonCharts onClick={handleToggle}>{buttonName}</ButtonCharts>
+      </SpaceBetween>
+      <Note1Grey {...titleProps}>{title}</Note1Grey>
       {rederMetrics}
     </div>
   );

@@ -4,7 +4,7 @@
 
 import styled, { css } from "styled-components";
 import { Divider } from "antd";
-import { mainColors } from "utils";
+import { mainColors, weightScale } from "utils";
 
 const sharedButtonStyles = css`
   border: none;
@@ -50,10 +50,14 @@ export const BudgeStyled = styled.button`
 
 export const ClientCardStyled = styled.div`
   background-color: ${mainColors.white};
+  border-radius: 8px;
   height: 420px;
   margin: 15px 8px 10px;
   padding: 15px;
   width: 254px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.008), 0 12.5px 10px rgba(0, 0, 0, 0.02),
+    0 5px 10px rgba(0, 0, 0, 0.042);
 
   @media (min-width: 1274px) {
     margin: 15px 10px 10px;
@@ -63,6 +67,11 @@ export const ClientCardStyled = styled.div`
     margin: 15px 18px 18px;
     width: 290px;
   }
+`;
+
+export const BoldStyled = styled.span`
+  color: ${mainColors.blue};
+  font-weight: ${weightScale.bold};
 `;
 
 export const StyledCardContainer = styled.div`
@@ -99,6 +108,7 @@ export const ContainerFlex = styled.div`
 
 export const DividerStyled = styled(Divider)`
   margin: 10px 0;
+  border-top: 1.5px solid rgba(0, 0, 0, 0.07);
 `;
 
 export const SearchInputStyled = styled.div`

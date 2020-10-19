@@ -3,23 +3,38 @@
  */
 
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Row } from "antd";
 import InsightsOverallScore from "./InsightsOverallScore";
 import InsightsMood from "./InsightsMood";
 import InsightsQuater from "./InsightsQuater";
 import InsightsStrategy from "./InsightsStrategy";
-import { Layout, ClientCard, CardContainer, Flex, SubH2 } from "common";
+import {
+  Layout,
+  ClientCard,
+  CardWrap,
+  CardContainer,
+  Flex,
+  SubH2,
+} from "common";
 import { StyledSmileIcon } from "./styles";
 import { iconSmile, iconSmileDown } from "media/svg";
 import { mockData, clientNames } from "utils";
 import { PAGE_TITLE } from "../constants";
+import "./styles.css";
 
 const InsightsPage = () => {
+  let history = useHistory();
+
   const clientTop = mockData[0];
   const clientLow = mockData[3];
 
   const layoutProps = {
     title: PAGE_TITLE,
+  };
+
+  const handleCardClick = (clientId) => {
+    history.push(`clients/${clientId}`);
   };
 
   const renderCardHeader = (backgroundColor, icon, title) => {
@@ -47,23 +62,23 @@ const InsightsPage = () => {
   return (
     <Layout {...layoutProps}>
       <Row justify="center">
-        <CardContainer style={{ minHeight: 300, minWidth: 300, width: 500 }}>
+        <CardWrap height={453} className="insights-overall">
           <InsightsOverallScore />
-        </CardContainer>
+        </CardWrap>
         <div style={{ marginBottom: 15 }}>
           {HigherScoreHeader}
-          <ClientCard {...clientTop} />
+          <ClientCard cardAction={handleCardClick} {...clientTop} />
         </div>
         <div style={{ marginBottom: 15 }}>
           {LowestScoreHeader}
-          <ClientCard {...clientLow} />
+          <ClientCard cardAction={handleCardClick} {...clientLow} />
         </div>
         <CardContainer height={440} width={312}>
           <InsightsStrategy />
         </CardContainer>
-        <CardContainer height={440} width={376}>
+        <CardWrap height={440} className="insights-moods">
           <InsightsMood clients={clientNames} />
-        </CardContainer>
+        </CardWrap>
         <CardContainer heigth={328} width={400}>
           <InsightsQuater />
         </CardContainer>

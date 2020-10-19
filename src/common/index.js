@@ -6,6 +6,7 @@ import ResizableCard from "./ResizableCard";
 import AvatarContainer from "./AvatarContainer";
 import Badge from "./Badge";
 import CardContainer from "./CardContainer";
+import CardWrap from "./CardWrap";
 import ClientCard from "./ClientCard";
 import Direction from "./Direction";
 import DragDropContainer from "./DragDropContainer";
@@ -21,6 +22,7 @@ export {
   AvatarContainer,
   Badge,
   CardContainer,
+  CardWrap,
   ClientCard,
   DragDropContainer,
   Direction,

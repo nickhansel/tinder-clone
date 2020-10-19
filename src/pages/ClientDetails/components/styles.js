@@ -21,7 +21,6 @@ export const AvatarContainer = styled.div`
 `;
 
 export const RowPagination = styled(Row)`
-  margin-left: 8px;
-  width: 1140px;
+  margin-top: 10px;
   justify-content: space-between;
 `;

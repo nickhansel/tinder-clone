@@ -4,7 +4,7 @@
 
 import React from "react";
 import { deleteNote } from "../reducers/clientDetailsSlice";
-import { Note, CardContainer } from "common";
+import { Note, CardWrap } from "common";
 
 const ClientDetailsNotesList = ({
   noteProps,
@@ -18,9 +18,9 @@ const ClientDetailsNotesList = ({
       {notesData &&
         notesData.length > 0 &&
         notesData.slice(minVal, maxVal).map((note, index) => (
-          <CardContainer {...noteProps} key={index}>
+          <CardWrap {...noteProps} key={index}>
             <Note authorName={authorName} note={note} deleteNote={deleteNote} />
-          </CardContainer>
+          </CardWrap>
         ))}
     </>
   );

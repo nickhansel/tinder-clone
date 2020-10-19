@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "chart.js";
-import { SubH1, SubH2, SpaceBetween, Flex } from "common";
+import { SubH1, BoldStyled, SpaceBetween, Flex } from "common";
 import { ButtonCharts } from "./styles";
 import { getAvg } from "utils";
 
@@ -28,7 +28,6 @@ const data = {
   datasets: [
     {
       label: "",
-      //backgroundColor: "rgb(255, 99, 132)",
       borderColor: "#20CDAE",
       data: healthScores,
     },
@@ -57,12 +56,17 @@ const InsightsOverallScore = () => {
       <SpaceBetween>
         <div>
           <SubH1>Overall Clients Health Score</SubH1>
-          <SubH2>Total Clients: {total}</SubH2>
-          <SubH2>Average Score: {average}</SubH2>
+          <BoldStyled>Total Clients: {total}</BoldStyled>
+          <br />
+          <BoldStyled>Average Score: {average}</BoldStyled>
         </div>
         <Flex>
           <ButtonCharts>Quater</ButtonCharts>
-          <ButtonCharts>Year</ButtonCharts>
+          <ButtonCharts
+            style={{ border: "1px solid #BDBDBD", color: "#BDBDBD" }}
+          >
+            Year
+          </ButtonCharts>
         </Flex>
       </SpaceBetween>
       <div style={{ marginTop: 40 }}>

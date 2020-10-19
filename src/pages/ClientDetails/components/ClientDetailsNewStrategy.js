@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Modal, Form, Input, Button, Typography, message } from "antd";
-import { Badge, Flex } from "common";
+import { Modal, Form, Input, Button, Divider, message } from "antd";
+import { Badge, Flex, BoldStyled, Note1Grey } from "common";
+import { BADGES } from "utils";
 
 const { TextArea } = Input;
-const { Paragraph } = Typography;
 
 const ClientDetailsNewStrategy = ({
+  client,
   selectedStrategy,
   isNewStrategyModal,
   handleToggle,
 }) => {
-  const [editableStr, setEditableStr] = useState("Enter your note..");
-
   const onFinish = (values) => {
     message.success("Strategy created");
     handleToggle();
@@ -58,25 +57,36 @@ const ClientDetailsNewStrategy = ({
     </Form>
   );
   const selected = selectedStrategy || "";
-
+  const modalTitle = (
+    <div>
+      <span>
+        Assign a Strategy Badge to the{" "}
+        <BoldStyled>${client.company}</BoldStyled> Account
+      </span>
+      <Note1Grey>
+        {`Select a strategy and fill out a gameplan to improve and strenghten
+        your realtionship with ${client.company}`}
+      </Note1Grey>
+    </div>
+  );
   return (
     <Modal
       visible={isNewStrategyModal}
-      title={`Add New Strategy`}
+      title={modalTitle}
       onCancel={() => handleToggle(false)}
       footer={[
         <Button key="back" onClick={() => handleToggle(false)}>
           Cancel
         </Button>,
       ]}
+      width={800}
     >
       <Flex>
-        <div style={{ paddingRight: 30 }}>
+        <div style={{ paddingRight: 30, width: 80 }}>
           <Badge strategy={selectedStrategy} />
         </div>
-        <Paragraph editable={{ onChange: setEditableStr }}>
-          {editableStr}
-        </Paragraph>
+        <Divider type={"vertical"} />
+        {renderForm}
       </Flex>
     </Modal>
   );

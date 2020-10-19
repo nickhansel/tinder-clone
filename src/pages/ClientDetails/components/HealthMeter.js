@@ -19,7 +19,6 @@ const HealthMeter = ({ healthScore }) => {
     borderWidth: 0.8,
     height: 18,
     paddingRight: 10,
-    width: 264,
   };
   const healthStyle = {
     backgroundColor: healthColor,

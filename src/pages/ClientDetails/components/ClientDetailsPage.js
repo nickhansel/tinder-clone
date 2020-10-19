@@ -11,7 +11,7 @@ import ClientDetailsNotesList from "./ClientDetailsNotesList";
 import ClientProfile from "./ClientDetailsProfile";
 import ClientDetailsTouchPoints from "./ClientDetailsTouchPoints";
 import ClientDetailsToolbox from "./ClientDetailsToolbox";
-import { Layout, Note2, H3, CardContainer } from "common";
+import { Layout, Note2, H3, CardWrap } from "common";
 import { RowPagination } from "./styles";
 import { getClient } from "utils";
 import { iconBack, iconAddCircle } from "media/svg";
@@ -40,22 +40,13 @@ const ClientDetailsPage = ({ history, location }) => {
     setMaxVal(page * NOTES_EACH_PAGE);
   };
 
-  // Helper
-  const getCardProps = (heigth, width) => {
-    return {
-      heigth,
-      width,
-    };
-  };
-
   // Props
-  const profileProps = getCardProps(320, 544);
-  const touchPointProps = getCardProps(320, 368);
-  const toolboxProps = getCardProps(320, 192);
-  const noteProps = getCardProps(200, 560);
+  const noteProps = {
+    height: 200,
+    className: "details-note",
+  };
   const rowProps = {
     justify: "center",
-    style: { width: "1200px" },
   };
   const noteListProps = {
     noteProps,
@@ -81,24 +72,24 @@ const ClientDetailsPage = ({ history, location }) => {
     <Layout {...layoutProps}>
       <DndProvider backend={HTML5Backend}>
         <Row {...rowProps}>
-          <Row>
-            <CardContainer {...profileProps}>
+          <Row {...rowProps}>
+            <CardWrap height={320} className="details-card details-profile">
               <ClientProfile {...client} />
-            </CardContainer>
-            <CardContainer {...touchPointProps}>
+            </CardWrap>
+            <CardWrap height={320} className="details-card details-touch">
               <ClientDetailsTouchPoints
                 authorName={"Blake"} // TODO get user
                 touchPoints={touchPoints}
               />
-            </CardContainer>
-            <CardContainer {...toolboxProps}>
+            </CardWrap>
+            <CardWrap className="details-card details-toolbox">
               <ClientDetailsToolbox
                 setSelectedStrategy={setSelectedStrategy}
                 handleToggle={() => toggleNewStrategyModal(true)}
               />
-            </CardContainer>
+            </CardWrap>
           </Row>
-          <RowPagination>
+          <RowPagination className="details-pagination">
             <H3>
               Notes{" "}
               <Tooltip title="Add Note">
@@ -112,7 +103,7 @@ const ClientDetailsPage = ({ history, location }) => {
             </H3>
             <Pagination {...paginationProps} />
           </RowPagination>
-          <Row>
+          <Row {...rowProps}>
             <ClientDetailsNotesList {...noteListProps} />
           </Row>
         </Row>
@@ -121,6 +112,7 @@ const ClientDetailsPage = ({ history, location }) => {
           handleToggle={() => toggleNewNoteModal(false)}
         />
         <ClientDetailsNewStrategy
+          client={client}
           selectedStrategy={selectedStrategy}
           isNewStrategyModal={isNewStrategyModal}
           handleToggle={() => toggleNewStrategyModal(false)}

@@ -1,0 +1,134 @@
+.details-profile-info {
+  padding-left: 20px;
+  width: 244px;
+}
+
+.details-card {
+  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+    0 5px 10px rgba(0, 0, 0, 0.032);
+  margin: 15px 8px 10px;
+}
+
+.details-profile {
+  width: 520px;
+}
+
+.details-touch {
+  width: 368px;
+}
+
+.details-toolbox {
+  height: 320px;
+  width: 192px;
+}
+
+.details-tools {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.details-note {
+  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+    0 5px 10px rgba(0, 0, 0, 0.032);
+  width: 469px;
+}
+
+@media (max-width: 1090px) {
+  .details-toolbox {
+    height: 150px;
+    width: 747px;
+  }
+  .details-note {
+    width: 747px;
+  }
+  .details-pagination {
+    width: 747px;
+  }
+}
+@media screen and (min-width: 1090px) and (max-width: 1250px) {
+  .details-touch {
+    width: 250px;
+  }
+  .details-profile {
+    width: 480px;
+  }
+  .details-profile-info {
+    width: 216px;
+  }
+  .details-pagination {
+    width: 953px;
+  }
+}
+@media screen and (min-width: 1284px) {
+  .details-profile-info {
+    width: 228px;
+  }
+  .details-profile {
+    width: 500px;
+  }
+  .details-card {
+    margin: 15px 5px 10px;
+  }
+  .details-touch {
+    width: 328px;
+  }
+  .details-note {
+    width: 518px;
+  }
+  .details-pagination {
+    width: 1123px;
+  }
+}
+@media screen and (min-width: 1284px) and (max-width: 1400px) {
+  .details-card {
+    margin: 15px 18px 18px;
+  }
+  .details-touch {
+    width: 400px;
+  }
+  .details-note {
+    width: 554px;
+  }
+  .details-pagination {
+    width: 1123px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .details-touch {
+    width: 450px;
+  }
+  .details-toolbox {
+    width: 240px;
+  }
+  .details-note {
+    width: 612px;
+  }
+  .details-pagination {
+    width: 1221px;
+  }
+}
+@media screen and(min-width: 1500px) {
+  .details-touch {
+    width: 500px;
+  }
+  .details-note {
+    width: 638px;
+  }
+  .details-pagination {
+    width: 1300px;
+  }
+}
+@media (min-width: 1600px) {
+  .details-touch {
+    width: 600px;
+  }
+  .details-note {
+    width: 678px;
+  }
+  .details-pagination {
+    width: 1367px;
+  }
+}

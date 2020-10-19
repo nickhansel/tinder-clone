@@ -41,8 +41,9 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
   );
 
   const actionWrapperStyle = {
-    position: "absolute",
     bottom: 0,
+    position: "absolute",
+    width: "100%",
   };
   const actionTextStyle = {
     margin: 0,
@@ -51,7 +52,7 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
   };
   const renderAction = (
     <div style={{ ...actionWrapperStyle }}>
-      <DividerStyled style={{ width: 340 }} />
+      <DividerStyled />
       <Flex style={{ justifyContent: "center" }}>
         <SubH2
           onClick={() => togglePointsModal(true)}

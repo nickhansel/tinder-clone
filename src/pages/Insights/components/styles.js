@@ -23,9 +23,15 @@ export const StyledSmileIcon = styled.div`
 `;
 
 export const ButtonCharts = styled.button`
+  background-color: white;
   border-radius: 12px;
   border: 1px solid black;
   height: 24px;
   margin-left: 15px;
+  outline: none;
   width: 77px;
+
+  :hover {
+    background-color: ${mainColors.grey1};
+  }
 `;
