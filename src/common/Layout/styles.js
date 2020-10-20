@@ -48,7 +48,7 @@ export const StyledDivider = styled(Divider)`
 `;
 
 export const StyledSider = styled(Sider)`
-  @media (max-width: 400px) {
+  @media (max-width: 430px) {
     display: none;
   }
 `;
@@ -62,7 +62,8 @@ export const StyledTopHeader = styled(Header)`
     margin-right: 8px;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 430px) {
     display: flex;
+    width: 424px;
   }
 `;

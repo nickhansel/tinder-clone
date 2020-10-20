@@ -73,7 +73,7 @@ const ClientDetailsPage = ({ history, location }) => {
       <DndProvider backend={HTML5Backend}>
         <Row {...rowProps}>
           <Row {...rowProps}>
-            <CardWrap height={320} className="details-card details-profile">
+            <CardWrap className="details-card details-profile">
               <ClientProfile {...client} />
             </CardWrap>
             <CardWrap height={320} className="details-card details-touch">

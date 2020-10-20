@@ -66,7 +66,7 @@ const ClientProfile = ({
   };
 
   return (
-    <Row>
+    <Row justify="center">
       <div ref={drop} style={{ opacity: isActive ? 0.5 : 1 }}>
         <AvatarContainer mood={clientMood} mode="full" />
       </div>

@@ -118,4 +118,8 @@ export const SearchInputStyled = styled.div`
     line-height: 10;
     width: 180px;
   }
+
+  @media (max-width: 430px) {
+    display: none;
+  }
 `;
