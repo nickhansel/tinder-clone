@@ -31,7 +31,16 @@ export const GlobalStyle = createGlobalStyle`
   .ant-typography-expand {
     font-size: 12px;
   } 
+
   .ant-pagination-total-text {
     height: 25px;
+  }
+
+  .ant-modal-content {
+    border-radius: 8px;
+  }
+
+  .ant-modal-header {
+    border-radius: 8px;
   }
 `;

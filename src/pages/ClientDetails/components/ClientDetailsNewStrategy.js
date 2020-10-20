@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Form, Input, Button, Divider, message } from "antd";
-import { Badge, Flex, BoldStyled, Note1Grey } from "common";
+import { Badge, Flex, BoldStyled, Note1Grey, StrategyIcons } from "common";
 import { BADGES } from "utils";
 
 const { TextArea } = Input;
+const badgeNames = Object.values(BADGES);
 
 const ClientDetailsNewStrategy = ({
   client,
@@ -69,6 +70,10 @@ const ClientDetailsNewStrategy = ({
       </Note1Grey>
     </div>
   );
+  const renderBages = badgeNames.map((badge) => {
+    return StrategyIcons[badge]("grey")
+  })
+
   return (
     <Modal
       visible={isNewStrategyModal}
@@ -82,8 +87,9 @@ const ClientDetailsNewStrategy = ({
       width={800}
     >
       <Flex>
-        <div style={{ paddingRight: 30, width: 80 }}>
-          <Badge strategy={selectedStrategy} />
+        <div style={{ paddingRight: 30, width: 180 }}>
+          {renderBages}
+          {/* <Badge strategy={selectedStrategy} /> */}
         </div>
         <Divider type={"vertical"} />
         {renderForm}

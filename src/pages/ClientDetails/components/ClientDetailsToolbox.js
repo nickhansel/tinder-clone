@@ -27,6 +27,7 @@ const ClientDetailsToolbox = ({ handleToggle, setSelectedStrategy }) => {
   // Styles
   const iconStyle = {
     height: 48,
+    fill: "#ffff",
     margin: 8,
     width: 48,
   };

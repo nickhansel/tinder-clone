@@ -21,7 +21,6 @@ export const BADGES = {
   BUG: "bug",
   ESCALATION: "escalation",
   CUSTOM: "custom",
-  ADD: "add",
 };
 
 export const STRATEGIES = {

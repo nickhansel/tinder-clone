@@ -15,6 +15,7 @@ import NavBar from "./NavBar";
 import Note from "./Note";
 import Profile from "./Profile";
 import SearchInput from "./SearchInput";
+import StrategyIcons from "./StrategyIcons";
 
 export {
   Layout,
@@ -31,6 +32,7 @@ export {
   Note,
   Profile,
   SearchInput,
+  StrategyIcons
 };
 
 // Styled Components
