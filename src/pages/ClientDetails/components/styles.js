@@ -3,7 +3,7 @@
  */
 
 import styled from "styled-components";
-import { Row, Modal } from "antd";
+import { Row } from "antd";
 
 export const ClientProfileStyled = styled.div`
   display: flex;
@@ -23,8 +23,4 @@ export const AvatarContainer = styled.div`
 export const RowPagination = styled(Row)`
   margin-top: 10px;
   justify-content: space-between;
-`;
-
-export const StrategyModal = styled(Modal)`
-  width: 800px;
 `;
