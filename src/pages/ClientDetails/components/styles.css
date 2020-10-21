@@ -37,6 +37,23 @@
   width: 554px;
 }
 
+/* New strategy form */
+.details-new-strategy-form {
+  width: 500px;
+}
+
+.details-new-strategy-form textarea,
+.details-new-strategy-form input {
+  border-radius: 8px;
+}
+
+.new-strategy-modal .ant-modal-footer {
+  border: none;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 206px;
+}
+
 @media only screen and (max-width: 430px) {
   .details-toolbox {
     height: 250px;
@@ -63,7 +80,7 @@
   }
 }
 
-@media  only screen and (min-width: 430px) and (max-width: 1090px) {
+@media only screen and (min-width: 430px) and (max-width: 1090px) {
   .details-toolbox {
     height: 150px;
     width: 865px;

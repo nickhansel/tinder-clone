@@ -114,6 +114,7 @@ const ClientDetailsPage = ({ history, location }) => {
         <ClientDetailsNewStrategy
           client={client}
           selectedStrategy={selectedStrategy}
+          setSelectedStrategy={setSelectedStrategy}
           isNewStrategyModal={isNewStrategyModal}
           handleToggle={() => toggleNewStrategyModal(false)}
         />

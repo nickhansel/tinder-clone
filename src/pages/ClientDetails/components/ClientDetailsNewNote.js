@@ -6,7 +6,6 @@ const { TextArea } = Input;
 
 const ClientDetailsNewNote = ({
   isNewNoteModal,
-  toggleNewNoteModal,
   handleToggle,
 }) => {
   const onFinish = (values) => {
@@ -62,9 +61,9 @@ const ClientDetailsNewNote = ({
     <Modal
       visible={isNewNoteModal}
       title="Add Note"
-      onCancel={() => toggleNewNoteModal(false)}
+      onCancel={() => handleToggle()}
       footer={[
-        <Button key="back" onClick={() => toggleNewNoteModal(false)}>
+        <Button key="back" onClick={() => handleToggle()}>
           Cancel
         </Button>,
       ]}
