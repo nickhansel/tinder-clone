@@ -16,10 +16,10 @@ export const BASE_URLS = {
 
 export const BADGES = {
   ATTENTION: "attention",
-  CONTACT: "contact",
-  FEATURE: "feature",
   BUG: "bug",
+  CONTACT: "contact",
   ESCALATION: "escalation",
+  FEATURE: "feature",
   CUSTOM: "custom",
 };
 

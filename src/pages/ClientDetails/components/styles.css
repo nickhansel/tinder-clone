@@ -39,7 +39,20 @@
 
 /* New strategy form */
 .details-new-strategy-form {
-  width: 500px;
+  padding-left: 20px !important;
+  width: 515px;
+}
+
+.details-new-strategy-form .ant-form-item-label {
+  padding: 0 !important;
+}
+
+.details-new-strategy-form label {
+  color: #828282 !important;
+}
+
+.details-new-strategy-form textarea {
+  height: 186px !important;
 }
 
 .details-new-strategy-form textarea,
@@ -51,7 +64,16 @@
   border: none;
   display: flex;
   justify-content: space-around;
-  margin-left: 206px;
+  margin-left: 221px;
+  padding: 0px 20px 18px !important;
+}
+
+.new-strategy-modal .ant-modal-body {
+  padding: 5px 0px 0px 5px !important;
+}
+
+.new-strategy-modal .ant-modal-header {
+  border-bottom: none !important;
 }
 
 @media only screen and (max-width: 430px) {

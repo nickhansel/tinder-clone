@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { deleteNote } from "../reducers/clientDetailsSlice";
+// import { deleteNote } from "../reducers/clientDetailsSlice";
 import { Note, CardWrap } from "common";
 
 const ClientDetailsNotesList = ({
@@ -19,7 +19,7 @@ const ClientDetailsNotesList = ({
         notesData.length > 0 &&
         notesData.slice(minVal, maxVal).map((note, index) => (
           <CardWrap {...noteProps} key={index}>
-            <Note authorName={authorName} note={note} deleteNote={deleteNote} />
+            <Note authorName={authorName} note={note} deleteNote={()=> console.log("delete")} />
           </CardWrap>
         ))}
     </>

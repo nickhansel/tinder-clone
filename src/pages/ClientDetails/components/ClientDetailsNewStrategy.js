@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Modal, Row, Form, Input, Button, Divider, Col, message } from "antd";
 import {
-  Badge,
   TextInfo,
   Flex,
   BoldStyled,
   Note1Grey,
+  Note2,
   StrategyIcons,
 } from "common";
 import { BADGES, mainColors } from "utils";
@@ -21,9 +21,9 @@ const formStyle = {
   wrapperCol: { span: 22 },
   layout: "vertical",
 };
-const tailLayout = {
-  wrapperCol: { offset: 0, span: 22 },
-};
+// const tailLayout = {
+//   wrapperCol: { offset: 0, span: 22 },
+// };
 
 const ClientDetailsNewStrategy = ({
   client,
@@ -68,8 +68,8 @@ const ClientDetailsNewStrategy = ({
         <Input />
       </Form.Item>
       <Form.Item
-        label="Text"
-        name="text"
+        label="Note"
+        name="strategy_note"
         rules={[{ required: true, message: "Please note text" }]}
       >
         <TextArea />
@@ -77,6 +77,7 @@ const ClientDetailsNewStrategy = ({
       {/* <Form.Item {...tailLayout}></Form.Item> */}
     </Form>
   );
+
   const selected = selectedStrategy || "";
   const modalTitle = (
     <div>
@@ -90,19 +91,27 @@ const ClientDetailsNewStrategy = ({
       </Note1Grey>
     </div>
   );
+  const iconContainerStyle = {
+    fontSize: 12,
+    margin: 8,
+    width: "max-content",
+  };
   // currently selected badge would keep it's color
-  const renderBages = badgeNames.map((name) => {
-    const badgeColor = selected !== name ? mainColors.grey3 : false;
+  const renderBages = badgeNames.map((badgeName, index) => {
+    const badgeColor = selected !== badgeName ? mainColors.grey3 : false;
 
     return (
-      <Col style={{ height: 70 }} onClick={() => handleStrategyClick(name)}>
-        {StrategyIcons[name](badgeColor)}
+      <Col key={index} onClick={() => handleStrategyClick(badgeName)} style={{ textAlign: "center"}}>
+        <div style={iconContainerStyle}>  
+          {selected ? StrategyIcons[badgeName](badgeColor) : null}
+        </div>
+        <Note2>{selected ? STRATEGY_MESSAGES[badgeName]["title"] : null}</Note2>
       </Col>
     );
   });
   const renderStrategyMessage = (
-    <TextInfo style={{ padding: "14px 0px 0px 24px" }}>
-      {selected ? STRATEGY_MESSAGES[selected](company) : null}
+    <TextInfo style={{ padding: "14px 0px 0px 14px" }}>
+      {selected ? STRATEGY_MESSAGES[selected]["message"](company) : null}
     </TextInfo>
   );
 
@@ -116,7 +125,12 @@ const ClientDetailsNewStrategy = ({
       onCancel={() => handleToggle(false)}
       footer={[
         <Button
-          style={{ backgroundColor: "#FFFF", borderRadius: 8, width: 100 }}
+          style={{ 
+            backgroundColor: "#FFFF",
+            borderRadius: 8,
+            border: "1px solid #14709F",
+            color: "#14709F",
+            width: 100 }}
           key="back"
           onClick={() => handleToggle(false)}
         >
@@ -129,7 +143,7 @@ const ClientDetailsNewStrategy = ({
           style={{
             backgroundColor: "#14709F",
             borderRadius: 8,
-            marginLeft: 173,
+            marginLeft: 164,
             width: 100,
           }}
           onClick={() => handleToggle(false)}
@@ -139,25 +153,28 @@ const ClientDetailsNewStrategy = ({
       ]}
     >
       <Flex>
-        <Row
-          gutter={[20, 20]}
-          style={{
-            flexWrap: "wrap",
-            width: 220,
-            justifyContent: "space-around",
-          }}
-        >
-          {renderBages}
-          {renderStrategyMessage}
+        <Row>
+          <Col style={{ width: 240}}>
+            <Row
+              style={{
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+              }}
+            >
+              {renderBages}
+            </Row>
+            <Row>
+              {renderStrategyMessage}
+            </Row>
+          </Col>
+          <Divider
+            type="vertical"
+            style={{
+              height: 350,
+            }}
+          />
+          <Col style={{ }}>{renderForm}</Col>
         </Row>
-        <Divider
-          type="vertical"
-          style={{
-            height: 270,
-            marginLeft: 40,
-          }}
-        />
-        <div style={{ paddingLeft: 30 }}>{renderForm}</div>
       </Flex>
     </Modal>
   );
