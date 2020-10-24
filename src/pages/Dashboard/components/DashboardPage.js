@@ -13,10 +13,19 @@ import { Layout, Note2, Flex } from "common";
 import { YellowBox } from "./styles";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
 import "./styles.css";
-import { mockData, filterDataByMood } from "utils";
+import { mockData, filterDataByMood, CURRENT_USER } from "utils";
 
 const DashboardPage = ({ history }) => {
-  const { loading, data, error } = useQuery(gql(listClients));
+  const { loading, data, error } = useQuery(
+    gql(listClients, {
+      variables: {
+        filter: {
+          contactId: "ut001",
+        },
+      },
+    })
+  );
+
   const [moodId, setMoodId] = useState("all");
   const [clientsData, setClientData] = useState(filterDataByMood(mockData));
   const [page, setPage] = useState(1);

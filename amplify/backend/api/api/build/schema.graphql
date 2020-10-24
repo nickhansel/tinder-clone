@@ -10,7 +10,7 @@ type Team {
   name: String!
   account(filter: ModelAccountFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelAccountConnection
   teamMembers(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
-  renewalDate: Int
+  renewalDate: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -36,7 +36,7 @@ type Account {
   name: String!
   renewalDate: String
   contract: Int
-  healthScore: Int
+  healthScore: Double
   accountMembers(filter: ModelClientFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientConnection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -297,7 +297,7 @@ type ModelTeamConnection {
 input ModelTeamFilterInput {
   id: ModelIDInput
   name: ModelStringInput
-  renewalDate: ModelIntInput
+  renewalDate: ModelStringInput
   and: [ModelTeamFilterInput]
   or: [ModelTeamFilterInput]
   not: ModelTeamFilterInput
@@ -306,13 +306,13 @@ input ModelTeamFilterInput {
 input CreateTeamInput {
   id: ID
   name: String!
-  renewalDate: Int
+  renewalDate: String
 }
 
 input UpdateTeamInput {
   id: ID!
   name: String
-  renewalDate: Int
+  renewalDate: String
 }
 
 input DeleteTeamInput {
@@ -321,7 +321,7 @@ input DeleteTeamInput {
 
 input ModelTeamConditionInput {
   name: ModelStringInput
-  renewalDate: ModelIntInput
+  renewalDate: ModelStringInput
   and: [ModelTeamConditionInput]
   or: [ModelTeamConditionInput]
   not: ModelTeamConditionInput
@@ -389,7 +389,7 @@ input ModelAccountFilterInput {
   name: ModelStringInput
   renewalDate: ModelStringInput
   contract: ModelIntInput
-  healthScore: ModelIntInput
+  healthScore: ModelFloatInput
   and: [ModelAccountFilterInput]
   or: [ModelAccountFilterInput]
   not: ModelAccountFilterInput
@@ -400,7 +400,7 @@ input CreateAccountInput {
   name: String!
   renewalDate: String
   contract: Int
-  healthScore: Int
+  healthScore: Double
   accountTeamId: ID
 }
 
@@ -409,7 +409,7 @@ input UpdateAccountInput {
   name: String
   renewalDate: String
   contract: Int
-  healthScore: Int
+  healthScore: Double
   accountTeamId: ID
 }
 
@@ -421,7 +421,7 @@ input ModelAccountConditionInput {
   name: ModelStringInput
   renewalDate: ModelStringInput
   contract: ModelIntInput
-  healthScore: ModelIntInput
+  healthScore: ModelFloatInput
   and: [ModelAccountConditionInput]
   or: [ModelAccountConditionInput]
   not: ModelAccountConditionInput

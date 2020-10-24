@@ -30,7 +30,7 @@ type Account @model {
   name: String!
   renewalDate: String
   contract: Int
-  healthScore: Double
+  healthScore: String
   accountMembers: [Client] @connection(name: "AccountClient")
 }
 
