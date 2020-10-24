@@ -1,4 +1,4 @@
-import iconPulse from "./icon-pulse.png";
 import iconHealth from "./icon-health.png";
+import greyBg from "./grey-bg.png";
 
-export { iconPulse, iconHealth };
+export { iconHealth, greyBg };

@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import gql from "graphql-tag";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { createStrategy } from "graphql/mutations";
+import { getClient } from "graphql/queries";
 import { Modal, Row, Form, Input, Button, Divider, Col, message } from "antd";
 import {
   TextInfo,
@@ -9,7 +13,7 @@ import {
   Note2,
   StrategyIcons,
 } from "common";
-import { BADGES, mainColors } from "utils";
+import { BADGES, mainColors, generateId } from "utils";
 import { STRATEGY_MESSAGES } from "../constants";
 
 const { TextArea } = Input;
@@ -26,22 +30,63 @@ const formStyle = {
 // };
 
 const ClientDetailsNewStrategy = ({
-  client,
+  client: {
+    id,
+    accountId: { name: companyName },
+    contactId,
+  },
   selectedStrategy,
   setSelectedStrategy,
   isNewStrategyModal,
   handleToggle,
 }) => {
-  const { company } = client;
+  const [addStrategy, { loading: creating, error }] = useMutation(
+    gql(createStrategy),
+    {
+      update(cache, { data: { createStrategy } }) {
+        const data = cache.readQuery({
+          query: gql(getClient),
+          variables: {
+            id,
+          },
+        });
+        const { items } = data.getClient.strategy;
+
+        cache.writeQuery({
+          query: gql(getClient),
+          data: {
+            getClient: {
+              ...data.getClient,
+              strategy: {
+                items: items.concat([createStrategy]),
+              },
+            },
+          },
+        });
+      },
+    }
+  );
 
   useEffect(() => {
     console.log(selectedStrategy);
   }, [selectedStrategy]);
 
   // Business logic
-  const onFinish = (values) => {
+  const handleSubmit = (values) => {
+    addStrategy({
+      variables: {
+        input: {
+          id: generateId(),
+          badgeName: selectedStrategy,
+          strategyClientIdId: id,
+          strategyOwnerIdId: contactId.id,
+          title: values.title,
+          description: values.strategy_note,
+        },
+      },
+    });
     message.success("Strategy created");
-    handleToggle();
+    handleToggle(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -53,11 +98,12 @@ const ClientDetailsNewStrategy = ({
   // Render components
   const renderForm = (
     <Form
+      id="form-new-strategy"
       {...formStyle}
       name="new-strategy"
       className="details-new-strategy-form"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      onFinish={handleSubmit}
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
@@ -82,12 +128,12 @@ const ClientDetailsNewStrategy = ({
   const modalTitle = (
     <div>
       <span>
-        Assign a Strategy Badge to the <BoldStyled>{company}</BoldStyled>{" "}
+        Assign a Strategy Badge to the <BoldStyled>{companyName}</BoldStyled>{" "}
         Account
       </span>
       <Note1Grey>
         {`Select a strategy and fill out a gameplan to improve and strenghten
-        your realtionship with ${company}`}
+        your realtionship with ${companyName}`}
       </Note1Grey>
     </div>
   );
@@ -101,8 +147,12 @@ const ClientDetailsNewStrategy = ({
     const badgeColor = selected !== badgeName ? mainColors.grey3 : false;
 
     return (
-      <Col key={index} onClick={() => handleStrategyClick(badgeName)} style={{ textAlign: "center"}}>
-        <div style={iconContainerStyle}>  
+      <Col
+        key={index}
+        onClick={() => handleStrategyClick(badgeName)}
+        style={{ textAlign: "center" }}
+      >
+        <div style={iconContainerStyle}>
           {selected ? StrategyIcons[badgeName](badgeColor) : null}
         </div>
         <Note2>{selected ? STRATEGY_MESSAGES[badgeName]["title"] : null}</Note2>
@@ -111,7 +161,7 @@ const ClientDetailsNewStrategy = ({
   });
   const renderStrategyMessage = (
     <TextInfo style={{ padding: "14px 0px 0px 14px" }}>
-      {selected ? STRATEGY_MESSAGES[selected]["message"](company) : null}
+      {selected ? STRATEGY_MESSAGES[selected]["message"](companyName) : null}
     </TextInfo>
   );
 
@@ -125,18 +175,20 @@ const ClientDetailsNewStrategy = ({
       onCancel={() => handleToggle(false)}
       footer={[
         <Button
-          style={{ 
+          style={{
             backgroundColor: "#FFFF",
             borderRadius: 8,
             border: "1px solid #14709F",
             color: "#14709F",
-            width: 100 }}
+            width: 100,
+          }}
           key="back"
           onClick={() => handleToggle(false)}
         >
           Cancel
         </Button>,
         <Button
+          form="form-new-strategy"
           key="submit"
           htmlType="submit"
           type="primary"
@@ -146,7 +198,6 @@ const ClientDetailsNewStrategy = ({
             marginLeft: 164,
             width: 100,
           }}
-          onClick={() => handleToggle(false)}
         >
           Confirm
         </Button>,
@@ -154,7 +205,7 @@ const ClientDetailsNewStrategy = ({
     >
       <Flex>
         <Row>
-          <Col style={{ width: 240}}>
+          <Col style={{ width: 240 }}>
             <Row
               style={{
                 flexWrap: "wrap",
@@ -163,9 +214,7 @@ const ClientDetailsNewStrategy = ({
             >
               {renderBages}
             </Row>
-            <Row>
-              {renderStrategyMessage}
-            </Row>
+            <Row>{renderStrategyMessage}</Row>
           </Col>
           <Divider
             type="vertical"
@@ -173,7 +222,7 @@ const ClientDetailsNewStrategy = ({
               height: 350,
             }}
           />
-          <Col style={{ }}>{renderForm}</Col>
+          <Col style={{}}>{renderForm}</Col>
         </Row>
       </Flex>
     </Modal>

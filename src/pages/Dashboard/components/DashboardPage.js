@@ -6,8 +6,8 @@ import React, { useState } from "react";
 import { Pagination } from "antd";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { listClients } from "graphql/queries";
-import DashboardClientList from "./DashboardClientsList";
+import { listClientsDash } from "graphql/queries";
+import DashboardClientList from "./DashboardClientList";
 import MoodFilter from "./DashboardMoodFilter";
 import { Layout, Note2, Flex } from "common";
 import { YellowBox } from "./styles";
@@ -16,32 +16,21 @@ import "./styles.css";
 import { mockData, filterDataByMood, CURRENT_USER } from "utils";
 
 const DashboardPage = ({ history }) => {
-  const { loading, data, error } = useQuery(
-    gql(listClients, {
-      variables: {
-        filter: {
-          contactId: "ut001",
-        },
-      },
-    })
-  );
+  const { loading, data, error } = useQuery(gql(listClientsDash), {
+    filter: {
+      contactId: CURRENT_USER,
+    },
+  });
 
+  const isLoaded = !loading && !error;
+  const clientsData = isLoaded ? data.listClients.items : [];
+  const totalClients = clientsData.length;
   const [moodId, setMoodId] = useState("all");
-  const [clientsData, setClientData] = useState(filterDataByMood(mockData));
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
 
-  console.log("2222");
-  console.log(data);
-
-  const moodFilter = (
-    <MoodFilter
-      setClientData={setClientData}
-      setMoodId={setMoodId}
-      clientsData={clientsData}
-    />
-  );
+  const moodFilter = <MoodFilter setMoodId={setMoodId} data={[]} />;
 
   const onChange = (page) => {
     // Pagination
@@ -61,8 +50,8 @@ const DashboardPage = ({ history }) => {
     defaultCurrent: 1,
     onChange: onChange,
     pageSize: 8,
-    showTotal: (total) => <Note2>Total {clientsData.length} clients</Note2>,
-    total: clientsData.length,
+    showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
+    total: totalClients,
   };
 
   return (

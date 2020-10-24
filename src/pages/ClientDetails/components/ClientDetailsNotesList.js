@@ -19,7 +19,11 @@ const ClientDetailsNotesList = ({
         notesData.length > 0 &&
         notesData.slice(minVal, maxVal).map((note, index) => (
           <CardWrap {...noteProps} key={index}>
-            <Note authorName={authorName} note={note} deleteNote={()=> console.log("delete")} />
+            <Note
+              authorName={authorName}
+              note={note}
+              deleteNote={() => console.log("delete")}
+            />
           </CardWrap>
         ))}
     </>

@@ -74,6 +74,14 @@
   line-height: 47px;
 }
 
+/* modal client strategys */
+.modal-client-startegys .ant-modal-footer {
+  border-top: none !important;
+}
+.modal-client-startegys .ant-modal-body {
+  padding: 0px 24px;
+}
+
 @media (max-width: 1024px) {
   .cards_wrap .card_item {
     width: 33.3%;

@@ -1,21 +1,22 @@
 /*
    Components export
  */
-import Layout from "./Layout";
-import ResizableCard from "./ResizableCard";
-import AvatarContainer from "./AvatarContainer";
-import Badge from "./Badge";
-import CardContainer from "./CardContainer";
-import CardWrap from "./CardWrap";
-import ClientCard from "./ClientCard";
-import Direction from "./Direction";
-import DragDropContainer from "./DragDropContainer";
-import HealthButton from "./HealthButton";
-import NavBar from "./NavBar";
-import Note from "./Note";
-import Profile from "./Profile";
-import SearchInput from "./SearchInput";
-import StrategyIcons from "./StrategyIcons";
+import Layout from "./components/Layout";
+import ResizableCard from "./components/ResizableCard";
+import AvatarContainer from "./components/AvatarContainer";
+import Badge from "./components/Badge";
+import CardContainer from "./components/CardContainer";
+import CardWrap from "./components/CardWrap";
+import ClientCard from "./components/ClientCard";
+import Direction from "./components/Direction";
+import DragDropContainer from "./components/DragDropContainer";
+import HealthButton from "./components/HealthButton";
+import NavBar from "./components/NavBar";
+import { Loading } from "./components";
+import Note from "./components/Note";
+import Profile from "./components/Profile";
+import SearchInput from "./components/SearchInput";
+import StrategyIcons from "./components/StrategyIcons";
 
 export {
   Layout,
@@ -30,11 +31,12 @@ export {
   HealthButton,
   NavBar,
   Note,
+  Loading,
   Profile,
   SearchInput,
-  StrategyIcons
+  StrategyIcons,
 };
 
 // Styled Components
-export * from "./Typography";
-export * from "./styles";
+export * from "./components/Typography";
+export * from "./components/styles";

@@ -22,10 +22,9 @@ import { iconMenu } from "media/svg";
 const ClientProfile = ({
   name,
   position,
-  company,
+  accountId: { name: company, healthScore, contract },
   status,
-  strategy,
-  health,
+  strategy: { items: strategyItems },
   renewalDate,
   mood,
 }) => {
@@ -42,8 +41,9 @@ const ClientProfile = ({
     }),
   });
   const isActive = canDrop && isOver;
-  const renderBadges = strategy.map((strategyItem, index) => (
-    <Badge key={index} strategy={strategyItem.name} />
+
+  const renderBadges = strategyItems.map((item, index) => (
+    <Badge key={index} strategy={item.badgeName} />
   ));
 
   const sectionHeader = (
@@ -55,7 +55,7 @@ const ClientProfile = ({
       <Divider type="vertical" style={{ height: 56 }} />
       <ProfileSection
         header={<Note1Grey style={{ marginLeft: 20 }}>Contract</Note1Grey>}
-        content={[<Note1 style={{ marginLeft: 14 }}>$100,00/year</Note1>]}
+        content={[<Note1 style={{ marginLeft: 14 }}>${contract}/month</Note1>]}
       />
     </>
   );
@@ -80,7 +80,7 @@ const ClientProfile = ({
           extra={<img style={iconProps} src={iconMenu} alt="" />}
         />
         <DividerStyled />
-        <HealthMeter healthScore={health} />
+        <HealthMeter healthScore={healthScore} />
         <Row>
           <ProfileSection header={sectionHeader} content={[]} />
         </Row>

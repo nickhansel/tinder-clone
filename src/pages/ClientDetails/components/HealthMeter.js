@@ -8,8 +8,9 @@ import { Note1Grey, SpaceBetween } from "common";
 import { getHealthColor, getHealthLen } from "utils";
 
 const HealthMeter = ({ healthScore }) => {
-  const healthColor = getHealthColor(healthScore);
-  const healthLen = getHealthLen(healthScore);
+  const score = parseFloat(healthScore);
+  const healthColor = getHealthColor(score);
+  const healthLen = getHealthLen(score);
 
   const iconContainerStyle = {
     background: "#ffffff",
@@ -38,7 +39,7 @@ const HealthMeter = ({ healthScore }) => {
     <div style={{ marginTop: 10 }}>
       <SpaceBetween>
         <Note1Grey>Health Meter</Note1Grey>
-        <span style={rateStyle}>{healthScore}/5</span>
+        <span style={rateStyle}>{score}/5.0</span>
       </SpaceBetween>
       <div style={iconContainerStyle}>
         <div style={healthStyle} />
@@ -48,7 +49,7 @@ const HealthMeter = ({ healthScore }) => {
 };
 
 HealthMeter.propTypes = {
-  healthScore: PropTypes.number.isRequired,
+  healthScore: PropTypes.string.isRequired,
 };
 
 export default HealthMeter;

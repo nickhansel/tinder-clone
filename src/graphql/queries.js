@@ -300,6 +300,11 @@ export const getClient = /* GraphQL */ `
           nextToken
         }
         clientNotes {
+          items {
+            title
+            content
+            createdAt
+          }
           nextToken
         }
         clientStrategies {
@@ -378,6 +383,43 @@ export const listClients = /* GraphQL */ `
         salesforceId
         name
         strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const listClientsDash = /* GraphQL */ `
+  query ListClients(
+    $filter: ModelClientFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+        }
+        isDecisionMaker
+        avatarId
+        name
+        strategy {
+          items {
+            id
+            badgeName
+            title
+            description
+          }
           nextToken
         }
         position
@@ -576,6 +618,29 @@ export const getStrategy = /* GraphQL */ `
       description
       createdAt
       updatedAt
+    }
+  }
+`;
+export const listClientStrategys = /* GraphQL */ `
+  query ListStrategys(
+    $filter: ModelStrategyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStrategys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        badgeName
+        ownerId {
+          id
+          name
+        }
+        title
+        description
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;

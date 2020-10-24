@@ -10,9 +10,8 @@ import { iconTrash } from "media/svg";
 
 const { Paragraph } = Typography;
 
-const Note = ({ type, authorName, note, deleteNote }) => {
-  const str = note.text || "";
-  const [noteText, setNoteText] = useState(str);
+const Note = ({ type, authorName, note, deleteNote, height }) => {
+  const [noteText, setNoteText] = useState(note.description);
   const [isSpinning, toggleSpinning] = useState(false);
 
   // rerender text when note updated
@@ -33,7 +32,7 @@ const Note = ({ type, authorName, note, deleteNote }) => {
 
   const paragraphProps = {
     style: {
-      height: 95,
+      height: height || 95,
       marginTop: 15,
       marginBottom: 0,
       overflow: "auto",
@@ -48,7 +47,7 @@ const Note = ({ type, authorName, note, deleteNote }) => {
   const Section = (
     <div>
       <Paragraph {...paragraphProps} editable={{ onChange: setNoteText }}>
-        {noteText}
+        {note.content}
       </Paragraph>
     </div>
   );
@@ -69,7 +68,7 @@ const Note = ({ type, authorName, note, deleteNote }) => {
     </Popconfirm>
   );
   const renderBadge =
-    type === "strategy" ? <Badge size="lrg" strategy={note.name} /> : null;
+    type === "strategy" ? <Badge size="lrg" strategy={note.badgeName} /> : null;
 
   return (
     <div>
@@ -83,7 +82,7 @@ const Note = ({ type, authorName, note, deleteNote }) => {
                 <span>
                   {moment(note.createdAt).format("MM/D/YYYY hh:mm")} by{" "}
                 </span>
-                <span style={{ color: "#115CE5" }}>{authorName}</span>
+                <span style={{ color: "#052F7B" }}>{authorName}</span>
               </Note1Grey>
             </div>
           </Flex>

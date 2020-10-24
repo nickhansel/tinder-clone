@@ -67,11 +67,11 @@ const InsightsPage = () => {
         </CardWrap>
         <div style={{ marginBottom: 15 }}>
           {HigherScoreHeader}
-          <ClientCard cardAction={handleCardClick} {...clientTop} />
+          <ClientCard onNameClick={handleCardClick} {...clientTop} />
         </div>
         <div style={{ marginBottom: 15 }}>
           {LowestScoreHeader}
-          <ClientCard cardAction={handleCardClick} {...clientLow} />
+          <ClientCard onNameClick={handleCardClick} {...clientLow} />
         </div>
         <CardContainer height={440} width={312}>
           <InsightsStrategy />

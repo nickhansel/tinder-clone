@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { AvatarStyled } from "./styles";
+import { greyBg } from "media/images";
 
 const AvatarContainer = ({ mood, avatarAction, mode = "croped" }) => {
   const size = {
@@ -9,8 +10,11 @@ const AvatarContainer = ({ mood, avatarAction, mode = "croped" }) => {
   };
 
   return (
-    <AvatarStyled onClick={avatarAction} style={{ height: size[mode] }}>
-      <img src={mood} alt="" />
+    <AvatarStyled
+      onClick={avatarAction}
+      style={{ height: size[mode], width: 230 }}
+    >
+      <img src={mood || greyBg} alt="" />
     </AvatarStyled>
   );
 };
