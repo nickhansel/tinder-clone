@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import { browserHistory as history } from "lib/history";
 import { ApolloProvider } from "@apollo/react-hooks";
 import App from "./App";
 import "./index.css";
@@ -27,8 +26,7 @@ const link = ApolloLink.from([
   createAuthLink({ url, region, auth }),
   createHttpLink({ uri: url }),
 ]);
-console.log("awsExports!!");
-console.log(awsExports);
+
 export const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),

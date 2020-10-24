@@ -6,18 +6,23 @@ import React, { useState } from "react";
 import { Row } from "antd";
 import { ClientCard } from "common";
 import DashboardClientModal from "./DashboardClientModal";
+import DashboardRateModal from "./DashboardRateModal";
 
 const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   const [isBadgeModal, toggleBadgeModal] = useState(false);
+  const [isRateModal, toggleRateModal] = useState(false);
   const [selectedClientId, setSelectedClient] = useState(null);
 
   const handleCardClick = (clientId) => {
     history.push(`clients/${clientId}`);
   };
-  const handleToggle = (state, id) => {
+  const handleBadgeToggle = (state, id) => {
     toggleBadgeModal(state);
     setSelectedClient(id);
   };
+  const handleRateToggle = (state) => {
+    toggleRateModal(state);
+  }
 
   return (
     <>
@@ -30,14 +35,19 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
               <ClientCard
                 key={index}
                 {...client}
+                avatarAction={handleRateToggle}
                 cardAction={handleCardClick}
-                infoAction={handleToggle}
+                infoAction={handleBadgeToggle}
               />
             ))}
       </Row>
+      <DashboardRateModal
+        handleToggle={handleRateToggle}
+        isRateModal={isRateModal}
+      />
       <DashboardClientModal
         data={data}
-        handleToggle={handleToggle}
+        handleToggle={handleBadgeToggle}
         isBadgeModal={isBadgeModal}
         selectedClientId={selectedClientId}
       />

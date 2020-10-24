@@ -12,10 +12,11 @@ import { mainColors, mockMoods } from "utils";
 
 const ClientCard = ({
   activity,
-  cardAction,
   company,
   health,
   id,
+  cardAction,
+  avatarAction,
   infoAction,
   name,
   position,
@@ -31,6 +32,7 @@ const ClientCard = ({
   const avatarProps = {
     mood: clientMood,
     mode: "croped",
+    avatarAction,
   };
   if (cardAction) {
     avatarProps.onClick = () => cardAction(id);
