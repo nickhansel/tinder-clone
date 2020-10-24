@@ -27,8 +27,10 @@ type User @model {
 type Account @model {
   id: ID!
   team: Team @connection(name: "TeamAccount")
-  companyName: String!
-  renewalDate: Int
+  name: String!
+  renewalDate: String
+  contract: Int
+  healthScore: Int
   accountMembers: [Client] @connection(name: "AccountClient")
 }
 
@@ -37,12 +39,12 @@ type Client @model {
   accountId: Account @connection(name: "AccountClient")
   contactId: User @connection(name: "UserClient")
   noteId: [ClientNote] @connection(name: "ClientNote")
+  isDecisionMaker: Boolean
   avatarId: String!
   salesforceId: ID
   name: String!
   strategy: [Strategy] @connection(name: "ClientStrategy")
   position: String
-  healthScore: Int
   lastContact: Int
 }
 
@@ -51,6 +53,9 @@ type ClientNote @model {
   clientId: Client @connection(name: "ClientNote")
   ownerId: User @connection(name: "UserNote")
   content: String
+  title: String
+  lastInterationSore: Int
+  isInteractionNote: Boolean
 }
 
 type Strategy @model {
