@@ -36,8 +36,10 @@ export const getTeam = /* GraphQL */ `
       account {
         items {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -111,11 +113,11 @@ export const getUser = /* GraphQL */ `
       clients {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -126,6 +128,9 @@ export const getUser = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
@@ -201,16 +206,18 @@ export const getAccount = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      companyName
+      name
       renewalDate
+      contract
+      healthScore
       accountMembers {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -238,8 +245,10 @@ export const listAccounts = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        companyName
+        name
         renewalDate
+        contract
+        healthScore
         accountMembers {
           nextToken
         }
@@ -263,8 +272,10 @@ export const getClient = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        companyName
+        name
         renewalDate
+        contract
+        healthScore
         accountMembers {
           nextToken
         }
@@ -301,11 +312,15 @@ export const getClient = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
         nextToken
       }
+      isDecisionMaker
       avatarId
       salesforceId
       name
@@ -321,7 +336,6 @@ export const getClient = /* GraphQL */ `
         nextToken
       }
       position
-      healthScore
       lastContact
       createdAt
       updatedAt
@@ -339,8 +353,10 @@ export const listClients = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -357,6 +373,7 @@ export const listClients = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -364,7 +381,6 @@ export const listClients = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -381,8 +397,10 @@ export const getClientNote = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -399,6 +417,7 @@ export const getClientNote = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -406,7 +425,6 @@ export const getClientNote = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -438,6 +456,9 @@ export const getClientNote = /* GraphQL */ `
         updatedAt
       }
       content
+      title
+      lastInterationSore
+      isInteractionNote
       createdAt
       updatedAt
     }
@@ -454,11 +475,11 @@ export const listClientNotes = /* GraphQL */ `
         id
         clientId {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -474,6 +495,9 @@ export const listClientNotes = /* GraphQL */ `
           updatedAt
         }
         content
+        title
+        lastInterationSore
+        isInteractionNote
         createdAt
         updatedAt
       }
@@ -490,8 +514,10 @@ export const getStrategy = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -508,6 +534,7 @@ export const getStrategy = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -515,7 +542,6 @@ export const getStrategy = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -565,11 +591,11 @@ export const listStrategys = /* GraphQL */ `
         badgeName
         clientId {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt

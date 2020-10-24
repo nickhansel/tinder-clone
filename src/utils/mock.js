@@ -222,6 +222,7 @@ export const mockData = [
 ];
 
 const STORAGE_URL = "https://empava-storage.s3.amazonaws.com/";
+
 export const mockMoods = {
   happyBoy: `${STORAGE_URL}boy_happy.gif`,
   sadBoy: `${STORAGE_URL}boy_sad.gif`,
@@ -352,3 +353,5 @@ export const clientNames = [
     change: "down",
   },
 ];
+
+export const CURRENT_USER = "ut001";

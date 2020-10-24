@@ -8,7 +8,7 @@ type Team @model {
   name: String!
   account: [Account] @connection(name: "TeamAccount")
   teamMembers: [User] @connection(name: "TeamUsers")
-  renewalDate: Int
+  renewalDate: String
 }
 
 type User @model {
@@ -30,7 +30,7 @@ type Account @model {
   name: String!
   renewalDate: String
   contract: Int
-  healthScore: Int
+  healthScore: Double
   accountMembers: [Client] @connection(name: "AccountClient")
 }
 

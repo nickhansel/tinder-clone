@@ -33,8 +33,10 @@ type User {
 type Account {
   id: ID!
   team: Team
-  companyName: String!
-  renewalDate: Int
+  name: String!
+  renewalDate: String
+  contract: Int
+  healthScore: Int
   accountMembers(filter: ModelClientFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientConnection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -45,12 +47,12 @@ type Client {
   accountId: Account
   contactId: User
   noteId(filter: ModelClientNoteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientNoteConnection
+  isDecisionMaker: Boolean
   avatarId: String!
   salesforceId: ID
   name: String!
   strategy(filter: ModelStrategyFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStrategyConnection
   position: String
-  healthScore: Int
   lastContact: Int
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -61,6 +63,9 @@ type ClientNote {
   clientId: Client
   ownerId: User
   content: String
+  title: String
+  lastInterationSore: Int
+  isInteractionNote: Boolean
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -381,8 +386,10 @@ type ModelAccountConnection {
 
 input ModelAccountFilterInput {
   id: ModelIDInput
-  companyName: ModelStringInput
-  renewalDate: ModelIntInput
+  name: ModelStringInput
+  renewalDate: ModelStringInput
+  contract: ModelIntInput
+  healthScore: ModelIntInput
   and: [ModelAccountFilterInput]
   or: [ModelAccountFilterInput]
   not: ModelAccountFilterInput
@@ -390,15 +397,19 @@ input ModelAccountFilterInput {
 
 input CreateAccountInput {
   id: ID
-  companyName: String!
-  renewalDate: Int
+  name: String!
+  renewalDate: String
+  contract: Int
+  healthScore: Int
   accountTeamId: ID
 }
 
 input UpdateAccountInput {
   id: ID!
-  companyName: String
-  renewalDate: Int
+  name: String
+  renewalDate: String
+  contract: Int
+  healthScore: Int
   accountTeamId: ID
 }
 
@@ -407,8 +418,10 @@ input DeleteAccountInput {
 }
 
 input ModelAccountConditionInput {
-  companyName: ModelStringInput
-  renewalDate: ModelIntInput
+  name: ModelStringInput
+  renewalDate: ModelStringInput
+  contract: ModelIntInput
+  healthScore: ModelIntInput
   and: [ModelAccountConditionInput]
   or: [ModelAccountConditionInput]
   not: ModelAccountConditionInput
@@ -421,11 +434,11 @@ type ModelClientConnection {
 
 input ModelClientFilterInput {
   id: ModelIDInput
+  isDecisionMaker: ModelBooleanInput
   avatarId: ModelStringInput
   salesforceId: ModelIDInput
   name: ModelStringInput
   position: ModelStringInput
-  healthScore: ModelIntInput
   lastContact: ModelIntInput
   and: [ModelClientFilterInput]
   or: [ModelClientFilterInput]
@@ -434,11 +447,11 @@ input ModelClientFilterInput {
 
 input CreateClientInput {
   id: ID
+  isDecisionMaker: Boolean
   avatarId: String!
   salesforceId: ID
   name: String!
   position: String
-  healthScore: Int
   lastContact: Int
   clientAccountIdId: ID
   clientContactIdId: ID
@@ -446,11 +459,11 @@ input CreateClientInput {
 
 input UpdateClientInput {
   id: ID!
+  isDecisionMaker: Boolean
   avatarId: String
   salesforceId: ID
   name: String
   position: String
-  healthScore: Int
   lastContact: Int
   clientAccountIdId: ID
   clientContactIdId: ID
@@ -461,11 +474,11 @@ input DeleteClientInput {
 }
 
 input ModelClientConditionInput {
+  isDecisionMaker: ModelBooleanInput
   avatarId: ModelStringInput
   salesforceId: ModelIDInput
   name: ModelStringInput
   position: ModelStringInput
-  healthScore: ModelIntInput
   lastContact: ModelIntInput
   and: [ModelClientConditionInput]
   or: [ModelClientConditionInput]
@@ -480,6 +493,9 @@ type ModelClientNoteConnection {
 input ModelClientNoteFilterInput {
   id: ModelIDInput
   content: ModelStringInput
+  title: ModelStringInput
+  lastInterationSore: ModelIntInput
+  isInteractionNote: ModelBooleanInput
   and: [ModelClientNoteFilterInput]
   or: [ModelClientNoteFilterInput]
   not: ModelClientNoteFilterInput
@@ -488,6 +504,9 @@ input ModelClientNoteFilterInput {
 input CreateClientNoteInput {
   id: ID
   content: String
+  title: String
+  lastInterationSore: Int
+  isInteractionNote: Boolean
   clientNoteClientIdId: ID
   clientNoteOwnerIdId: ID
 }
@@ -495,6 +514,9 @@ input CreateClientNoteInput {
 input UpdateClientNoteInput {
   id: ID!
   content: String
+  title: String
+  lastInterationSore: Int
+  isInteractionNote: Boolean
   clientNoteClientIdId: ID
   clientNoteOwnerIdId: ID
 }
@@ -505,6 +527,9 @@ input DeleteClientNoteInput {
 
 input ModelClientNoteConditionInput {
   content: ModelStringInput
+  title: ModelStringInput
+  lastInterationSore: ModelIntInput
+  isInteractionNote: ModelBooleanInput
   and: [ModelClientNoteConditionInput]
   or: [ModelClientNoteConditionInput]
   not: ModelClientNoteConditionInput
