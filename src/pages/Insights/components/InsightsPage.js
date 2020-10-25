@@ -4,6 +4,9 @@
 
 import React from "react";
 import { useHistory } from "react-router-dom";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import { listClientsDash } from "graphql/queries";
 import { Row } from "antd";
 import InsightsOverallScore from "./InsightsOverallScore";
 import InsightsMood from "./InsightsMood";
@@ -19,11 +22,16 @@ import {
 } from "common";
 import { StyledSmileIcon } from "./styles";
 import { iconSmile, iconSmileDown } from "media/svg";
-import { mockData, clientNames } from "utils";
+import { mockData, clientNames, CURRENT_USER } from "utils";
 import { PAGE_TITLE } from "../constants";
 import "./styles.css";
 
 const InsightsPage = () => {
+  const { loading, data, error } = useQuery(gql(listClientsDash), {
+    filter: {
+      contactId: CURRENT_USER,
+    },
+  });
   let history = useHistory();
 
   const clientTop = mockData[0];
@@ -67,19 +75,19 @@ const InsightsPage = () => {
         </CardWrap>
         <div style={{ marginBottom: 15 }}>
           {HigherScoreHeader}
-          <ClientCard cardAction={handleCardClick} {...clientTop} />
+          <ClientCard onNameClick={handleCardClick} {...clientTop} />
         </div>
         <div style={{ marginBottom: 15 }}>
           {LowestScoreHeader}
-          <ClientCard cardAction={handleCardClick} {...clientLow} />
+          <ClientCard onNameClick={handleCardClick} {...clientLow} />
         </div>
-        <CardContainer height={440} width={312}>
+        <CardContainer height={440} width={335} className="strategy-metrica">
           <InsightsStrategy />
         </CardContainer>
         <CardWrap height={440} className="insights-moods">
           <InsightsMood clients={clientNames} />
         </CardWrap>
-        <CardContainer heigth={328} width={400}>
+        <CardContainer heigth={328} width={400} className="quater-moods">
           <InsightsQuater />
         </CardContainer>
       </Row>

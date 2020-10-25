@@ -3,8 +3,8 @@
 */
 
 import React from "react";
-import NavBar from "common/NavBar";
-import NavDropdown from "common/NavDropdown";
+import NavBar from "common/components/NavBar";
+import NavDropdown from "common/components/NavDropdown";
 import logoEmpava from "media/landing/logo-empava.png";
 import "./styles.css";
 

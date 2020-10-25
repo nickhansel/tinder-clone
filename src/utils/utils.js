@@ -24,7 +24,7 @@ const filterHelper = (data, moods) => {
   const dataCopy = [...data];
 
   const filtered = dataCopy.filter((clientItem) => {
-    return moods.includes(clientItem.status);
+    return moods.includes(clientItem.avatarId);
   });
 
   return filtered;
@@ -42,7 +42,7 @@ export const filterDataByMood = (data, moodId) => {
         "happyGirl",
       ]);
     case "attention":
-      return filterHelper(data, ["curiousBoy", "curiousBoy"]);
+      return filterHelper(data, ["curiousGirl", "curiousBoy"]);
     case "cold":
       return filterHelper(data, ["indiffBoy", "indiffGirl"]);
     case "risk":
@@ -92,6 +92,7 @@ Calculate the displayed length for the health meter health score
 export const getHealthLen = (healthScore) => {
   const code = getHealthCode(healthScore);
   const len = {
+    top: "100%",
     high: "95%",
     mid: "70%",
     low: "35%",
@@ -104,6 +105,8 @@ export const getHealthLen = (healthScore) => {
 Calculate the code for the health based on health score
 */
 export const getHealthCode = (healthScore) => {
+  if (healthScore === 5) return "top";
+
   let healthCode = "high";
 
   if (healthScore < 4 && healthScore >= 3) {
@@ -133,4 +136,9 @@ export const generateId = () => {
 export const getAvg = (data) => {
   const total = data.reduce((acc, c) => acc + c, 0);
   return Math.floor(total / data.length);
+};
+
+export const getIdFromLocation = (location) => {
+  const reg = "[^/]+$";
+  return location.pathname.match(reg)[0];
 };

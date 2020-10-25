@@ -4,7 +4,7 @@
 
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import JSignOut from "../../auth/SignOut";
+// import JSignOut from "../../../auth/SignOut";
 import { SearchInput, SubH1, Profile, Flex } from "common";
 import {
   ContentContainer,

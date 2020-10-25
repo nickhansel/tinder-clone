@@ -16,7 +16,7 @@ export const MoodFilterContainer = styled.div`
   justify-content: space-between;
   min-width: 330px;
   padding-left: ${spacing.lg};
-  width: 50%;
+  width: 30%;
 
   button {
     border: none;

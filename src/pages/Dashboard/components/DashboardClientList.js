@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { Row } from "antd";
 import { ClientCard } from "common";
-import DashboardClientModal from "./DashboardClientModal";
+import ClientStrategyModal from "./ClientStrategyModal";
 import DashboardRateModal from "./DashboardRateModal";
 
 const DashboardClientList = ({ data, minVal, maxVal, history }) => {
@@ -22,22 +22,21 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   };
   const handleRateToggle = (state) => {
     toggleRateModal(state);
-  }
+  };
 
   return (
     <>
       <Row justify="center">
-        {data &&
-          data.length > 0 &&
+        {data.length > 0 &&
           data
             .slice(minVal, maxVal)
             .map((client, index) => (
               <ClientCard
                 key={index}
                 {...client}
-                avatarAction={handleRateToggle}
-                cardAction={handleCardClick}
-                infoAction={handleBadgeToggle}
+                onAvatarClick={handleRateToggle}
+                onNameClick={handleCardClick}
+                onBadgeClick={handleBadgeToggle}
               />
             ))}
       </Row>
@@ -45,7 +44,7 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
         handleToggle={handleRateToggle}
         isRateModal={isRateModal}
       />
-      <DashboardClientModal
+      <ClientStrategyModal
         data={data}
         handleToggle={handleBadgeToggle}
         isBadgeModal={isBadgeModal}

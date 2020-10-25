@@ -39,8 +39,10 @@ export const onCreateTeam = /* GraphQL */ `
       account {
         items {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -73,8 +75,10 @@ export const onUpdateTeam = /* GraphQL */ `
       account {
         items {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -107,8 +111,10 @@ export const onDeleteTeam = /* GraphQL */ `
       account {
         items {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -158,11 +164,11 @@ export const onCreateUser = /* GraphQL */ `
       clients {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -173,6 +179,9 @@ export const onCreateUser = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
@@ -219,11 +228,11 @@ export const onUpdateUser = /* GraphQL */ `
       clients {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -234,6 +243,9 @@ export const onUpdateUser = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
@@ -280,11 +292,11 @@ export const onDeleteUser = /* GraphQL */ `
       clients {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -295,6 +307,9 @@ export const onDeleteUser = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
@@ -333,16 +348,18 @@ export const onCreateAccount = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      companyName
+      name
       renewalDate
+      contract
+      healthScore
       accountMembers {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -371,16 +388,18 @@ export const onUpdateAccount = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      companyName
+      name
       renewalDate
+      contract
+      healthScore
       accountMembers {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -409,16 +428,18 @@ export const onDeleteAccount = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      companyName
+      name
       renewalDate
+      contract
+      healthScore
       accountMembers {
         items {
           id
+          isDecisionMaker
           avatarId
           salesforceId
           name
           position
-          healthScore
           lastContact
           createdAt
           updatedAt
@@ -443,8 +464,10 @@ export const onCreateClient = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        companyName
+        name
         renewalDate
+        contract
+        healthScore
         accountMembers {
           nextToken
         }
@@ -481,11 +504,15 @@ export const onCreateClient = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
         nextToken
       }
+      isDecisionMaker
       avatarId
       salesforceId
       name
@@ -501,7 +528,6 @@ export const onCreateClient = /* GraphQL */ `
         nextToken
       }
       position
-      healthScore
       lastContact
       createdAt
       updatedAt
@@ -521,8 +547,10 @@ export const onUpdateClient = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        companyName
+        name
         renewalDate
+        contract
+        healthScore
         accountMembers {
           nextToken
         }
@@ -559,11 +587,15 @@ export const onUpdateClient = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
         nextToken
       }
+      isDecisionMaker
       avatarId
       salesforceId
       name
@@ -579,7 +611,6 @@ export const onUpdateClient = /* GraphQL */ `
         nextToken
       }
       position
-      healthScore
       lastContact
       createdAt
       updatedAt
@@ -599,8 +630,10 @@ export const onDeleteClient = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        companyName
+        name
         renewalDate
+        contract
+        healthScore
         accountMembers {
           nextToken
         }
@@ -637,11 +670,15 @@ export const onDeleteClient = /* GraphQL */ `
         items {
           id
           content
+          title
+          lastInterationSore
+          isInteractionNote
           createdAt
           updatedAt
         }
         nextToken
       }
+      isDecisionMaker
       avatarId
       salesforceId
       name
@@ -657,7 +694,6 @@ export const onDeleteClient = /* GraphQL */ `
         nextToken
       }
       position
-      healthScore
       lastContact
       createdAt
       updatedAt
@@ -672,8 +708,10 @@ export const onCreateClientNote = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -690,6 +728,7 @@ export const onCreateClientNote = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -697,7 +736,6 @@ export const onCreateClientNote = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -729,6 +767,9 @@ export const onCreateClientNote = /* GraphQL */ `
         updatedAt
       }
       content
+      title
+      lastInterationSore
+      isInteractionNote
       createdAt
       updatedAt
     }
@@ -742,8 +783,10 @@ export const onUpdateClientNote = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -760,6 +803,7 @@ export const onUpdateClientNote = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -767,7 +811,6 @@ export const onUpdateClientNote = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -799,6 +842,9 @@ export const onUpdateClientNote = /* GraphQL */ `
         updatedAt
       }
       content
+      title
+      lastInterationSore
+      isInteractionNote
       createdAt
       updatedAt
     }
@@ -812,8 +858,10 @@ export const onDeleteClientNote = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -830,6 +878,7 @@ export const onDeleteClientNote = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -837,7 +886,6 @@ export const onDeleteClientNote = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -869,6 +917,9 @@ export const onDeleteClientNote = /* GraphQL */ `
         updatedAt
       }
       content
+      title
+      lastInterationSore
+      isInteractionNote
       createdAt
       updatedAt
     }
@@ -883,8 +934,10 @@ export const onCreateStrategy = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -901,6 +954,7 @@ export const onCreateStrategy = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -908,7 +962,6 @@ export const onCreateStrategy = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -955,8 +1008,10 @@ export const onUpdateStrategy = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -973,6 +1028,7 @@ export const onUpdateStrategy = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -980,7 +1036,6 @@ export const onUpdateStrategy = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt
@@ -1027,8 +1082,10 @@ export const onDeleteStrategy = /* GraphQL */ `
         id
         accountId {
           id
-          companyName
+          name
           renewalDate
+          contract
+          healthScore
           createdAt
           updatedAt
         }
@@ -1045,6 +1102,7 @@ export const onDeleteStrategy = /* GraphQL */ `
         noteId {
           nextToken
         }
+        isDecisionMaker
         avatarId
         salesforceId
         name
@@ -1052,7 +1110,6 @@ export const onDeleteStrategy = /* GraphQL */ `
           nextToken
         }
         position
-        healthScore
         lastContact
         createdAt
         updatedAt

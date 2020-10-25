@@ -3,9 +3,13 @@ import { MoodFilterContainer, MoodFilterWrapper } from "./styles";
 import { MOOD_FILTER } from "../constants";
 import { Note1 } from "common";
 
-const MoodFilter = ({ setMoodId, setClientData, clientsData }) => {
+const MoodFilter = ({ setMoodId, setFiltering, clientsData }) => {
   const handleMoodClick = (moodId) => {
+    setFiltering(true);
     setMoodId(moodId);
+    setTimeout(function() {
+      setFiltering(false);
+    }, 500);
   };
 
   const filterButton = ({ id, name }) => (

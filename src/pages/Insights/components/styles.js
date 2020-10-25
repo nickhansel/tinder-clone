@@ -25,7 +25,8 @@ export const StyledSmileIcon = styled.div`
 export const ButtonCharts = styled.button`
   background-color: white;
   border-radius: 12px;
-  border: 1px solid black;
+  border: 1px solid #82add7;
+  color: #82add7;
   height: 24px;
   margin-left: 15px;
   outline: none;
