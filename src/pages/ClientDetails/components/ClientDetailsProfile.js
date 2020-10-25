@@ -25,13 +25,13 @@ const ClientProfile = ({
   position,
   accountId: { name: company, healthScore, contract },
   contactId: { id },
-  status,
+  avatarId,
   strategy: { items: strategyItems },
   renewalDate,
   mood,
 }) => {
   const [isBadgeModal, toggleBadgeModal] = useState(false);
-  const clientMood = mockMoods[status]; // TODO change to real data
+  const clientMood = mockMoods[avatarId]; // TODO change to real data
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "icon",
     drop: () => ({

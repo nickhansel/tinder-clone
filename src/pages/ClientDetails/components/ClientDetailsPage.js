@@ -24,6 +24,8 @@ const NOTES_EACH_PAGE = 4;
 
 const ClientDetailsPage = ({ history, location }) => {
   const slectedClient = getIdFromLocation(location);
+  console.log("slectedClient");
+  console.log(slectedClient);
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: {
       id: slectedClient,
@@ -38,7 +40,10 @@ const ClientDetailsPage = ({ history, location }) => {
       clientId: slectedClient,
     },
   });
-
+  console.log("client data");
+  console.log(data);
+  console.log("notesData");
+  console.log(notesData);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
   const [page, setPage] = useState(1);
@@ -64,7 +69,7 @@ const ClientDetailsPage = ({ history, location }) => {
 
   // Props
   const layoutProps = {
-    title: `${accountId.name} - ${name}`,
+    title: accountId ? `${accountId.name} - ${name}` : "",
     prefix: <img src={iconBack} alt="" />,
   };
 
@@ -89,7 +94,7 @@ const ClientDetailsPage = ({ history, location }) => {
       notesData: notesData.listClientNotes.items,
       minVal,
       maxVal,
-      authorName: contactId.name,
+      authorName: contactId ? contactId.name : "",
     };
     const paginationProps = {
       current: page,
@@ -109,7 +114,7 @@ const ClientDetailsPage = ({ history, location }) => {
             </CardWrap>
             <CardWrap height={320} className="details-card details-touch">
               <ClientDetailsTouchPoints
-                authorName={contactId.name}
+                authorName={contactId ? contactId.name : ""}
                 touchPoints={touchPoints}
               />
             </CardWrap>

@@ -22,6 +22,7 @@ import iconTrash from "./icon-trash.svg";
 import iconSmileDown from "./icon-smile-down.svg";
 import iconSmile from "./icon-smile.svg";
 import iconUp from "./icon-up.svg";
+import iconStarMaker from "./icon-star-maker.svg";
 import iconStar from "./icon-star.svg";
 
 export {
@@ -49,5 +50,6 @@ export {
   iconTrash,
   iconSmile,
   iconUp,
+  iconStarMaker,
   iconStar,
 };

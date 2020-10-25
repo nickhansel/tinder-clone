@@ -10,8 +10,6 @@ const ClientStrategyModal = ({
   handleToggle,
   isBadgeModal,
 }) => {
-  console.log("selectedClientId");
-  console.log(selectedClientId);
   const { loading, data, error } = useQuery(gql(listClientStrategys), {
     filter: {
       clientId: selectedClientId,
@@ -20,8 +18,6 @@ const ClientStrategyModal = ({
 
   const isLoading = loading || error;
   const clientStrategys = !isLoading ? data.listStrategys.items : [];
-  console.log("data client");
-  console.log(data);
 
   const renderNotes = clientStrategys.map((item) => {
     return (

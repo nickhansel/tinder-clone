@@ -12,17 +12,18 @@ import { mainColors, mockMoods } from "utils";
 
 const ClientCard = ({
   id,
-  activity,
+  isDecisionMaker,
+  avatarId,
   accountId: { name: company, healthScore },
   onNameClick,
   onAvatarClick,
   onBadgeClick,
   name: clientName,
+  lastContact,
   position,
   strategy: { items: strategyItems },
-  status,
 }) => {
-  const clientMood = mockMoods[status];
+  const clientMood = mockMoods[avatarId];
   const renderBadges = strategyItems.map((strategyItem, index) => (
     <Badge key={index} strategy={strategyItem.badgeName} />
   ));
@@ -32,6 +33,7 @@ const ClientCard = ({
     mood: clientMood,
     mode: "croped",
     onAvatarClick,
+    isDecisionMaker,
   };
   if (onNameClick) {
     avatarProps.onClick = () => onNameClick(id);
@@ -52,7 +54,7 @@ const ClientCard = ({
       <Note2>
         {position} at <BoldStyled>{company}</BoldStyled>
       </Note2>
-      <Note2 {...noteProps}>{activity}</Note2>
+      <Note2 {...noteProps}>{lastContact}</Note2>
       <DividerStyled />
       <ContainerFlex>
         <HealthButton healthScore={parseFloat(healthScore)} />
@@ -63,11 +65,9 @@ const ClientCard = ({
 };
 
 ClientCard.propTypes = {
-  clientName: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
-  company: PropTypes.string.isRequired,
-  health: PropTypes.number.isRequired,
-  activity: PropTypes.string.isRequired,
+  accountId: PropTypes.object.isRequired,
   strategyItems: PropTypes.array,
   onNameClick: PropTypes.func,
   onBadgeClick: PropTypes.func,

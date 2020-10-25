@@ -53,7 +53,7 @@ type Client {
   name: String!
   strategy(filter: ModelStrategyFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStrategyConnection
   position: String
-  lastContact: Int
+  lastContact: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -439,7 +439,7 @@ input ModelClientFilterInput {
   salesforceId: ModelIDInput
   name: ModelStringInput
   position: ModelStringInput
-  lastContact: ModelIntInput
+  lastContact: ModelStringInput
   and: [ModelClientFilterInput]
   or: [ModelClientFilterInput]
   not: ModelClientFilterInput
@@ -452,7 +452,7 @@ input CreateClientInput {
   salesforceId: ID
   name: String!
   position: String
-  lastContact: Int
+  lastContact: String
   clientAccountIdId: ID
   clientContactIdId: ID
 }
@@ -464,7 +464,7 @@ input UpdateClientInput {
   salesforceId: ID
   name: String
   position: String
-  lastContact: Int
+  lastContact: String
   clientAccountIdId: ID
   clientContactIdId: ID
 }
@@ -479,7 +479,7 @@ input ModelClientConditionInput {
   salesforceId: ModelIDInput
   name: ModelStringInput
   position: ModelStringInput
-  lastContact: ModelIntInput
+  lastContact: ModelStringInput
   and: [ModelClientConditionInput]
   or: [ModelClientConditionInput]
   not: ModelClientConditionInput

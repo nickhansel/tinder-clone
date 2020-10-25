@@ -1,223 +1,239 @@
 export const mockData = [
   {
-    id: 1,
+    id: "12can1",
     name: "Jenn Janson",
     position: "VP of Makreting",
-    company: "RGC",
+    accountId: { name: "RGC", healthScore: 4.1 },
     activity: "Last response a week ago",
-    status: "happyBoy",
-    health: 4.5,
-    strategy: [],
+    avatarId: "happyGirl",
+    strategy: { items: [] },
     renewalDate: "12/10/2020",
+    isDecisionMaker: true,
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 2,
     name: "Alex Abrams",
     position: "Marketing Manager",
-    company: "AirNinja",
+    accountId: { name: "AirNinja", healthScore: 4.7 },
     activity: "New email",
-    status: "champBoy",
-    health: 5,
-    strategy: [],
+    avatarId: "champBoy",
+    strategy: { items: [] },
     renewalDate: "02/10/2021",
+    isDecisionMaker: true,
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 3,
     name: "Tom Tollins",
-    position: "Position",
-    company: "AirNinja",
+    position: "Marketing Executive",
+    accountId: { name: "Looking Glass", healthScore: 2.4 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "sadBoy",
-    health: 2,
-    strategy: [
-      {
-        name: "attention",
-        title: "Extra Attention",
-        text: `Alex is not getting full use out of our platform and seems confused by certain features. 
+    avatarId: "sadBoy",
+    strategy: {
+      items: [
+        {
+          badgeName: "attention",
+          title: "Extra Attention",
+          content: `Alex is not getting full use out of our platform and seems confused by certain features. 
     I will make a point to reach out weekly 
     with tips and strateges relevent to AirNinja’s 
     needs to provide more tangible value.`,
-      },
-      {
-        name: "bug",
-        title: "Bug - Add User Issue",
-        text: `Alex is not able to add his Team Member Alison to our
+        },
+        {
+          badgeName: "bug",
+          title: "Bug - Add User Issue",
+          content: `Alex is not able to add his Team Member Alison to our
          platform. This is disapointing becasue he is trying to 
          increase adoption internally at Airninja but is enoutering a 
          bug on our end preventing this. He says Alison is not recieving 
          the confirmation email. I will follow up with the support team
           to get this resolved. `,
-      },
-    ],
+        },
+      ],
+    },
     renewalDate: "12/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
-    id: 4,
-    name: "Tyler Middleton",
-    position: "Position",
-    company: "RGC",
-    activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "impatientGirl",
-    health: 2.4,
-    strategy: [
-      {
-        name: "attention",
-        title: "Extra Attention",
-        text: `Alex is not getting full use out of our platform and seems confused by certain features. 
+    id: "9can1",
+    name: "Emma Jones",
+    position: "General Manager",
+    accountId: { name: "Walk About", healthScore: 4.8, contract: 1100 },
+    isDecisionMaker: true,
+    avatarId: "champGirl",
+    strategy: {
+      items: [
+        {
+          badgeName: "attention",
+          title: "Extra Attention",
+          content: `Alex is not getting full use out of our platform and seems confused by certain features. 
     I will make a point to reach out weekly 
     with tips and strateges relevent to AirNinja’s 
     needs to provide more tangible value.`,
-      },
-    ],
+        },
+      ],
+    },
     renewalDate: "12/20/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 5,
-    name: "Rick Mighty",
-    position: "Marketing Manager",
-    company: "RGC",
-    activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "sadBoy",
-    health: 2.4,
-    strategy: [
-      {
-        name: "bug",
-        title: "Bug - Add User Issue",
-        text: `Alex is not able to add his Team Member Alison to our
+    name: "Mike Toulliver",
+    position: "VP of Sales",
+    accountId: { name: "Pear", healthScore: 2.8, contract: 21100 },
+    avatarId: "indiffBoy",
+    strategy: {
+      items: [
+        {
+          badgeName: "bug",
+          title: "Bug - Add User Issue",
+          content: `Alex is not able to add his Team Member Alison to our
        platform. This is disapointing becasue he is trying to 
        increase adoption internally at Airninja but is enoutering a 
        bug on our end preventing this. He says Alison is not recieving 
        the confirmation email. I will follow up with the support team
         to get this resolved. `,
-      },
-    ],
+        },
+      ],
+    },
     renewalDate: "11/18/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 6,
-    name: "Anne Nicely",
-    position: "Head of Sales",
-    company: "Walk About",
+    name: "Ben Holloway",
+    position: "Director of PR",
+    accountId: { name: "SendDoc", healthScore: 4.3, contract: 3300 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "happyGirl",
-    health: 4.5,
-    strategy: [],
+    avatarId: "happyGirl",
+    strategy: { items: [] },
     renewalDate: "12/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 7,
-    name: "Alex Stevenson",
-    position: "General Manager",
-    company: "Walk About",
+    name: "Grace Gathers",
+    position: "Region Assistant Manager",
+    accountId: { name: "Jumpr", healthScore: 3.2, contract: 7300 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "champGirl",
-    health: 5,
-    strategy: [],
+    avatarId: "impatientGirl",
+    strategy: { items: [] },
     renewalDate: "12/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 8,
-    name: "Mark Roberts",
-    position: "Marketing Executive",
-    company: "Looking Glass",
+    name: "Vanessa Aubrey",
+    position: "Communication Manager",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "curiousGirl",
-    health: 3,
-    strategy: [],
+    avatarId: "curiousGirl",
+    strategy: { items: [] },
     renewalDate: "12/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 9,
     name: "Tale Storm",
     position: "Manager",
-    company: "Slack",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "Last response today",
-    status: "happyBoy",
+    avatarId: "happyBoy",
     health: 4.3,
-    strategy: [],
+    strategy: { items: [] },
     renewalDate: "12/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 10,
     name: "Emma Jones",
     position: "General Manager",
-    company: "Walk About",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "New email",
-    status: "champGirl",
+    avatarId: "champGirl",
     health: 4.9,
-    strategy: [],
+    strategy: { items: [] },
     renewalDate: "12/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 11,
     name: "Vanessa Aubrey",
     position: "Communication Manager",
-    company: "BlockFlow",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "impatientGirl",
+    avatarId: "impatientGirl",
     health: 1.9,
-    strategy: [
-      {
-        name: "escalation",
-        title: "Escalate - Add User Issue",
-        text: `Alex is not able to add his Team Member Alison to our
+    strategy: {
+      items: [
+        {
+          badgeName: "escalation",
+          title: "Escalate - Add User Issue",
+          content: `Alex is not able to add his Team Member Alison to our
        platform. This is disapointing becasue he is trying to 
        increase adoption internally at Airninja but is enoutering a 
        bug on our end preventing this.`,
-      },
-      {
-        name: "contact",
-        title: "Add New Contact",
-        text: `Alex is not able to add his Team Member Alison to our
+        },
+        {
+          badgeName: "contact",
+          title: "Add New Contact",
+          content: `Alex is not able to add his Team Member Alison to our
        platform. This is disapointing becasue he is trying to 
   `,
-      },
-    ],
+        },
+      ],
+    },
     renewalDate: "12/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 12,
     name: "Tyler Middleton",
     position: "Position",
-    company: "Facebook",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "sadBoy",
+    avatarId: "sadBoy",
     health: 3.1,
-    strategy: [],
+    strategy: { items: [] },
     renewalDate: "11/10/2020",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 13,
     name: "Rick Mighty",
     position: "Position",
-    company: "Facebook",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "indiffBoy",
+    avatarId: "indiffBoy",
     health: 3.2,
-    strategy: [],
+    strategy: { items: [] },
     renewalDate: "12/10/2021",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 14,
     name: "Grace Gathers",
     position: "Region Assistant Manager",
-    company: "Jumpr",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "Last activity is at 9:23PM on 24/08/2020",
-    status: "indiffBoy",
+    avatarId: "indiffBoy",
     health: 4.2,
-    strategy: [],
+    strategy: { items: [] },
     renewalDate: "05/20/2021",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
     id: 15,
     name: "Ben Holloway",
     position: "Director of PR",
-    company: "SendDoc",
+    accountId: { name: "BlockFlow", healthScore: 3.9, contract: 9000 },
     activity: "...",
-    status: "happyBoy",
+    avatarId: "happyBoy",
     health: 4.2,
-    strategy: [],
+    strategy: { items: [] },
     renewalDate: "04/10/2021",
+    lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
 ];
 
