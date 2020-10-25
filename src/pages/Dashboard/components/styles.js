@@ -3,6 +3,7 @@
  */
 
 import Modal from "antd/lib/modal/Modal";
+import { Flex } from "common";
 import styled from "styled-components";
 import { mainColors, spacing } from "utils";
 
@@ -47,6 +48,8 @@ export const YellowBox = styled.div`
   }
 `;
 
+/* Styles for DashboardRateModal */
+
 export const FlexRate = styled.div`
   display: flex;
   flex-direction: column;
@@ -58,6 +61,30 @@ export const FlexRate = styled.div`
 
   div img:last-child {
     margin-right: 0;
+  }
+`;
+
+export const FlexRateWord = styled(Flex)`
+  margin: 25px 120px 50px;
+
+  justify-content: space-between;
+`;
+
+export const TextArea = styled.div`
+  display: flex;
+  justify-content: center;
+
+
+  textarea {
+    resize: none;
+    padding-left: 17px;
+    padding-top: 20px;
+    width: 643px;
+    height: 128px;
+    color: #081a2b;
+    border: 1px #CCCFD1 solid;
+    border-radius: 10px;
+    outline: none;
   }
 `;
 
