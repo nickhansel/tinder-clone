@@ -4,10 +4,12 @@ import iconAdd from "./icon-add.svg";
 import iconAttention from "./icon-attention.svg";
 import iconBack from "./icon-back.svg";
 import iconBug from "./icon-bug.svg";
+import iconCalendar from "./icon-calendar.svg";
 import iconCustom from "./icon-custom.svg";
 import iconDown from "./icon-down.svg";
 import iconEdit from "./icon-edit.svg";
 import iconEscalate from "./icon-escalation.svg";
+import iconFilter from "./icon-filter.svg";
 import iconGear from "./icon-gear.svg";
 import iconHealth from "./icon-health.svg";
 import iconLogo from "./icon-logo.svg";
@@ -22,6 +24,7 @@ import iconTrash from "./icon-trash.svg";
 import iconSmileDown from "./icon-smile-down.svg";
 import iconSmile from "./icon-smile.svg";
 import iconUp from "./icon-up.svg";
+import iconSort from "./icon-sort.svg";
 import iconStarMaker from "./icon-star-maker.svg";
 import iconStar from "./icon-star.svg";
 
@@ -32,11 +35,13 @@ export {
   iconAttention,
   iconBack,
   iconBug,
+  iconCalendar,
   iconCustom,
   iconSmileDown,
   iconDown,
   iconEdit,
   iconEscalate,
+  iconFilter,
   iconGear,
   iconHealth,
   iconLogo,
@@ -50,6 +55,7 @@ export {
   iconTrash,
   iconSmile,
   iconUp,
+  iconSort,
   iconStarMaker,
   iconStar,
 };

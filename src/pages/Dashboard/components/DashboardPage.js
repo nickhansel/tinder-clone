@@ -5,32 +5,47 @@
 import React, { useState } from "react";
 import { Pagination } from "antd";
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { listClientsDash } from "graphql/queries";
 import DashboardClientList from "./DashboardClientList";
 import MoodFilter from "./DashboardMoodFilter";
-import { Layout, Note2, Flex } from "common";
+import { Layout, Note2, Flex, Note2Grey, Loading } from "common";
 import { YellowBox } from "./styles";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
 import "./styles.css";
 import { mockData, filterDataByMood, CURRENT_USER } from "utils";
+import { iconFilter, iconSort, iconCalendar } from "media/svg";
 
 const DashboardPage = ({ history }) => {
+  const [moodId, setMoodId] = useState("all");
+  const [filtering, setFiltering] = useState(false);
+  const [page, setPage] = useState(1);
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+
   const { loading, data, error } = useQuery(gql(listClientsDash), {
     filter: {
       contactId: CURRENT_USER,
     },
   });
 
-  const isLoaded = !loading && !error;
-  const clientsData = isLoaded ? data.listClients.items : [];
-  const totalClients = clientsData.length;
-  const [moodId, setMoodId] = useState("all");
-  const [page, setPage] = useState(1);
-  const [minVal, setMinVal] = useState(0);
-  const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+  if (loading) {
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    );
+  }
 
-  const moodFilter = <MoodFilter setMoodId={setMoodId} data={[]} />;
+  const isLoaded = !loading && !error;
+  const clientsData = isLoaded
+    ? filterDataByMood(data.listClients.items, moodId)
+    : [];
+  const totalClients = clientsData.length;
+
+  const moodFilter = (
+    <MoodFilter setMoodId={setMoodId} setFiltering={setFiltering} />
+  );
 
   const onChange = (page) => {
     // Pagination
@@ -54,15 +69,37 @@ const DashboardPage = ({ history }) => {
     total: totalClients,
   };
 
+  const renderClients = filtering ? (
+    <div style={{ marginTop: 200 }}>
+      <Loading />
+    </div>
+  ) : (
+    <DashboardClientList {...cardListProps} />
+  );
+
   return (
     <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
-      <Flex style={{ justifyContent: "flex-end" }}>
+      <Flex style={{ justifyContent: "space-between" }}>
+        <Flex style={{ width: 375, justifyContent: "space-evenly" }}>
+          <Flex>
+            <img src={iconCalendar} alt="" />
+            <Note2Grey>Renewal Date</Note2Grey>
+          </Flex>
+          <Flex>
+            <img src={iconSort} alt="" />
+            <Note2Grey>Sort By</Note2Grey>
+          </Flex>
+          <Flex>
+            <img src={iconFilter} alt="" />
+            <Note2Grey>Filters</Note2Grey>
+          </Flex>
+        </Flex>
         <Pagination style={{ marginLeft: 20 }} {...paginationProps} />
       </Flex>
       <YellowBox>
         <div></div>
       </YellowBox>
-      <DashboardClientList {...cardListProps} />
+      {renderClients}
     </Layout>
   );
 };

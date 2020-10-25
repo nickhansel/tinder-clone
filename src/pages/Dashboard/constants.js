@@ -12,7 +12,7 @@ export const MOOD_FILTER = [
     name: "Champion",
   },
   {
-    id: "sad",
+    id: "attention",
     name: "Need Attention",
   },
   {

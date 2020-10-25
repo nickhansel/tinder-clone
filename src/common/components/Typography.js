@@ -98,3 +98,9 @@ export const Note2 = styled.p`
   line-height: 20px;
   margin-bottom: 5px;
 `;
+export const Note2Grey = styled(Note2)`
+  color: ${mainColors.grey3};
+  margin-top: 6px;
+  margin-bottom: 0;
+  margin-left: 4px;
+`;

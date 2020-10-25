@@ -24,7 +24,7 @@ const filterHelper = (data, moods) => {
   const dataCopy = [...data];
 
   const filtered = dataCopy.filter((clientItem) => {
-    return moods.includes(clientItem.status);
+    return moods.includes(clientItem.avatarId);
   });
 
   return filtered;
@@ -42,7 +42,7 @@ export const filterDataByMood = (data, moodId) => {
         "happyGirl",
       ]);
     case "attention":
-      return filterHelper(data, ["curiousBoy", "curiousBoy"]);
+      return filterHelper(data, ["curiousGirl", "curiousBoy"]);
     case "cold":
       return filterHelper(data, ["indiffBoy", "indiffGirl"]);
     case "risk":
