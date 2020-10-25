@@ -4,7 +4,8 @@ import { Modal, Button } from "antd";
 import { Flex } from "common";
 import { css } from "styled-components";
 import { iconStar } from "media/svg";
-import { ImageRate, FlexRate } from "./styles";
+import { ImageRate, FlexRate, FlexRateWord, TextArea } from "./styles";
+import "./styles.css";
 
 const DashboardRateModal = ({
   isRateModal,
@@ -14,6 +15,7 @@ const DashboardRateModal = ({
     <Modal
       visible={isRateModal}
       title="How was your last conversation with Alex?"
+      className="modal__title"
       width={772}
       closable={false}
       onCancel={() => handleToggle(false)}
@@ -37,13 +39,16 @@ const DashboardRateModal = ({
               <img src={iconStar} alt="Star" />
             </div>
           </FlexRate>
-          <Flex style={{ justifyContent: "space-around" }} >
+          <FlexRateWord>
             <div>Very bad</div>
             <div>Very good</div>
-          </Flex>
+          </FlexRateWord>
         </div>
         <form>
-          <textarea placeholder="Add a note about your last meeting"></textarea>
+          <TextArea>
+            <textarea placeholder="Add a note about your last meeting"></textarea>
+          </TextArea>
+
         </form>
       </div>
     </Modal>
