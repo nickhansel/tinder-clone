@@ -10,20 +10,25 @@ import { iconTrash } from "media/svg";
 
 const { Paragraph } = Typography;
 
-const Note = ({ type, authorName, note, deleteNote, height }) => {
+const Note = ({ type, deleting, authorName, note, deleteNote, height }) => {
   const [noteText, setNoteText] = useState(note.content || note.description);
   const [isSpinning, toggleSpinning] = useState(false);
 
-  // rerender text when note updated
-  // useEffect(() => {
-  //   setNoteText(note.text);
-  // }, [note]);
+  useEffect(() => {
+    setNoteText(note.content || note.description);
+  }, [note]);
 
-  // Delete on confirm
+  // Delete on
   function confirm(e) {
     deleteNote(note.id);
-    message.success("Deleted");
-    toggleSpinning(false);
+
+    // give time for a note to delete
+    setTimeout(function() {
+      if (!deleting) {
+        message.success("Deleted");
+        toggleSpinning(false);
+      }
+    }, 1000);
   }
 
   function cancel(e) {

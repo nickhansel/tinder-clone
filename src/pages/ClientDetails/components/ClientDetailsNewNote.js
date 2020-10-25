@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { createClientNote } from "graphql/mutations";
 import { listClientNotesDetails } from "graphql/queries";
 import { Modal, Form, Input, Button, message } from "antd";
@@ -28,10 +28,7 @@ const ClientDetailsNewNote = ({
             id,
           },
         });
-        console.log(data);
         const { items } = data.listClientNotes;
-        console.log("items");
-        console.log(items);
 
         cache.writeQuery({
           query: gql(listClientNotesDetails),

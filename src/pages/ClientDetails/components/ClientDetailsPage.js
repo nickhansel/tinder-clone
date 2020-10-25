@@ -59,7 +59,7 @@ const ClientDetailsPage = ({ history, location }) => {
 
   const isLoaded = !loading && !error;
   const clientData = isLoaded && data ? data.getClient : {};
-  const { accountId, name } = clientData;
+  const { accountId, name, contactId } = clientData;
   const totalNotes = 0 || notesData.listClientNotes.items.length;
 
   // Props
@@ -85,10 +85,11 @@ const ClientDetailsPage = ({ history, location }) => {
     };
     const noteListProps = {
       noteProps,
+      slectedClient,
       notesData: notesData.listClientNotes.items,
       minVal,
       maxVal,
-      authorName: "Blake", // TODO get user
+      authorName: contactId.name,
     };
     const paginationProps = {
       current: page,
@@ -108,7 +109,7 @@ const ClientDetailsPage = ({ history, location }) => {
             </CardWrap>
             <CardWrap height={320} className="details-card details-touch">
               <ClientDetailsTouchPoints
-                authorName={"Blake"} // TODO get user
+                authorName={contactId.name}
                 touchPoints={touchPoints}
               />
             </CardWrap>

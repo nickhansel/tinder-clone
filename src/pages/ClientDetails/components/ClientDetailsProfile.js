@@ -2,11 +2,9 @@
    Client Profile
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import { Row, Divider } from "antd";
-import HealthMeter from "./HealthMeter";
-import ProfileSection from "./ProfileSection";
 import {
   AvatarContainer,
   SubH1,
@@ -16,6 +14,9 @@ import {
   Badge,
   DividerStyled,
 } from "common";
+import HealthMeter from "./HealthMeter";
+import ProfileSection from "./ProfileSection";
+import ClientStrategyModal from "pages/Dashboard/components/ClientStrategyModal";
 import { mockMoods } from "utils/mock";
 import { iconMenu } from "media/svg";
 
@@ -23,11 +24,13 @@ const ClientProfile = ({
   name,
   position,
   accountId: { name: company, healthScore, contract },
+  contactId: { id },
   status,
   strategy: { items: strategyItems },
   renewalDate,
   mood,
 }) => {
+  const [isBadgeModal, toggleBadgeModal] = useState(false);
   const clientMood = mockMoods[status]; // TODO change to real data
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "icon",
@@ -42,6 +45,7 @@ const ClientProfile = ({
   });
   const isActive = canDrop && isOver;
 
+  // Components render
   const renderBadges = strategyItems.map((item, index) => (
     <Badge key={index} strategy={item.badgeName} />
   ));
@@ -85,8 +89,13 @@ const ClientProfile = ({
           <ProfileSection header={sectionHeader} content={[]} />
         </Row>
         <DividerStyled />
-        <Row>{renderBadges}</Row>
+        <Row onClick={() => toggleBadgeModal(true)}>{renderBadges}</Row>
       </div>
+      <ClientStrategyModal
+        handleToggle={toggleBadgeModal}
+        isBadgeModal={isBadgeModal}
+        selectedClientId={id}
+      />
     </Row>
   );
 };

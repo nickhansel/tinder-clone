@@ -45,7 +45,7 @@ type Client @model {
   name: String!
   strategy: [Strategy] @connection(name: "ClientStrategy")
   position: String
-  lastContact: Int
+  lastContact: String
 }
 
 type ClientNote @model {

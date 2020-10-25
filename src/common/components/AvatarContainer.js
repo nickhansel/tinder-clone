@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { AvatarStyled } from "./styles";
 import { greyBg } from "media/images";
 
-const AvatarContainer = ({ mood, avatarAction, mode = "croped" }) => {
+const AvatarContainer = ({ mood, onAvatarClick, mode = "croped" }) => {
   const size = {
     full: 289,
     croped: 249,
@@ -11,7 +11,7 @@ const AvatarContainer = ({ mood, avatarAction, mode = "croped" }) => {
 
   return (
     <AvatarStyled
-      onClick={avatarAction}
+      onClick={onAvatarClick}
       style={{ height: size[mode], width: 230 }}
     >
       <img src={mood || greyBg} alt="" />

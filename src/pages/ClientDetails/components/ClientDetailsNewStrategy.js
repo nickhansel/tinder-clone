@@ -120,7 +120,6 @@ const ClientDetailsNewStrategy = ({
       >
         <TextArea />
       </Form.Item>
-      {/* <Form.Item {...tailLayout}></Form.Item> */}
     </Form>
   );
 
