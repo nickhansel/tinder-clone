@@ -11,7 +11,7 @@ import { iconTrash } from "media/svg";
 const { Paragraph } = Typography;
 
 const Note = ({ type, authorName, note, deleteNote, height }) => {
-  const [noteText, setNoteText] = useState(note.description);
+  const [noteText, setNoteText] = useState(note.content || note.description);
   const [isSpinning, toggleSpinning] = useState(false);
 
   // rerender text when note updated
@@ -19,8 +19,9 @@ const Note = ({ type, authorName, note, deleteNote, height }) => {
   //   setNoteText(note.text);
   // }, [note]);
 
+  // Delete on confirm
   function confirm(e) {
-    // TODO delete note
+    deleteNote(note.id);
     message.success("Deleted");
     toggleSpinning(false);
   }
@@ -47,7 +48,7 @@ const Note = ({ type, authorName, note, deleteNote, height }) => {
   const Section = (
     <div>
       <Paragraph {...paragraphProps} editable={{ onChange: setNoteText }}>
-        {note.content}
+        {noteText}
       </Paragraph>
     </div>
   );

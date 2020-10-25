@@ -547,6 +547,33 @@ export const listClientNotes = /* GraphQL */ `
     }
   }
 `;
+export const listClientNotesDetails = /* GraphQL */ `
+  query ListClientNotes(
+    $filter: ModelClientNoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClientNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        clientId {
+          id
+        }
+        ownerId {
+          id
+          name
+        }
+        content
+        title
+        lastInterationSore
+        isInteractionNote
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getStrategy = /* GraphQL */ `
   query GetStrategy($id: ID!) {
     getStrategy(id: $id) {

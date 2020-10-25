@@ -3,7 +3,9 @@
  */
 
 import React from "react";
-// import { deleteNote } from "../reducers/clientDetailsSlice";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+import { deleteClientNote } from "graphql/mutations";
 import { Note, CardWrap } from "common";
 
 const ClientDetailsNotesList = ({
@@ -13,6 +15,20 @@ const ClientDetailsNotesList = ({
   maxVal,
   authorName,
 }) => {
+  const [deleteNote] = useMutation(gql(deleteClientNote));
+
+  // Business logic
+  const handleDeleteNote = (noteId) => {
+    deleteNote({
+      variables: {
+        input: {
+          id: noteId,
+        },
+      },
+      // update: updateCache,
+    });
+  };
+
   return (
     <>
       {notesData &&
@@ -22,7 +38,7 @@ const ClientDetailsNotesList = ({
             <Note
               authorName={authorName}
               note={note}
-              deleteNote={() => console.log("delete")}
+              deleteNote={handleDeleteNote}
             />
           </CardWrap>
         ))}

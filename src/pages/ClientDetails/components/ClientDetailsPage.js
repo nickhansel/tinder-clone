@@ -6,7 +6,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { getClient } from "graphql/queries";
+import { getClient, listClientNotesDetails } from "graphql/queries";
 import { Row, Pagination, Tooltip } from "antd";
 import ClientDetailsNewNote from "./ClientDetailsNewNote";
 import ClientDetailsNewStrategy from "./ClientDetailsNewStrategy";
@@ -29,6 +29,15 @@ const ClientDetailsPage = ({ history, location }) => {
       id: slectedClient,
     },
   });
+  const {
+    loading: notesLoading,
+    data: notesData,
+    error: notesError,
+  } = useQuery(gql(listClientNotesDetails), {
+    filter: {
+      clientId: slectedClient,
+    },
+  });
 
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
@@ -40,7 +49,7 @@ const ClientDetailsPage = ({ history, location }) => {
   // Get client from db in future
   const [touchPoints, setPoints] = useState(touchPointsMock);
 
-  if (loading) {
+  if (loading || notesLoading) {
     return (
       <Layout>
         <Loading />
@@ -50,12 +59,8 @@ const ClientDetailsPage = ({ history, location }) => {
 
   const isLoaded = !loading && !error;
   const clientData = isLoaded && data ? data.getClient : {};
-  const {
-    accountId,
-    name,
-    noteId: { items: noteItems },
-  } = clientData;
-  const totalNotes = noteItems.length;
+  const { accountId, name } = clientData;
+  const totalNotes = 0 || notesData.listClientNotes.items.length;
 
   // Props
   const layoutProps = {
@@ -80,7 +85,7 @@ const ClientDetailsPage = ({ history, location }) => {
     };
     const noteListProps = {
       noteProps,
-      notesData: noteItems,
+      notesData: notesData.listClientNotes.items,
       minVal,
       maxVal,
       authorName: "Blake", // TODO get user
@@ -133,6 +138,7 @@ const ClientDetailsPage = ({ history, location }) => {
           </Row>
         </Row>
         <ClientDetailsNewNote
+          client={clientData}
           isNewNoteModal={isNewNoteModal}
           handleToggle={() => toggleNewNoteModal(false)}
         />

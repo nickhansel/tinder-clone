@@ -180,16 +180,13 @@
 }
 @media screen and (min-width: 1400px) {
   .details-touch {
-    width: 450px;
-  }
-  .details-toolbox {
-    width: 240px;
+    width: 460px;
   }
   .details-note {
-    width: 612px;
+    width: 570px;
   }
   .details-pagination {
-    width: 1221px;
+    width: 1200px;
   }
 }
 @media screen and(min-width: 1500px) {
@@ -208,9 +205,9 @@
     width: 600px;
   }
   .details-note {
-    width: 678px;
+    width: 656px;
   }
   .details-pagination {
-    width: 1367px;
+    width: 1323px;
   }
 }
