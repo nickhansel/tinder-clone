@@ -2,6 +2,7 @@
    styled components for Dashboard page
  */
 
+import Modal from "antd/lib/modal/Modal";
 import styled from "styled-components";
 import { mainColors, spacing } from "utils";
 
@@ -45,3 +46,18 @@ export const YellowBox = styled.div`
     width: 30px;
   }
 `;
+
+export const FlexRate = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  div img {
+    margin-right: 60px;
+  }
+
+  div img:last-child {
+    margin-right: 0;
+  }
+`;
+
