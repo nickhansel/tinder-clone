@@ -55,7 +55,7 @@ const ClientDetailsToolbox = ({ handleToggle, setSelectedStrategy }) => {
         {renderActionIcon("contact", iconNewContact, CONTACT)}
         {renderActionIcon("escalation", iconEscalate, ESCALATION)}
         {renderActionIcon("feature", iconNewFeature, FEATURE)}
-        {renderActionIcon("add", iconCustom, CUSTOM)}
+        {renderActionIcon("custom", iconCustom, CUSTOM)}
       </div>
     </div>
   );

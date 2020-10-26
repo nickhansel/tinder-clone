@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Tooltip } from "antd";
 import { AvatarStyled } from "./styles";
 import { greyBg } from "media/images";
 import { iconStarMaker } from "media/svg";
@@ -17,17 +18,19 @@ const AvatarContainer = ({
 
   const extraImg = isDecisionMaker ? (
     <div style={{ position: "relative" }}>
-      <img
-        style={{
-          height: 32,
-          left: 188,
-          position: "absolute",
-          top: 5,
-          width: 32,
-        }}
-        src={iconStarMaker}
-        alt=""
-      />
+      <Tooltip title="Decision Maker" placement="topLeft">
+        <img
+          style={{
+            height: 32,
+            left: 188,
+            position: "absolute",
+            top: 5,
+            width: 32,
+          }}
+          src={iconStarMaker}
+          alt=""
+        />
+      </Tooltip>
     </div>
   ) : null;
 

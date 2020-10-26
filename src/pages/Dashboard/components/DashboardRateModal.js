@@ -7,10 +7,7 @@ import { iconStar } from "media/svg";
 import { ImageRate, FlexRate, FlexRateWord, TextArea } from "./styles";
 import "./styles.css";
 
-const DashboardRateModal = ({
-  isRateModal,
-  handleToggle,
-}) => {
+const DashboardRateModal = ({ isRateModal, handleToggle }) => {
   return (
     <Modal
       visible={isRateModal}
@@ -20,9 +17,7 @@ const DashboardRateModal = ({
       closable={false}
       onCancel={() => handleToggle(false)}
       footer={[
-        <Button onClick={() => handleToggle(false)}>
-          Skip
-        </Button>,
+        <Button onClick={() => handleToggle(false)}>Skip</Button>,
         <Button key="back" onClick={() => handleToggle(false)}>
           Send Rating
         </Button>,
@@ -48,7 +43,6 @@ const DashboardRateModal = ({
           <TextArea>
             <textarea placeholder="Add a note about your last meeting"></textarea>
           </TextArea>
-
         </form>
       </div>
     </Modal>
