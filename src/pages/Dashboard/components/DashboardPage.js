@@ -10,7 +10,6 @@ import { listClientsDash } from "graphql/queries";
 import DashboardClientList from "./DashboardClientList";
 import MoodFilter from "./DashboardMoodFilter";
 import { Layout, Note2, Flex, Note2Grey, Loading } from "common";
-import { YellowBox } from "./styles";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
 import "./styles.css";
 import { mockData, filterDataByMood, CURRENT_USER } from "utils";
@@ -98,9 +97,6 @@ const DashboardPage = ({ history }) => {
         </Flex>
         <Pagination style={{ marginLeft: 20 }} {...paginationProps} />
       </Flex>
-      <YellowBox>
-        <div></div>
-      </YellowBox>
       {renderClients}
     </Layout>
   );
