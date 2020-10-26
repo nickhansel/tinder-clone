@@ -4,6 +4,7 @@
 
 import styled from "styled-components";
 import { Row } from "antd";
+import { Flex } from "common";
 
 export const ClientProfileStyled = styled.div`
   display: flex;
@@ -23,4 +24,12 @@ export const AvatarContainer = styled.div`
 export const RowPagination = styled(Row)`
   margin-top: 10px;
   justify-content: space-between;
+`;
+
+export const FlexNewNoteForm = styled(Flex)`
+  justify-content: flex-end;
+
+  .ant-form {
+    flex-basis: 500px;
+  }
 `;

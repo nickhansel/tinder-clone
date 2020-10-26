@@ -74,7 +74,6 @@
   line-height: 47px;
 }
 
-
 .modal__title .ant-modal-header {
   border-bottom: none;
 }
@@ -94,6 +93,7 @@
   margin: 0;
   padding-bottom: 35px;
   border: none;
+}
 
 /* modal client strategys */
 .modal-client-startegys .ant-modal-footer {
