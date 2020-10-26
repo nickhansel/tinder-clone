@@ -58,15 +58,6 @@ export const ClientCardStyled = styled.div`
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.008), 0 12.5px 10px rgba(0, 0, 0, 0.02),
     0 5px 10px rgba(0, 0, 0, 0.042);
-
-  @media (min-width: 1274px) {
-    margin: 15px 10px 10px;
-    width: 264px;
-  }
-  @media (min-width: 1400px) {
-    margin: 15px 18px 18px;
-    width: 290px;
-  }
 `;
 
 export const BoldStyled = styled.span`

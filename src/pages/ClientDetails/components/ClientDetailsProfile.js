@@ -23,11 +23,10 @@ import { iconMenu } from "media/svg";
 const ClientProfile = ({
   name,
   position,
-  accountId: { name: company, healthScore, contract },
+  accountId: { name: company, healthScore, contract, renewalDate },
   contactId: { id },
   avatarId,
   strategy: { items: strategyItems },
-  renewalDate,
   mood,
 }) => {
   const [isBadgeModal, toggleBadgeModal] = useState(false);

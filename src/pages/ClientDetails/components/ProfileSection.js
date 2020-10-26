@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { DividerStyled, SpaceBetween } from "common";
+import { SpaceBetween } from "common";
 
 const ProfileSection = ({ header, content, extra }) => {
   const renderContent = (
