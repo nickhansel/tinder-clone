@@ -4,7 +4,8 @@
 }
 
 .details-card {
-  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034), 0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
     0 5px 10px rgba(0, 0, 0, 0.032);
   margin: 15px 8px 10px;
 }
@@ -34,7 +35,8 @@
 }
 
 .details-note {
-  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034), 0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
     0 5px 10px rgba(0, 0, 0, 0.032);
   width: 554px;
 }
@@ -208,43 +210,4 @@
   .details-pagination {
     width: 1323px;
   }
-}
-
-/* ClientDetailsNewNote form */
-
-.modal__newnote .ant-modal-body {
-  padding-bottom: 0 !important;
-}
-
-.modal__newnote .ant-modal-header,
-.modal__newnote .ant-modal-footer {
-  border: none;
-}
-
-.modal__newnote .ant-form-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.modal__newnote .ant-form-item-label {
-  align-self: flex-start;
-}
-
-.form__newnote label {
-  color: #828282 !important;
-}
-
-.form__newnote textarea,
-.form__newnote input {
-  border-radius: 8px;
-}
-
-.form__newnote textarea {
-  resize: none;
-  height: 130px !important;
-}
-
-.modal__newnote .ant-modal-footer {
-  display: flex;
-  justify-content: space-evenly;
 }
