@@ -5,6 +5,7 @@ import iconAttention from "./icon-attention.svg";
 import iconBack from "./icon-back.svg";
 import iconBug from "./icon-bug.svg";
 import iconCalendar from "./icon-calendar.svg";
+import iconCrown from "./icon-crown.svg";
 import iconCustom from "./icon-custom.svg";
 import iconDown from "./icon-down.svg";
 import iconEdit from "./icon-edit.svg";
@@ -36,6 +37,7 @@ export {
   iconBack,
   iconBug,
   iconCalendar,
+  iconCrown,
   iconCustom,
   iconSmileDown,
   iconDown,
