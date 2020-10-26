@@ -6,6 +6,9 @@ import { createClientNote } from "graphql/mutations";
 import { getClient } from "graphql/queries";
 import { Modal, Form, Input, Button, message } from "antd";
 import { generateId } from "utils";
+import { ButtonCancel, ButtonConfirm } from "common";
+import "./styles.css";
+import { FlexNewNoteForm } from "./styles";
 
 const { TextArea } = Input;
 
@@ -72,6 +75,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       {...layout}
       form={form}
       name="basic"
+      className="form__newnote"
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -90,11 +94,6 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       >
         <TextArea />
       </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
     </Form>
   );
 
@@ -102,14 +101,27 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     <Modal
       visible={isNewNoteModal}
       title="Add Note"
+      width={700}
+      className="modal__newnote"
       onCancel={() => handleToggle()}
       footer={[
-        <Button key="back" onClick={() => handleToggle()}>
+        <ButtonCancel
+          key="back"
+          onClick={() => handleToggle()}
+        >
           Cancel
-        </Button>,
+        </ButtonCancel>,
+        <ButtonConfirm
+          form="form-new-note"
+          key="submit"
+          htmlType="submit"
+          type="primary"
+        >
+          Save
+      </ButtonConfirm>
       ]}
     >
-      <div>{renderForm}</div>
+      <FlexNewNoteForm>{renderForm}</FlexNewNoteForm>
     </Modal>
   );
 };
