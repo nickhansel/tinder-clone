@@ -13,9 +13,11 @@ const ClientStrategyModal = ({
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: { id: selectedClientId },
   });
-
+  console.log("selectedClientId");
+  console.log(selectedClientId);
   const isLoading = loading || error;
-  const clientStrategys = !isLoading ? data.getClient.strategy.items : [];
+  const clientStrategys =
+    !isLoading && data.getClient ? data.getClient.strategy.items : [];
 
   const renderNotes = loading ? (
     <Loading />

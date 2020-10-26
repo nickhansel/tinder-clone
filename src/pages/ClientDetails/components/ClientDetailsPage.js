@@ -30,15 +30,6 @@ const ClientDetailsPage = ({ history, location }) => {
       id: slectedClient,
     },
   });
-  const {
-    loading: notesLoading,
-    data: notesData,
-    error: notesError,
-  } = useQuery(gql(listClientNotesDetails), {
-    filter: {
-      clientId: slectedClient,
-    },
-  });
 
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
@@ -50,7 +41,7 @@ const ClientDetailsPage = ({ history, location }) => {
   // Get client from db in future
   const [touchPoints, setPoints] = useState(touchPointsMock);
 
-  if (loading || notesLoading) {
+  if (loading) {
     return (
       <Layout>
         <div style={{ marginTop: 200 }}>
@@ -62,8 +53,13 @@ const ClientDetailsPage = ({ history, location }) => {
 
   const isLoaded = !loading && !error;
   const clientData = isLoaded && data ? data.getClient : {};
-  const { accountId, name, contactId } = clientData;
-  const totalNotes = 0 || notesData.listClientNotes.items.length;
+  const {
+    accountId,
+    name,
+    contactId,
+    noteId: { items: notesData },
+  } = clientData;
+  const totalNotes = 0 || notesData.length;
 
   // Props
   const layoutProps = {
@@ -95,7 +91,7 @@ const ClientDetailsPage = ({ history, location }) => {
     const noteListProps = {
       noteProps,
       slectedClient,
-      notesData: notesData.listClientNotes.items,
+      notesData: notesData,
       minVal,
       maxVal,
       authorName: contactId ? contactId.name : "",
