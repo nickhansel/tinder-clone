@@ -15,6 +15,8 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     accountId: { name: companyName },
     contactId,
   } = client;
+  const [form] = Form.useForm();
+
   const [addClientNote, { loading: creating, error }] = useMutation(
     gql(createClientNote),
     {
@@ -51,6 +53,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     });
 
     message.success("Note created");
+    form.resetFields();
     handleToggle();
   };
   const onFinishFailed = (errorInfo) => {
@@ -67,6 +70,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
   const renderForm = (
     <Form
       {...layout}
+      form={form}
       name="basic"
       initialValues={{ remember: true }}
       onFinish={onFinish}

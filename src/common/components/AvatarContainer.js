@@ -7,7 +7,6 @@ import { iconStarMaker, iconCrown } from "media/svg";
 
 const AvatarContainer = ({
   mood,
-  onAvatarClick,
   mode = "croped",
   isDecisionMaker,
   isChamp,
@@ -49,10 +48,7 @@ const AvatarContainer = ({
   ) : null;
 
   return (
-    <AvatarStyled
-      onClick={onAvatarClick}
-      style={{ height: size[mode], width: 230 }}
-    >
+    <AvatarStyled style={{ height: size[mode], width: 230 }}>
       <div style={{ position: "relative" }}>
         {champIcon}
         {decisionMakerIcon}

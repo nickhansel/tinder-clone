@@ -2,7 +2,6 @@
    styled components for Dashboard page
  */
 
-import Modal from "antd/lib/modal/Modal";
 import { Flex } from "common";
 import styled from "styled-components";
 import { mainColors, spacing } from "utils";
@@ -65,7 +64,7 @@ export const FlexRate = styled.div`
 `;
 
 export const FlexRateWord = styled(Flex)`
-  margin: 25px 120px 50px;
+  margin: 15px 120px 30px;
 
   justify-content: space-between;
 `;

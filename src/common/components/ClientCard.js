@@ -16,7 +16,6 @@ const ClientCard = ({
   avatarId,
   accountId: { name: company, healthScore },
   onNameClick,
-  onAvatarClick,
   onBadgeClick,
   name: clientName,
   lastContact,
@@ -34,12 +33,11 @@ const ClientCard = ({
   const avatarProps = {
     mood: clientMood,
     mode: "croped",
-    onAvatarClick,
     isDecisionMaker,
     isChamp,
   };
   if (onNameClick) {
-    avatarProps.onClick = () => onNameClick(id);
+    avatarProps.onClick = () => onNameClick(id, clientName);
   }
   const noteProps = {
     style: { color: mainColors.grey2 },

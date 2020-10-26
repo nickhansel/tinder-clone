@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { createStrategy } from "graphql/mutations";
 import { getClient } from "graphql/queries";
-import { Modal, Row, Form, Input, Button, Divider, Col, message } from "antd";
+import { Modal, Row, Form, Input, Divider, Col, message } from "antd";
 import {
   TextInfo,
   Flex,
@@ -39,6 +39,8 @@ const ClientDetailsNewStrategy = ({
   isNewStrategyModal,
   handleToggle,
 }) => {
+  const [form] = Form.useForm();
+
   const [addStrategy, { loading: creating, error }] = useMutation(
     gql(createStrategy),
     {
@@ -85,6 +87,7 @@ const ClientDetailsNewStrategy = ({
       },
     });
     message.success("Strategy created");
+    form.resetFields();
     handleToggle(false);
   };
   const onFinishFailed = (errorInfo) => {
@@ -99,6 +102,7 @@ const ClientDetailsNewStrategy = ({
     <Form
       id="form-new-strategy"
       {...formStyle}
+      form={form}
       name="new-strategy"
       className="details-new-strategy-form"
       initialValues={{ remember: true }}
