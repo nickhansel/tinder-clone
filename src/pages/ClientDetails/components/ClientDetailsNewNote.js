@@ -6,6 +6,7 @@ import { createClientNote } from "graphql/mutations";
 import { getClient } from "graphql/queries";
 import { Modal, Form, Input, Button, message } from "antd";
 import { generateId } from "utils";
+import { ButtonCancel, ButtonConfirm } from "common";
 import "./styles.css";
 import { FlexNewNoteForm } from "./styles";
 
@@ -74,7 +75,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       {...layout}
       form={form}
       name="basic"
-      className="input__newnote"
+      className="form__newnote"
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -104,34 +105,20 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       className="modal__newnote"
       onCancel={() => handleToggle()}
       footer={[
-        <Button
-          style={{
-            marginBottom: 20,
-            backgroundColor: "#FFFF",
-            borderRadius: 8,
-            border: "1px solid #14709F",
-            color: "#14709F",
-            width: 100,
-          }}
+        <ButtonCancel
           key="back"
           onClick={() => handleToggle()}
         >
           Cancel
-        </Button>,
-        <Button
+        </ButtonCancel>,
+        <ButtonConfirm
           form="form-new-note"
           key="submit"
           htmlType="submit"
           type="primary"
-          style={{
-            backgroundColor: "#14709F",
-            borderRadius: 8,
-            marginBottom: 20,
-            width: 100,
-          }}
         >
           Save
-      </Button>
+      </ButtonConfirm>
       ]}
     >
       <FlexNewNoteForm>{renderForm}</FlexNewNoteForm>

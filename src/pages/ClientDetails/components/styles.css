@@ -230,16 +230,16 @@
   align-self: flex-start;
 }
 
-.input__newnote label {
+.form__newnote label {
   color: #828282 !important;
 }
 
-.input__newnote textarea,
-.input__newnote input {
+.form__newnote textarea,
+.form__newnote input {
   border-radius: 8px;
 }
 
-.input__newnote textarea {
+.form__newnote textarea {
   resize: none;
   height: 130px !important;
 }
