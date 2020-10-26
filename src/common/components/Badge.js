@@ -11,6 +11,7 @@ import {
   iconAdd,
 } from "media/svg";
 import { BudgeStyled } from "./styles";
+import { capitalizeFirstLetter } from "utils";
 
 const statusData = {
   attention: iconAttention,
@@ -36,7 +37,7 @@ const Badge = ({ strategy, size }) => {
 
   return (
     <BudgeStyled style={style}>
-      <Tooltip title={strategy.toUpperCase()}>
+      <Tooltip title={capitalizeFirstLetter(strategy)}>
         <img src={statusData[strategy]} alt="health score" />
       </Tooltip>
     </BudgeStyled>
