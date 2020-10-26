@@ -87,12 +87,14 @@ export const ButtonHealthStyled = styled.button`
   color: ${mainColors.white};
   display: inline-block;
   font-size: 12px;
+  padding-right: 5px;
   height: 32px;
   width: 64px;
 
   img {
     display: inline-block;
     padding-right: 12px;
+    padding-bottom: 3px;
     vertical-align: middle;
   }
   :focus {
@@ -108,7 +110,7 @@ export const ContainerFlex = styled.div`
 
 export const DividerStyled = styled(Divider)`
   margin: 10px 0;
-  border-top: 1.5px solid rgba(0, 0, 0, 0.07);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 export const SearchInputStyled = styled.div`
