@@ -32,7 +32,9 @@ const DashboardPage = ({ history }) => {
   if (loading) {
     return (
       <Layout>
-        <Loading />
+        <div style={{ marginTop: 200 }}>
+          <Loading />
+        </div>
       </Layout>
     );
   }

@@ -1,26 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "antd";
-import { Flex } from "common";
+import { Flex, ButtonConfirm, ButtonCancel } from "common";
 import { css } from "styled-components";
 import { iconStar } from "media/svg";
 import { ImageRate, FlexRate, FlexRateWord, TextArea } from "./styles";
 import "./styles.css";
+
+const BUTTON_WIDTH = 190;
 
 const DashboardRateModal = ({ isRateModal, handleToggle }) => {
   return (
     <Modal
       visible={isRateModal}
       title="How was your last conversation with Alex?"
-      className="modal__title"
+      className="modal__rate"
       width={772}
       closable={false}
       onCancel={() => handleToggle(false)}
       footer={[
-        <Button onClick={() => handleToggle(false)}>Skip</Button>,
-        <Button key="back" onClick={() => handleToggle(false)}>
+        <ButtonCancel
+          style={{ width: BUTTON_WIDTH }}
+          onClick={() => handleToggle(false)}
+        >
+          Skip
+        </ButtonCancel>,
+        <ButtonConfirm
+          style={{ width: BUTTON_WIDTH }}
+          key="back"
+          onClick={() => handleToggle(false)}
+        >
           Send Rating
-        </Button>,
+        </ButtonConfirm>,
       ]}
     >
       <div>

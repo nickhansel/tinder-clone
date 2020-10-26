@@ -1,7 +1,7 @@
 /*
    Client Page
  */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import gql from "graphql-tag";
@@ -18,14 +18,13 @@ import { Layout, Note2, H3, CardWrap, Loading } from "common";
 import { RowPagination } from "./styles";
 import { iconBack, iconAddCircle } from "media/svg";
 import "./styles.css";
-import { mockData, notesMock, touchPointsMock, getIdFromLocation } from "utils";
+import { touchPointsMock, getIdFromLocation } from "utils";
 
 const NOTES_EACH_PAGE = 4;
 
 const ClientDetailsPage = ({ history, location }) => {
   const slectedClient = getIdFromLocation(location);
-  console.log("slectedClient");
-  console.log(slectedClient);
+
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: {
       id: slectedClient,
@@ -40,10 +39,7 @@ const ClientDetailsPage = ({ history, location }) => {
       clientId: slectedClient,
     },
   });
-  console.log("client data");
-  console.log(data);
-  console.log("notesData");
-  console.log(notesData);
+
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
   const [page, setPage] = useState(1);
@@ -57,7 +53,9 @@ const ClientDetailsPage = ({ history, location }) => {
   if (loading || notesLoading) {
     return (
       <Layout>
-        <Loading />
+        <div style={{ marginTop: 200 }}>
+          <Loading />
+        </div>
       </Layout>
     );
   }

@@ -36,7 +36,7 @@ const ClientStrategyModal = ({
 
   return (
     <Modal
-      className="modal-client-startegys"
+      className="modal__client-startegys"
       visible={isBadgeModal}
       title="Notes"
       onCancel={() => handleToggle(false, null)}

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { createStrategy } from "graphql/mutations";
 import { getClient } from "graphql/queries";
 import { Modal, Row, Form, Input, Button, Divider, Col, message } from "antd";
@@ -12,6 +12,8 @@ import {
   Note1Grey,
   Note2,
   StrategyIcons,
+  ButtonConfirm,
+  ButtonCancel,
 } from "common";
 import { BADGES, mainColors, generateId } from "utils";
 import { STRATEGY_MESSAGES } from "../constants";
@@ -25,9 +27,6 @@ const formStyle = {
   wrapperCol: { span: 22 },
   layout: "vertical",
 };
-// const tailLayout = {
-//   wrapperCol: { offset: 0, span: 22 },
-// };
 
 const ClientDetailsNewStrategy = ({
   client: {
@@ -173,33 +172,18 @@ const ClientDetailsNewStrategy = ({
       title={modalTitle}
       onCancel={() => handleToggle(false)}
       footer={[
-        <Button
-          style={{
-            backgroundColor: "#FFFF",
-            borderRadius: 8,
-            border: "1px solid #14709F",
-            color: "#14709F",
-            width: 100,
-          }}
-          key="back"
-          onClick={() => handleToggle(false)}
-        >
+        <ButtonCancel key="back" onClick={() => handleToggle(false)}>
           Cancel
-        </Button>,
-        <Button
+        </ButtonCancel>,
+        <ButtonConfirm
           form="form-new-strategy"
           key="submit"
           htmlType="submit"
           type="primary"
-          style={{
-            backgroundColor: "#14709F",
-            borderRadius: 8,
-            marginLeft: 164,
-            width: 100,
-          }}
+          style={{ marginLeft: 140 }}
         >
           Confirm
-        </Button>,
+        </ButtonConfirm>,
       ]}
     >
       <Flex>
