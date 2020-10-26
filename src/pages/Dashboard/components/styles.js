@@ -74,17 +74,15 @@ export const TextArea = styled.div`
   display: flex;
   justify-content: center;
 
-
   textarea {
     resize: none;
     padding-left: 17px;
     padding-top: 20px;
-    width: 643px;
+    width: 543px;
     height: 128px;
     color: #081a2b;
-    border: 1px #CCCFD1 solid;
+    border: 1px #cccfd1 solid;
     border-radius: 10px;
     outline: none;
   }
 `;
-

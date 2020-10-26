@@ -15,7 +15,7 @@ const DashboardRateModal = ({ isRateModal, handleToggle }) => {
       visible={isRateModal}
       title="How was your last conversation with Alex?"
       className="modal__rate"
-      width={772}
+      width={682}
       closable={false}
       onCancel={() => handleToggle(false)}
       footer={[

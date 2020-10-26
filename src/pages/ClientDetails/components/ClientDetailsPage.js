@@ -67,7 +67,13 @@ const ClientDetailsPage = ({ history, location }) => {
 
   // Props
   const layoutProps = {
-    title: accountId ? `${accountId.name} - ${name}` : "",
+    title: accountId ? (
+      <span>
+        <b style={{ color: "#0E3860" }}>{accountId.name}</b> - {name}
+      </span>
+    ) : (
+      ""
+    ),
     prefix: <img src={iconBack} alt="" />,
   };
 

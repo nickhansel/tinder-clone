@@ -58,7 +58,7 @@ const InsightsOverallScore = () => {
           <SubH1>Overall Clients Health Score</SubH1>
           <BoldStyled>Total Clients: {total}</BoldStyled>
           <br />
-          <BoldStyled>Average Score: {average}</BoldStyled>
+          <BoldStyled>Average Score: {average}.0</BoldStyled>
         </div>
         <Flex>
           <ButtonCharts>Quater</ButtonCharts>

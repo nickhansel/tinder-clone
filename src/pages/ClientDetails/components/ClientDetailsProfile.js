@@ -78,7 +78,9 @@ const ClientProfile = ({
           header={<SubH1>{name}</SubH1>}
           content={[
             <Note1Grey>{position}</Note1Grey>,
-            <Note2>{company}</Note2>,
+            <Note2>
+              <b>{company}</b>
+            </Note2>,
           ]}
           extra={<img style={iconProps} src={iconMenu} alt="" />}
         />
