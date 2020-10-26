@@ -34,19 +34,6 @@ export const MoodFilterContainer = styled.div`
   }
 `;
 
-export const YellowBox = styled.div`
-  position: relative;
-
-  div {
-    background-color: #f9cd34;
-    height: 80px;
-    position: absolute;
-    left: -31px;
-    top: 415px;
-    width: 30px;
-  }
-`;
-
 /* Styles for DashboardRateModal */
 
 export const FlexRate = styled.div`
