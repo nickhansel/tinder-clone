@@ -109,7 +109,7 @@ export const getHealthCode = (healthScore) => {
 
   let healthCode = "high";
 
-  if (healthScore < 4 && healthScore >= 3) {
+  if (healthScore < 4 && healthScore >= 2.8) {
     healthCode = "mid";
   }
   if (healthScore < 2.8) {
