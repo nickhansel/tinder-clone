@@ -16,13 +16,14 @@ const ClientCard = ({
   avatarId,
   accountId: { name: company, healthScore },
   onNameClick,
-  onAvatarClick,
   onBadgeClick,
   name: clientName,
   lastContact,
   position,
   strategy: { items: strategyItems },
 }) => {
+  const score = parseFloat(healthScore);
+  const isChamp = score > 4.5;
   const clientMood = mockMoods[avatarId];
   const renderBadges = strategyItems.map((strategyItem, index) => (
     <Badge key={index} strategy={strategyItem.badgeName} />
@@ -32,11 +33,11 @@ const ClientCard = ({
   const avatarProps = {
     mood: clientMood,
     mode: "croped",
-    onAvatarClick,
     isDecisionMaker,
+    isChamp,
   };
   if (onNameClick) {
-    avatarProps.onClick = () => onNameClick(id);
+    avatarProps.onClick = () => onNameClick(id, clientName);
   }
   const noteProps = {
     style: { color: mainColors.grey2 },

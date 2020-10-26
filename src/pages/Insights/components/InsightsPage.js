@@ -34,8 +34,8 @@ const InsightsPage = () => {
   });
   let history = useHistory();
 
-  const clientTop = mockData[0];
-  const clientLow = mockData[3];
+  const clientTop = mockData[3];
+  const clientLow = mockData[2];
 
   const layoutProps = {
     title: PAGE_TITLE,

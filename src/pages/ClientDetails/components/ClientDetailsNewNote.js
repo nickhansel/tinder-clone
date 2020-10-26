@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { createClientNote } from "graphql/mutations";
-import { listClientNotesDetails } from "graphql/queries";
+import { getClient } from "graphql/queries";
 import { Modal, Form, Input, Button, message } from "antd";
 import { generateId } from "utils";
 import "./styles.css";
@@ -11,33 +11,29 @@ import { FlexNewNoteForm } from "./styles";
 
 const { TextArea } = Input;
 
-const ClientDetailsNewNote = ({
-  isNewNoteModal,
-  handleToggle,
-  client: {
+const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
+  const {
     id,
     accountId: { name: companyName },
     contactId,
-  },
-}) => {
+  } = client;
+  const [form] = Form.useForm();
+
   const [addClientNote, { loading: creating, error }] = useMutation(
     gql(createClientNote),
     {
       update(cache, { data: { createClientNote } }) {
-        const data = cache.readQuery({
-          query: gql(listClientNotesDetails),
-          valiables: {
-            id,
-          },
-        });
-        const { items } = data.listClientNotes;
+        const { items } = client.noteId;
 
         cache.writeQuery({
-          query: gql(listClientNotesDetails),
+          query: gql(getClient),
           data: {
-            listClientNotes: {
-              __typename: "ClientNotes",
-              items: [createClientNote].concat(items),
+            __typename: "Client",
+            getClient: {
+              ...client,
+              noteId: {
+                items: [createClientNote].concat(items),
+              },
             },
           },
         });
@@ -59,6 +55,7 @@ const ClientDetailsNewNote = ({
     });
 
     message.success("Note created");
+    form.resetFields();
     handleToggle();
   };
   const onFinishFailed = (errorInfo) => {
@@ -75,6 +72,7 @@ const ClientDetailsNewNote = ({
   const renderForm = (
     <Form
       {...layout}
+      form={form}
       name="basic"
       className="input__newnote"
       initialValues={{ remember: true }}

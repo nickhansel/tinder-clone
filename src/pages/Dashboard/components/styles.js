@@ -2,7 +2,6 @@
    styled components for Dashboard page
  */
 
-import Modal from "antd/lib/modal/Modal";
 import { Flex } from "common";
 import styled from "styled-components";
 import { mainColors, spacing } from "utils";
@@ -65,7 +64,7 @@ export const FlexRate = styled.div`
 `;
 
 export const FlexRateWord = styled(Flex)`
-  margin: 25px 120px 50px;
+  margin: 15px 120px 30px;
 
   justify-content: space-between;
 `;
@@ -74,17 +73,15 @@ export const TextArea = styled.div`
   display: flex;
   justify-content: center;
 
-
   textarea {
     resize: none;
     padding-left: 17px;
     padding-top: 20px;
-    width: 643px;
+    width: 543px;
     height: 128px;
     color: #081a2b;
-    border: 1px #CCCFD1 solid;
+    border: 1px #cccfd1 solid;
     border-radius: 10px;
     outline: none;
   }
 `;
-

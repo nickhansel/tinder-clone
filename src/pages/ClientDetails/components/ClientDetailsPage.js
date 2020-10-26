@@ -1,7 +1,7 @@
 /*
    Client Page
  */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import gql from "graphql-tag";
@@ -18,32 +18,19 @@ import { Layout, Note2, H3, CardWrap, Loading } from "common";
 import { RowPagination } from "./styles";
 import { iconBack, iconAddCircle } from "media/svg";
 import "./styles.css";
-import { mockData, notesMock, touchPointsMock, getIdFromLocation } from "utils";
+import { touchPointsMock, getIdFromLocation } from "utils";
 
 const NOTES_EACH_PAGE = 4;
 
 const ClientDetailsPage = ({ history, location }) => {
   const slectedClient = getIdFromLocation(location);
-  console.log("slectedClient");
-  console.log(slectedClient);
+
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: {
       id: slectedClient,
     },
   });
-  const {
-    loading: notesLoading,
-    data: notesData,
-    error: notesError,
-  } = useQuery(gql(listClientNotesDetails), {
-    filter: {
-      clientId: slectedClient,
-    },
-  });
-  console.log("client data");
-  console.log(data);
-  console.log("notesData");
-  console.log(notesData);
+
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
   const [page, setPage] = useState(1);
@@ -54,22 +41,35 @@ const ClientDetailsPage = ({ history, location }) => {
   // Get client from db in future
   const [touchPoints, setPoints] = useState(touchPointsMock);
 
-  if (loading || notesLoading) {
+  if (loading) {
     return (
       <Layout>
-        <Loading />
+        <div style={{ marginTop: 200 }}>
+          <Loading />
+        </div>
       </Layout>
     );
   }
 
   const isLoaded = !loading && !error;
   const clientData = isLoaded && data ? data.getClient : {};
-  const { accountId, name, contactId } = clientData;
-  const totalNotes = 0 || notesData.listClientNotes.items.length;
+  const {
+    accountId,
+    name,
+    contactId,
+    noteId: { items: notesData },
+  } = clientData;
+  const totalNotes = 0 || notesData.length;
 
   // Props
   const layoutProps = {
-    title: accountId ? `${accountId.name} - ${name}` : "",
+    title: accountId ? (
+      <span>
+        <b style={{ color: "#0E3860" }}>{accountId.name}</b> - {name}
+      </span>
+    ) : (
+      ""
+    ),
     prefix: <img src={iconBack} alt="" />,
   };
 
@@ -91,7 +91,7 @@ const ClientDetailsPage = ({ history, location }) => {
     const noteListProps = {
       noteProps,
       slectedClient,
-      notesData: notesData.listClientNotes.items,
+      notesData: notesData,
       minVal,
       maxVal,
       authorName: contactId ? contactId.name : "",

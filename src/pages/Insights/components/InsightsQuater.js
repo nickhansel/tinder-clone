@@ -50,7 +50,7 @@ const InsightsQuater = ({ clients }) => {
   };
 
   return (
-    <div>
+    <div style={{}}>
       <SubH2 {...titleProps}>Quater Metrics</SubH2>
       {renderMoodList}
     </div>

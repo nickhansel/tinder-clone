@@ -1,54 +1,64 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Modal, Button } from "antd";
-import { Flex } from "common";
-import { css } from "styled-components";
-import { iconStar } from "media/svg";
-import { ImageRate, FlexRate, FlexRateWord, TextArea } from "./styles";
+import { Modal } from "antd";
+import { ButtonConfirm, ButtonCancel, H4, Text } from "common";
+import Rater from "./Rater";
+import { FlexRate, FlexRateWord, TextArea } from "./styles";
 import "./styles.css";
+
+const BUTTON_WIDTH = 140;
 
 const DashboardRateModal = ({
   isRateModal,
   handleToggle,
+  clientName,
+  clientId,
+  history,
 }) => {
+  const handleFinish = () => {
+    history.push(`clients/${clientId}`);
+    handleToggle(false);
+  };
+
+  const textProps = {
+    style: { color: "#4F4F4F" },
+  };
+
   return (
     <Modal
       visible={isRateModal}
-      title="How was your last conversation with Alex?"
-      className="modal__title"
-      width={772}
+      title={<H4>How was your last conversation with {clientName}?</H4>}
+      className="modal__rate"
+      bodyStyle={{ height: 310 }}
+      width={682}
       closable={false}
-      onCancel={() => handleToggle(false)}
       footer={[
-        <Button onClick={() => handleToggle(false)}>
+        <ButtonCancel style={{ width: BUTTON_WIDTH }} onClick={handleFinish}>
           Skip
-        </Button>,
-        <Button key="back" onClick={() => handleToggle(false)}>
+        </ButtonCancel>,
+        <ButtonConfirm
+          style={{ marginLeft: 20, width: BUTTON_WIDTH }}
+          key="back"
+          onClick={handleFinish}
+        >
           Send Rating
-        </Button>,
+        </ButtonConfirm>,
       ]}
     >
       <div>
         <div>
           <FlexRate>
-            <div>
-              <img src={iconStar} alt="Star" />
-              <img src={iconStar} alt="Star" />
-              <img src={iconStar} alt="Star" />
-              <img src={iconStar} alt="Star" />
-              <img src={iconStar} alt="Star" />
-            </div>
+            <Rater />
           </FlexRate>
           <FlexRateWord>
-            <div>Very bad</div>
-            <div>Very good</div>
+            <Text {...textProps}>Very bad</Text>
+            <Text {...textProps}>Very good</Text>
           </FlexRateWord>
         </div>
         <form>
           <TextArea>
             <textarea placeholder="Add a note about your last meeting"></textarea>
           </TextArea>
-
         </form>
       </div>
     </Modal>

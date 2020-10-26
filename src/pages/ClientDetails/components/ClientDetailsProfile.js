@@ -21,13 +21,14 @@ import { mockMoods } from "utils/mock";
 import { iconMenu } from "media/svg";
 
 const ClientProfile = ({
+  id,
   name,
   position,
-  accountId: { name: company, healthScore, contract },
-  contactId: { id },
+  accountId: { name: company, healthScore, contract, renewalDate },
+  contactId: { id: contactId },
+  isDecisionMaker,
   avatarId,
   strategy: { items: strategyItems },
-  renewalDate,
   mood,
 }) => {
   const [isBadgeModal, toggleBadgeModal] = useState(false);
@@ -44,6 +45,9 @@ const ClientProfile = ({
     }),
   });
   const isActive = canDrop && isOver;
+
+  const score = parseFloat(healthScore);
+  const isChamp = score > 4.5;
 
   // Components render
   const renderBadges = strategyItems.map((item, index) => (
@@ -72,14 +76,21 @@ const ClientProfile = ({
   return (
     <Row justify="center">
       <div ref={drop} style={{ opacity: isActive ? 0.5 : 1 }}>
-        <AvatarContainer mood={clientMood} mode="full" />
+        <AvatarContainer
+          isChamp={isChamp}
+          isDecisionMaker={isDecisionMaker}
+          mood={clientMood}
+          mode="full"
+        />
       </div>
       <div className="details-profile-info">
         <ProfileSection
           header={<SubH1>{name}</SubH1>}
           content={[
             <Note1Grey>{position}</Note1Grey>,
-            <Note2>{company}</Note2>,
+            <Note2>
+              <b>{company}</b>
+            </Note2>,
           ]}
           extra={<img style={iconProps} src={iconMenu} alt="" />}
         />

@@ -74,32 +74,37 @@
   line-height: 47px;
 }
 
-.modal__title .ant-modal-header {
+/* modal rate */
+.modal__rate .ant-modal-header {
   border-bottom: none;
 }
 
-.modal__title .ant-modal-header .ant-modal-title {
-  margin-top: 35px;
-  text-align: center;
-  font-size: 30px;
-  font-family: Roboto;
-  font-weight: 500;
-  line-height: 44px;
+.modal__rate .ant-modal-body {
+  padding: 0;
 }
 
-.modal__title .ant-modal-footer {
+.modal__rate .ant-modal-header .ant-modal-title {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.modal__rate .ant-modal-footer {
   display: flex;
   justify-content: center;
   margin: 0;
-  padding-bottom: 35px;
+  padding-bottom: 25px;
   border: none;
 }
 
+.ant-rate-star:not(:last-child) {
+  margin-right: 34px !important;
+}
+
 /* modal client strategys */
-.modal-client-startegys .ant-modal-footer {
+.modal__client-startegys .ant-modal-footer {
   border-top: none !important;
 }
-.modal-client-startegys .ant-modal-body {
+.modal__client-startegys .ant-modal-body {
   padding: 0px 24px;
 }
 

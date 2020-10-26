@@ -650,6 +650,7 @@ export const getStrategy = /* GraphQL */ `
 `;
 export const listClientStrategys = /* GraphQL */ `
   query ListStrategys(
+    $clientId: String
     $filter: ModelStrategyFilterInput
     $limit: Int
     $nextToken: String
@@ -658,6 +659,9 @@ export const listClientStrategys = /* GraphQL */ `
       items {
         id
         badgeName
+        clientId(filter: { id: { eq: $clientId } }) {
+          id
+        }
         ownerId {
           id
           name

@@ -12,16 +12,16 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   const [isBadgeModal, toggleBadgeModal] = useState(false);
   const [isRateModal, toggleRateModal] = useState(false);
   const [selectedClientId, setSelectedClient] = useState(null);
+  const [selectedClientName, setSelectedClientName] = useState(null);
 
-  const handleCardClick = (clientId) => {
-    history.push(`clients/${clientId}`);
-  };
   const handleBadgeToggle = (state, id) => {
     toggleBadgeModal(state);
     setSelectedClient(id);
   };
-  const handleRateToggle = (state) => {
-    toggleRateModal(state);
+  const handleRateToggle = (id, clientName) => {
+    setSelectedClientName(clientName);
+    setSelectedClient(id);
+    toggleRateModal(true);
   };
 
   return (
@@ -34,13 +34,15 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
               <ClientCard
                 key={index}
                 {...client}
-                onAvatarClick={handleRateToggle}
-                onNameClick={handleCardClick}
+                onNameClick={handleRateToggle}
                 onBadgeClick={handleBadgeToggle}
               />
             ))}
       </Row>
       <DashboardRateModal
+        clientName={selectedClientName}
+        clientId={selectedClientId}
+        history={history}
         handleToggle={handleRateToggle}
         isRateModal={isRateModal}
       />
