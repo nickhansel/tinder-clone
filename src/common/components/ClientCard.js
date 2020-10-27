@@ -24,6 +24,7 @@ const ClientCard = ({
 }) => {
   const score = parseFloat(healthScore);
   const isChamp = score > 4.5;
+  const isImpatient = avatarId === "impatientGirl";
   const clientMood = mockMoods[avatarId];
   const renderBadges = strategyItems.map((strategyItem, index) => (
     <Badge key={index} strategy={strategyItem.badgeName} />
@@ -35,6 +36,7 @@ const ClientCard = ({
     mode: "croped",
     isDecisionMaker,
     isChamp,
+    isImpatient
   };
   if (onNameClick) {
     avatarProps.onClick = () => onNameClick(id, clientName);

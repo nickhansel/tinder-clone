@@ -19,6 +19,7 @@ import iconMenu from "./icon-menu.svg";
 import iconNewContact from "./icon-new-contact.svg";
 import iconNewFeature from "./icon-new-feature.svg";
 import iconPulse from "./icon-pulse.svg";
+import iconNewMail from "./icon-new-mail.svg";
 import iconPerson from "./icon-person.svg";
 import iconSearch from "./icon-search.svg";
 import iconTrash from "./icon-trash.svg";
@@ -51,6 +52,7 @@ export {
   iconMenu,
   iconNewContact,
   iconNewFeature,
+  iconNewMail,
   iconPerson,
   iconPulse,
   iconSearch,
