@@ -6,6 +6,8 @@ import { createClientNote } from "graphql/mutations";
 import { getClient } from "graphql/queries";
 import { Modal, Form, Input, Button, message } from "antd";
 import { generateId } from "utils";
+import { ButtonCancel, ButtonConfirm } from "common";
+import "./styles.css";
 
 const { TextArea } = Input;
 
@@ -71,7 +73,10 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     <Form
       {...layout}
       form={form}
+      layout="vertical"
       name="basic"
+      wrapperCol={{ span: 24, offset: 0 }}
+      className="form__newnote"
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -80,6 +85,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
         label="Title"
         name="title"
         rules={[{ required: true, message: "Please input note title" }]}
+        colon={false}
       >
         <Input />
       </Form.Item>
@@ -87,6 +93,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
         label="Note"
         name="note_content"
         rules={[{ required: true, message: "Please note text" }]}
+        colon={false}
       >
         <TextArea />
       </Form.Item>
@@ -102,11 +109,24 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     <Modal
       visible={isNewNoteModal}
       title="Add Note"
-      onCancel={() => handleToggle()}
+      className="modal__newnote"
+      width={644}
+      onCancel={() => handleToggle(false)}
       footer={[
-        <Button key="back" onClick={() => handleToggle()}>
+        <ButtonCancel
+          key="back"
+          onClick={() => handleToggle(false)}
+        >
           Cancel
-        </Button>,
+        </ButtonCancel>,
+        <ButtonConfirm
+          form="form-new-note"
+          key="submit"
+          htmlType="submit"
+          type="primary"
+        >
+          Confirm
+        </ButtonConfirm>
       ]}
     >
       <div>{renderForm}</div>

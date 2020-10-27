@@ -98,9 +98,6 @@
   .details-profile-info {
     width: 290px;
   }
-  .details-pagination {
-    width: 310px;
-  }
   .details-touch {
     width: 310px;
   }
@@ -183,10 +180,10 @@
     width: 460px;
   }
   .details-note {
-    width: 570px;
+    width: 581px;
   }
   .details-pagination {
-    width: 1200px;
+    width: 1178px;
   }
 }
 @media screen and(min-width: 1500px) {
@@ -210,4 +207,70 @@
   .details-pagination {
     width: 1323px;
   }
+}
+
+/* ClientDetailsNewNote form */
+
+.modal__newnote .ant-modal-body {
+  padding-bottom: 0 !important;
+}
+
+.modal__newnote .ant-modal-header,
+.modal__newnote .ant-modal-footer {
+  border: none;
+}
+
+.modal__newnote .ant-modal-header {
+  padding-left: 59px;
+  padding-top: 24px;
+  padding-right: 53px;
+  padding-bottom: 0;
+}
+
+.modal__newnote .ant-modal-body {
+  padding-top: 33px !important;
+}
+
+.ant-form-item {
+  margin-bottom: 16px !important;
+}
+
+.modal__newnote .ant-modal-body,
+.modal__newnote .ant-modal-footer {
+  padding-left: 59px;
+  padding-right: 53px;
+}
+
+.modal__newnote .ant-modal-footer {
+  padding-top: 0 !important;
+  padding-bottom: 17px !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ant-modal-close {
+  padding-right: 33px !important;
+  padding-top: 8px !important;
+}
+
+.ant-modal-close svg {
+  fill: #061523;
+}
+
+.form__newnote label {
+  color: #828282 !important;
+}
+
+.form__newnote textarea,
+.form__newnote input {
+  border-radius: 8px;
+}
+
+.form__newnote input {
+  padding: 8px 11px !important;
+}
+
+.form__newnote textarea {
+  resize: none;
+  height: 200px !important;
 }
