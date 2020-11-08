@@ -62,20 +62,16 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     console.log("Failed:", errorInfo);
   };
 
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+  const formStyle = {
+    wrapperCol: { span: 24, offset: 0 },
+    layout: "vertical"
   };
-  const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-  };
+
   const renderForm = (
     <Form
-      {...layout}
+      {...formStyle}
       form={form}
-      layout="vertical"
       name="basic"
-      wrapperCol={{ span: 24, offset: 0 }}
       className="form__newnote"
       initialValues={{ remember: true }}
       onFinish={onFinish}
