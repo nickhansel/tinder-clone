@@ -22,7 +22,7 @@ const DashboardPage = ({ history }) => {
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
-  const [username, setUser] = useState(NUM_EACH_PAGE);
+  const [username, setUser] = useState("");
 
   useEffect(() => {
     Auth.currentUserInfo()

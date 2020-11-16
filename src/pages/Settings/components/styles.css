@@ -1,0 +1,28 @@
+.settings-team,
+.settings-profile {
+  height: 320px;
+}
+
+.settings-info {
+  height: 420px;
+  padding: 25px !important;
+}
+
+.ant-tabs {
+  width: 100%;
+}
+
+.ant-row .ant-tabs .ant-tabs-nav {
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
+
+.settings-profile .ant-avatar-lg {
+  height: 80px;
+  margin: 10px 30px;
+  width: 80px;
+}
+
+.settings-profile .ant-avatar-lg.ant-avatar-icon {
+  font-size: 76px;
+}

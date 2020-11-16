@@ -1,7 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Rate } from "antd";
-import { iconStar } from "media/svg";
 
 const desc = ["very bad", "bad", "normal", "good", "very good"];
 
@@ -23,11 +21,7 @@ class Rater extends React.Component {
           tooltips={desc}
           onChange={this.handleChange}
           value={value}
-          // character={({ index }) => {
-          //   return <iconStar />;
-          // }}
         />
-        {/* {value ? <span className="ant-rate-text">{desc[value - 1]}</span> : ""} */}
       </span>
     );
   }
