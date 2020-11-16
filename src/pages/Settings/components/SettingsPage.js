@@ -3,7 +3,7 @@
  */
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
-import { Row, Tabs, Col, Avatar, Tooltip, Divider } from "antd";
+import { Row, Tabs, Col, Avatar, Tooltip, Divider, Input } from "antd";
 import {
   Layout,
   Note1,
@@ -12,6 +12,7 @@ import {
   CardWrap,
   Flex,
   SpaceBetween,
+  ButtonStyled,
 } from "common";
 import { iconBack, iconAddCircle, iconEdit } from "media/svg";
 import { UserOutlined } from "@ant-design/icons";
@@ -110,6 +111,13 @@ const SettingsPage = () => {
                 <Divider />
                 <SubH2>Company Address</SubH2>
                 <Note1>Address</Note1>
+                <Divider />
+                <SubH2>Connect Salesforce</SubH2>
+                <Note1Grey>(Enter your API key)</Note1Grey>
+                <div style={{ marginBottom: "20px", width: "450px" }}>
+                  <Input />
+                </div>
+                <ButtonStyled>Confirm</ButtonStyled>
               </CardWrap>
             </Col>
           </TabPane>
