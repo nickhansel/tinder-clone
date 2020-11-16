@@ -14,7 +14,7 @@ type Team @model {
 type User @model {
   id: ID!
   team: Team @connection(name: "TeamUsers")
-  name: String!
+  name: String
   email: String!
   password: String!
   profileImg: String
