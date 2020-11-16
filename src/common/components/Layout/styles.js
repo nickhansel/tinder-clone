@@ -8,7 +8,7 @@ import { Layout, Divider } from "antd";
 
 const { MAX_CONTENT_WIDTH } = LAYOUT_SIZES;
 
-const { Header, Sider } = Layout;
+const { Header } = Layout;
 
 export const ContentContainer = styled(Layout.Content)`
   background-color: ${slateGrey};
@@ -34,7 +34,7 @@ export const HeaderActions = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: 60px;
-  width: 300px;
+  width: 450px;
 
   .ant-input-affix-wrapper {
     border-radius: 50px;
@@ -47,11 +47,6 @@ export const StyledDivider = styled(Divider)`
   margin: 0;
 `;
 
-export const StyledSider = styled(Sider)`
-  @media (max-width: 430px) {
-    display: none;
-  }
-`;
 export const StyledTopHeader = styled(Header)`
   background-color: #0e3860;
   display: none;
@@ -65,5 +60,18 @@ export const StyledTopHeader = styled(Header)`
   @media (max-width: 430px) {
     display: flex;
     width: 424px;
+  }
+`;
+
+export const SearchInputStyled = styled.div`
+  .ant-input-affix-wrapper {
+    border-radius: 40px;
+    height: 40px;
+    line-height: 10;
+    width: 180px;
+  }
+
+  @media (max-width: 430px) {
+    display: none;
   }
 `;

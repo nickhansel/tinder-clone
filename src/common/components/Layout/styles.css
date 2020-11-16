@@ -38,10 +38,12 @@
   font-weight: 500;
 }
 
-aside .ant-layout-sider {
-  flex: 0 0 64px !important;
-}
-
 .ant-layout {
   height: 100vh;
+}
+
+@media (max-width: 430px) {
+  .ant-layout .ant-layout-sider {
+    display: none !important;
+  }
 }

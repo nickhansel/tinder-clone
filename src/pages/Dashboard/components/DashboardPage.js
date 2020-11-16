@@ -2,18 +2,19 @@
    Dashboard Page 
  */
 
-import React, { useState } from "react";
-import { Pagination } from "antd";
+import React, { useState, useEffect } from "react";
+import { Auth } from "aws-amplify";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { listClientsDash } from "graphql/queries";
+import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientList";
 import MoodFilter from "./DashboardMoodFilter";
 import { Layout, Note2, Flex, Note2Grey, Loading } from "common";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
-import "./styles.css";
-import { mockData, filterDataByMood, CURRENT_USER } from "utils";
+import { filterDataByMood, CURRENT_USER } from "utils";
 import { iconFilter, iconSort, iconCalendar } from "media/svg";
+import "./styles.css";
 
 const DashboardPage = ({ history }) => {
   const [moodId, setMoodId] = useState("all");
@@ -21,6 +22,21 @@ const DashboardPage = ({ history }) => {
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+  const [username, setUser] = useState(NUM_EACH_PAGE);
+
+  useEffect(() => {
+    Auth.currentUserInfo()
+      .then((data) => {
+        console.log("data");
+        console.log(data);
+
+        setUser(data.username);
+      })
+      .catch((err) => console.log("error: ", err));
+  }, []);
+
+  console.log("username");
+  console.log(username);
 
   const { loading, data, error } = useQuery(gql(listClientsDash), {
     filter: {
@@ -39,7 +55,7 @@ const DashboardPage = ({ history }) => {
   }
 
   const isLoaded = !loading && !error;
-  const clientsData = isLoaded
+  const clientsData = isLoaded // TODO change to API filtering
     ? filterDataByMood(data.listClients.items, moodId)
     : [];
   const totalClients = clientsData.length;

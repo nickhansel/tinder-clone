@@ -11,11 +11,9 @@ import ClientCard from "./ClientCard";
 import Direction from "./Direction";
 import DragDropContainer from "./DragDropContainer";
 import HealthButton from "./HealthButton";
-import NavBar from "./NavBar";
 import Loading from "./Loading";
 import Note from "./Note";
 import Profile from "./Profile";
-import SearchInput from "./SearchInput";
 import StrategyIcons from "./StrategyIcons";
 
 export {
@@ -29,10 +27,8 @@ export {
   DragDropContainer,
   Direction,
   HealthButton,
-  NavBar,
   Loading,
   Note,
   Profile,
-  SearchInput,
   StrategyIcons,
 };

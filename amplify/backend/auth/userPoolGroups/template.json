@@ -1,0 +1,68 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "authauthcra91a82637UserPoolId": {
+            "Type": "String",
+            "Default": "authauthcra91a82637UserPoolId"
+        },
+        
+        "authauthcra91a82637AppClientID": {
+            "Type": "String",
+            "Default": "authauthcra91a82637AppClientID"
+        },
+        "authauthcra91a82637AppClientIDWeb": {
+            "Type": "String",
+            "Default": "authauthcra91a82637AppClientIDWeb"
+        },
+        "AuthRoleArn": {
+            "Type": "String"
+        },
+        "UnauthRoleArn": {
+            "Type": "String"
+        },
+        "env": {
+            "Type": "String"
+        }
+    },
+    "Conditions": {
+        "ShouldNotCreateEnvResources": {
+            "Fn::Equals": [
+                {
+                    "Ref": "env"
+                },
+                "NONE"
+            ]
+        }
+    },
+    "Resources": {
+    
+        "adminGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "admin",
+              "Precedence" : 1,
+              
+              "UserPoolId" : {
+                "Ref": "authauthcra91a82637UserPoolId"
+              } 
+            }
+        },
+        
+    
+        "teamMemberGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "teamMember",
+              "Precedence" : 2,
+              
+              "UserPoolId" : {
+                "Ref": "authauthcra91a82637UserPoolId"
+              } 
+            }
+        },
+        
+    
+    
+    },
+    
+}

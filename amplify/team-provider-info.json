@@ -13,7 +13,9 @@
     },
     "categories": {
       "auth": {
-        "authcra91a82637": {}
+        "authcra91a82637": {
+          "hostedUIProviderCreds": "[]"
+        }
       }
     }
   }

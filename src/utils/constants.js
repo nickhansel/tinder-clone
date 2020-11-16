@@ -8,6 +8,7 @@ export const CARD_SIZES = {
 };
 
 export const BASE_URLS = {
+  AUTH: "auth",
   DASHBOARD: "dashboard",
   INSIGHTS: "insights",
   SETTINGS: "settings",

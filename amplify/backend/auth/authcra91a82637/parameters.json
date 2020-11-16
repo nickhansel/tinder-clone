@@ -1,12 +1,10 @@
 {
-    "identityPoolName": "authcra91a82637_identitypool_91a82637",
-    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "authcr91a82637",
     "userPoolName": "authcra91a82637_userpool_91a82637",
     "autoVerifiedAttributes": [
         "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
         "SMS Text Message"
     ],
@@ -32,7 +30,7 @@
     "userpoolClientSetAttributes": false,
     "sharedId": "91a82637",
     "resourceName": "authcra91a82637",
-    "authSelections": "identityPoolAndUserPool",
+    "authSelections": "userPoolOnly",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -45,11 +43,27 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
     "usernameAttributes": [
         "email"
     ],
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+        "admin",
+        "teamMember"
+    ],
     "serviceName": "Cognito",
-    "dependsOn": []
+    "dependsOn": [],
+    "hostedUI": true,
+    "userPoolGroups": true,
+    "adminQueries": true,
+    "triggers": "{}",
+    "hostedUIDomainName": "authcradcda044c-dcda044c",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\"],\"CallbackURLs\":[\"http://localhost:3000/login/\"],\"LogoutURLs\":[\"http://localhost:3000/logout/\"]}",
+    "adminQueryGroup": "teamMember",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": []
 }

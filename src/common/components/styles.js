@@ -103,16 +103,3 @@ export const DividerStyled = styled(Divider)`
   margin: 10px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 `;
-
-export const SearchInputStyled = styled.div`
-  .ant-input-affix-wrapper {
-    border-radius: 40px;
-    height: 40px;
-    line-height: 10;
-    width: 180px;
-  }
-
-  @media (max-width: 430px) {
-    display: none;
-  }
-`;
