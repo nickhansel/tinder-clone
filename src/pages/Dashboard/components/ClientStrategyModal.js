@@ -17,7 +17,7 @@ const ClientStrategyModal = ({
   const [deleteAction, { loading: deleting }] = useMutation(
     gql(deleteStrategy)
   );
-  console.log(selectedClientId);
+
   // Business logic
   const handleDeleteStrategy = (strategyId) => {
     const updateCache = (client) => {

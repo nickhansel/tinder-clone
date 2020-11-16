@@ -27,16 +27,10 @@ const DashboardPage = ({ history }) => {
   useEffect(() => {
     Auth.currentUserInfo()
       .then((data) => {
-        console.log("data");
-        console.log(data);
-
         setUser(data.username);
       })
       .catch((err) => console.log("error: ", err));
   }, []);
-
-  console.log("username");
-  console.log(username);
 
   const { loading, data, error } = useQuery(gql(listClientsDash), {
     filter: {

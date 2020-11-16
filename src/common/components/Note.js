@@ -32,7 +32,6 @@ const Note = ({ type, deleting, authorName, note, deleteNote, height }) => {
   }
 
   function cancel(e) {
-    console.log(e);
     toggleSpinning(false);
   }
 

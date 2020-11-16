@@ -68,10 +68,6 @@ const ClientDetailsNewStrategy = ({
     }
   );
 
-  useEffect(() => {
-    console.log(selectedStrategy);
-  }, [selectedStrategy]);
-
   // Business logic
   const handleSubmit = (values) => {
     addStrategy({

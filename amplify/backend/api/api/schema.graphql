@@ -34,7 +34,7 @@ type Account @model {
   accountMembers: [Client] @connection(name: "AccountClient")
 }
 
-type Client @model {
+type Client @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   accountId: Account @connection(name: "AccountClient")
   contactId: User @connection(name: "UserClient")
@@ -48,7 +48,7 @@ type Client @model {
   lastContact: String
 }
 
-type ClientNote @model {
+type ClientNote @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   clientId: Client @connection(name: "ClientNote")
   ownerId: User @connection(name: "UserNote")
@@ -58,7 +58,7 @@ type ClientNote @model {
   isInteractionNote: Boolean
 }
 
-type Strategy @model {
+type Strategy @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   badgeName: String!
   clientId: Client @connection(name: "ClientStrategy")

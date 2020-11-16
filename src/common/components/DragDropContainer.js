@@ -13,8 +13,6 @@ const DragDropContainer = ({ name, children, actionOnFinish, style }) => {
       const dropResult = monitor.getDropResult();
 
       if (item && dropResult) {
-        console.log("item here");
-        console.log(item);
         actionOnFinish(item.name);
       }
     },
