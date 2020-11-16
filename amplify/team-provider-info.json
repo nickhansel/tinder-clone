@@ -10,6 +10,11 @@
       "StackName": "amplify-authcra-dev-231551",
       "StackId": "arn:aws:cloudformation:us-east-1:189089466747:stack/amplify-authcra-dev-231551/bc9095d0-ffbf-11ea-b0dc-0a5cf73de175",
       "AmplifyAppId": "d2q0wmakbw0rez"
+    },
+    "categories": {
+      "auth": {
+        "authcra06264fdb": {}
+      }
     }
   }
 }
