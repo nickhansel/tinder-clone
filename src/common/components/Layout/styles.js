@@ -50,7 +50,7 @@ export const StyledDivider = styled(Divider)`
 export const StyledTopHeader = styled(Header)`
   background-color: #0e3860;
   display: none;
-  padding: 15px 30px 0;
+  padding: 1.1em 1.1em 0;
   justify-content: flex-end;
 
   img {
@@ -59,7 +59,6 @@ export const StyledTopHeader = styled(Header)`
 
   @media (max-width: 430px) {
     display: flex;
-    width: 424px;
   }
 `;
 

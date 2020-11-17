@@ -115,6 +115,20 @@ export const FlexContainer = styled(Flex)`
     }
   }
 
+  div > div {
+    margin-right: 3.1em;
+  }
+
+  @media(min-width: 780px) {
+    div > div {
+      margin-right: 0;
+    }
+  }
+
+  div > div:last-child {
+    margin-right: 0;
+  }
+
   div + div {
     margin-left: 1em;  
   }
@@ -132,9 +146,16 @@ export const FlexContainer = styled(Flex)`
   }
 
   div > img {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
+  }
+
+  @media(min-width: 780px) {
+    div > img {
+      width: 24px;
+      height: 24px;
+    }
   }
   
   div > p {
