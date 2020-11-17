@@ -81,7 +81,6 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
         label="Title"
         name="title"
         rules={[{ required: true, message: "Please input note title" }]}
-        colon={false}
       >
         <Input />
       </Form.Item>
