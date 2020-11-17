@@ -89,7 +89,6 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
         label="Note"
         name="note_content"
         rules={[{ required: true, message: "Please note text" }]}
-        colon={false}
       >
         <TextArea />
       </Form.Item>
@@ -111,7 +110,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       footer={[
         <ButtonCancel
           key="back"
-          onClick={() => handleToggle(false)}
+          onClick={() => handleToggle()}
         >
           Cancel
         </ButtonCancel>,

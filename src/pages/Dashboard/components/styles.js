@@ -98,10 +98,10 @@ export const FlexContainer = styled(Flex)`
   flex-direction: column;
   align-items: center;
 
-    @media(min-width: 560px) {
-      flex-direction: row;
-      justify-content: space-between;
-    }
+  @media(min-width: 560px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   div {
     display: flex;
