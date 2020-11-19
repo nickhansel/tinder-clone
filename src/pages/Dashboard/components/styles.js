@@ -19,6 +19,7 @@ export const MoodFilterContainer = styled.div`
 
   @media(min-width: 476px) {
     min-width: 330px;
+    padding-left: ${spacing.xl};
   }
 
   button {
