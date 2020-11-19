@@ -13,9 +13,13 @@ export const MoodFilterWrapper = styled.div`
 export const MoodFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  min-width: 330px;
+  min-width: 310px;
   padding-left: ${spacing.lg};
   width: 30%;
+
+  @media(min-width: 476px) {
+    min-width: 330px;
+  }
 
   button {
     border: none;
@@ -31,6 +35,11 @@ export const MoodFilterContainer = styled.div`
 
   button:hover {
     text-decoration: underline;
+  }
+
+  button:active {
+    color: ${mainColors.blue};
+
   }
 `;
 
