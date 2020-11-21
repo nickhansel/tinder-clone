@@ -26,10 +26,10 @@ export const HeaderStyled = styled(Header)`
   background-color: ${mainColors.white};
   display: flex;
   justify-content: space-between;
-  padding: 1em 1em 1em 1.72em;
+  padding: 1em;
 
   @media(min-width: 476px) {
-    padding: 1em 1em 1em 2.28em;
+    padding: 1em 1em 1em 1.5em;
   }
 `;
 

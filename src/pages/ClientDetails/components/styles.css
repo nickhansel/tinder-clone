@@ -221,10 +221,14 @@
 }
 
 .modal__newnote .ant-modal-header {
-  padding-left: 59px;
-  padding-top: 24px;
-  padding-right: 53px;
-  padding-bottom: 0;
+  padding: 1.714em 1em 0 1em;
+}
+
+@media (min-width: 480px) {
+  .modal__newnote .ant-modal-header {
+    padding-left: 4.214em;
+    padding-right: 3.785em;
+  }
 }
 
 .modal__newnote .ant-modal-body {
@@ -237,8 +241,15 @@
 
 .modal__newnote .ant-modal-body,
 .modal__newnote .ant-modal-footer {
-  padding-left: 59px;
-  padding-right: 53px;
+  padding: 0 1em;
+}
+
+@media (min-width: 480px) {
+  .modal__newnote .ant-modal-body,
+  .modal__newnote .ant-modal-footer {
+    padding-left: 4.214em;
+    padding-right: 3.785em;
+  }
 }
 
 .modal__newnote .ant-modal-footer {
@@ -249,8 +260,14 @@
 }
 
 .ant-modal-close {
-  padding-right: 33px !important;
-  padding-top: 8px !important;
+  padding-right: 1em !important;
+  padding-top: 0.571em !important;
+}
+
+@media (min-width: 480px) {
+  .ant-modal-close {
+    padding-right: 2.357em !important;
+  }
 }
 
 .ant-modal-close svg {

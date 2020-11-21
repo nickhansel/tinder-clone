@@ -80,7 +80,7 @@ const Layout = ({ prefix, children, title, extra = null }) => {
           <Flex>
             <span
               onClick={() => handleMenuItemClick(BASE_URLS.DASHBOARD)}
-              style={{ lineHeight: 2.8 }}
+              style={{ lineHeight: 2.8, paddingRight: 10 }}
             >
               {prefix}
             </span>

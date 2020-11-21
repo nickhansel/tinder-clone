@@ -37,11 +37,6 @@ export const MoodFilterContainer = styled.div`
   button:hover {
     text-decoration: underline;
   }
-
-  button:active {
-    color: ${mainColors.blue};
-
-  }
 `;
 
 /* Styles for DashboardRateModal */
@@ -104,7 +99,6 @@ export const RateModalTitle = styled(AdaptiveTitle)`
 `;
 
 export const FlexContainer = styled(Flex)`
-
   flex-direction: column;
   align-items: center;
 
@@ -183,7 +177,6 @@ export const FlexContainer = styled(Flex)`
   @media(min-width: 1980px) {
     div > p {
       margin-left: 1em;
-      font-size: 1.5rem;
     }
   }
 `;

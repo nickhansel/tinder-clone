@@ -155,12 +155,6 @@
   color: #838c95;
 }
 
-@media (min-width: 1980px) {
-  .ant-pagination li p {
-    font-size: 1.5rem;
-  }
-}
-
 .ant-pagination-total-text {
   padding-top: 0.16em;
 }
