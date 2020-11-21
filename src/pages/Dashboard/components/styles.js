@@ -2,7 +2,7 @@
    styled components for Dashboard page
  */
 
-import { Flex } from "common";
+import { Flex, AdaptiveTitle } from "common";
 import styled from "styled-components";
 import { mainColors, spacing } from "utils";
 
@@ -24,7 +24,7 @@ export const MoodFilterContainer = styled.div`
     outline: none;
     padding: 0;
 
-    p {
+    p { 
       margin: 0;
     }
   }
@@ -40,20 +40,25 @@ export const FlexRate = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  div img {
-    margin-right: 60px;
-  }
-
-  div img:last-child {
-    margin-right: 0;
-  }
 `;
 
 export const FlexRateWord = styled(Flex)`
-  margin: 15px 120px 30px;
+  display: flex;
+  justify-content: space-between;  
+  margin-bottom: 1em;
+  width: 270px;
 
-  justify-content: space-between;
+  @media(min-width: 321px) {
+    width: 83.29%;
+  }
+
+  @media(min-width: 580px) {
+    width: 65%;
+  }
+
+  @media(min-width: 760px) {
+    width: 433px;
+  }
 `;
 
 export const TextArea = styled.div`
@@ -62,13 +67,28 @@ export const TextArea = styled.div`
 
   textarea {
     resize: none;
-    padding-left: 17px;
-    padding-top: 20px;
-    width: 543px;
+    padding-left: 1em;
+    padding-top: 1em; 
+    width: 270px;
     height: 128px;
     color: #081a2b;
     border: 1px #cccfd1 solid;
     border-radius: 10px;
     outline: none;
+
+    @media(min-width: 321px) {
+      width: 83.29%;
+    }
+
+    @media(min-width: 760px) {
+      padding-left: 1.0625em;
+      padding-top: 1.25em;
+    }
+  }
+`;
+
+export const RateModalTitle = styled(AdaptiveTitle)`
+  @media(min-width: 1280px) {
+    font-size: 1.875em;
   }
 `;

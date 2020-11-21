@@ -104,3 +104,12 @@ export const Note2Grey = styled(Note2)`
   margin-bottom: 0;
   margin-left: 4px;
 `;
+
+
+//
+export const AdaptiveTitle = styled.h6`
+  font-family: ${fonts.roboto};
+  font-size: calc(1.07em + 1vw);
+  font-weight: ${weightScale.bold};
+  margin: 0;
+`;
