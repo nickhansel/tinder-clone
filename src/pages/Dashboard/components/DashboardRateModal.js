@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Modal } from "antd";
-import { ButtonConfirm, ButtonCancel, H4, Text } from "common";
+import { ButtonConfirm, ButtonCancel, Text } from "common";
 import Rater from "./Rater";
-import { FlexRate, FlexRateWord, TextArea } from "./styles";
+import { FlexRate, FlexRateWord, TextArea, RateModalTitle } from "./styles";
 import "./styles.css";
 
 const BUTTON_WIDTH = 140;
@@ -27,7 +27,7 @@ const DashboardRateModal = ({
   return (
     <Modal
       visible={isRateModal}
-      title={<H4>How was your last conversation with {clientName}?</H4>}
+      title={<RateModalTitle>How was your last conversation with {clientName}?</RateModalTitle>}
       className="modal__rate"
       bodyStyle={{ height: 310 }}
       width={682}
@@ -49,11 +49,11 @@ const DashboardRateModal = ({
         <div>
           <FlexRate>
             <Rater />
+            <FlexRateWord>
+              <Text {...textProps}>Very bad</Text>
+              <Text {...textProps}>Very good</Text>
+            </FlexRateWord>
           </FlexRate>
-          <FlexRateWord>
-            <Text {...textProps}>Very bad</Text>
-            <Text {...textProps}>Very good</Text>
-          </FlexRateWord>
         </div>
         <form>
           <TextArea>
