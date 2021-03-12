@@ -53,7 +53,6 @@ export const onCreateTeam = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -91,7 +90,6 @@ export const onUpdateTeam = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -129,7 +127,6 @@ export const onDeleteTeam = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -165,8 +162,7 @@ export const onCreateUser = /* GraphQL */ `
         updatedAt
       }
       name
-      email
-      password
+      ema
       profileImg
       isAdmin
       clients {
@@ -231,8 +227,7 @@ export const onUpdateUser = /* GraphQL */ `
         updatedAt
       }
       name
-      email
-      password
+      ema
       profileImg
       isAdmin
       clients {
@@ -297,8 +292,7 @@ export const onDeleteUser = /* GraphQL */ `
         updatedAt
       }
       name
-      email
-      password
+      ema
       profileImg
       isAdmin
       clients {
@@ -506,8 +500,7 @@ export const onCreateClient = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -593,8 +586,7 @@ export const onUpdateClient = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -680,8 +672,7 @@ export const onDeleteClient = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -749,7 +740,6 @@ export const onCreateClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -782,8 +772,7 @@ export const onCreateClientNote = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -826,7 +815,6 @@ export const onUpdateClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -859,8 +847,7 @@ export const onUpdateClientNote = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -903,7 +890,6 @@ export const onDeleteClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -936,8 +922,7 @@ export const onDeleteClientNote = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -981,7 +966,6 @@ export const onCreateStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -1014,8 +998,7 @@ export const onCreateStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -1057,7 +1040,6 @@ export const onUpdateStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -1090,8 +1072,7 @@ export const onUpdateStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -1133,7 +1114,6 @@ export const onDeleteStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -1166,8 +1146,7 @@ export const onDeleteStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {

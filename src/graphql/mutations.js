@@ -65,7 +65,7 @@ export const createTeam = /* GraphQL */ `
           id
           name
           email
-          password
+        
           profileImg
           isAdmin
           createdAt
@@ -106,7 +106,6 @@ export const updateTeam = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -147,7 +146,6 @@ export const deleteTeam = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -183,7 +181,6 @@ export const createUser = /* GraphQL */ `
       }
       name
       email
-      password
       profileImg
       isAdmin
       clients {
@@ -250,7 +247,6 @@ export const updateUser = /* GraphQL */ `
       }
       name
       email
-      password
       profileImg
       isAdmin
       clients {
@@ -317,7 +313,6 @@ export const deleteUser = /* GraphQL */ `
       }
       name
       email
-      password
       profileImg
       isAdmin
       clients {
@@ -528,7 +523,6 @@ export const createClient = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -614,7 +608,6 @@ export const updateClient = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -700,7 +693,6 @@ export const deleteClient = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -771,7 +763,6 @@ export const createClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -803,7 +794,6 @@ export const createClientNote = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -849,7 +839,6 @@ export const updateClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -881,7 +870,6 @@ export const updateClientNote = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -927,7 +915,6 @@ export const deleteClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -959,7 +946,6 @@ export const deleteClientNote = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -1006,7 +992,6 @@ export const createStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -1038,7 +1023,6 @@ export const createStrategy = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -1083,7 +1067,6 @@ export const updateStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -1115,7 +1098,6 @@ export const updateStrategy = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -1160,7 +1142,6 @@ export const deleteStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -1191,8 +1172,7 @@ export const deleteStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        email        
         profileImg
         isAdmin
         clients {

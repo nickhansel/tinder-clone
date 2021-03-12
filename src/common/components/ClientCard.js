@@ -14,14 +14,21 @@ const ClientCard = ({
   id,
   isDecisionMaker,
   avatarId,
-  accountId: { name: company, healthScore },
+  accountId: { healthScore, name: companyName },
+  // Account: {
+  //   Name: companyName,
+  //   LastActivityDate: lastContact
+  // },
   onNameClick,
   onBadgeClick,
   name: clientName,
-  lastContact,
   position,
+  lastContact,
   strategy: { items: strategyItems },
 }) => {
+  if (companyName.length > 18) {
+    companyName = companyName.substring(0, 17);
+  }
   const score = parseFloat(healthScore);
   const isChamp = score > 4.5;
   const isImpatient = avatarId === "impatientGirl";
@@ -55,7 +62,7 @@ const ClientCard = ({
         <SubH1>{clientName}</SubH1>
       </div>
       <Note2>
-        {position} at <BoldStyled>{company}</BoldStyled>
+        {position} at <BoldStyled>{companyName}</BoldStyled>
       </Note2>
       <Note2 {...noteProps}>{lastContact}</Note2>
       <DividerStyled />

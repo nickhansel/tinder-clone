@@ -16,6 +16,7 @@ import {
   Note,
   Profile,
   StrategyIcons,
+  ActionHeader
 } from "./components";
 
 export {
@@ -33,6 +34,7 @@ export {
   Loading,
   Profile,
   StrategyIcons,
+  ActionHeader,
 };
 
 // Styled Components

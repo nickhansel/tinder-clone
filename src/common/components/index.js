@@ -15,6 +15,7 @@ import Loading from "./Loading";
 import Note from "./Note";
 import Profile from "./Profile";
 import StrategyIcons from "./StrategyIcons";
+import ActionHeader from "./ActionHeader";
 
 export {
   Layout,
@@ -31,4 +32,5 @@ export {
   Note,
   Profile,
   StrategyIcons,
+  ActionHeader,
 };

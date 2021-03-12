@@ -21,10 +21,12 @@ type User {
   id: ID!
   team: Team
   name: String
-  email: String!
-  password: String!
+  email: String
   profileImg: String
   isAdmin: Boolean
+  salesforceKey: String
+  salesforceSecret: String
+  salesforcePassword: String
   clients(filter: ModelClientFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientConnection
   clientNotes(filter: ModelClientNoteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientNoteConnection
   clientStrategies(filter: ModelStrategyFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStrategyConnection
@@ -346,9 +348,11 @@ input ModelUserFilterInput {
   id: ModelIDInput
   name: ModelStringInput
   email: ModelStringInput
-  password: ModelStringInput
   profileImg: ModelStringInput
   isAdmin: ModelBooleanInput
+  salesforceKey: ModelStringInput
+  salesforceSecret: ModelStringInput
+  salesforcePassword: ModelStringInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
   not: ModelUserFilterInput
@@ -357,10 +361,12 @@ input ModelUserFilterInput {
 input CreateUserInput {
   id: ID
   name: String
-  email: String!
-  password: String!
+  email: String
   profileImg: String
   isAdmin: Boolean
+  salesforceKey: String
+  salesforceSecret: String
+  salesforcePassword: String
   userTeamId: ID
 }
 
@@ -368,9 +374,11 @@ input UpdateUserInput {
   id: ID!
   name: String
   email: String
-  password: String
   profileImg: String
   isAdmin: Boolean
+  salesforceKey: String
+  salesforceSecret: String
+  salesforcePassword: String
   userTeamId: ID
 }
 
@@ -381,9 +389,11 @@ input DeleteUserInput {
 input ModelUserConditionInput {
   name: ModelStringInput
   email: ModelStringInput
-  password: ModelStringInput
   profileImg: ModelStringInput
   isAdmin: ModelBooleanInput
+  salesforceKey: ModelStringInput
+  salesforceSecret: ModelStringInput
+  salesforcePassword: ModelStringInput
   and: [ModelUserConditionInput]
   or: [ModelUserConditionInput]
   not: ModelUserConditionInput

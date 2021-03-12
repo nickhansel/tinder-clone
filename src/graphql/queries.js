@@ -50,7 +50,6 @@ export const getTeam = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -111,7 +110,6 @@ export const getUser = /* GraphQL */ `
       }
       name
       email
-      password
       profileImg
       isAdmin
       clients {
@@ -174,7 +172,6 @@ export const listUsers = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -297,7 +294,6 @@ export const getClient = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -373,7 +369,6 @@ export const listClients = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -454,7 +449,6 @@ export const getClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -486,7 +480,6 @@ export const getClientNote = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -534,7 +527,6 @@ export const listClientNotes = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -598,7 +590,6 @@ export const getStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -629,8 +620,7 @@ export const getStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        email
-        password
+        emai
         profileImg
         isAdmin
         clients {
@@ -704,7 +694,6 @@ export const listStrategys = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
