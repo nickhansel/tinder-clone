@@ -10,11 +10,13 @@ import { listClientsDash } from "graphql/queries";
 import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientList";
 import MoodFilter from "./DashboardMoodFilter";
-import { Layout, Note2, Flex, Note2Grey, Loading } from "common";
+import { Layout, Note2, Note2Grey, Loading } from "common";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
+import { FlexContainer } from "./styles";
 import { filterDataByMood, CURRENT_USER } from "utils";
 import { iconFilter, iconSort, iconCalendar } from "media/svg";
 import "./styles.css";
+
 
 const DashboardPage = ({ history }) => {
   const [moodId, setMoodId] = useState("all");
@@ -85,28 +87,30 @@ const DashboardPage = ({ history }) => {
       <Loading />
     </div>
   ) : (
-    <DashboardClientList {...cardListProps} />
-  );
+      <DashboardClientList {...cardListProps} />
+    );
 
   return (
     <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
-      <Flex style={{ justifyContent: "space-between" }}>
-        <Flex style={{ width: 375, justifyContent: "space-evenly" }}>
-          <Flex>
+      <FlexContainer>
+        <div>
+          <div>
             <img src={iconCalendar} alt="" />
             <Note2Grey>Renewal Date</Note2Grey>
-          </Flex>
-          <Flex>
+          </div>
+          <div>
             <img src={iconSort} alt="" />
             <Note2Grey>Sort By</Note2Grey>
-          </Flex>
-          <Flex>
+          </div>
+          <div>
             <img src={iconFilter} alt="" />
             <Note2Grey>Filters</Note2Grey>
-          </Flex>
-        </Flex>
-        <Pagination style={{ marginLeft: 20 }} {...paginationProps} />
-      </Flex>
+          </div>
+        </div>
+        <Pagination
+          {...paginationProps}
+        />
+      </FlexContainer>
       {renderClients}
     </Layout>
   );

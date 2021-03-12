@@ -13,9 +13,14 @@ export const MoodFilterWrapper = styled.div`
 export const MoodFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  min-width: 330px;
+  min-width: 310px;
   padding-left: ${spacing.lg};
   width: 30%;
+
+  @media(min-width: 476px) {
+    min-width: 330px;
+    padding-left: ${spacing.xl};
+  }
 
   button {
     border: none;
@@ -92,3 +97,87 @@ export const RateModalTitle = styled(AdaptiveTitle)`
     font-size: 1.875em;
   }
 `;
+
+export const FlexContainer = styled(Flex)`
+  flex-direction: column;
+  align-items: center;
+
+  @media(min-width: 560px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    margin-bottom: .5em;
+  }
+
+  @media(min-width: 560px) {
+    div {
+      margin-bottom: 0;
+    }
+  }
+
+  div > div {
+    margin-right: 3.1em;
+  }
+
+  @media(min-width: 780px) {
+    div > div {
+      margin-right: 0;
+    }
+  }
+
+  div > div:last-child {
+    margin-right: 0;
+  }
+
+  div + div {
+    margin-left: 1em;  
+  }
+
+  @media(min-width: 780px) {
+    div + div {
+      margin-left: 2em;
+    }
+  }
+
+  @media(min-width: 1980px) {
+    div + div {
+      margin-left: 3em;
+    }
+  }
+
+  div > img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  @media(min-width: 780px) {
+    div > img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  div > p {
+    display: none;
+  }
+
+  @media(min-width: 780px) {
+    div > p {
+      display: block;
+      margin-top: 0;
+      font-size: .85rem;
+    }
+  }
+
+  @media(min-width: 1980px) {
+    div > p {
+      margin-left: 1em;
+    }
+  }
+`;
+

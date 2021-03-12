@@ -147,3 +147,14 @@
     width: 100%;
   }
 }
+
+/* Pagination */
+
+.ant-pagination li p {
+  font-size: 0.85rem;
+  color: #838c95;
+}
+
+.ant-pagination-total-text {
+  padding-top: 0.16em;
+}

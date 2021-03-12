@@ -50,11 +50,10 @@ export const BudgeStyled = styled.button`
 
 export const ClientCardStyled = styled.div`
   background-color: ${mainColors.white};
-  border-radius: 8px;
-  height: 420px;
-  margin: 15px 8px 10px;
-  padding: 15px;
-  width: 254px;
+  border-radius: .571em;
+  margin: 1.07em .571em .71em;
+  padding: 1.05em;
+  width: 17,3972%;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.008), 0 12.5px 10px rgba(0, 0, 0, 0.02),
     0 5px 10px rgba(0, 0, 0, 0.042);

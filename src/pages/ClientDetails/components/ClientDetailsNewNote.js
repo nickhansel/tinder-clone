@@ -6,6 +6,8 @@ import { createClientNote } from "graphql/mutations";
 import { getClient } from "graphql/queries";
 import { Modal, Form, Input, Button, message } from "antd";
 import { generateId } from "utils";
+import { ButtonCancel, ButtonConfirm } from "common";
+import "./styles.css";
 
 const { TextArea } = Input;
 
@@ -39,7 +41,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     }
   );
 
-  const onFinish = (values) => {
+  const handleNewNoteSubmit = (values) => {
     addClientNote({
       variables: {
         input: {
@@ -60,20 +62,20 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     console.log("Failed:", errorInfo);
   };
 
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+  const formStyle = {
+    wrapperCol: { span: 24, offset: 0 },
+    layout: "vertical"
   };
-  const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-  };
+
   const renderForm = (
     <Form
-      {...layout}
+      id="form-new-note"
+      {...formStyle}
       form={form}
       name="basic"
+      className="form__newnote"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      onFinish={handleNewNoteSubmit}
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
@@ -90,11 +92,6 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       >
         <TextArea />
       </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
     </Form>
   );
 
@@ -102,11 +99,24 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     <Modal
       visible={isNewNoteModal}
       title="Add Note"
+      className="modal__newnote"
+      width={644}
       onCancel={() => handleToggle()}
       footer={[
-        <Button key="back" onClick={() => handleToggle()}>
+        <ButtonCancel
+          key="back"
+          onClick={() => handleToggle()}
+        >
           Cancel
-        </Button>,
+        </ButtonCancel>,
+        <ButtonConfirm
+          form="form-new-note"
+          key="submit"
+          htmlType="submit"
+          type="primary"
+        >
+          Confirm
+        </ButtonConfirm>
       ]}
     >
       <div>{renderForm}</div>

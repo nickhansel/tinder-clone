@@ -26,15 +26,15 @@ export const HeaderStyled = styled(Header)`
   background-color: ${mainColors.white};
   display: flex;
   justify-content: space-between;
-  min-width: 480px;
-  padding: 14px 24px;
+  padding: 1em;
+
+  @media(min-width: 476px) {
+    padding: 1em 1em 1em 1.5em;
+  }
 `;
 
 export const HeaderActions = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  height: 60px;
-  width: 450px;
 
   .ant-input-affix-wrapper {
     border-radius: 50px;
@@ -50,16 +50,15 @@ export const StyledDivider = styled(Divider)`
 export const StyledTopHeader = styled(Header)`
   background-color: #0e3860;
   display: none;
-  padding: 15px 30px 0;
+  padding: 1.1em .7em 0;
   justify-content: flex-end;
-
-  img {
-    margin-right: 8px;
-  }
 
   @media (max-width: 430px) {
     display: flex;
-    width: 424px;
+  }
+
+  img {
+    margin-right: 8px;
   }
 `;
 

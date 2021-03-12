@@ -42,8 +42,6 @@
   height: 100vh;
 }
 
-@media (max-width: 430px) {
-  .ant-layout .ant-layout-sider {
-    display: none !important;
-  }
+.ant-avatar {
+  margin-left: 1em !important;
 }
