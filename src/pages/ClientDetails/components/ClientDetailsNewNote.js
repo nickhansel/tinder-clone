@@ -41,7 +41,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
     }
   );
 
-  const onFinish = (values) => {
+  const handleNewNoteSubmit = (values) => {
     addClientNote({
       variables: {
         input: {
@@ -69,12 +69,13 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
 
   const renderForm = (
     <Form
+      id="form-new-note"
       {...formStyle}
       form={form}
       name="basic"
       className="form__newnote"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
+      onFinish={handleNewNoteSubmit}
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
@@ -91,11 +92,6 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       >
         <TextArea />
       </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
     </Form>
   );
 
@@ -105,7 +101,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       title="Add Note"
       className="modal__newnote"
       width={644}
-      onCancel={() => handleToggle(false)}
+      onCancel={() => handleToggle()}
       footer={[
         <ButtonCancel
           key="back"
