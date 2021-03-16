@@ -62,6 +62,8 @@ export const onCreateTeam = /* GraphQL */ `
         nextToken
       }
       renewalDate
+      sfKey
+      sfUsername
       createdAt
       updatedAt
     }
@@ -98,6 +100,8 @@ export const onUpdateTeam = /* GraphQL */ `
         nextToken
       }
       renewalDate
+      sfKey
+      sfUsername
       createdAt
       updatedAt
     }
@@ -134,6 +138,8 @@ export const onDeleteTeam = /* GraphQL */ `
         nextToken
       }
       renewalDate
+      sfKey
+      sfUsername
       createdAt
       updatedAt
     }
@@ -153,6 +159,8 @@ export const onCreateUser = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -217,6 +225,8 @@ export const onUpdateUser = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -281,6 +291,8 @@ export const onDeleteUser = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -345,6 +357,8 @@ export const onCreateAccount = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -385,6 +399,8 @@ export const onUpdateAccount = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -425,6 +441,8 @@ export const onDeleteAccount = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -461,6 +479,8 @@ export const onCreateClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -480,6 +500,8 @@ export const onCreateClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -544,6 +566,8 @@ export const onUpdateClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -563,6 +587,8 @@ export const onUpdateClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -627,6 +653,8 @@ export const onDeleteClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -646,6 +674,8 @@ export const onDeleteClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -746,6 +776,8 @@ export const onCreateClientNote = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -821,6 +853,8 @@ export const onUpdateClientNote = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -896,6 +930,8 @@ export const onDeleteClientNote = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -972,6 +1008,8 @@ export const onCreateStrategy = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -1046,6 +1084,8 @@ export const onUpdateStrategy = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -1120,6 +1160,8 @@ export const onDeleteStrategy = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }

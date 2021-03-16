@@ -11,6 +11,8 @@ type Team {
   account(filter: ModelAccountFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelAccountConnection
   teamMembers(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
   renewalDate: String
+  sfKey: String
+  sfUsername: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -298,6 +300,8 @@ input ModelTeamFilterInput {
   id: ModelIDInput
   name: ModelStringInput
   renewalDate: ModelStringInput
+  sfKey: ModelStringInput
+  sfUsername: ModelStringInput
   and: [ModelTeamFilterInput]
   or: [ModelTeamFilterInput]
   not: ModelTeamFilterInput
@@ -307,12 +311,16 @@ input CreateTeamInput {
   id: ID
   name: String!
   renewalDate: String
+  sfKey: String
+  sfUsername: String
 }
 
 input UpdateTeamInput {
   id: ID!
   name: String
   renewalDate: String
+  sfKey: String
+  sfUsername: String
 }
 
 input DeleteTeamInput {
@@ -322,6 +330,8 @@ input DeleteTeamInput {
 input ModelTeamConditionInput {
   name: ModelStringInput
   renewalDate: ModelStringInput
+  sfKey: ModelStringInput
+  sfUsername: ModelStringInput
   and: [ModelTeamConditionInput]
   or: [ModelTeamConditionInput]
   not: ModelTeamConditionInput

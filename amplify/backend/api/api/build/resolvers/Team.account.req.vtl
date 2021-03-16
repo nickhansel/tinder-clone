@@ -1,5 +1,11 @@
-#set( $limit = $util.defaultIfNull($context.args.limit, 100) )
-#set( $query = {
+#if( $util.isNull($context.source.id) )
+  #set( $result = {
+  "items":   []
+} )
+  #return($result)
+#else
+  #set( $limit = $util.defaultIfNull($context.args.limit, 100) )
+  #set( $query = {
   "expression": "#connectionAttribute = :connectionAttribute",
   "expressionNames": {
       "#connectionAttribute": "accountTeamId"
@@ -11,28 +17,29 @@
   }
 } )
 {
-  "version": "2018-05-29",
-  "operation": "Query",
-  "query":   $util.toJson($query),
-  "scanIndexForward":   #if( $context.args.sortDirection )
-    #if( $context.args.sortDirection == "ASC" )
+      "version": "2018-05-29",
+      "operation": "Query",
+      "query":     $util.toJson($query),
+      "scanIndexForward":     #if( $context.args.sortDirection )
+      #if( $context.args.sortDirection == "ASC" )
 true
-    #else
+      #else
 false
-    #end
-  #else
+      #end
+    #else
 true
-  #end,
-  "filter":   #if( $context.args.filter )
+    #end,
+      "filter":     #if( $context.args.filter )
 $util.transform.toDynamoDBFilterExpression($ctx.args.filter)
-  #else
+    #else
 null
-  #end,
-  "limit": $limit,
-  "nextToken":   #if( $context.args.nextToken )
+    #end,
+      "limit": $limit,
+      "nextToken":     #if( $context.args.nextToken )
 $util.toJson($context.args.nextToken)
-  #else
+    #else
 null
-  #end,
-  "index": "gsi-TeamAccount"
-}
+    #end,
+      "index": "gsi-TeamAccount"
+  }
+#end

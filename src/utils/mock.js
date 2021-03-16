@@ -24,7 +24,7 @@ export const mockData = [
     lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
-    id: 3,
+    id: '0034x000008HjpMAAS',
     name: "Tom Tollins",
     position: "Marketing Executive",
     accountId: { name: "Looking Glass", healthScore: 2.4 },
@@ -56,7 +56,7 @@ export const mockData = [
     lastContact: "Last activity is at 1:37PM on 9/23/2020",
   },
   {
-    id: "9can1",
+    id: "0034x000008HjpMAAS",
     name: "Emma Jones",
     position: "General Manager",
     accountId: { name: "Walk About", healthScore: 4.8, contract: 1100 },

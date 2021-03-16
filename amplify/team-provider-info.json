@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "authcra06264fdb": {}
+        "authcra06264fdb": {},
+        "userPoolGroups": {}
       }
     }
   }

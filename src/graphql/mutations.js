@@ -74,6 +74,8 @@ export const createTeam = /* GraphQL */ `
         nextToken
       }
       renewalDate
+      sfKey
+      sfUsername
       createdAt
       updatedAt
     }
@@ -113,6 +115,8 @@ export const updateTeam = /* GraphQL */ `
         nextToken
       }
       renewalDate
+      sfKey
+      sfUsername
       createdAt
       updatedAt
     }

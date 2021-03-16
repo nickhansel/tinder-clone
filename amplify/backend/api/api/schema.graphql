@@ -9,6 +9,8 @@ type Team @model {
   account: [Account] @connection(name: "TeamAccount")
   teamMembers: [User] @connection(name: "TeamUsers")
   renewalDate: String
+  sfKey: String
+  sfUsername: String
 }
 
 type User @model {

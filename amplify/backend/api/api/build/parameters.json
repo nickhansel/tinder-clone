@@ -2,5 +2,5 @@
     "CreateAPIKey": 1,
     "AppSyncApiName": "api",
     "S3DeploymentBucket": "amplify-authcra-dev-231551-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/fc8e55e9bfb5de6c389c8c7e81d67fe9f82fcc71"
+    "S3DeploymentRootKey": "amplify-appsync-files/d026bed1c1826887ea4a5b09ac297626db010f29"
 }
