@@ -63,54 +63,54 @@ const DashboardPage = ({ history }) => {
     }
   }, [userData]);
 
-  const { loading, data, error } = useQuery(gql(listClientsDash), {
-    filter: {
-      contactId: CURRENT_USER,
-    },
-  });
+	const { loading, data, error } = useQuery(gql(listClientsDash), {
+		filter: {
+			contactId: CURRENT_USER,
+		},
+	});
 
-  if (loading || creatingUser) {
-    return (
-      <Layout>
-        <div style={{ marginTop: 200 }}>
-          <Loading />
-        </div>
-      </Layout>
-    );
-  }
+	if (loading || creatingUser) {
+		return (
+			<Layout>
+				<div style={{ marginTop: 200 }}>
+					<Loading />
+				</div>
+			</Layout>
+		);
+	}
 
-  const isLoaded = !loading && !error;
-  const clientsData = isLoaded // TODO change to API filtering
-    ? filterDataByMood(data.listClients.items, moodId)
-    : [];
-  const totalClients = clientsData.length;
+	const isLoaded = !loading && !error;
+	const clientsData = isLoaded // TODO change to API filtering
+		? filterDataByMood(data.listClients.items, moodId)
+		: [];
+	const totalClients = clientsData.length;
 
   const moodFilter = (
     <MoodFilter setMoodId={setMoodId}
       setFiltering={setFiltering} />
   );
 
-  const onChange = (page) => {
-    // Pagination
-    setPage(page);
-    setMinVal((page - 1) * NUM_EACH_PAGE);
-    setMaxVal(page * NUM_EACH_PAGE);
-  };
+	const onChange = (page) => {
+		// Pagination
+		setPage(page);
+		setMinVal((page - 1) * NUM_EACH_PAGE);
+		setMaxVal(page * NUM_EACH_PAGE);
+	};
 
-  const cardListProps = {
-    data: clientsData,
-    history,
-    minVal,
-    maxVal,
-  };
-  const paginationProps = {
-    current: page,
-    defaultCurrent: 1,
-    onChange: onChange,
-    pageSize: 8,
-    showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
-    total: totalClients,
-  };
+	const cardListProps = {
+		data: clientsData,
+		history,
+		minVal,
+		maxVal,
+	};
+	const paginationProps = {
+		current: page,
+		defaultCurrent: 1,
+		onChange: onChange,
+		pageSize: 8,
+		showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
+		total: totalClients,
+	};
 
   const renderClients = filtering ? (
     <div style={{ marginTop: 200 }}>

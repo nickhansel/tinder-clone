@@ -13,38 +13,47 @@ import InsightsMood from './InsightsMood';
 import InsightsQuater from './InsightsQuater';
 import InsightsStrategy from './InsightsStrategy';
 import {
-  Layout,
-  ClientCard,
-  CardWrap,
-  CardContainer,
-  Flex,
-  SubH2,
+	Layout,
+	ClientCard,
+	CardWrap,
+	CardContainer,
+	Flex,
+	SubH2,
+	Loading,
 } from 'common';
 import { StyledSmileIcon } from './styles';
 import { iconSmile, iconSmileDown } from 'media/svg';
-import { mockData, clientNames, CURRENT_USER } from 'utils';
+import { mockData, clientNames, CURRENT_USER, filterDataByMood } from 'utils';
 import { PAGE_TITLE } from '../constants';
 import './styles.css';
 
 const InsightsPage = () => {
-  const { loading, data, error } = useQuery(gql(listClientsDash), {
-    filter: {
-      contactId: CURRENT_USER,
-    },
-  });
-  let history = useHistory();
+	const { loading, data, error } = useQuery(gql(listClientsDash), {
+		filter: {
+			contactId: CURRENT_USER,
+		},
+	});
+	let history = useHistory();
 
-  const clientTop = mockData[3];
-  const clientLow = mockData[2];
+	if (loading) {
+		return (
+			<Layout>
+				<div style={{ marginTop: 200 }}>
+					<Loading />
+				</div>
+			</Layout>
+		);
+	}
 
-  const layoutProps = {
-    title: PAGE_TITLE,
-  };
+	// const isLoaded = !loading && !error;
+	// const clientsData = isLoaded;
+	// const totalClients = clientsData.length;
 
-  const handleCardClick = (clientId) => {
-    history.push(`clients/${clientId}`);
-  };
+	// const clientTop = mockData[3];
+	// const clientLow = mockData[2];
+	// console.log(data);
 
+<<<<<<< HEAD
   const renderCardHeader = (backgroundColor, icon, title) => {
     return (
       <Flex>
@@ -102,6 +111,91 @@ const InsightsPage = () => {
       </Row>
     </Layout>
   );
+=======
+	function getClientTop(dataset) {
+		let max = dataset[0];
+		dataset.forEach((element) => {
+			if (max.accountId.healthScore < element.accountId.healthScore) {
+				max = element;
+			}
+		});
+		return max;
+	}
+	const clientTop2 = getClientTop(data.listClients.items);
+
+	function getClientBottom(dataset) {
+		let min = dataset[0];
+		dataset.forEach((element) => {
+			if (min.accountId.healthScore > element.accountId.healthScore) {
+				min = element;
+			}
+		});
+		return min;
+	}
+	const clientBottom2 = getClientBottom(data.listClients.items);
+
+	const layoutProps = {
+		title: PAGE_TITLE,
+	};
+
+	const handleCardClick = (clientId) => {
+		history.push(`clients/${clientId}`);
+	};
+
+	const renderCardHeader = (backgroundColor, icon, title) => {
+		return (
+			<Flex>
+				<StyledSmileIcon style={{ backgroundColor }}>
+					<img src={icon} alt={`icon ${title}`} />
+				</StyledSmileIcon>
+				<SubH2>{title}</SubH2>
+			</Flex>
+		);
+	};
+
+	const HigherScoreHeader = renderCardHeader(
+		'#20CDAE',
+		iconSmile,
+		'Client with Highest Score'
+	);
+	const LowestScoreHeader = renderCardHeader(
+		'#FD6A65',
+		iconSmileDown,
+		'Client with Lowest Score'
+	);
+
+	const insightOverallScoreProps = {
+		overallData: data,
+		totalClients: data.listClients.items.length,
+	};
+
+	return (
+		<Layout {...layoutProps}>
+			<Row justify='center'>
+				<CardWrap height={453} className='insights-overall'>
+					<InsightsOverallScore {...insightOverallScoreProps} />
+				</CardWrap>
+				<div style={{ marginBottom: 15 }}>
+					{HigherScoreHeader}
+					<ClientCard onNameClick={handleCardClick} {...clientTop2} />
+				</div>
+				<div style={{ marginBottom: 15 }}>
+					{LowestScoreHeader}
+					<ClientCard onNameClick={handleCardClick} {...clientBottom2} />
+				</div>
+				<CardContainer height={440} width={335} className='strategy-metrica'>
+					<InsightsStrategy />
+				</CardContainer>
+				<CardWrap height={440} className='insights-moods'>
+					<InsightsMood clients={clientNames} />
+				</CardWrap>
+				<CardContainer heigth={328} width={400} className='quater-moods'>
+					<InsightsQuater />
+				</CardContainer>
+			</Row>
+		</Layout>
+	);
+>>>>>>> EU-20 Connected the API to the Client Health Graph and updated the Top and Bottom Client from the API Health Scores
 };
 
 export default InsightsPage;
