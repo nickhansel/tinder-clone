@@ -104,7 +104,7 @@ const InsightsStrategy = () => {
 
 	if (stateWins) {
 		buttonName = METRICS_STATE.WINS;
-		title = 'Badge wins this quater';
+		title = 'Badge wins this Quarter';
 		progressColor = mintGreen;
 		data = winsBadges;
 	}

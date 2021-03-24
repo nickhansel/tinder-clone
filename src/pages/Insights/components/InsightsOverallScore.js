@@ -6,20 +6,14 @@ import { getAvg } from 'utils';
 
 const InsightsOverallScore = ({ overallData, totalClients }) => {
 	const total = totalClients;
-
-	// function getHealthAvg(array) {
-	// 	let sum = 0;
-	// 	for (let i = 0; i < array.length; i++) {
-	// 		sum = sum + array[i];
-	// 	}
-	// 	return sum;
-	// }
 	const healthScores2 = [];
 
+	// get the health scores from the API call and push to the new array
 	overallData.listClients.items.forEach((element) => {
 		healthScores2.push(parseFloat(element.accountId.healthScore));
 	});
 
+	// get average of the health scores to display
 	const average = getAvg(healthScores2);
 
 	const data = {
@@ -55,7 +49,6 @@ const InsightsOverallScore = ({ overallData, totalClients }) => {
 			},
 		});
 	});
-	// console.log(overallData.listClients.items);
 
 	return (
 		<div>
@@ -67,7 +60,7 @@ const InsightsOverallScore = ({ overallData, totalClients }) => {
 					<BoldStyled>Average Score: {average}.0</BoldStyled>
 				</div>
 				<Flex>
-					<ButtonCharts>Quater</ButtonCharts>
+					<ButtonCharts>Quarter</ButtonCharts>
 					<ButtonCharts
 						style={{ border: '1px solid #BDBDBD', color: '#BDBDBD' }}>
 						Year

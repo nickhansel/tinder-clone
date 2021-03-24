@@ -10,7 +10,7 @@ import { listClientsDash } from 'graphql/queries';
 import { Row } from 'antd';
 import InsightsOverallScore from './InsightsOverallScore';
 import InsightsMood from './InsightsMood';
-import InsightsQuater from './InsightsQuater';
+import InsightsQuarter from './InsightsQuarter';
 import InsightsStrategy from './InsightsStrategy';
 import {
 	Layout,
@@ -23,7 +23,12 @@ import {
 } from 'common';
 import { StyledSmileIcon } from './styles';
 import { iconSmile, iconSmileDown } from 'media/svg';
-import { mockData, clientNames, CURRENT_USER, filterDataByMood } from 'utils';
+import {
+	clientNames,
+	CURRENT_USER,
+	getClientTop,
+	getClientBottom,
+} from 'utils';
 import { PAGE_TITLE } from '../constants';
 import './styles.css';
 
@@ -48,12 +53,6 @@ const InsightsPage = () => {
 	// const isLoaded = !loading && !error;
 	// const clientsData = isLoaded;
 	// const totalClients = clientsData.length;
-
-	// const clientTop = mockData[3];
-	// const clientLow = mockData[2];
-	// console.log(data);
-
-<<<<<<< HEAD
   const renderCardHeader = (backgroundColor, icon, title) => {
     return (
       <Flex>
@@ -121,17 +120,12 @@ const InsightsPage = () => {
 		});
 		return max;
 	}
+=======
+	// use getClientTop from Utils
+>>>>>>> EU-20 moved functions to utils and changed Quarters
 	const clientTop2 = getClientTop(data.listClients.items);
 
-	function getClientBottom(dataset) {
-		let min = dataset[0];
-		dataset.forEach((element) => {
-			if (min.accountId.healthScore > element.accountId.healthScore) {
-				min = element;
-			}
-		});
-		return min;
-	}
+	//use get ClientBottom from utils
 	const clientBottom2 = getClientBottom(data.listClients.items);
 
 	const layoutProps = {
@@ -189,8 +183,8 @@ const InsightsPage = () => {
 				<CardWrap height={440} className='insights-moods'>
 					<InsightsMood clients={clientNames} />
 				</CardWrap>
-				<CardContainer heigth={328} width={400} className='quater-moods'>
-					<InsightsQuater />
+				<CardContainer heigth={328} width={400} className='Quarter-moods'>
+					<InsightsQuarter />
 				</CardContainer>
 			</Row>
 		</Layout>

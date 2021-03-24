@@ -9,140 +9,160 @@ import { mintGreen, roseRed, mustardYellow } from 'utils';
    In future would be done through API
  */
 export const getClient = (searchString) => {
-  let targetClient = false;
+	let targetClient = false;
 
-  mockData.forEach((client) => {
-    if (searchString.includes(client.id)) {
-      targetClient = client;
-    }
-  });
+	mockData.forEach((client) => {
+		if (searchString.includes(client.id)) {
+			targetClient = client;
+		}
+	});
 
-  return targetClient;
+	return targetClient;
 };
 
 const filterHelper = (data, moods) => {
-  const dataCopy = [...data];
+	const dataCopy = [...data];
 
-  const filtered = dataCopy.filter((clientItem) => {
-    return moods.includes(clientItem.avatarId);
-  });
+	const filtered = dataCopy.filter((clientItem) => {
+		return moods.includes(clientItem.avatarId);
+	});
 
-  return filtered;
+	return filtered;
 };
 
 export const filterDataByMood = (data, moodId) => {
-  switch (moodId) {
-    case 'all':
-      return data;
-    case 'champ':
-      return filterHelper(data, [
-        'champBoy',
-        'champGirl',
-        'happyBoy',
-        'happyGirl',
-      ]);
-    case 'attention':
-      return filterHelper(data, ['curiousGirl', 'curiousBoy']);
-    case 'cold':
-      return filterHelper(data, ['indiffBoy', 'indiffGirl']);
-    case 'risk':
-      return filterHelper(data, ['sadBoy', 'sadGirl']);
-    default:
-      return data;
-  }
+	switch (moodId) {
+		case 'all':
+			return data;
+		case 'champ':
+			return filterHelper(data, [
+				'champBoy',
+				'champGirl',
+				'happyBoy',
+				'happyGirl',
+			]);
+		case 'attention':
+			return filterHelper(data, ['curiousGirl', 'curiousBoy']);
+		case 'cold':
+			return filterHelper(data, ['indiffBoy', 'indiffGirl']);
+		case 'risk':
+			return filterHelper(data, ['sadBoy', 'sadGirl']);
+		default:
+			return data;
+	}
 };
 
 export const getError = (err) => {
-  let msg = 'Problem witht the request';
+	let msg = 'Problem witht the request';
 
-  if (err.response) {
-    const data = err.response.data;
+	if (err.response) {
+		const data = err.response.data;
 
-    if (data.message) {
-      msg = data.message;
-    } else if (typeof data === 'object') {
-      const errors = Object.values(data);
-      msg = errors.flat().join(', ');
-    }
+		if (data.message) {
+			msg = data.message;
+		} else if (typeof data === 'object') {
+			const errors = Object.values(data);
+			msg = errors.flat().join(', ');
+		}
 
-    return msg;
-  }
+		return msg;
+	}
 
-  console.error(err);
-  return msg;
+	console.error(err);
+	return msg;
 };
 
 /*
 Calculate the color based on health score
 */
 export const getHealthColor = (healthScore) => {
-  const code = getHealthCode(healthScore);
-  const colors = {
-    high: mintGreen,
-    mid: mustardYellow,
-    low: roseRed,
-  };
+	const code = getHealthCode(healthScore);
+	const colors = {
+		high: mintGreen,
+		mid: mustardYellow,
+		low: roseRed,
+	};
 
-  return colors[code];
+	return colors[code];
 };
 
 /*
 Calculate the displayed length for the health meter health score
 */
 export const getHealthLen = (healthScore) => {
-  const code = getHealthCode(healthScore);
-  const len = {
-    top: '100%',
-    high: '95%',
-    mid: '70%',
-    low: '35%',
-  };
+	const code = getHealthCode(healthScore);
+	const len = {
+		top: '100%',
+		high: '95%',
+		mid: '70%',
+		low: '35%',
+	};
 
-  return len[code];
+	return len[code];
 };
 
 /*
 Calculate the code for the health based on health score
 */
 export const getHealthCode = (healthScore) => {
-  if (healthScore === 5) return 'top';
+	if (healthScore === 5) return 'top';
 
-  let healthCode = 'high';
+	let healthCode = 'high';
 
-  if (healthScore < 4 && healthScore >= 2.8) {
-    healthCode = 'mid';
-  }
-  if (healthScore < 2.8) {
-    healthCode = 'low';
-  }
+	if (healthScore < 4 && healthScore >= 2.8) {
+		healthCode = 'mid';
+	}
+	if (healthScore < 2.8) {
+		healthCode = 'low';
+	}
 
-  return healthCode;
+	return healthCode;
 };
 
 /*
 Generate random id
 */
 export const generateId = () => {
-  return (
-    Math.random()
-      .toString(36)
-      .substring(2, 15) +
-    Math.random()
-      .toString(36)
-      .substring(2, 15)
-  );
+	return (
+		Math.random()
+			.toString(36)
+			.substring(2, 15) +
+		Math.random()
+			.toString(36)
+			.substring(2, 15)
+	);
 };
 
 export const getAvg = (data) => {
-  const total = data.reduce((acc, c) => acc + c, 0);
-  return Math.floor(total / data.length);
+	const total = data.reduce((acc, c) => acc + c, 0);
+	return Math.floor(total / data.length);
 };
 
 export const getIdFromLocation = (location) => {
-  const reg = '[^/]+$';
-  return location.pathname.match(reg)[0];
+	const reg = '[^/]+$';
+	return location.pathname.match(reg)[0];
 };
 
 export const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+	return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const getClientTop = (dataset) => {
+	let max = dataset[0];
+	dataset.forEach((element) => {
+		if (max.accountId.healthScore < element.accountId.healthScore) {
+			max = element;
+		}
+	});
+	return max;
+};
+
+export const getClientBottom = (dataset) => {
+	let min = dataset[0];
+	dataset.forEach((element) => {
+		if (min.accountId.healthScore > element.accountId.healthScore) {
+			min = element;
+		}
+	});
+	return min;
 };
