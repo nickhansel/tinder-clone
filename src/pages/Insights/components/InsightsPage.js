@@ -183,7 +183,7 @@ const InsightsPage = () => {
 				<CardWrap height={440} className='insights-moods'>
 					<InsightsMood clients={clientNames} />
 				</CardWrap>
-				<CardContainer heigth={328} width={400} className='Quarter-moods'>
+				<CardContainer height={328} width={400} className='Quarter-moods'>
 					<InsightsQuarter />
 				</CardContainer>
 			</Row>
