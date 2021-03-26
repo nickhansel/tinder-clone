@@ -20,6 +20,10 @@ export const SpaceBetween = styled(Flex)`
   justify-content: space-between;
 `;
 
+export const SpaceEnd = styled(Flex)`
+  justify-content: flex-end;
+`;
+
 export const AvatarStyled = styled.div`
   background-color: #ebebeb;
   border-radius: 8px;

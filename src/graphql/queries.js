@@ -50,7 +50,6 @@ export const getTeam = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -92,13 +91,15 @@ export const listTeams = /* GraphQL */ `
     }
   }
 `;
-export const getUser = /* GraphQL */ `
+export const getUserConfigs = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
       team {
         id
         name
+        sfKey
+        sfUsername
         account {
           nextToken
         }
@@ -111,7 +112,34 @@ export const getUser = /* GraphQL */ `
       }
       name
       email
-      password
+      profileImg
+      isAdmin
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      team {
+        id
+        name
+        sfKey
+        sfUsername
+        account {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        renewalDate
+        createdAt
+        updatedAt
+      }
+      name
+      email
       profileImg
       isAdmin
       clients {
@@ -174,7 +202,6 @@ export const listUsers = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -297,7 +324,6 @@ export const getClient = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -373,7 +399,6 @@ export const listClients = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -454,7 +479,6 @@ export const getClientNote = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -486,7 +510,6 @@ export const getClientNote = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -534,7 +557,6 @@ export const listClientNotes = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -598,7 +620,6 @@ export const getStrategy = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt
@@ -630,7 +651,6 @@ export const getStrategy = /* GraphQL */ `
         }
         name
         email
-        password
         profileImg
         isAdmin
         clients {
@@ -704,7 +724,6 @@ export const listStrategys = /* GraphQL */ `
           id
           name
           email
-          password
           profileImg
           isAdmin
           createdAt

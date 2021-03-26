@@ -278,15 +278,6 @@
   color: #828282 !important;
 }
 
-.form__newnote textarea,
-.form__newnote input {
-  border-radius: 8px;
-}
-
-.form__newnote input {
-  padding: 8px 11px !important;
-}
-
 .form__newnote textarea {
   resize: none;
   height: 200px !important;

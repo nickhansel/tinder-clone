@@ -23,7 +23,7 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
     setSelectedClient(id);
     toggleRateModal(true);
   };
-
+  
   return (
     <>
       <Row justify="center">

@@ -43,4 +43,10 @@ export const GlobalStyle = createGlobalStyle`
   .ant-modal-header {
     border-radius: 8px;
   }
+
+  textarea,
+  input {
+    border-radius: 8px !important;
+    padding: 8px 11px !important;
+  }
 `;

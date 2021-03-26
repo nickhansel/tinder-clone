@@ -19,10 +19,10 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route path='/auth' component={Authenticator} />
-      <PrivateRoute exact path="/dashboard" component={DashboardPage} />
-      <PrivateRoute exact path="/clients/:clientId" component={ClientDetailsPage} />
-      <PrivateRoute exact path="/settings" component={SettingsPage} />
-      <PrivateRoute exact path="/insights" component={InsightsPage} />
+      <Route exact path="/dashboard" component={DashboardPage} />
+      <Route exact path="/clients/:clientId" component={ClientDetailsPage} />
+      <Route exact path="/settings" component={SettingsPage} />
+      <Route exact path="/insights" component={InsightsPage} />
     </Switch>
   </Router>
 )

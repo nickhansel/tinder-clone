@@ -17,10 +17,12 @@ type User @model {
   id: ID!
   team: Team @connection(name: "TeamUsers")
   name: String
-  email: String!
-  password: String!
+  email: String
   profileImg: String
   isAdmin: Boolean
+  salesforceKey: String
+  salesforceSecret: String
+  salesforcePassword: String
   clients: [Client] @connection(name: "UserClient")
   clientNotes: [ClientNote] @connection(name: "UserNote")
   clientStrategies: [Strategy] @connection(name: "UserStrategy")

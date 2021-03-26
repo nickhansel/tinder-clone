@@ -4,8 +4,8 @@
 }
 
 .settings-info {
-  height: 420px;
-  padding: 25px !important;
+  height: auto;
+  min-height: 470px;
 }
 
 .ant-tabs {

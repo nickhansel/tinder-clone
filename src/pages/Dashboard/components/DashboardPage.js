@@ -5,18 +5,18 @@
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
-import { listClientsDash } from "graphql/queries";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { listClientsDash, getUser } from "graphql/queries";
+import { createUser as createUserMutation } from "graphql/mutations";
 import { Pagination } from "antd";
 import DashboardClientList from "./DashboardClientList";
 import MoodFilter from "./DashboardMoodFilter";
-import { Layout, Note2, Note2Grey, Loading } from "common";
+import DashboardSort from "./DashboardSort";
+import { Layout, Note2, Loading } from "common";
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
 import { FlexContainer } from "./styles";
 import { filterDataByMood, CURRENT_USER } from "utils";
-import { iconFilter, iconSort, iconCalendar } from "media/svg";
 import "./styles.css";
-
 
 const DashboardPage = ({ history }) => {
   const [moodId, setMoodId] = useState("all");
@@ -24,15 +24,42 @@ const DashboardPage = ({ history }) => {
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
-  const [username, setUser] = useState("");
+  const [authUserData, setAuthUserData] = useState("");
+
+  // get user from out db
+  const { data: userData } = useQuery(gql(getUser), {
+    variables: { id: authUserData.id },
+  });
+
+  const [createUser, { loading: creatingUser }] = useMutation(
+    gql(createUserMutation), { 
+      refetchQueries: [{
+        query: gql(getUser),
+        variables: { id: authUserData.id },
+      }]
+  });
 
   useEffect(() => {
     Auth.currentUserInfo()
       .then((data) => {
-        setUser(data.username);
+        setAuthUserData(data);
       })
       .catch((err) => console.log("error: ", err));
-  }, []);
+  })
+
+  useEffect(() => {
+    if (userData && userData.getUser === null) {
+      createUser({
+        variables: {
+          input: {
+            id: authUserData.id,
+            name: authUserData.username,
+            email: authUserData.attributes.email
+          },
+        },
+      })
+    }
+  }, [userData]);
 
   const { loading, data, error } = useQuery(gql(listClientsDash), {
     filter: {
@@ -40,7 +67,7 @@ const DashboardPage = ({ history }) => {
     },
   });
 
-  if (loading) {
+  if (loading || creatingUser) {
     return (
       <Layout>
         <div style={{ marginTop: 200 }}>
@@ -93,23 +120,8 @@ const DashboardPage = ({ history }) => {
   return (
     <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
       <FlexContainer>
-        <div>
-          <div>
-            <img src={iconCalendar} alt="" />
-            <Note2Grey>Renewal Date</Note2Grey>
-          </div>
-          <div>
-            <img src={iconSort} alt="" />
-            <Note2Grey>Sort By</Note2Grey>
-          </div>
-          <div>
-            <img src={iconFilter} alt="" />
-            <Note2Grey>Filters</Note2Grey>
-          </div>
-        </div>
-        <Pagination
-          {...paginationProps}
-        />
+        <DashboardSort />
+        <Pagination {...paginationProps} />
       </FlexContainer>
       {renderClients}
     </Layout>
