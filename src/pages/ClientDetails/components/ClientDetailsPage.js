@@ -6,7 +6,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { getClient, listClientNotesDetails } from "graphql/queries";
+import { getClient } from "graphql/queries";
 import { Row, Pagination, Tooltip } from "antd";
 import ClientDetailsNewNote from "./ClientDetailsNewNote";
 import ClientDetailsNewStrategy from "./ClientDetailsNewStrategy";

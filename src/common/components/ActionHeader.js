@@ -44,7 +44,7 @@ const ActionHeader = ({ title, actions }) => {
     const { name, icon, action } = actionsMap[actionName];
 
     return ( 
-      <Tooltip title={name}>
+      <Tooltip key={key} title={name}>
         <img
           style={{ cursor: "pointer" }}
           src={icon}

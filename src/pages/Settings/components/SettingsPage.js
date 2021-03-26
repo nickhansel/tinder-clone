@@ -7,6 +7,7 @@ import {
   Layout,
   ActionHeader,
   SubH2,
+  Note1Grey,
   CardWrap,
   Flex,
 } from "common";
@@ -17,51 +18,29 @@ import { TabLayout, InfoRow } from'./layouts';
 import useCurrentUser from '../../../customHooks/useCurrentUser';
 import "./styles.css";
 
-var jsforce = require('jsforce');
-
-const domain ='https://empava-dev-ed.my.salesforce.com'
-const consumerKey ='3MVG9kBt168mda__pzQ.aoD3KEYm00tt_pgtML_t97zFkkLW2qWIDlsK5Esa9BMDtyvKk55XtChBtVAso7M1A'
-const consumerSecret ='BDA201F244D0B67341126518D5258C758BBFD1AEC94347DD4687506AEF877E41'
-
-
+const jsforce = require('jsforce');
 const { TabPane } = Tabs;
 
 const SettingsPage = () => {
   const userData = useCurrentUser();
   const [salesRecords, setSalesRecords] = useState([]);
-  console.log(userData)
+  const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
 
-  // Get currect user from the aws auth 
   useEffect(() => {
-    var conn = new jsforce.Connection({
-      oauth2 : {
-        // you can change loginUrl to connect to sandbox or prerelease env.
-        clientId: consumerKey,
-        clientSecret: consumerSecret,
-      },
-      instanceUrl: domain,
-    });
-    conn.login('asiya@empava.io', 'Redicecre19CXwVkKF5oc9SLsKd9ACCH8ja', function(err, userInfo) {
-      if (err) { return console.error(err); }
-      // Now you can get the access token and instance URL information.
-      // Save them to establish connection next time.
-      console.log(conn.accessToken);
-      console.log(conn.instanceUrl);
-      // logged in user property
-      console.log(userInfo);
-      console.log("User ID: " + userInfo.id);
-      console.log("Org ID: " + userInfo.organizationId);
-      conn.query("SELECT Id, Name, CreatedDate FROM Contact", function(err, result) {
-        if (err) { return console.error(err); }
-        console.log(result);
-        setSalesRecords(result.records)
-      });
-    });
-  }, []);
+    if (sfConnected) {
+      const { sfUsername, sfKey } = userData.team;
 
-  // Debugging 
-  console.log("salesRecords")
-  console.log(salesRecords)
+      // Salesforce connection test
+      var conn = new jsforce.Connection();
+      conn.login(sfUsername, sfKey, function(err, userInfo) {
+        if (err) { return console.error(err); }
+        conn.query("SELECT Id, Name, CreatedDate FROM Contact", function(err, result) {
+          if (err) { return console.error(err); }
+          setSalesRecords(result.records)
+        });
+      });
+    }
+  }, [userData]);
 
   // Props
   const layoutProps = {
@@ -72,19 +51,19 @@ const SettingsPage = () => {
     justify: "center",
   };
 
-  // Tabs configs - TODO: move to separate comoponents ?
+  // Tabs configs - TODO: move to separate comoponents when expand
   const connectionContent = (
     <>
       <ActionHeader title="Salesforce Connection" actions={["edit"]} />
-      <ConnectionForm />
+      {userData.id && !sfConnected  ? <ConnectionForm user={userData} /> : <Note1Grey>Connection created</Note1Grey>}
     </>
   )
-
   const configsContent = (
     <>
       <SubH2>Salesforce Accounts</SubH2>
     </>
   )
+
   // Props for the tabs
   const settingsTabsProps = [
     {
@@ -111,9 +90,9 @@ const SettingsPage = () => {
     <Tabs defaultActiveKey="1">
       {settingsTabsProps.map((item, key) => {
         const tabProps = {
-          tabName: item.tabName,
-          spanSize: item.spanSize,
           content: item.content,
+          spanSize: item.spanSize,
+          tabName: item.tabName,
         };
 
         return (
@@ -134,8 +113,9 @@ const SettingsPage = () => {
             <Flex>
               <Avatar size="large" icon={<UserOutlined />} />
               <div>
-                <InfoRow name={"Username:"} data={userData.name} />
-                <InfoRow name={"Email:"} data={userData.email} />
+                <InfoRow name="Username:" data={userData.name} />
+                <InfoRow name="Email:" data={userData.email} />
+                <InfoRow name="Team:" data={userData.team ? userData.team.name : 'Not created'} />
               </div>
             </Flex>
           </CardWrap>

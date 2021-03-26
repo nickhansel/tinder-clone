@@ -225,6 +225,20 @@ export const createUser = /* GraphQL */ `
     }
   }
 `;
+export const linkUserTeam = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      team {
+        id
+      }
+      updatedAt
+    }
+  }
+`;
 export const updateUser = /* GraphQL */ `
   mutation UpdateUser(
     $input: UpdateUserInput!

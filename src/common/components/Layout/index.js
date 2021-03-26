@@ -55,7 +55,7 @@ const Layout = ({ prefix, children, title, extra = null }) => {
           selectable={true}
           onClick={(item) => handleMenuItemClick(item.key)}
           onSelect={(key) => setSelectedItem(key)}
-          inlineCollapsed={true}
+          collapsed="true"
           selectedKeys={[selectedItem]}
           defaultSelectedKeys={["dashboard"]}
         >

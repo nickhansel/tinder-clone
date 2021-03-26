@@ -91,6 +91,34 @@ export const listTeams = /* GraphQL */ `
     }
   }
 `;
+export const getUserConfigs = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      team {
+        id
+        name
+        sfKey
+        sfUsername
+        account {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        renewalDate
+        createdAt
+        updatedAt
+      }
+      name
+      email
+      profileImg
+      isAdmin
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -98,6 +126,8 @@ export const getUser = /* GraphQL */ `
       team {
         id
         name
+        sfKey
+        sfUsername
         account {
           nextToken
         }
@@ -620,7 +650,7 @@ export const getStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
         clients {

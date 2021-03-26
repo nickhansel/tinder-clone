@@ -60,9 +60,9 @@ const ClientStrategyModal = ({
   const renderNotes = loading ? (
     <Loading />
   ) : (
-    clientStrategys.map((item) => {
+    clientStrategys.map((item, key) => {
       return (
-        <div style={{ marginTop: 15 }}>
+        <div key={key} style={{ marginTop: 15 }}>
           <Note
             height={95}
             type="strategy"

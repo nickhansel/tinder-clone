@@ -1,65 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { createTeam } from "graphql/mutations";
-import { getClient } from "graphql/queries";
+import { useMutation } from "@apollo/react-hooks";
+import {
+  createTeam as createTeamMutation,
+  linkUserTeam as linkUserTeamMutation
+} from "graphql/mutations";
 import { Form, Input, message } from "antd";
-import { generateId } from "utils";
-import { ButtonConfirm, SpaceEnd } from "common";
+import { ButtonConfirm, SpaceEnd, Loading, Layout } from "common";
+import createTeamAction from "../actions/createTeamAction";
 import "./styles.css";
+
+
+const formStyle = {
+  wrapperCol: { span: 14, offset: 0 },
+  layout: "vertical"
+};
+const tailLayout = {
+  wrapperCol: { offset: 0, span: 14 },
+};
 
 const ConnectionForm = ({ user }) => {
   const [form] = Form.useForm();
 
-  const [addTeamConnection, { loading: creating, error }] = useMutation(
-    gql(createTeam),
-    {
-      // update(cache, { data: { createTeam } }) {
-      //   const { items } = client.noteId;
-
-      //   cache.writeQuery({
-      //     query: gql(getClient),
-      //     data: {
-      //       __typename: "Client",
-      //       getClient: {
-      //         ...client,
-      //         noteId: {
-      //           items: [createTeam].concat(items),
-      //         },
-      //       },
-      //     },
-      //   });
-      // },
-    }
-  );
-
+  const [createTeam, { loading }] = useMutation(
+    gql(createTeamMutation));
+  const [linkUserTeam, { loading: loadingLink }] = useMutation(
+    gql(linkUserTeamMutation));
+  
+  // Business logic
   const handleSubmit = (values) => {
-    addTeamConnection({
-      variables: {
-        input: {
-          id: generateId(),
-          name: values.name,
-          sfKey: values.token,
-          sfUsername: values.username
-        },
-      },
-    });
+    createTeamAction(values, createTeam, user.id, linkUserTeam);
 
     message.success("Connected team created");
     form.resetFields();
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log("Failed:", errorInfo); // TODO: output error message
   };
 
-  const formStyle = {
-    wrapperCol: { span: 14, offset: 0, paddingTop: 20 },
-    layout: "vertical"
-  };
-  const tailLayout = {
-    wrapperCol: { offset: 0, span: 14 },
-  };
+  // spinner
+  if (loading || loadingLink) {
+    return (
+        <div style={{ marginTop: 80 }}>
+          <Loading />
+        </div>
+    );
+  }
 
   return (
     <div>
@@ -75,13 +62,13 @@ const ConnectionForm = ({ user }) => {
       >
         <Form.Item
           label="Name"
-          name="name"
+          name="teamName"
           rules={[{ required: true, message: "Please input team name" }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Username"
+          label="Salesforce Username"
           name="username"
           rules={[{ required: true, message: "Please input salesforce username" }]}
         >
@@ -117,8 +104,8 @@ const ConnectionForm = ({ user }) => {
   );
 };
 
-// ConnectionForm.propTypes = {
-//   handleToggle: PropTypes.func.isRequired,
-// };
+ConnectionForm.propTypes = {
+  user: PropTypes.object,
+};
 
 export default ConnectionForm;
