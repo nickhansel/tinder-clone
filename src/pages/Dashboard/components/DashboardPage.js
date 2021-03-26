@@ -40,11 +40,13 @@ const DashboardPage = ({ history }) => {
   });
 
   useEffect(() => {
-    Auth.currentUserInfo()
-      .then((data) => {
-        setAuthUserData(data);
-      })
-      .catch((err) => console.log("error: ", err));
+    if (!authUserData.id) {
+      Auth.currentUserInfo()
+        .then((data) => {
+          setAuthUserData(data);
+        })
+        .catch((err) => console.log("error: ", err));
+    }
   })
 
   useEffect(() => {
