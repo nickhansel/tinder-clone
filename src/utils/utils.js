@@ -147,22 +147,14 @@ export const capitalizeFirstLetter = (string) => {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const getClientTop = (dataset) => {
-	let max = dataset[0];
-	dataset.forEach((element) => {
-		if (max.accountId.healthScore < element.accountId.healthScore) {
-			max = element;
-		}
-	});
-	return max;
-};
+export const findTopBottomClients = (arr) => {
+	let min = arr[0],
+		max = arr[0];
 
-export const getClientBottom = (dataset) => {
-	let min = dataset[0];
-	dataset.forEach((element) => {
-		if (min.accountId.healthScore > element.accountId.healthScore) {
-			min = element;
-		}
-	});
-	return min;
+	for (let i = 0, len = arr.length; i < len; i++) {
+		let v = arr[i];
+		min = v.accountId.healthScore < min.accountId.healthScore ? v : min;
+		max = v.accountId.healthScore > max.accountId.healthScore ? v : max;
+	}
+	return [min, max];
 };

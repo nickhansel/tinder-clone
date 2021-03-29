@@ -1,6 +1,6 @@
 /*
-   Insights Page 
- */
+  Insights Page 
+*/
 
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -23,12 +23,7 @@ import {
 } from 'common';
 import { StyledSmileIcon } from './styles';
 import { iconSmile, iconSmileDown } from 'media/svg';
-import {
-	clientNames,
-	CURRENT_USER,
-	getClientTop,
-	getClientBottom,
-} from 'utils';
+import { clientNames, CURRENT_USER, findTopBottomClients } from 'utils';
 import { PAGE_TITLE } from '../constants';
 import './styles.css';
 
@@ -50,67 +45,6 @@ const InsightsPage = () => {
 		);
 	}
 
-	// const isLoaded = !loading && !error;
-	// const clientsData = isLoaded;
-	// const totalClients = clientsData.length;
-  const renderCardHeader = (backgroundColor, icon, title) => {
-    return (
-      <Flex>
-        <StyledSmileIcon style={{ backgroundColor }}>
-          <img src={icon}
-            alt={`icon ${title}`} />
-        </StyledSmileIcon>
-        <SubH2>{title}</SubH2>
-      </Flex>
-    );
-  };
-
-  const HigherScoreHeader = renderCardHeader(
-    '#20CDAE',
-    iconSmile,
-    'Client with Highest Score'
-  );
-  const LowestScoreHeader = renderCardHeader(
-    '#FD6A65',
-    iconSmileDown,
-    'Client with Lowest Score'
-  );
-
-  return (
-    <Layout {...layoutProps}>
-      <Row justify="center">
-        <CardWrap height={453}
-          className="insights-overall">
-          <InsightsOverallScore />
-        </CardWrap>
-        <div style={{ marginBottom: 15 }}>
-          {HigherScoreHeader}
-          <ClientCard onNameClick={handleCardClick}
-            {...clientTop} />
-        </div>
-        <div style={{ marginBottom: 15 }}>
-          {LowestScoreHeader}
-          <ClientCard onNameClick={handleCardClick}
-            {...clientLow} />
-        </div>
-        <CardContainer height={440}
-          width={335}
-          className="strategy-metrica">
-          <InsightsStrategy />
-        </CardContainer>
-        <CardWrap height={440}
-          className="insights-moods">
-          <InsightsMood clients={clientNames} />
-        </CardWrap>
-        <CardContainer heigth={328}
-          width={400}
-          className="quater-moods">
-          <InsightsQuater />
-        </CardContainer>
-      </Row>
-    </Layout>
-  );
-=======
 	function getClientTop(dataset) {
 		let max = dataset[0];
 		dataset.forEach((element) => {
@@ -120,13 +54,15 @@ const InsightsPage = () => {
 		});
 		return max;
 	}
-=======
+
 	// use getClientTop from Utils
->>>>>>> EU-20 moved functions to utils and changed Quarters
 	const clientTop2 = getClientTop(data.listClients.items);
 
 	//use get ClientBottom from utils
 	const clientBottom2 = getClientBottom(data.listClients.items);
+
+	// get the Top and Bottom Client from formula in utils
+	const clientTopBottom = findTopBottomClients(data.listClients.items);
 
 	const layoutProps = {
 		title: PAGE_TITLE,
@@ -171,11 +107,11 @@ const InsightsPage = () => {
 				</CardWrap>
 				<div style={{ marginBottom: 15 }}>
 					{HigherScoreHeader}
-					<ClientCard onNameClick={handleCardClick} {...clientTop2} />
+					<ClientCard onNameClick={handleCardClick} {...clientTopBottom[1]} />
 				</div>
 				<div style={{ marginBottom: 15 }}>
 					{LowestScoreHeader}
-					<ClientCard onNameClick={handleCardClick} {...clientBottom2} />
+					<ClientCard onNameClick={handleCardClick} {...clientTopBottom[0]} />
 				</div>
 				<CardContainer height={440} width={335} className='strategy-metrica'>
 					<InsightsStrategy />
@@ -189,7 +125,6 @@ const InsightsPage = () => {
 			</Row>
 		</Layout>
 	);
->>>>>>> EU-20 Connected the API to the Client Health Graph and updated the Top and Bottom Client from the API Health Scores
 };
 
 export default InsightsPage;

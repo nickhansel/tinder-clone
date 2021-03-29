@@ -5,16 +5,15 @@ import { ButtonCharts } from './styles';
 import { getAvg } from 'utils';
 
 const InsightsOverallScore = ({ overallData, totalClients }) => {
-	const total = totalClients;
-	const healthScores2 = [];
+	const healthScores = [];
 
 	// get the health scores from the API call and push to the new array
 	overallData.listClients.items.forEach((element) => {
-		healthScores2.push(parseFloat(element.accountId.healthScore));
+		healthScores.push(parseFloat(element.accountId.healthScore));
 	});
 
 	// get average of the health scores to display
-	const average = getAvg(healthScores2);
+	const average = getAvg(healthScores);
 
 	const data = {
 		labels: [
@@ -31,7 +30,7 @@ const InsightsOverallScore = ({ overallData, totalClients }) => {
 			{
 				label: '',
 				borderColor: '#20CDAE',
-				data: healthScores2,
+				data: healthScores,
 			},
 		],
 	};
@@ -55,7 +54,7 @@ const InsightsOverallScore = ({ overallData, totalClients }) => {
 			<SpaceBetween>
 				<div>
 					<SubH1>Overall Clients Health Score</SubH1>
-					<BoldStyled>Total Clients: {total}</BoldStyled>
+					<BoldStyled>Total Clients: {totalClients}</BoldStyled>
 					<br />
 					<BoldStyled>Average Score: {average}.0</BoldStyled>
 				</div>
