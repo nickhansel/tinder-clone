@@ -5,7 +5,7 @@ import { BADGES, mainColors, mintGreen } from 'utils';
 import { ButtonCharts } from './styles';
 import { METRICS_STATE } from '../constants';
 
-const InsightsStrategy = () => {
+const InsightsStrategy = ({ overallData }) => {
 	const [stateWins, setState] = useState(false);
 
 	const handleToggle = () => {
@@ -17,40 +17,80 @@ const InsightsStrategy = () => {
 		{
 			name: BADGES.ATTENTION,
 			title: 'Attention',
-			score: 13,
-			percent: 60,
+			score: 0,
+			percent: 0,
 		},
 		{
 			name: BADGES.CONTACT,
 			title: 'New Contact',
-			score: 10,
-			percent: 50,
+			score: 0,
+			percent: 0,
 		},
 		{
 			name: BADGES.FEATURE,
 			title: 'New Feature',
-			score: 5,
-			percent: 10,
+			score: 0,
+			percent: 0,
 		},
 		{
 			name: BADGES.BUG,
 			title: 'Bug',
-			score: 6,
-			percent: 12,
+			score: 0,
+			percent: 0,
 		},
 		{
 			name: BADGES.ESCALATION,
 			title: 'Escalation',
-			score: 2,
-			percent: 6,
+			score: 0,
+			percent: 0,
 		},
 		{
 			name: BADGES.CUSTOM,
 			title: 'Custom',
-			score: 6,
-			percent: 12,
+			score: 0,
+			percent: 0,
 		},
 	];
+
+	function getBadges(strategyData, badgeDict) {
+		let totalBadges = 0;
+
+		for (let i = 0; i < strategyData.length; i++) {
+			for (let j = 0; j < strategyData[i].strategy.items.length; j++) {
+				if (strategyData[i].strategy.items[j].badgeName == 'attention') {
+					totalBadges += 1;
+					badgeDict[0].score += 1;
+				} else if (strategyData[i].strategy.items[j].badgeName == 'contact') {
+					totalBadges += 1;
+					badgeDict[1].score += 1;
+				} else if (strategyData[i].strategy.items[j].badgeName == 'feature') {
+					totalBadges += 1;
+					badgeDict[2].score += 1;
+				} else if (strategyData[i].strategy.items[j].badgeName == 'bug') {
+					totalBadges += 1;
+					badgeDict[3].score += 1;
+				} else if (
+					strategyData[i].strategy.items[j].badgeName == 'escalation'
+				) {
+					totalBadges += 1;
+					badgeDict[4].score += 1;
+				} else if (strategyData[i].strategy.items[j].badgeName == 'custom') {
+					totalBadges += 1;
+					badgeDict[5].score += 1;
+				}
+			}
+		}
+
+		badgeDict.forEach((element) => {
+			element.percent = (element.score / totalBadges) * 100;
+		});
+
+		return badgeDict;
+	}
+
+	// console.log(overallData);
+	let newBadgeDict = getBadges(overallData.listClients.items, currentBadges);
+
 	const winsBadges = [
 		{
 			name: BADGES.ATTENTION,
@@ -100,7 +140,7 @@ const InsightsStrategy = () => {
 	let buttonName = METRICS_STATE.ASSIGNED;
 	let title = 'Badges currently assigned';
 	let progressColor = mainColors.brightBlue;
-	let data = currentBadges;
+	let data = newBadgeDict;
 
 	if (stateWins) {
 		buttonName = METRICS_STATE.WINS;

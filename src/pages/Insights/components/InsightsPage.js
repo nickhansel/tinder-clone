@@ -99,6 +99,10 @@ const InsightsPage = () => {
 		totalClients: data.listClients.items.length,
 	};
 
+	const insightsStrategyProps = {
+		overallData: data,
+	};
+
 	return (
 		<Layout {...layoutProps}>
 			<Row justify='center'>
@@ -114,7 +118,7 @@ const InsightsPage = () => {
 					<ClientCard onNameClick={handleCardClick} {...clientTopBottom[0]} />
 				</div>
 				<CardContainer height={440} width={335} className='strategy-metrica'>
-					<InsightsStrategy />
+					<InsightsStrategy {...insightsStrategyProps} />
 				</CardContainer>
 				<CardWrap height={440} className='insights-moods'>
 					<InsightsMood clients={clientNames} />
