@@ -20,7 +20,7 @@ export default function useCurrentUser() {
 
   // get user from out db
   const { data: currentUser = {} } = useQuery(gql(getUser), {
-    variables: { id: userData.id },
+    variables: { id: userData ? userData.id : '' },
   });
 
   return currentUser.getUser || currentUser;

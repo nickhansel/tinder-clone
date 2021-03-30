@@ -24,23 +24,23 @@ const DashboardPage = ({ history }) => {
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
-  const [authUserData, setAuthUserData] = useState('');
+  const [authUserData, setAuthUserData] = useState({});
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
-    variables: { id: authUserData.id },
+    variables: { id: authUserData ? authUserData.id : 'us-east-1:97965bee-1388-4e07-8aa6-7999a454ed16'},
   });
 
   const [createUser, { loading: creatingUser }] = useMutation(
     gql(createUserMutation), { 
       refetchQueries: [{
         query: gql(getUser),
-        variables: { id: authUserData.id },
+        variables: { id: authUserData ? authUserData.id : '' },
       }]
     });
 
   useEffect(() => {
-    if (!authUserData.id) {
+    if (authUserData != null && !authUserData.id) {
       Auth.currentUserInfo()
         .then((data) => {
           setAuthUserData(data);
