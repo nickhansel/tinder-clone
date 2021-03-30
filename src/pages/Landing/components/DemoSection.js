@@ -2,20 +2,22 @@
    Contact Page
  */
 
-import React from "react";
-import { Col } from "antd";
-import bgVideo from "media/landing/bg-video.png";
-import { RowDemo, Container, StyledInfoSection } from "./styles";
-import ReactPlayer from "react-player";
-import { DEMO_URL } from "../constants";
-import "./styles.css";
+import React from 'react';
+import { Col } from 'antd';
+import bgVideo from 'media/landing/bg-video.png';
+import { RowDemo, Container, StyledInfoSection } from './styles';
+import ReactPlayer from 'react-player';
+import { DEMO_URL } from '../constants';
+import './styles.css';
 
 const DemoSection = () => {
   const InfoSection = (
-    <Col className="info-col" flex="1 1 250px" style={{ marginRight: 40 }}>
+    <Col className="info-col"
+      flex="1 1 250px"
+      style={{ marginRight: 40 }}>
       <StyledInfoSection>
-        <h2 style={{ color: "white" }}>See Empava In Action</h2>
-        <p style={{ color: "white" }}>
+        <h2 style={{ color: 'white' }}>See Empava In Action</h2>
+        <p style={{ color: 'white' }}>
           Empower your account managers, gamify their workflow and provide the
           entire team with Intuitive quick access to the tools and data that
           matter most.
@@ -28,10 +30,10 @@ const DemoSection = () => {
     <div
       id="section2"
       style={{
-        width: "100%",
+        width: '100%',
         height: 700,
         backgroundImage: `url(${bgVideo})`,
-        backgroundSize: "cover",
+        backgroundSize: 'cover',
       }}
     >
       <Container>

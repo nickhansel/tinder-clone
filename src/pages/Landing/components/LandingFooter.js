@@ -1,8 +1,8 @@
 /*
   Landing Footer Page
  */
-import React from "react";
-import { StyledFooter, FooterContent } from "./styles";
+import React from 'react';
+import { StyledFooter, FooterContent } from './styles';
 
 const LandingFooter = () => {
   return (

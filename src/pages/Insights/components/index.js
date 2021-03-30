@@ -1,3 +1,3 @@
-import InsightsPage from "./InsightsPage";
+import InsightsPage from './InsightsPage';
 
 export default InsightsPage;

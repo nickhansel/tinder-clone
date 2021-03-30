@@ -17,6 +17,10 @@
     "clsx": "^1.1.1",
     "connected-react-router": "^6.8.0",
     "core-js": "^3.6.5",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-react": "^7.5.1",
     "glamor": "^2.20.40",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
@@ -46,7 +50,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint . --quiet",
+    "lint-autofix": "./node_modules/.bin/eslint . --quiet --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -56,5 +62,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.3.1"
+  }
 }

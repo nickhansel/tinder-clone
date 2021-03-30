@@ -2,12 +2,12 @@
   Client List component
  */
 
-import React from "react";
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
-import { deleteClientNote } from "graphql/mutations";
-import { getClient } from "graphql/queries";
-import { Note, CardWrap } from "common";
+import React from 'react';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import { deleteClientNote } from 'graphql/mutations';
+import { getClient } from 'graphql/queries';
+import { Note, CardWrap } from 'common';
 
 const ClientDetailsNotesList = ({
   noteProps,
@@ -37,7 +37,7 @@ const ClientDetailsNotesList = ({
       client.writeQuery({
         query: gql(getClient),
         data: {
-          __typename: "Client",
+          __typename: 'Client',
           getClient: {
             ...data.getClient,
             noteId: {
@@ -63,7 +63,8 @@ const ClientDetailsNotesList = ({
       {notesData &&
         notesData.length > 0 &&
         notesData.slice(minVal, maxVal).map((note, index) => (
-          <CardWrap {...noteProps} key={index}>
+          <CardWrap {...noteProps}
+            key={index}>
             <Note
               deleting={deleting}
               authorName={authorName}
@@ -71,7 +72,8 @@ const ClientDetailsNotesList = ({
               deleteNote={handleDeleteNote}
             />
           </CardWrap>
-        ))}
+        ))
+      }
     </>
   );
 };

@@ -1,0 +1,57 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2016,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "jest": true,
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "DEBUG": false
+  },
+  "rules": {
+    "react/jsx-fragments": ["off"],
+    "ember-suave/no-const-outside-module-scope": "off",
+    "ember-suave/require-access-in-comments": "off",
+    "indent": ["error", 2, {
+      "MemberExpression": 1,
+      "SwitchCase": 1
+    }],
+    "keyword-spacing": ["error", {}],
+    "no-console": "off",
+    "no-constant-condition": "off",
+    "one-var": ["error", "never"],
+    "operator-linebreak": "off",
+    "quotes": ["error", "single", {
+      "allowTemplateLiterals": true,
+      "avoidEscape": true
+    }],
+    "spaced-comment": ["error", "always", {
+      "block": {
+        "balanced": true,
+        "exceptions": ["*"]
+      }
+    }],
+    "template-curly-spacing": ["error", "never"],
+    "semi": ["error", "always"],
+    "react/jsx-max-props-per-line": ["error"]
+  }
+}

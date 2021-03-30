@@ -1,10 +1,10 @@
 /*
    Component to provide layout for settings tabs
  */
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Col } from "antd";
-import { CardWrap } from "common";
+import { Col } from 'antd';
+import { CardWrap } from 'common';
 
 
 const TabLayout = ({
@@ -23,6 +23,6 @@ const TabLayout = ({
 TabLayout.propTypes = {
   spanSize: PropTypes.number,
   content: PropTypes.any,
-}
+};
 
 export default TabLayout;

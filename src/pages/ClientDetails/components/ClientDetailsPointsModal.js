@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Modal } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Modal } from 'antd';
 
 const ClientDetailsPointsModal = ({ isOpen, handleToggle, content }) => {
   const contentProps = {
     style: {
-      overflow: "auto",
+      overflow: 'auto',
       height: 420,
     },
   };

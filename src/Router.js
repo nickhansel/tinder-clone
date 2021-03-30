@@ -12,19 +12,30 @@ import {
   ClientDetailsPage,
   DashboardPage,
   LandingPage,
-} from "pages";
+} from 'pages';
 
 const Routes = () => (
   <Router>
     <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route path='/auth' component={Authenticator} />
-      <Route exact path="/dashboard" component={DashboardPage} />
-      <Route exact path="/clients/:clientId" component={ClientDetailsPage} />
-      <Route exact path="/settings" component={SettingsPage} />
-      <Route exact path="/insights" component={InsightsPage} />
+      <Route exact
+        path="/"
+        component={LandingPage} />
+      <Route path='/auth'
+        component={Authenticator} />
+      <Route exact
+        path="/dashboard"
+        component={DashboardPage} />
+      <Route exact
+        path="/clients/:clientId"
+        component={ClientDetailsPage} />
+      <Route exact
+        path="/settings"
+        component={SettingsPage} />
+      <Route exact
+        path="/insights"
+        component={InsightsPage} />
     </Switch>
   </Router>
-)
+);
 
-export default Routes
+export default Routes;

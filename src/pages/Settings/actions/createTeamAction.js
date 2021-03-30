@@ -1,4 +1,4 @@
-import { generateId } from "utils";
+import { generateId } from 'utils';
 
 // Action to create a new employee and connections to skills
 const createTeamAction = (newData, createTeam, userId, linkUserTeam) => {
@@ -14,7 +14,7 @@ const createTeamAction = (newData, createTeam, userId, linkUserTeam) => {
         sfUsername: username
       },
     },
-  })
+  });
 };
 
 export default createTeamAction;

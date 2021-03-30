@@ -1,5 +1,5 @@
-//import React from "react";
-import { generateId } from "utils";
+// import React from "react";
+import { generateId } from 'utils';
 
 // Action to create a new employee and connections to skills
 const createSubscribtionAction = (createSubscribtion, data) => {
@@ -15,7 +15,7 @@ const createSubscribtionAction = (createSubscribtion, data) => {
     .then((res) => {
       console.log(res);
     })
-    .catch((error) => console.log("error" + error));
+    .catch((error) => console.log('error' + error));
 };
 
 export default createSubscribtionAction;

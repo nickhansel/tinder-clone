@@ -8,30 +8,30 @@ export const CARD_SIZES = {
 };
 
 export const BASE_URLS = {
-  AUTH: "auth",
-  DASHBOARD: "dashboard",
-  INSIGHTS: "insights",
-  SETTINGS: "settings",
-  CLIENTS: "clients",
+  AUTH: 'auth',
+  DASHBOARD: 'dashboard',
+  INSIGHTS: 'insights',
+  SETTINGS: 'settings',
+  CLIENTS: 'clients',
 };
 
 export const BADGES = {
-  ATTENTION: "attention",
-  BUG: "bug",
-  CONTACT: "contact",
-  ESCALATION: "escalation",
-  FEATURE: "feature",
-  CUSTOM: "custom",
+  ATTENTION: 'attention',
+  BUG: 'bug',
+  CONTACT: 'contact',
+  ESCALATION: 'escalation',
+  FEATURE: 'feature',
+  CUSTOM: 'custom',
 };
 
 export const STRATEGIES = {
-  ATTENTION: "Attention",
-  CONTACT: "New Contact",
-  FEATURE: "New Feature",
-  BUG: "Bug",
-  ESCALATION: "Escalation",
-  CUSTOM: "Custom",
-  ADD: "Add",
+  ATTENTION: 'Attention',
+  CONTACT: 'New Contact',
+  FEATURE: 'New Feature',
+  BUG: 'Bug',
+  ESCALATION: 'Escalation',
+  CUSTOM: 'Custom',
+  ADD: 'Add',
 };
 
 export const LAYOUT_SIZES = {

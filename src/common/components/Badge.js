@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Tooltip } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Tooltip } from 'antd';
 import {
   iconBug,
   iconAttention,
@@ -9,9 +9,9 @@ import {
   iconNewFeature,
   iconCustom,
   iconAdd,
-} from "media/svg";
-import { BudgeStyled } from "./styles";
-import { capitalizeFirstLetter } from "utils";
+} from 'media/svg';
+import { BudgeStyled } from './styles';
+import { capitalizeFirstLetter } from 'utils';
 
 const statusData = {
   attention: iconAttention,
@@ -26,7 +26,7 @@ const statusData = {
 const Badge = ({ strategy, size }) => {
   let dimentions = 32;
 
-  if (size === "lrg") {
+  if (size === 'lrg') {
     dimentions = 50;
   }
 
@@ -38,7 +38,8 @@ const Badge = ({ strategy, size }) => {
   return (
     <BudgeStyled style={style}>
       <Tooltip title={capitalizeFirstLetter(strategy)}>
-        <img src={statusData[strategy]} alt="health score" />
+        <img src={statusData[strategy]}
+          alt="health score" />
       </Tooltip>
     </BudgeStyled>
   );

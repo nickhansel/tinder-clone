@@ -2,8 +2,8 @@
   header styled components
  */
 
-import styled from "styled-components";
-import { mainColors, typeScale, typeScaleSm, weightScale, fonts } from "utils";
+import styled from 'styled-components';
+import { mainColors, typeScale, typeScaleSm, weightScale, fonts } from 'utils';
 
 export const Title = styled.h1`
   color: black;

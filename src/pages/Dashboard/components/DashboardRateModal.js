@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Modal } from "antd";
-import { ButtonConfirm, ButtonCancel, Text } from "common";
-import Rater from "./Rater";
-import { FlexRate, FlexRateWord, TextArea, RateModalTitle } from "./styles";
-import "./styles.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Modal } from 'antd';
+import { ButtonConfirm, ButtonCancel, Text } from 'common';
+import Rater from './Rater';
+import { FlexRate, FlexRateWord, TextArea, RateModalTitle } from './styles';
+import './styles.css';
 
 const BUTTON_WIDTH = 140;
 
@@ -21,7 +21,7 @@ const DashboardRateModal = ({
   };
 
   const textProps = {
-    style: { color: "#4F4F4F" },
+    style: { color: '#4F4F4F' },
   };
 
   return (
@@ -33,7 +33,8 @@ const DashboardRateModal = ({
       width={682}
       closable={false}
       footer={[
-        <ButtonCancel style={{ width: BUTTON_WIDTH }} onClick={handleFinish}>
+        <ButtonCancel style={{ width: BUTTON_WIDTH }}
+          onClick={handleFinish}>
           Skip
         </ButtonCancel>,
         <ButtonConfirm

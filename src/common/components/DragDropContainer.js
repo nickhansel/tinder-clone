@@ -2,11 +2,11 @@
    Container for drag and drop
  */
 
-import React from "react";
-import { useDrag } from "react-dnd";
+import React from 'react';
+import { useDrag } from 'react-dnd';
 
 const DragDropContainer = ({ name, children, actionOnFinish, style }) => {
-  const item = { name, type: "icon" };
+  const item = { name, type: 'icon' };
   const [{ opacity }, drag] = useDrag({
     item,
     end(item, monitor) {
@@ -22,7 +22,8 @@ const DragDropContainer = ({ name, children, actionOnFinish, style }) => {
   });
 
   return (
-    <div ref={drag} style={style}>
+    <div ref={drag}
+      style={style}>
       {children}
     </div>
   );

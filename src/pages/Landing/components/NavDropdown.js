@@ -1,6 +1,6 @@
-import React from "react";
-import { Menu, Dropdown } from "antd";
-import { MenuUnfoldOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Menu, Dropdown } from 'antd';
+import { MenuUnfoldOutlined } from '@ant-design/icons';
 
 const menu = (
   <Menu>
@@ -21,8 +21,10 @@ const menu = (
 
 const NavDropdown = () => {
   return (
-    <Dropdown overlay={menu} trigger={["click"]}>
-      <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+    <Dropdown overlay={menu}
+      trigger={['click']}>
+      <a className="ant-dropdown-link"
+        onClick={(e) => e.preventDefault()}>
         <MenuUnfoldOutlined />
       </a>
     </Dropdown>

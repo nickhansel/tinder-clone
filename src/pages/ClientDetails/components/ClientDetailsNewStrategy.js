@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
-import { createStrategy } from "graphql/mutations";
-import { getClient } from "graphql/queries";
-import { Modal, Row, Form, Input, Divider, Col, message } from "antd";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import { createStrategy } from 'graphql/mutations';
+import { getClient } from 'graphql/queries';
+import { Modal, Row, Form, Input, Divider, Col, message } from 'antd';
 import {
   TextInfo,
   Flex,
@@ -14,9 +14,9 @@ import {
   StrategyIcons,
   ButtonConfirm,
   ButtonCancel,
-} from "common";
-import { BADGES, mainColors, generateId } from "utils";
-import { STRATEGY_MESSAGES } from "../constants";
+} from 'common';
+import { BADGES, mainColors, generateId } from 'utils';
+import { STRATEGY_MESSAGES } from '../constants';
 
 const { TextArea } = Input;
 const badgeNames = Object.values(BADGES);
@@ -25,7 +25,7 @@ const badgeNames = Object.values(BADGES);
 const formStyle = {
   labelCol: { span: 8 },
   wrapperCol: { span: 22 },
-  layout: "vertical",
+  layout: 'vertical',
 };
 
 const ClientDetailsNewStrategy = ({
@@ -82,12 +82,12 @@ const ClientDetailsNewStrategy = ({
         },
       },
     });
-    message.success("Strategy created");
+    message.success('Strategy created');
     form.resetFields();
     handleToggle(false);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
   const handleStrategyClick = (strategyName) => {
     setSelectedStrategy(strategyName);
@@ -108,25 +108,25 @@ const ClientDetailsNewStrategy = ({
       <Form.Item
         label="Title"
         name="title"
-        rules={[{ required: true, message: "Please input note title" }]}
+        rules={[{ required: true, message: 'Please input note title' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Note"
         name="strategy_note"
-        rules={[{ required: true, message: "Please note text" }]}
+        rules={[{ required: true, message: 'Please note text' }]}
       >
         <TextArea />
       </Form.Item>
     </Form>
   );
 
-  const selected = selectedStrategy || "";
+  const selected = selectedStrategy || '';
   const modalTitle = (
     <div>
       <span>
-        Assign a Strategy Badge to the <BoldStyled>{companyName}</BoldStyled>{" "}
+        Assign a Strategy Badge to the <BoldStyled>{companyName}</BoldStyled>{' '}
         Account
       </span>
       <Note1Grey>
@@ -138,7 +138,7 @@ const ClientDetailsNewStrategy = ({
   const iconContainerStyle = {
     fontSize: 12,
     margin: 8,
-    width: "max-content",
+    width: 'max-content',
   };
   // currently selected badge would keep it's color
   const renderBages = badgeNames.map((badgeName, index) => {
@@ -148,18 +148,18 @@ const ClientDetailsNewStrategy = ({
       <Col
         key={index}
         onClick={() => handleStrategyClick(badgeName)}
-        style={{ textAlign: "center" }}
+        style={{ textAlign: 'center' }}
       >
         <div style={iconContainerStyle}>
           {selected ? StrategyIcons[badgeName](badgeColor) : null}
         </div>
-        <Note2>{selected ? STRATEGY_MESSAGES[badgeName]["title"] : null}</Note2>
+        <Note2>{selected ? STRATEGY_MESSAGES[badgeName]['title'] : null}</Note2>
       </Col>
     );
   });
   const renderStrategyMessage = (
-    <TextInfo style={{ padding: "14px 0px 0px 14px" }}>
-      {selected ? STRATEGY_MESSAGES[selected]["message"](companyName) : null}
+    <TextInfo style={{ padding: '14px 0px 0px 14px' }}>
+      {selected ? STRATEGY_MESSAGES[selected]['message'](companyName) : null}
     </TextInfo>
   );
 
@@ -172,7 +172,8 @@ const ClientDetailsNewStrategy = ({
       title={modalTitle}
       onCancel={() => handleToggle(false)}
       footer={[
-        <ButtonCancel key="back" onClick={() => handleToggle(false)}>
+        <ButtonCancel key="back"
+          onClick={() => handleToggle(false)}>
           Cancel
         </ButtonCancel>,
         <ButtonConfirm
@@ -191,8 +192,8 @@ const ClientDetailsNewStrategy = ({
           <Col style={{ width: 240 }}>
             <Row
               style={{
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
+                flexWrap: 'wrap',
+                justifyContent: 'space-evenly',
               }}
             >
               {renderBages}

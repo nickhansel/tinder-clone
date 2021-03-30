@@ -2,8 +2,8 @@
   styled components
  */
 
-import styled from "styled-components";
-import { Row } from "antd";
+import styled from 'styled-components';
+import { Row } from 'antd';
 
 export const ClientProfileStyled = styled.div`
   display: flex;

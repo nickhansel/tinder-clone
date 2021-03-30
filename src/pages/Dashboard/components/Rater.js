@@ -1,7 +1,7 @@
-import React from "react";
-import { Rate } from "antd";
+import React from 'react';
+import { Rate } from 'antd';
 
-const desc = ["very bad", "bad", "normal", "good", "very good"];
+const desc = ['very bad', 'bad', 'normal', 'good', 'very good'];
 
 class Rater extends React.Component {
   state = {
@@ -17,7 +17,7 @@ class Rater extends React.Component {
     return (
       <span>
         <Rate
-          style={{ color: "#82ADD7", fontSize: 60 }}
+          style={{ color: '#82ADD7', fontSize: 60 }}
           tooltips={desc}
           onChange={this.handleChange}
           value={value}

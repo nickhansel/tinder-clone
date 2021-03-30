@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import gql from "graphql-tag";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { createClientNote } from "graphql/mutations";
-import { getClient } from "graphql/queries";
-import { Modal, Form, Input, Button, message } from "antd";
-import { generateId } from "utils";
-import { ButtonCancel, ButtonConfirm } from "common";
-import "./styles.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { createClientNote } from 'graphql/mutations';
+import { getClient } from 'graphql/queries';
+import { Modal, Form, Input, Button, message } from 'antd';
+import { generateId } from 'utils';
+import { ButtonCancel, ButtonConfirm } from 'common';
+import './styles.css';
 
 const { TextArea } = Input;
 
@@ -28,7 +28,7 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
         cache.writeQuery({
           query: gql(getClient),
           data: {
-            __typename: "Client",
+            __typename: 'Client',
             getClient: {
               ...client,
               noteId: {
@@ -54,17 +54,17 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       },
     });
 
-    message.success("Note created");
+    message.success('Note created');
     form.resetFields();
     handleToggle();
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
 
   const formStyle = {
     wrapperCol: { span: 24, offset: 0 },
-    layout: "vertical"
+    layout: 'vertical'
   };
 
   const renderForm = (
@@ -81,14 +81,14 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
       <Form.Item
         label="Title"
         name="title"
-        rules={[{ required: true, message: "Please input note title" }]}
+        rules={[{ required: true, message: 'Please input note title' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Note"
         name="note_content"
-        rules={[{ required: true, message: "Please note text" }]}
+        rules={[{ required: true, message: 'Please note text' }]}
       >
         <TextArea />
       </Form.Item>

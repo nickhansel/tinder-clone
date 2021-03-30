@@ -2,9 +2,9 @@
    Client Profile
  */
 
-import React, { useState } from "react";
-import { useDrop } from "react-dnd";
-import { Row, Divider } from "antd";
+import React, { useState } from 'react';
+import { useDrop } from 'react-dnd';
+import { Row, Divider } from 'antd';
 import {
   AvatarContainer,
   SubH1,
@@ -13,12 +13,12 @@ import {
   Note1Grey,
   Badge,
   DividerStyled,
-} from "common";
-import HealthMeter from "./HealthMeter";
-import ProfileSection from "./ProfileSection";
-import ClientStrategyModal from "pages/Dashboard/components/ClientStrategyModal";
-import { mockMoods } from "utils/mock";
-import { iconMenu } from "media/svg";
+} from 'common';
+import HealthMeter from './HealthMeter';
+import ProfileSection from './ProfileSection';
+import ClientStrategyModal from 'pages/Dashboard/components/ClientStrategyModal';
+import { mockMoods } from 'utils/mock';
+import { iconMenu } from 'media/svg';
 
 const ClientProfile = ({
   id,
@@ -34,10 +34,10 @@ const ClientProfile = ({
   const [isBadgeModal, toggleBadgeModal] = useState(false);
   const clientMood = mockMoods[avatarId]; // TODO change to real data
   const [{ canDrop, isOver }, drop] = useDrop({
-    accept: "icon",
+    accept: 'icon',
     drop: () => ({
       name: `Dustbin`,
-      allowedDropEffect: "any",
+      allowedDropEffect: 'any',
     }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -51,7 +51,8 @@ const ClientProfile = ({
 
   // Components render
   const renderBadges = strategyItems.map((item, index) => (
-    <Badge key={index} strategy={item.badgeName} />
+    <Badge key={index}
+      strategy={item.badgeName} />
   ));
 
   const sectionHeader = (
@@ -60,7 +61,8 @@ const ClientProfile = ({
         header={<Note1Grey>Renewal Date</Note1Grey>}
         content={[<Note1>{renewalDate}</Note1>]}
       />
-      <Divider type="vertical" style={{ height: 56 }} />
+      <Divider type="vertical"
+        style={{ height: 56 }} />
       <ProfileSection
         header={<Note1Grey style={{ marginLeft: 20 }}>Contract</Note1Grey>}
         content={[<Note1 style={{ marginLeft: 14 }}>${contract}/month</Note1>]}
@@ -75,7 +77,8 @@ const ClientProfile = ({
 
   return (
     <Row justify="center">
-      <div ref={drop} style={{ opacity: isActive ? 0.5 : 1 }}>
+      <div ref={drop}
+        style={{ opacity: isActive ? 0.5 : 1 }}>
         <AvatarContainer
           isChamp={isChamp}
           isDecisionMaker={isDecisionMaker}
@@ -92,12 +95,15 @@ const ClientProfile = ({
               <b>{company}</b>
             </Note2>,
           ]}
-          extra={<img style={iconProps} src={iconMenu} alt="" />}
+          extra={<img style={iconProps}
+            src={iconMenu}
+            alt="" />}
         />
         <DividerStyled />
         <HealthMeter healthScore={healthScore} />
         <Row>
-          <ProfileSection header={sectionHeader} content={[]} />
+          <ProfileSection header={sectionHeader}
+            content={[]} />
         </Row>
         <DividerStyled />
         <Row onClick={() => toggleBadgeModal(true)}>{renderBadges}</Row>

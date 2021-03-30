@@ -2,11 +2,11 @@
   Client List component
  */
 
-import React, { useState } from "react";
-import { Row } from "antd";
-import { ClientCard } from "common";
-import ClientStrategyModal from "./ClientStrategyModal";
-import DashboardRateModal from "./DashboardRateModal";
+import React, { useState } from 'react';
+import { Row } from 'antd';
+import { ClientCard } from 'common';
+import ClientStrategyModal from './ClientStrategyModal';
+import DashboardRateModal from './DashboardRateModal';
 
 const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   const [isBadgeModal, toggleBadgeModal] = useState(false);
@@ -28,16 +28,16 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
     <>
       <Row justify="center">
         {data.length > 0 &&
-          data
-            .slice(minVal, maxVal)
-            .map((client, index) => (
-              <ClientCard
-                key={index}
-                {...client}
-                onNameClick={handleRateToggle}
-                onBadgeClick={handleBadgeToggle}
-              />
-            ))}
+            data
+              .slice(minVal, maxVal)
+              .map((client, index) => (
+                <ClientCard
+                  key={index}
+                  {...client}
+                  onNameClick={handleRateToggle}
+                  onBadgeClick={handleBadgeToggle}
+                />
+              ))}
       </Row>
       <DashboardRateModal
         clientName={selectedClientName}

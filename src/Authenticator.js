@@ -1,21 +1,21 @@
-import React from "react";
-import { Note1Grey } from "common";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { Note1Grey } from 'common';
+import { withRouter } from 'react-router-dom';
 
-import SignIn from "./auth/SignIn";
-import SignUp from "./auth/SignUp";
+import SignIn from './auth/SignIn';
+import SignUp from './auth/SignUp';
 
 const styles = {
   buttonContainer: {
-    display: "flex",
-    marginBottom: "30px",
-    justifyContent: "center",
+    display: 'flex',
+    marginBottom: '30px',
+    justifyContent: 'center',
   },
   button: {
-    width: "100px",
-    paddingBottom: "10px",
-    cursor: "pointer",
-    borderBottom: "2px solid transparent",
+    width: '100px',
+    paddingBottom: '10px',
+    cursor: 'pointer',
+    borderBottom: '2px solid transparent',
   },
 };
 
@@ -34,17 +34,18 @@ class Authenticator extends React.Component {
     const { showSignIn } = this.state;
     const styleSignIn = {
       ...styles.button,
-      borderBottomColor: !showSignIn ? "#ddd" : "",
+      borderBottomColor: !showSignIn ? '#ddd' : '',
     };
     const styleSignOut = {
       ...styles.button,
-      borderBottomColor: showSignIn ? "#ddd" : "",
+      borderBottomColor: showSignIn ? '#ddd' : '',
     };
 
     return (
-      <div style={{ marginTop: "60px" }}>
+      <div style={{ marginTop: '60px' }}>
         <div style={styles.buttonContainer}>
-          <Note1Grey style={styleSignIn} onClick={() => this.switchState(true)}>
+          <Note1Grey style={styleSignIn}
+            onClick={() => this.switchState(true)}>
             Sign In
           </Note1Grey>
           <Note1Grey

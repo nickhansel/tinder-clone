@@ -1,6 +1,6 @@
-import React from "react";
-import { SubH2, Direction, SpaceBetween } from "common";
-import { SubH2Blue } from "./styles";
+import React from 'react';
+import { SubH2, Direction, SpaceBetween } from 'common';
+import { SubH2Blue } from './styles';
 
 const InsightsMood = ({ clients }) => {
   const renderMoodList = clients.map((client) => (

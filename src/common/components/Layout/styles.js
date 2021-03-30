@@ -2,9 +2,9 @@
    styled components for Layout
  */
 
-import styled from "styled-components";
-import { slateGrey, mainColors, LAYOUT_SIZES } from "utils";
-import { Layout, Divider } from "antd";
+import styled from 'styled-components';
+import { slateGrey, mainColors, LAYOUT_SIZES } from 'utils';
+import { Layout, Divider } from 'antd';
 
 const { MAX_CONTENT_WIDTH } = LAYOUT_SIZES;
 

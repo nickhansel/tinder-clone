@@ -1,3 +1,3 @@
-import InsightsPage from "./components";
+import InsightsPage from './components';
 
 export default InsightsPage;

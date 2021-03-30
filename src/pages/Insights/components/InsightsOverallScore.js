@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Chart } from "chart.js";
-import { SubH1, BoldStyled, SpaceBetween, Flex } from "common";
-import { ButtonCharts } from "./styles";
-import { getAvg } from "utils";
+import React, { useState, useEffect } from 'react';
+import { Chart } from 'chart.js';
+import { SubH1, BoldStyled, SpaceBetween, Flex } from 'common';
+import { ButtonCharts } from './styles';
+import { getAvg } from 'utils';
 
 // Mock data
 const healthScores = [
@@ -24,11 +24,11 @@ const healthScores = [
 ];
 const average = getAvg(healthScores);
 const data = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
-      label: "",
-      borderColor: "#20CDAE",
+      label: '',
+      borderColor: '#20CDAE',
       data: healthScores,
     },
   ],
@@ -39,9 +39,9 @@ const InsightsOverallScore = () => {
 
   useEffect(() => {
     // Initalize chart when components mounted
-    const ctx = document.getElementById("lineChart");
+    const ctx = document.getElementById('lineChart');
     const myChart = new Chart(ctx, {
-      type: "line",
+      type: 'line',
       data: data,
       options: {
         legend: {
@@ -63,7 +63,7 @@ const InsightsOverallScore = () => {
         <Flex>
           <ButtonCharts>Quater</ButtonCharts>
           <ButtonCharts
-            style={{ border: "1px solid #BDBDBD", color: "#BDBDBD" }}
+            style={{ border: '1px solid #BDBDBD', color: '#BDBDBD' }}
           >
             Year
           </ButtonCharts>

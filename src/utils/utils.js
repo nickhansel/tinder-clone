@@ -1,8 +1,8 @@
 /*
    Helper methods
  */
-import { mockData } from "./mock";
-import { mintGreen, roseRed, mustardYellow } from "utils";
+import { mockData } from './mock';
+import { mintGreen, roseRed, mustardYellow } from 'utils';
 
 /*
    Temporary helper to search for client based on location
@@ -32,37 +32,37 @@ const filterHelper = (data, moods) => {
 
 export const filterDataByMood = (data, moodId) => {
   switch (moodId) {
-    case "all":
+    case 'all':
       return data;
-    case "champ":
+    case 'champ':
       return filterHelper(data, [
-        "champBoy",
-        "champGirl",
-        "happyBoy",
-        "happyGirl",
+        'champBoy',
+        'champGirl',
+        'happyBoy',
+        'happyGirl',
       ]);
-    case "attention":
-      return filterHelper(data, ["curiousGirl", "curiousBoy"]);
-    case "cold":
-      return filterHelper(data, ["indiffBoy", "indiffGirl"]);
-    case "risk":
-      return filterHelper(data, ["sadBoy", "sadGirl"]);
+    case 'attention':
+      return filterHelper(data, ['curiousGirl', 'curiousBoy']);
+    case 'cold':
+      return filterHelper(data, ['indiffBoy', 'indiffGirl']);
+    case 'risk':
+      return filterHelper(data, ['sadBoy', 'sadGirl']);
     default:
       return data;
   }
 };
 
 export const getError = (err) => {
-  let msg = "Problem witht the request";
+  let msg = 'Problem witht the request';
 
   if (err.response) {
     const data = err.response.data;
 
     if (data.message) {
       msg = data.message;
-    } else if (typeof data === "object") {
+    } else if (typeof data === 'object') {
       const errors = Object.values(data);
-      msg = errors.flat().join(", ");
+      msg = errors.flat().join(', ');
     }
 
     return msg;
@@ -92,10 +92,10 @@ Calculate the displayed length for the health meter health score
 export const getHealthLen = (healthScore) => {
   const code = getHealthCode(healthScore);
   const len = {
-    top: "100%",
-    high: "95%",
-    mid: "70%",
-    low: "35%",
+    top: '100%',
+    high: '95%',
+    mid: '70%',
+    low: '35%',
   };
 
   return len[code];
@@ -105,15 +105,15 @@ export const getHealthLen = (healthScore) => {
 Calculate the code for the health based on health score
 */
 export const getHealthCode = (healthScore) => {
-  if (healthScore === 5) return "top";
+  if (healthScore === 5) return 'top';
 
-  let healthCode = "high";
+  let healthCode = 'high';
 
   if (healthScore < 4 && healthScore >= 2.8) {
-    healthCode = "mid";
+    healthCode = 'mid';
   }
   if (healthScore < 2.8) {
-    healthCode = "low";
+    healthCode = 'low';
   }
 
   return healthCode;
@@ -139,7 +139,7 @@ export const getAvg = (data) => {
 };
 
 export const getIdFromLocation = (location) => {
-  const reg = "[^/]+$";
+  const reg = '[^/]+$';
   return location.pathname.match(reg)[0];
 };
 
