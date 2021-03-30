@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import {
   withRouter,
   Route,
   Redirect,
-} from 'react-router-dom'
-import { Auth } from 'aws-amplify'
+} from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
 class PrivateRoute extends React.Component {
   state = {
@@ -13,29 +13,29 @@ class PrivateRoute extends React.Component {
   }
   
   componentDidMount() {
-    this.authenticate()
+    this.authenticate();
     this.unlisten = this.props.history.listen(() => {
       Auth.currentAuthenticatedUser()
         .then(user => console.log('user: ', user))
         .catch(() => {
-          if (this.state.isAuthenticated) this.setState({ isAuthenticated: false })
-        })
+          if (this.state.isAuthenticated) this.setState({ isAuthenticated: false });
+        });
     });
   }
   componentWillUnmount() {
-    this.unlisten()
+    this.unlisten();
   }
   authenticate() {
     Auth.currentAuthenticatedUser()
       .then(() => {
-        this.setState({ loaded: true, isAuthenticated: true })
+        this.setState({ loaded: true, isAuthenticated: true });
       })
-      .catch(() => this.props.history.push('/auth'))
+      .catch(() => this.props.history.push('/auth'));
   }
   render() {
-    const { component: Component, ...rest } = this.props
-    const { loaded , isAuthenticated} = this.state
-    if (!loaded) return null
+    const { component: Component, ...rest } = this.props;
+    const { loaded , isAuthenticated} = this.state;
+    if (!loaded) return null;
     return (
       <Route
         {...rest}
@@ -45,14 +45,14 @@ class PrivateRoute extends React.Component {
           ) : (
             <Redirect
               to={{
-                pathname: "/auth",
+                pathname: '/auth',
               }}
             />
-          )
+          );
         }}
       />
-    )
+    );
   }
 }
 
-export default withRouter(PrivateRoute)
+export default withRouter(PrivateRoute);

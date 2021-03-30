@@ -17,7 +17,7 @@ import {
   Profile,
   StrategyIcons,
   ActionHeader
-} from "./components";
+} from './components';
 
 export {
   Layout,
@@ -38,6 +38,6 @@ export {
 };
 
 // Styled Components
-export * from "./components/Typography";
-export * from "./components/Buttons";
-export * from "./components/styles";
+export * from './components/Typography';
+export * from './components/Buttons';
+export * from './components/styles';

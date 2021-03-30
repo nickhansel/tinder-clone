@@ -2,22 +2,22 @@
   Layout component
  */
 
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import SignOutButton from "auth/SignOutButton";
-import SearchInput from "./SearchInput";
-import { Layout as AntLayout, Menu } from "antd";
-import { SubH1, Profile, Flex } from "common";
-import { BASE_URLS } from "utils";
-import { iconPulse, iconGear, iconPerson, iconLogo } from "media/svg";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import SignOutButton from 'auth/SignOutButton';
+import SearchInput from './SearchInput';
+import { Layout as AntLayout, Menu } from 'antd';
+import { SubH1, Profile, Flex } from 'common';
+import { BASE_URLS } from 'utils';
+import { iconPulse, iconGear, iconPerson, iconLogo } from 'media/svg';
 import {
   ContentContainer,
   IconStyled,
   HeaderStyled,
   HeaderActions,
   StyledTopHeader,
-} from "./styles";
-import "./styles.css";
+} from './styles';
+import './styles.css';
 
 const { Sider } = AntLayout;
 const { Item } = Menu;
@@ -39,15 +39,22 @@ const Layout = ({ prefix, children, title, extra = null }) => {
     history.push(`/${url}`);
   };
 
-  const renderIconGear = <IconStyled src={iconGear} alt="logo settings" />;
-  const renderIconPulse = <IconStyled src={iconPulse} alt="logo insights" />;
-  const renderIconPerson = <IconStyled src={iconPerson} alt="logo dashboard" />;
+  const renderIconGear = <IconStyled src={iconGear}
+    alt="logo settings" />;
+  const renderIconPulse = <IconStyled src={iconPulse}
+    alt="logo insights" />;
+  const renderIconPerson = <IconStyled src={iconPerson}
+    alt="logo dashboard" />;
 
   return (
     <AntLayout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null}
+        collapsible
+        collapsed={collapsed}>
         <div className="logo-side-bar">
-          <img src={iconLogo} onClick={() => toggle()} alt="logo side bar" />
+          <img src={iconLogo}
+            onClick={() => toggle()}
+            alt="logo side bar" />
         </div>
         <Menu
           theme="dark"
@@ -57,15 +64,18 @@ const Layout = ({ prefix, children, title, extra = null }) => {
           onSelect={(key) => setSelectedItem(key)}
           collapsed="true"
           selectedKeys={[selectedItem]}
-          defaultSelectedKeys={["dashboard"]}
+          defaultSelectedKeys={['dashboard']}
         >
-          <Item key="dashboard" icon={renderIconPerson}>
+          <Item key="dashboard"
+            icon={renderIconPerson}>
             Dashboard
           </Item>
-          <Item key="insights" icon={renderIconPulse}>
+          <Item key="insights"
+            icon={renderIconPulse}>
             Insights
           </Item>
-          <Item key="settings" icon={renderIconGear}>
+          <Item key="settings"
+            icon={renderIconGear}>
             Settings
           </Item>
         </Menu>

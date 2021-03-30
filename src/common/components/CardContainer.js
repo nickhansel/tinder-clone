@@ -1,10 +1,10 @@
 /*
    Client Dtail Card 
  */
-import React from "react";
-import PropTypes from "prop-types";
-import { StyledCardContainer } from "./styles";
-import "./styles.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { StyledCardContainer } from './styles';
+import './styles.css';
 
 const CardContainer = ({ children, height, width, style }) => {
   const containerProps = {

@@ -1,15 +1,15 @@
-import React from "react";
-import { Spin } from "antd";
+import React from 'react';
+import { Spin } from 'antd';
 
 const Loading = () => {
   return (
     <div
       style={{
-        display: "flex",
-        height: "100%",
+        display: 'flex',
+        height: '100%',
         margintTop: 200,
-        justifyContent: "center",
-        width: "100%",
+        justifyContent: 'center',
+        width: '100%',
       }}
     >
       <Spin size="large" />

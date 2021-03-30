@@ -2,8 +2,8 @@
    ProfileSection
  */
 
-import React from "react";
-import { SpaceBetween } from "common";
+import React from 'react';
+import { SpaceBetween } from 'common';
 
 const ProfileSection = ({ header, content, extra }) => {
   const renderContent = (
@@ -15,7 +15,7 @@ const ProfileSection = ({ header, content, extra }) => {
   );
 
   return (
-    <div style={{ marginTop: 10, width: "100%" }}>
+    <div style={{ marginTop: 10, width: '100%' }}>
       <SpaceBetween>
         {header}
         {extra}

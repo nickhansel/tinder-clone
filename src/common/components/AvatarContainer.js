@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Tooltip } from "antd";
-import { AvatarStyled } from "./styles";
-import { greyBg } from "media/images";
-import { iconStarMaker, iconCrown, iconNewMail } from "media/svg";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Tooltip } from 'antd';
+import { AvatarStyled } from './styles';
+import { greyBg } from 'media/images';
+import { iconStarMaker, iconCrown, iconNewMail } from 'media/svg';
 
 const AvatarContainer = ({
   mood,
-  mode = "croped",
+  mode = 'croped',
   isDecisionMaker,
   isChamp,
   isImpatient,
@@ -17,13 +17,14 @@ const AvatarContainer = ({
     croped: 249,
   };
   const newMailIcon = isImpatient ? (
-    <Tooltip title="New Mail" placement="topLeft">
+    <Tooltip title="New Mail"
+      placement="topLeft">
       <img
         style={{
           height: 24,
           left: 180,
           top: 10,
-          position: "absolute",
+          position: 'absolute',
           width: 24,
         }}
         src={iconNewMail}
@@ -32,13 +33,14 @@ const AvatarContainer = ({
     </Tooltip>
   ) : null;
   const champIcon = isChamp ? (
-    <Tooltip title="Champion" placement="topLeft">
+    <Tooltip title="Champion"
+      placement="topLeft">
       <img
         style={{
           height: 32,
           left: 188,
           top: 5,
-          position: "absolute",
+          position: 'absolute',
           width: 32,
         }}
         src={iconCrown}
@@ -47,12 +49,13 @@ const AvatarContainer = ({
     </Tooltip>
   ) : null;
   const decisionMakerIcon = isDecisionMaker ? (
-    <Tooltip title="Decision Maker" placement="topLeft">
+    <Tooltip title="Decision Maker"
+      placement="topLeft">
       <img
         style={{
           height: 32,
           left: 188,
-          position: "absolute",
+          position: 'absolute',
           top: isChamp ? 40 : 5,
           width: 32,
         }}
@@ -64,12 +67,13 @@ const AvatarContainer = ({
 
   return (
     <AvatarStyled style={{ height: size[mode], width: 230 }}>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: 'relative' }}>
         {newMailIcon}
         {champIcon}
         {decisionMakerIcon}
       </div>
-      <img src={mood || greyBg} alt="" />
+      <img src={mood || greyBg}
+        alt="" />
     </AvatarStyled>
   );
 };

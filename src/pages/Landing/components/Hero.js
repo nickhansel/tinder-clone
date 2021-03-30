@@ -2,20 +2,20 @@
    Hero Page
  */
 
-import React from "react";
-import { Row, Col, Carousel } from "antd";
-import { CarouselStyled, MainHeaderText, HeroBgContainer } from "./styles";
-import "./styles.css";
+import React from 'react';
+import { Row, Col, Carousel } from 'antd';
+import { CarouselStyled, MainHeaderText, HeroBgContainer } from './styles';
+import './styles.css';
 
 const carouselStyle = {
-  color: "#fff",
-  textAlign: "center",
+  color: '#fff',
+  textAlign: 'center',
 };
 
 const renderCarousel = (
   <CarouselStyled>
     <Carousel
-      dots={{ className: "my-dots-class" }}
+      dots={{ className: 'my-dots-class' }}
       autoplay
       speed={500}
       effect="fade"
@@ -23,26 +23,26 @@ const renderCarousel = (
       style={{ width: 700 }}
     >
       <div>
-        {" "}
+        {' '}
         <img
           style={carouselStyle}
-          src={"https://empava-storage.s3.amazonaws.com/dashboard.png"}
+          src={'https://empava-storage.s3.amazonaws.com/dashboard.png'}
           alt="carousel dashboard"
         />
       </div>
       <div>
-        {" "}
+        {' '}
         <img
           style={carouselStyle}
-          src={"https://empava-storage.s3.amazonaws.com/client-profile.jpg"}
+          src={'https://empava-storage.s3.amazonaws.com/client-profile.jpg'}
           alt="carousel dashboard client"
         />
       </div>
       <div>
-        {" "}
+        {' '}
         <img
           style={carouselStyle}
-          src={"https://empava-storage.s3.amazonaws.com/relationship.jpg"}
+          src={'https://empava-storage.s3.amazonaws.com/relationship.jpg'}
           alt="carousel relationship"
         />
       </div>
@@ -65,7 +65,7 @@ const Hero = () => {
           </MainHeaderText>
         </Col>
       </Row>
-      <div style={{ width: "100%", justifyContent: "center", display: "flex" }}>
+      <div style={{ width: '100%', justifyContent: 'center', display: 'flex' }}>
         {renderCarousel}
       </div>
     </HeroBgContainer>

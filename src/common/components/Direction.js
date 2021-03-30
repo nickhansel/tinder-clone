@@ -1,6 +1,6 @@
-import React from "react";
-import iconUp from "media/svg/icon-up.svg";
-import iconDwon from "media/svg/icon-down.svg";
+import React from 'react';
+import iconUp from 'media/svg/icon-up.svg';
+import iconDwon from 'media/svg/icon-down.svg';
 
 const Direction = ({ direction }) => {
   const directionsMap = {
@@ -9,7 +9,8 @@ const Direction = ({ direction }) => {
   };
 
   return (
-    <img src={directionsMap[direction]} alt={`direction icon ${direction}`} />
+    <img src={directionsMap[direction]}
+      alt={`direction icon ${direction}`} />
   );
 };
 

@@ -2,8 +2,8 @@
    styled components for shared components 
  */
 
-import styled from "styled-components";
-import { mainColors } from "utils";
+import styled from 'styled-components';
+import { mainColors } from 'utils';
 
 export const AuthInput = styled.input`
   border: none;

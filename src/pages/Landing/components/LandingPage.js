@@ -2,18 +2,18 @@
    Landing Page
  */
 
-import React from "react";
-import Header from "./Header";
-import Hero from "./Hero";
-import FeaturesSection from "./FeaturesSection";
-import AvatarsSection from "./AvatarsSection";
-import ContactSection from "./ContactSection";
-import LandingFooter from "./LandingFooter";
-import DemoSection from "./DemoSection";
+import React from 'react';
+import Header from './Header';
+import Hero from './Hero';
+import FeaturesSection from './FeaturesSection';
+import AvatarsSection from './AvatarsSection';
+import ContactSection from './ContactSection';
+import LandingFooter from './LandingFooter';
+import DemoSection from './DemoSection';
 
 const LandingPage = () => {
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div style={{ overflow: 'hidden' }}>
       <Header />
       <Hero />
       <FeaturesSection />

@@ -2,10 +2,10 @@
    Health Meter
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import { Note1Grey, SpaceBetween } from "common";
-import { getHealthColor, getHealthLen } from "utils";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Note1Grey, SpaceBetween } from 'common';
+import { getHealthColor, getHealthLen } from 'utils';
 
 const HealthMeter = ({ healthScore }) => {
   const score = parseFloat(healthScore);
@@ -13,10 +13,10 @@ const HealthMeter = ({ healthScore }) => {
   const healthLen = getHealthLen(score);
 
   const iconContainerStyle = {
-    background: "#ffffff",
-    borderColor: "#BDBDBD",
+    background: '#ffffff',
+    borderColor: '#BDBDBD',
     borderRadius: 24,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderWidth: 0.8,
     height: 18,
     paddingRight: 10,
@@ -32,7 +32,7 @@ const HealthMeter = ({ healthScore }) => {
   const rateStyle = {
     color: healthColor,
     fontWeight: 700,
-    textAlign: "center",
+    textAlign: 'center',
   };
 
   return (

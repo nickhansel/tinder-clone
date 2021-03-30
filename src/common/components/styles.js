@@ -2,9 +2,9 @@
    styled components for shared components 
  */
 
-import styled, { css } from "styled-components";
-import { Divider } from "antd";
-import { mainColors, weightScale } from "utils";
+import styled, { css } from 'styled-components';
+import { Divider } from 'antd';
+import { mainColors, weightScale } from 'utils';
 
 const sharedButtonStyles = css`
   border: none;

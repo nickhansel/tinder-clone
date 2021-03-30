@@ -1,3 +1,3 @@
-import SettingsPage from "./components";
+import SettingsPage from './components';
 
 export default SettingsPage;

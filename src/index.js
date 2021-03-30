@@ -1,18 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import * as serviceWorker from "./serviceWorker";
-import { ApolloProvider } from "@apollo/react-hooks";
-import App from "./App";
-import "./index.css";
-import { ApolloLink } from "apollo-link";
-import ApolloClient from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { createAuthLink } from "aws-appsync-auth-link";
-import { createHttpLink } from "apollo-link-http";
-import { AUTH_TYPE } from "aws-appsync";
-import Amplify from "aws-amplify";
-import awsExports from "./aws-exports";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import * as serviceWorker from './serviceWorker';
+import { ApolloProvider } from '@apollo/react-hooks';
+import App from './App';
+import './index.css';
+import { ApolloLink } from 'apollo-link';
+import ApolloClient from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { createAuthLink } from 'aws-appsync-auth-link';
+import { createHttpLink } from 'apollo-link-http';
+import { AUTH_TYPE } from 'aws-appsync';
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
 
 Amplify.configure(awsExports);
 
@@ -36,11 +36,12 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={App} />
+        <Route path="/"
+          component={App} />
       </Switch>
     </BrowserRouter>
   </ApolloProvider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

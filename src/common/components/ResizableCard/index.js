@@ -1,3 +1,3 @@
-import ResizableCard from "./ResizableCard";
+import ResizableCard from './ResizableCard';
 
 export default ResizableCard;

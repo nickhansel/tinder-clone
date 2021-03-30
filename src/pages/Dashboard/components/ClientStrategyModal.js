@@ -1,10 +1,10 @@
-import React from "react";
-import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import { getClient } from "graphql/queries";
-import { deleteStrategy } from "graphql/mutations";
-import { Modal, Divider } from "antd";
-import { Note, Loading } from "common";
+import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { getClient } from 'graphql/queries';
+import { deleteStrategy } from 'graphql/mutations';
+import { Modal, Divider } from 'antd';
+import { Note, Loading } from 'common';
 
 const ClientStrategyModal = ({
   selectedClientId,
@@ -28,7 +28,7 @@ const ClientStrategyModal = ({
       client.writeQuery({
         query: gql(getClient),
         data: {
-          __typename: "Client",
+          __typename: 'Client',
           getClient: {
             ...data.getClient,
             strategy: {
@@ -62,7 +62,8 @@ const ClientStrategyModal = ({
   ) : (
     clientStrategys.map((item, key) => {
       return (
-        <div key={key} style={{ marginTop: 15 }}>
+        <div key={key}
+          style={{ marginTop: 15 }}>
           <Note
             height={95}
             type="strategy"

@@ -1,24 +1,24 @@
 /*
    Client Page
  */
-import React, { useState } from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
-import { getClient } from "graphql/queries";
-import { Row, Pagination, Tooltip } from "antd";
-import ClientDetailsNewNote from "./ClientDetailsNewNote";
-import ClientDetailsNewStrategy from "./ClientDetailsNewStrategy";
-import ClientDetailsNotesList from "./ClientDetailsNotesList";
-import ClientProfile from "./ClientDetailsProfile";
-import ClientDetailsTouchPoints from "./ClientDetailsTouchPoints";
-import ClientDetailsToolbox from "./ClientDetailsToolbox";
-import { Layout, Note2, H3, CardWrap, Loading } from "common";
-import { RowPagination } from "./styles";
-import { iconBack, iconAddCircle } from "media/svg";
-import "./styles.css";
-import { touchPointsMock, getIdFromLocation } from "utils";
+import React, { useState } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { getClient } from 'graphql/queries';
+import { Row, Pagination, Tooltip } from 'antd';
+import ClientDetailsNewNote from './ClientDetailsNewNote';
+import ClientDetailsNewStrategy from './ClientDetailsNewStrategy';
+import ClientDetailsNotesList from './ClientDetailsNotesList';
+import ClientProfile from './ClientDetailsProfile';
+import ClientDetailsTouchPoints from './ClientDetailsTouchPoints';
+import ClientDetailsToolbox from './ClientDetailsToolbox';
+import { Layout, Note2, H3, CardWrap, Loading } from 'common';
+import { RowPagination } from './styles';
+import { iconBack, iconAddCircle } from 'media/svg';
+import './styles.css';
+import { touchPointsMock, getIdFromLocation } from 'utils';
 
 const NOTES_EACH_PAGE = 4;
 
@@ -65,12 +65,13 @@ const ClientDetailsPage = ({ history, location }) => {
   const layoutProps = {
     title: accountId ? (
       <span>
-        <b style={{ color: "#0E3860" }}>{accountId.name}</b> - {name}
+        <b style={{ color: '#0E3860' }}>{accountId.name}</b> - {name}
       </span>
     ) : (
-      ""
+      ''
     ),
-    prefix: <img src={iconBack} alt="" />,
+    prefix: <img src={iconBack}
+      alt="" />,
   };
 
   const renderContent = () => {
@@ -83,10 +84,10 @@ const ClientDetailsPage = ({ history, location }) => {
 
     const noteProps = {
       height: 200,
-      className: "details-note",
+      className: 'details-note',
     };
     const rowProps = {
-      justify: "center",
+      justify: 'center',
     };
     const noteListProps = {
       noteProps,
@@ -94,7 +95,7 @@ const ClientDetailsPage = ({ history, location }) => {
       notesData: notesData,
       minVal,
       maxVal,
-      authorName: contactId ? contactId.name : "",
+      authorName: contactId ? contactId.name : '',
     };
     const paginationProps = {
       current: page,
@@ -112,9 +113,10 @@ const ClientDetailsPage = ({ history, location }) => {
             <CardWrap className="details-card details-profile">
               <ClientProfile {...clientData} />
             </CardWrap>
-            <CardWrap height={320} className="details-card details-touch">
+            <CardWrap height={320}
+              className="details-card details-touch">
               <ClientDetailsTouchPoints
-                authorName={contactId ? contactId.name : ""}
+                authorName={contactId ? contactId.name : ''}
                 touchPoints={touchPoints}
               />
             </CardWrap>
@@ -127,11 +129,11 @@ const ClientDetailsPage = ({ history, location }) => {
           </Row>
           <RowPagination className="details-pagination">
             <H3>
-              Notes{" "}
+                Notes{' '}
               <Tooltip title="Add Note">
                 <img
                   onClick={() => toggleNewNoteModal(true)}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   src={iconAddCircle}
                   alt="add note"
                 />

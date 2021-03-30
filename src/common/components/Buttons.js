@@ -2,10 +2,10 @@
   Buttons styled components
  */
 
-import styled from "styled-components";
-import { Button } from "antd";
+import styled from 'styled-components';
+import { Button } from 'antd';
 
-import { mainColors, fonts, typeScaleSm, weightScale } from "utils";
+import { mainColors, fonts, typeScaleSm, weightScale } from 'utils';
 
 export const ButtonStyled = styled(Button)`
   border-radius: 8px;

@@ -2,12 +2,12 @@
    Client Touch Points
  */
 
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Typography } from "antd";
-import { SubH2, Note1Grey, Flex, DividerStyled } from "common";
-import ClientDetailsPointsModal from "./ClientDetailsPointsModal";
-import { iconMail } from "media/svg";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Typography } from 'antd';
+import { SubH2, Note1Grey, Flex, DividerStyled } from 'common';
+import ClientDetailsPointsModal from './ClientDetailsPointsModal';
+import { iconMail } from 'media/svg';
 
 const { Paragraph } = Typography;
 
@@ -15,10 +15,10 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
   const [isModalOpen, togglePointsModal] = useState(false);
 
   const styleAuthor = {
-    color: "#115CE5",
+    color: '#115CE5',
   };
   const paragraphProps = {
-    ellipsis: { rows: 2, expandable: true, symbol: "more" },
+    ellipsis: { rows: 2, expandable: true, symbol: 'more' },
   };
 
   const renderTouchPoints = (
@@ -27,9 +27,10 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
         return (
           <span key={index}>
             <Flex>
-              <img src={iconMail} alt="icon mail last touch points" />
-              <Note1Grey style={{ padding: "0px 8px" }}>
-                {point.createdAt} by{" "}
+              <img src={iconMail}
+                alt="icon mail last touch points" />
+              <Note1Grey style={{ padding: '0px 8px' }}>
+                {point.createdAt} by{' '}
               </Note1Grey>
               <span style={{ ...styleAuthor }}>{authorName}</span>
             </Flex>
@@ -42,18 +43,18 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
 
   const actionWrapperStyle = {
     bottom: 0,
-    position: "absolute",
-    width: "100%",
+    position: 'absolute',
+    width: '100%',
   };
   const actionTextStyle = {
     margin: 0,
-    color: "#14709F",
-    cursor: "pointer",
+    color: '#14709F',
+    cursor: 'pointer',
   };
   const renderAction = (
     <div style={{ ...actionWrapperStyle }}>
       <DividerStyled />
-      <Flex style={{ justifyContent: "center" }}>
+      <Flex style={{ justifyContent: 'center' }}>
         <SubH2
           onClick={() => togglePointsModal(true)}
           style={{ ...actionTextStyle }}
@@ -65,11 +66,11 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
   );
 
   const wrapperStyle = {
-    position: "relative",
-    height: "100%",
+    position: 'relative',
+    height: '100%',
   };
   const contentStyle = {
-    overflow: "auto",
+    overflow: 'auto',
     height: 220,
   };
 

@@ -2,9 +2,9 @@
    styled components for Dashboard page
  */
 
-import { Flex, AdaptiveTitle } from "common";
-import styled from "styled-components";
-import { mainColors, spacing } from "utils";
+import { Flex, AdaptiveTitle } from 'common';
+import styled from 'styled-components';
+import { mainColors, spacing } from 'utils';
 
 export const MoodFilterWrapper = styled.div`
   background-color: ${mainColors.white};

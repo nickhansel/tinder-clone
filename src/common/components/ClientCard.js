@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { AvatarContainer, HealthButton, Badge } from "common";
-import { SubH1, Note2 } from "./Typography";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { AvatarContainer, HealthButton, Badge } from 'common';
+import { SubH1, Note2 } from './Typography';
 import {
   ClientCardStyled,
   ContainerFlex,
   DividerStyled,
   BoldStyled,
-} from "./styles";
-import { mainColors, mockMoods } from "utils";
+} from './styles';
+import { mainColors, mockMoods } from 'utils';
 
 const ClientCard = ({
   id,
@@ -31,16 +31,17 @@ const ClientCard = ({
   }
   const score = parseFloat(healthScore);
   const isChamp = score > 4.5;
-  const isImpatient = avatarId === "impatientGirl";
+  const isImpatient = avatarId === 'impatientGirl';
   const clientMood = mockMoods[avatarId];
   const renderBadges = strategyItems.map((strategyItem, index) => (
-    <Badge key={index} strategy={strategyItem.badgeName} />
+    <Badge key={index}
+      strategy={strategyItem.badgeName} />
   ));
 
   // Props
   const avatarProps = {
     mood: clientMood,
-    mode: "croped",
+    mode: 'croped',
     isDecisionMaker,
     isChamp,
     isImpatient

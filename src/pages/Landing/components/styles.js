@@ -1,18 +1,18 @@
 /*
   Styled componets for Landing Page
  */
-import styled, { css } from "styled-components";
-import { Row } from "antd";
+import styled, { css } from 'styled-components';
+import { Row } from 'antd';
 import {
   primaryBlue,
   primaryGreen,
   bgLightBlue,
   contactBlue,
   secondaryFont,
-} from "utils";
-import heroBgImgSm from "media/landing/hero-bg-mobile.jpg";
-import heroBgImgLg from "media/landing/bg-hero.png";
-import heroBg from "media/landing/bg-mb.png";
+} from 'utils';
+import heroBgImgSm from 'media/landing/hero-bg-mobile.jpg';
+import heroBgImgLg from 'media/landing/bg-hero.png';
+import heroBg from 'media/landing/bg-mb.png';
 
 const sharedButtonStyles = css`
   border: none;

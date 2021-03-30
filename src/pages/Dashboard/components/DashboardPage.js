@@ -2,52 +2,52 @@
    Dashboard Page 
  */
 
-import React, { useState, useEffect } from "react";
-import { Auth } from "aws-amplify";
-import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import { listClientsDash, getUser } from "graphql/queries";
-import { createUser as createUserMutation } from "graphql/mutations";
-import { Pagination } from "antd";
-import DashboardClientList from "./DashboardClientList";
-import MoodFilter from "./DashboardMoodFilter";
-import DashboardSort from "./DashboardSort";
-import { Layout, Note2, Loading } from "common";
-import { DASHBOARD_TITLE, NUM_EACH_PAGE } from "../constants";
-import { FlexContainer } from "./styles";
-import { filterDataByMood, CURRENT_USER } from "utils";
-import "./styles.css";
+import React, { useState, useEffect } from 'react';
+import { Auth } from 'aws-amplify';
+import gql from 'graphql-tag';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { listClientsDash, getUser } from 'graphql/queries';
+import { createUser as createUserMutation } from 'graphql/mutations';
+import { Pagination } from 'antd';
+import DashboardClientList from './DashboardClientList';
+import MoodFilter from './DashboardMoodFilter';
+import DashboardSort from './DashboardSort';
+import { Layout, Note2, Loading } from 'common';
+import { DASHBOARD_TITLE, NUM_EACH_PAGE } from '../constants';
+import { FlexContainer } from './styles';
+import { filterDataByMood, CURRENT_USER } from 'utils';
+import './styles.css';
 
 const DashboardPage = ({ history }) => {
-  const [moodId, setMoodId] = useState("all");
+  const [moodId, setMoodId] = useState('all');
   const [filtering, setFiltering] = useState(false);
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
-  const [authUserData, setAuthUserData] = useState("");
+  const [authUserData, setAuthUserData] = useState({});
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
-    variables: { id: authUserData.id },
+    variables: { id: authUserData ? authUserData.id : 'us-east-1:97965bee-1388-4e07-8aa6-7999a454ed16'},
   });
 
   const [createUser, { loading: creatingUser }] = useMutation(
     gql(createUserMutation), { 
       refetchQueries: [{
         query: gql(getUser),
-        variables: { id: authUserData.id },
+        variables: { id: authUserData ? authUserData.id : '' },
       }]
-  });
+    });
 
   useEffect(() => {
-    if (!authUserData.id) {
+    if (authUserData != null && !authUserData.id) {
       Auth.currentUserInfo()
         .then((data) => {
           setAuthUserData(data);
         })
-        .catch((err) => console.log("error: ", err));
+        .catch((err) => console.log('error: ', err));
     }
-  })
+  });
 
   useEffect(() => {
     if (userData && userData.getUser === null) {
@@ -59,7 +59,7 @@ const DashboardPage = ({ history }) => {
             email: authUserData.attributes.email
           },
         },
-      })
+      });
     }
   }, [userData]);
 
@@ -86,7 +86,8 @@ const DashboardPage = ({ history }) => {
   const totalClients = clientsData.length;
 
   const moodFilter = (
-    <MoodFilter setMoodId={setMoodId} setFiltering={setFiltering} />
+    <MoodFilter setMoodId={setMoodId}
+      setFiltering={setFiltering} />
   );
 
   const onChange = (page) => {
@@ -116,11 +117,12 @@ const DashboardPage = ({ history }) => {
       <Loading />
     </div>
   ) : (
-      <DashboardClientList {...cardListProps} />
-    );
+    <DashboardClientList {...cardListProps} />
+  );
 
   return (
-    <Layout title={DASHBOARD_TITLE} extra={moodFilter}>
+    <Layout title={DASHBOARD_TITLE}
+      extra={moodFilter}>
       <FlexContainer>
         <DashboardSort />
         <Pagination {...paginationProps} />

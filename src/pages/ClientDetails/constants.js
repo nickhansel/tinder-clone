@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const STRATEGY_MESSAGES = {
   attention: {
@@ -7,7 +7,7 @@ const STRATEGY_MESSAGES = {
         Would {company} benifit from <b>Extra Attention?</b>
       </>
     ),
-    title:  "Attention"
+    title:  'Attention'
   },
   bug: {
     message: (company) => (
@@ -15,16 +15,16 @@ const STRATEGY_MESSAGES = {
         Has {company} encoutnered a <b>bug</b> or issue that needs to resolved?
       </>
     ),
-    title: "Bug",
+    title: 'Bug',
   },
   contact: {
     message: (company) => (
       <>
-        Hit a wall with your current contact at {company} and need to find a{" "}
+        Hit a wall with your current contact at {company} and need to find a{' '}
         <b>New Contact</b> to talk to?
       </>
     ),
-    title: "New Contact",
+    title: 'New Contact',
   },
   escalation: {
     message: (company) => (
@@ -33,7 +33,7 @@ const STRATEGY_MESSAGES = {
         additional resources
       </>
     ),
-    title: "Escalation",
+    title: 'Escalation',
   },
   feature: {
     message: (company) => (
@@ -41,16 +41,16 @@ const STRATEGY_MESSAGES = {
         Does {company} have a resonable <b>New Feature</b> request?
       </>
     ),
-    title: "New Feature",
+    title: 'New Feature',
   },
   custom: {
     message: (company) => (
       <>
-        Implement a <b>Custom</b> strategy to improve your relationship with{" "}
-        {company}{" "}
+        Implement a <b>Custom</b> strategy to improve your relationship with{' '}
+        {company}{' '}
       </>
     ),
-    title: "Custom",
+    title: 'Custom',
   }
 };
 

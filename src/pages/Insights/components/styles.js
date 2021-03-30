@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { SubH2 } from "common";
-import { mainColors } from "utils";
+import styled from 'styled-components';
+import { SubH2 } from 'common';
+import { mainColors } from 'utils';
 
 export const SubH2Blue = styled(SubH2)`
   color: ${mainColors.brightBlue};

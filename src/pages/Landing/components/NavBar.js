@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const NavBar = () => {
   return (
     <div
       style={{
-        display: "flex",
+        display: 'flex',
         fontWeight: 500,
-        justifyContent: "space-around",
+        justifyContent: 'space-around',
         marginLeft: 40,
         marginTop: 5,
         width: 450,

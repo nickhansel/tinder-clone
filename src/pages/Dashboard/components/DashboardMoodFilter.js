@@ -1,7 +1,7 @@
-import React from "react";
-import { MoodFilterContainer, MoodFilterWrapper } from "./styles";
-import { MOOD_FILTER } from "../constants";
-import { Note1 } from "common";
+import React from 'react';
+import { MoodFilterContainer, MoodFilterWrapper } from './styles';
+import { MOOD_FILTER } from '../constants';
+import { Note1 } from 'common';
 
 const MoodFilter = ({ setMoodId, setFiltering, clientsData }) => {
   const handleMoodClick = (moodId) => {
@@ -13,7 +13,9 @@ const MoodFilter = ({ setMoodId, setFiltering, clientsData }) => {
   };
 
   const filterButton = ({ id, name }) => (
-    <button id={id} key={id} onClick={() => handleMoodClick(id)}>
+    <button id={id}
+      key={id}
+      onClick={() => handleMoodClick(id)}>
       <Note1>{name}</Note1>
     </button>
   );
