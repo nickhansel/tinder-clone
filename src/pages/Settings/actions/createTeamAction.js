@@ -5,6 +5,7 @@ const createTeamAction = (newData, createTeam, userId, linkUserTeam) => {
   const { teamName, username, password, token } = newData;
 
   const teamId = generateId();
+
   createTeam({
     variables: {
       input: {
@@ -14,6 +15,14 @@ const createTeamAction = (newData, createTeam, userId, linkUserTeam) => {
         sfUsername: username
       },
     },
+  }).then(res => {
+    console.log(res);
+    linkUserTeam({
+      variables: {
+        id: userId,
+        userTeamId: teamId
+      }
+    });
   });
 };
 

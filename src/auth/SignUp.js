@@ -27,6 +27,7 @@ const SignUp = () => {
     authCode: '',
   });
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [error, setError] = useState({});
 
   const onChange = (key, value) => {
     setUserData({
@@ -47,7 +48,10 @@ const SignUp = () => {
       },
     })
       .then(() => setShowConfirmation(true))
-      .catch((err) => console.log('error signing up: ', err));
+      .catch((err) => {
+        console.log('error signing up: ', err);
+        setError(err);
+      });
   };
 
   const confirmSignUp = () => {
@@ -84,6 +88,9 @@ const SignUp = () => {
               placeholder="Phone Number"
               onChange={(evt) => onChange('phone_number', evt.target.value)}
             />
+          </div>
+          <div>
+            <p style={{ color: 'red'}}>{error.message}</p>
           </div>
           <Flex>
             <ButtonCancel onClick={onCancel}>

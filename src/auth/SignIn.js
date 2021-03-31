@@ -19,6 +19,7 @@ const styles = {
 
 const SignIn = () => {
   const history = useHistory();
+  const [error, setError] = useState({});
   const [userData, setUserData] = useState({
     username: '',
     password: '',
@@ -37,7 +38,10 @@ const SignIn = () => {
       .then((user) => {
         history.push(BASE_URLS.DASHBOARD);
       })
-      .catch((err) => console.log('error signing in...: ', err));
+      .catch((err) => {
+        console.log('error signing in...: ', err);
+        setError(err);
+      });
   };
   const onCancel = () => {
     history.push('/');
@@ -55,6 +59,9 @@ const SignIn = () => {
           onChange={(evt) => onChange('password', evt.target.value)}
           placeholder="password"
         />
+      </div>
+      <div>
+        <p style={{ color: 'red'}}>{error.message}</p>
       </div>
       <Flex>
         <ButtonCancel onClick={onCancel}>
