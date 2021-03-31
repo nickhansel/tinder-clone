@@ -19,8 +19,10 @@ const createTeamAction = (newData, createTeam, userId, linkUserTeam) => {
     console.log(res);
     linkUserTeam({
       variables: {
-        id: userId,
-        userTeamId: teamId
+        input: {
+          id: userId,
+          userTeamId: teamId
+        }
       }
     });
   });

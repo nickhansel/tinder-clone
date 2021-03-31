@@ -3,6 +3,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Auth } from 'aws-amplify';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -28,7 +29,7 @@ const DashboardPage = ({ history }) => {
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
-    variables: { id: authUserData ? authUserData.id : 'us-east-1:97965bee-1388-4e07-8aa6-7999a454ed16'},
+    variables: { id: authUserData.id },
   });
 
   const [createUser, { loading: creatingUser }] = useMutation(
@@ -43,7 +44,9 @@ const DashboardPage = ({ history }) => {
     if (authUserData != null && !authUserData.id) {
       Auth.currentUserInfo()
         .then((data) => {
-          setAuthUserData(data);
+          if (data) {
+            setAuthUserData(data);
+          }
         })
         .catch((err) => console.log('error: ', err));
     }
@@ -130,6 +133,10 @@ const DashboardPage = ({ history }) => {
       {renderClients}
     </Layout>
   );
+};
+
+DashboardPage.propTypes = {
+  history: PropTypes.object
 };
 
 export default DashboardPage;
