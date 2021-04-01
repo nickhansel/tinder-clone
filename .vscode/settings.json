@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "files.exclude": {
     "amplify/.config": true,
     "amplify/**/*-parameters.json": true,
@@ -8,4 +9,7 @@
     "amplify/backend/amplify-meta.json": true,
     "amplify/backend/awscloudformation": true
   }
+=======
+  "editor.tabSize": 2
+>>>>>>> added initial functionality for edit note flow
 }

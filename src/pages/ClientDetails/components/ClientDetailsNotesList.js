@@ -5,13 +5,13 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { deleteClientNote } from 'graphql/mutations';
+import { deleteClientNote, updateClientNote } from 'graphql/mutations';
 import { getClient } from 'graphql/queries';
 import { Note, CardWrap } from 'common';
 
 const ClientDetailsNotesList = ({
   noteProps,
-  slectedClient,
+  selectedClient,
   notesData,
   minVal,
   maxVal,
@@ -21,13 +21,28 @@ const ClientDetailsNotesList = ({
     gql(deleteClientNote)
   );
 
+  const [updateNote, { loading: updating }] = useMutation(
+    gql(updateClientNote)
+  );
+
+  const handleUpdateNote = (noteID, noteText) => {
+    updateNote({
+      variables: {
+        input: {
+          id: noteID,
+          content: noteText,
+        },
+      },
+    });
+  };
+
   // Business logic
   const handleDeleteNote = (noteId) => {
     const updateCache = (client) => {
       const data = client.readQuery({
         query: gql(getClient),
         variables: {
-          id: slectedClient,
+          id: selectedClient,
         },
       });
       const newItems = data.getClient.noteId.items.filter(
@@ -61,19 +76,20 @@ const ClientDetailsNotesList = ({
   return (
     <>
       {notesData &&
-        notesData.length > 0 &&
-        notesData.slice(minVal, maxVal).map((note, index) => (
-          <CardWrap {...noteProps}
-            key={index}>
-            <Note
-              deleting={deleting}
-              authorName={authorName}
-              note={note}
-              deleteNote={handleDeleteNote}
-            />
-          </CardWrap>
-        ))
-      }
+				notesData.length > 0 &&
+				notesData.slice(minVal, maxVal).map((note, index) => (
+				  <CardWrap {...noteProps}
+				    key={index}>
+				    <Note
+				      deleting={deleting}
+				      authorName={authorName}
+				      note={note}
+				      deleteNote={handleDeleteNote}
+				      updating={updating}
+				      updateNote={handleUpdateNote}
+				    />
+				  </CardWrap>
+				))}
     </>
   );
 };

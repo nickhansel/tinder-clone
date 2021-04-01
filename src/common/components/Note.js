@@ -10,7 +10,7 @@ import { iconTrash } from 'media/svg';
 
 const { Paragraph } = Typography;
 
-const Note = ({ type, deleting, authorName, note, deleteNote, height }) => {
+const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNote, height }) => {
   const [noteText, setNoteText] = useState(note.content || note.description);
   const [isSpinning, toggleSpinning] = useState(false);
 
@@ -29,6 +29,13 @@ const Note = ({ type, deleting, authorName, note, deleteNote, height }) => {
         toggleSpinning(false);
       }
     }, 1000);
+  }
+
+  function confirmUpdate() {
+    // e.preventDefault();
+    // updateNote(note.id, noteText);
+    // console.log(e);
+    console.log(noteText);
   }
 
   function cancel(e) {
@@ -51,8 +58,9 @@ const Note = ({ type, deleting, authorName, note, deleteNote, height }) => {
 
   const Section = (
     <div>
-      <Paragraph {...paragraphProps}
-        editable={{ onChange: setNoteText }}>
+      <Paragraph
+        {...paragraphProps}
+        editable={{ onChange: setNoteText, onEnd: confirmUpdate  }}>
         {noteText}
       </Paragraph>
     </div>
