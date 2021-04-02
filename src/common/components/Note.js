@@ -31,11 +31,10 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
     }, 1000);
   }
 
-  function confirmUpdate() {
-    // e.preventDefault();
-    // updateNote(note.id, noteText);
+  function confirmUpdate(e) {
+    setNoteText(e);
+    updateNote(note.id, e);
     // console.log(e);
-    console.log(noteText);
   }
 
   function cancel(e) {
@@ -60,7 +59,7 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
     <div>
       <Paragraph
         {...paragraphProps}
-        editable={{ onChange: setNoteText, onEnd: confirmUpdate  }}>
+        editable={{ onChange: confirmUpdate }}>
         {noteText}
       </Paragraph>
     </div>
