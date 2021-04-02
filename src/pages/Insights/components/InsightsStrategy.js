@@ -57,24 +57,32 @@ const InsightsStrategy = ({ overallData }) => {
 
     for (let i = 0; i < strategyData.length; i++) {
       for (let j = 0; j < strategyData[i].strategy.items.length; j++) {
-        if (strategyData[i].strategy.items[j].badgeName == 'attention') {
+        const { badgeName } = strategyData[i].strategy.items[j];
+
+        if (badgeName === BADGES.ATTENTION) {
           totalBadges += 1;
           badgeDict[0].score += 1;
-        } else if (strategyData[i].strategy.items[j].badgeName == 'contact') {
+        } else if (
+          badgeName === BADGES.CONTACT
+        ) {
           totalBadges += 1;
           badgeDict[1].score += 1;
-        } else if (strategyData[i].strategy.items[j].badgeName == 'feature') {
+        } else if (
+          badgeName === BADGES.FEATURE
+        ) {
           totalBadges += 1;
           badgeDict[2].score += 1;
-        } else if (strategyData[i].strategy.items[j].badgeName == 'bug') {
+        } else if (badgeName === BADGES.BUG) {
           totalBadges += 1;
           badgeDict[3].score += 1;
         } else if (
-          strategyData[i].strategy.items[j].badgeName == 'escalation'
+          badgeName === BADGES.ESCALATION
         ) {
           totalBadges += 1;
           badgeDict[4].score += 1;
-        } else if (strategyData[i].strategy.items[j].badgeName == 'custom') {
+        } else if (
+          badgeName === BADGES.CUSTOM
+        ) {
           totalBadges += 1;
           badgeDict[5].score += 1;
         }
