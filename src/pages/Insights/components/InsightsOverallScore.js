@@ -4,38 +4,36 @@ import { SubH1, BoldStyled, SpaceBetween, Flex } from 'common';
 import { ButtonCharts } from './styles';
 import { getAvg } from 'utils';
 
-// Mock data
-const healthScores = [
-  4.5,
-  5,
-  2,
-  2.4,
-  2.4,
-  4.5,
-  5,
-  3,
-  4.3,
-  4.9,
-  1.9,
-  3.1,
-  3.2,
-  4.2,
-  4.2,
-];
-const average = getAvg(healthScores);
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: '',
-      borderColor: '#20CDAE',
-      data: healthScores,
-    },
-  ],
-};
+const InsightsOverallScore = ({ overallData, totalClients }) => {
+  const healthScores = [];
 
-const InsightsOverallScore = () => {
-  const total = 17;
+  // get the health scores from the API call and push to the new array
+  overallData.listClients.items.forEach((element) => {
+    healthScores.push(parseFloat(element.accountId.healthScore));
+  });
+
+  // get average of the health scores to display
+  const average = getAvg(healthScores);
+
+  const data = {
+    labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+    ],
+    datasets: [
+      {
+        label: '',
+        borderColor: '#20CDAE',
+        data: healthScores,
+      },
+    ],
+  };
 
   useEffect(() => {
     // Initalize chart when components mounted
@@ -56,21 +54,20 @@ const InsightsOverallScore = () => {
       <SpaceBetween>
         <div>
           <SubH1>Overall Clients Health Score</SubH1>
-          <BoldStyled>Total Clients: {total}</BoldStyled>
+          <BoldStyled>Total Clients: {totalClients}</BoldStyled>
           <br />
           <BoldStyled>Average Score: {average}.0</BoldStyled>
         </div>
         <Flex>
-          <ButtonCharts>Quater</ButtonCharts>
+          <ButtonCharts>Quarter</ButtonCharts>
           <ButtonCharts
-            style={{ border: '1px solid #BDBDBD', color: '#BDBDBD' }}
-          >
-            Year
+            style={{ border: '1px solid #BDBDBD', color: '#BDBDBD' }}>
+						Year
           </ButtonCharts>
         </Flex>
       </SpaceBetween>
       <div style={{ marginTop: 40 }}>
-        <canvas id="lineChart"></canvas>
+        <canvas id='lineChart'></canvas>
       </div>
     </div>
   );

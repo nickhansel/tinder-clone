@@ -23,11 +23,13 @@ import { touchPointsMock, getIdFromLocation } from 'utils';
 const NOTES_EACH_PAGE = 4;
 
 const ClientDetailsPage = ({ history, location }) => {
-  const slectedClient = getIdFromLocation(location);
+  const selectedClient = getIdFromLocation(location);
+  console.log(location);
+  console.log(selectedClient);
 
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: {
-      id: slectedClient,
+      id: selectedClient,
     },
   });
 
@@ -71,7 +73,7 @@ const ClientDetailsPage = ({ history, location }) => {
       ''
     ),
     prefix: <img src={iconBack}
-      alt="" />,
+      alt='' />,
   };
 
   const renderContent = () => {
@@ -91,7 +93,7 @@ const ClientDetailsPage = ({ history, location }) => {
     };
     const noteListProps = {
       noteProps,
-      slectedClient,
+      selectedClient,
       notesData: notesData,
       minVal,
       maxVal,
@@ -110,32 +112,32 @@ const ClientDetailsPage = ({ history, location }) => {
       <>
         <Row {...rowProps}>
           <Row {...rowProps}>
-            <CardWrap className="details-card details-profile">
+            <CardWrap className='details-card details-profile'>
               <ClientProfile {...clientData} />
             </CardWrap>
             <CardWrap height={320}
-              className="details-card details-touch">
+              className='details-card details-touch'>
               <ClientDetailsTouchPoints
                 authorName={contactId ? contactId.name : ''}
                 touchPoints={touchPoints}
               />
             </CardWrap>
-            <CardWrap className="details-card details-toolbox">
+            <CardWrap className='details-card details-toolbox'>
               <ClientDetailsToolbox
                 setSelectedStrategy={setSelectedStrategy}
                 handleToggle={() => toggleNewStrategyModal(true)}
               />
             </CardWrap>
           </Row>
-          <RowPagination className="details-pagination">
+          <RowPagination className='details-pagination'>
             <H3>
-                Notes{' '}
-              <Tooltip title="Add Note">
+							Notes{' '}
+              <Tooltip title='Add Note'>
                 <img
                   onClick={() => toggleNewNoteModal(true)}
                   style={{ cursor: 'pointer' }}
                   src={iconAddCircle}
-                  alt="add note"
+                  alt='add note'
                 />
               </Tooltip>
             </H3>

@@ -1,31 +1,31 @@
 .insights-overall {
-  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
-    0 5px 10px rgba(0, 0, 0, 0.032);
-  width: 556px;
+	box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+		0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+		0 5px 10px rgba(0, 0, 0, 0.032);
+	width: 556px;
 }
 
 .insights-moods {
-  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
-    0 5px 10px rgba(0, 0, 0, 0.032);
-  width: 356px;
+	box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+		0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+		0 5px 10px rgba(0, 0, 0, 0.032);
+	width: 356px;
 }
 
-.quater-moods {
-  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
-    0 5px 10px rgba(0, 0, 0, 0.032);
+.quarter-moods {
+	box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+		0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+		0 5px 10px rgba(0, 0, 0, 0.032);
 }
 
 .strategy-metrica {
-  box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
-    0 5px 10px rgba(0, 0, 0, 0.032);
+	box-shadow: 0 2.8px 8.2px rgba(0, 0, 0, 0.034),
+		0 6.7px 8.3px rgba(0, 0, 0, 0.008), 0 11.5px 10px rgba(0, 0, 0, 0.02),
+		0 5px 10px rgba(0, 0, 0, 0.032);
 }
 
 .chartjs-render-monitor {
-  height: 292px !important;
+	height: 292px !important;
 }
 
 /* @media (max-width: 1180px) {

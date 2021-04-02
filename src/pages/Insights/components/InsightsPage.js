@@ -1,6 +1,7 @@
+
 /*
-   Insights Page 
- */
+  Insights Page 
+*/
 
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +11,7 @@ import { listClientsDash } from 'graphql/queries';
 import { Row } from 'antd';
 import InsightsOverallScore from './InsightsOverallScore';
 import InsightsMood from './InsightsMood';
-import InsightsQuater from './InsightsQuater';
+import InsightsQuarter from './InsightsQuarter';
 import InsightsStrategy from './InsightsStrategy';
 import {
   Layout,
@@ -19,10 +20,11 @@ import {
   CardContainer,
   Flex,
   SubH2,
+  Loading,
 } from 'common';
 import { StyledSmileIcon } from './styles';
 import { iconSmile, iconSmileDown } from 'media/svg';
-import { mockData, clientNames, CURRENT_USER } from 'utils';
+import { clientNames, CURRENT_USER, findTopBottomClients } from 'utils';
 import { PAGE_TITLE } from '../constants';
 import './styles.css';
 
@@ -34,8 +36,18 @@ const InsightsPage = () => {
   });
   let history = useHistory();
 
-  const clientTop = mockData[3];
-  const clientLow = mockData[2];
+  if (loading) {
+    return (
+      <Layout>
+        <div style={{ marginTop: 200 }}>
+          <Loading />
+        </div>
+      </Layout>
+    );
+  }
+
+  // get the Top and Bottom Client from formula in utils
+  const clientTopBottom = findTopBottomClients(data.listClients.items);
 
   const layoutProps = {
     title: PAGE_TITLE,
@@ -68,36 +80,45 @@ const InsightsPage = () => {
     'Client with Lowest Score'
   );
 
+  const insightOverallScoreProps = {
+    overallData: data,
+    totalClients: data.listClients.items.length,
+  };
+
+  const insightsStrategyProps = {
+    overallData: data,
+  };
+
   return (
     <Layout {...layoutProps}>
-      <Row justify="center">
+      <Row justify='center'>
         <CardWrap height={453}
-          className="insights-overall">
-          <InsightsOverallScore />
+          className='insights-overall'>
+          <InsightsOverallScore {...insightOverallScoreProps} />
         </CardWrap>
         <div style={{ marginBottom: 15 }}>
           {HigherScoreHeader}
           <ClientCard onNameClick={handleCardClick}
-            {...clientTop} />
+            {...clientTopBottom[1]} />
         </div>
         <div style={{ marginBottom: 15 }}>
           {LowestScoreHeader}
           <ClientCard onNameClick={handleCardClick}
-            {...clientLow} />
+            {...clientTopBottom[0]} />
         </div>
         <CardContainer height={440}
           width={335}
-          className="strategy-metrica">
-          <InsightsStrategy />
+          className='strategy-metrica'>
+          <InsightsStrategy {...insightsStrategyProps} />
         </CardContainer>
         <CardWrap height={440}
-          className="insights-moods">
+          className='insights-moods'>
           <InsightsMood clients={clientNames} />
         </CardWrap>
-        <CardContainer heigth={328}
+        <CardContainer height={328}
           width={400}
-          className="quater-moods">
-          <InsightsQuater />
+          className='Quarter-moods'>
+          <InsightsQuarter />
         </CardContainer>
       </Row>
     </Layout>

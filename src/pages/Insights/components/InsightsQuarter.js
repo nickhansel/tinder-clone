@@ -3,7 +3,7 @@ import { Progress } from 'antd';
 import { Text, SubH2, SpaceBetween } from 'common';
 import { mainColors } from 'utils';
 
-const quaterMetrics = [
+const QuarterMetrics = [
   {
     name: 'Clients Renewed',
     score: 14,
@@ -20,14 +20,14 @@ const quaterMetrics = [
     percent: 35,
   },
   {
-    name: 'Open Renewals This Quater',
+    name: 'Open Renewals This Quarter',
     score: 4,
     percent: 15,
   },
 ];
 
-const InsightsQuater = ({ clients }) => {
-  const renderMoodList = quaterMetrics.map((metric, index) => (
+const InsightsQuarter = ({ clients }) => {
+  const renderMoodList = QuarterMetrics.map((metric, index) => (
     <div key={index}
       style={{ paddingBottom: 20 }}>
       <SpaceBetween>
@@ -37,7 +37,7 @@ const InsightsQuater = ({ clients }) => {
       <Progress
         showInfo={false}
         strokeWidth={12}
-        strokeColor="#20CDAE"
+        strokeColor='#20CDAE'
         percent={metric.percent}
       />
     </div>
@@ -52,10 +52,10 @@ const InsightsQuater = ({ clients }) => {
 
   return (
     <div style={{}}>
-      <SubH2 {...titleProps}>Quater Metrics</SubH2>
+      <SubH2 {...titleProps}>Quarter Metrics</SubH2>
       {renderMoodList}
     </div>
   );
 };
 
-export default InsightsQuater;
+export default InsightsQuarter;

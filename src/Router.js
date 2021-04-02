@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-  BrowserRouter as Router
-} from 'react-router-dom';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Authenticator from './Authenticator';
 import {
