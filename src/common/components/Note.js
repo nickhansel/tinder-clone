@@ -31,10 +31,11 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
     }, 1000);
   }
 
+  // updates note in backend and sets note text for state, and adds an alert on successful post
   function confirmUpdate(e) {
     setNoteText(e);
     updateNote(note.id, e);
-    // console.log(e);
+    message.success('Note Updated');
   }
 
   function cancel(e) {
