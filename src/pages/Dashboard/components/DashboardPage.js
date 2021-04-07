@@ -68,7 +68,7 @@ const DashboardPage = ({ history }) => {
 
   const { loading, data, error } = useQuery(gql(listClientsDash), {
     filter: {
-      contactId: CURRENT_USER,
+      teamId: userData && userData.team ? userData.team.id : CURRENT_USER
     },
   });
 
@@ -83,11 +83,11 @@ const DashboardPage = ({ history }) => {
   }
 
   const isLoaded = !loading && !error;
-  const clientsData = isLoaded // TODO change to API filtering
+  let clientsData = isLoaded // TODO change to API filtering
     ? filterDataByMood(data.listClients.items, moodId)
     : [];
   const totalClients = clientsData.length;
-
+  console.log(clientsData);
   const moodFilter = (
     <MoodFilter setMoodId={setMoodId}
       setFiltering={setFiltering} />

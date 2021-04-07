@@ -44,8 +44,9 @@ type Client @model {
   contactId: User @connection(name: "UserClient")
   noteId: [ClientNote] @connection(name: "ClientNote")
   isDecisionMaker: Boolean
-  avatarId: String!
+  avatarId: String
   salesforceId: ID
+  email: String
   name: String!
   strategy: [Strategy] @connection(name: "ClientStrategy")
   position: String

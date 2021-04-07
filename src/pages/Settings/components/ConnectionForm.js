@@ -7,7 +7,7 @@ import {
   linkUserTeam as linkUserTeamMutation
 } from 'graphql/mutations';
 import { Form, Input, message } from 'antd';
-import { ButtonConfirm, SpaceEnd, Loading, Layout } from 'common';
+import { ButtonConfirm, SpaceEnd, Loading } from 'common';
 import createTeamAction from '../actions/createTeamAction';
 import './styles.css';
 
@@ -61,7 +61,7 @@ const ConnectionForm = ({ user }) => {
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          label="Name"
+          label="Team Name"
           name="teamName"
           rules={[{ required: true, message: 'Please input team name' }]}
         >
