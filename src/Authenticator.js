@@ -55,7 +55,7 @@ class Authenticator extends React.Component {
             Sign Up
           </Note1Grey>
         </div>
-        {showSignIn ? <SignIn /> : <SignUp />}
+        {showSignIn ? <SignIn /> : <SignUp switchState={this.switchState} />}
       </div>
     );
   }

@@ -52,8 +52,9 @@ type Client {
   contactId: User
   noteId(filter: ModelClientNoteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientNoteConnection
   isDecisionMaker: Boolean
-  avatarId: String!
+  avatarId: String
   salesforceId: ID
+  email: String
   name: String!
   strategy(filter: ModelStrategyFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStrategyConnection
   position: String
@@ -457,6 +458,7 @@ input ModelClientFilterInput {
   isDecisionMaker: ModelBooleanInput
   avatarId: ModelStringInput
   salesforceId: ModelIDInput
+  email: ModelStringInput
   name: ModelStringInput
   position: ModelStringInput
   lastContact: ModelStringInput
@@ -468,8 +470,9 @@ input ModelClientFilterInput {
 input CreateClientInput {
   id: ID
   isDecisionMaker: Boolean
-  avatarId: String!
+  avatarId: String
   salesforceId: ID
+  email: String
   name: String!
   position: String
   lastContact: String
@@ -482,6 +485,7 @@ input UpdateClientInput {
   isDecisionMaker: Boolean
   avatarId: String
   salesforceId: ID
+  email: String
   name: String
   position: String
   lastContact: String
@@ -497,6 +501,7 @@ input ModelClientConditionInput {
   isDecisionMaker: ModelBooleanInput
   avatarId: ModelStringInput
   salesforceId: ModelIDInput
+  email: ModelStringInput
   name: ModelStringInput
   position: ModelStringInput
   lastContact: ModelStringInput

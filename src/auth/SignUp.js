@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { css } from 'glamor';
 import { Auth } from 'aws-amplify';
@@ -17,7 +18,7 @@ const styles = {
   },
 };
 
-const SignUp = () => {
+const SignUp = ({ switchState }) => {
   const history = useHistory();
   const [userData, setUserData] = useState({
     username: '',
@@ -27,6 +28,8 @@ const SignUp = () => {
     authCode: '',
   });
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [error, setError] = useState({});
+  const [message, setMessage] = useState('');
 
   const onChange = (key, value) => {
     setUserData({
@@ -47,14 +50,20 @@ const SignUp = () => {
       },
     })
       .then(() => setShowConfirmation(true))
-      .catch((err) => console.log('error signing up: ', err));
+      .catch((err) => {
+        console.log('error signing up: ', err);
+        setError(err);
+      });
   };
 
   const confirmSignUp = () => {
     const { username, authCode } = userData;
 
     Auth.confirmSignUp(username, authCode)
-      .then(() => history.push(BASE_URLS.DASHBOARD))
+      .then(() => {
+        setMessage('Success');
+        switchState(true);
+      })
       .catch((err) => console.log('error confirming signing up: ', err));
   };
 
@@ -85,6 +94,9 @@ const SignUp = () => {
               onChange={(evt) => onChange('phone_number', evt.target.value)}
             />
           </div>
+          <div>
+            <p style={{ color: 'red'}}>{error.message}</p>
+          </div>
           <Flex>
             <ButtonCancel onClick={onCancel}>
               <TextInfo>Cancel</TextInfo>
@@ -104,10 +116,15 @@ const SignUp = () => {
           <ButtonConfirm onClick={confirmSignUp}>
             <Text>Sign Up</Text>
           </ButtonConfirm>
+          <div><p style={{ color: 'red' }}>{message}</p></div>
         </div>
       )}
     </div>
   );
+};
+
+SignUp.propTpes = {
+  switchState: PropTypes.func
 };
 
 export default SignUp;

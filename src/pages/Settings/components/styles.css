@@ -26,3 +26,7 @@
 .settings-profile .ant-avatar-lg.ant-avatar-icon {
   font-size: 76px;
 }
+
+.icon-sync {
+  cursor: pointer;
+}

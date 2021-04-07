@@ -567,6 +567,7 @@ export const createClient = /* GraphQL */ `
       avatarId
       salesforceId
       name
+      email
       strategy {
         items {
           id
@@ -652,6 +653,7 @@ export const updateClient = /* GraphQL */ `
       avatarId
       salesforceId
       name
+      email
       strategy {
         items {
           id
@@ -737,6 +739,7 @@ export const deleteClient = /* GraphQL */ `
       avatarId
       salesforceId
       name
+      email
       strategy {
         items {
           id

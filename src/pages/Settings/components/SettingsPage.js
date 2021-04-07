@@ -1,7 +1,7 @@
 /*
    Settings Page
  */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Row, Tabs, Col, Avatar } from 'antd';
 import {
   Layout,
@@ -14,34 +14,18 @@ import {
 import { iconBack } from 'media/svg';
 import { UserOutlined } from '@ant-design/icons';
 import ConnectionForm from './ConnectionForm';
+import SyncClients from './SyncClients';
 import { TabLayout, InfoRow } from './layouts';
 import useCurrentUser from '../../../customHooks/useCurrentUser';
 import './styles.css';
 
-const jsforce = require('jsforce');
 const { TabPane } = Tabs;
-
+   
 const SettingsPage = () => {
   const userData = useCurrentUser();
-  const [salesRecords, setSalesRecords] = useState([]);
   const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
-
-  useEffect(() => {
-    if (sfConnected) {
-      const { sfUsername, sfKey } = userData.team;
-
-      // Salesforce connection test
-      var conn = new jsforce.Connection();
-      conn.login(sfUsername, sfKey, function(err, userInfo) {
-        if (err) { return console.error(err); }
-        conn.query('SELECT Id, Name, CreatedDate FROM Contact', function(err, result) {
-          if (err) { return console.error(err); }
-          setSalesRecords(result.records);
-        });
-      });
-    }
-  }, [userData]);
-
+   
+   
   // Props
   const layoutProps = {
     title: 'Profile',
@@ -51,19 +35,28 @@ const SettingsPage = () => {
   const rowProps = {
     justify: 'center',
   };
-
+   
+  const connectionCreated = (
+    <div>
+      <Note1Grey>Connection created</Note1Grey>
+      <Flex>You can Sync Clients now  -&gt; &nbsp;&nbsp;  
+        <SyncClients userData={userData} />
+      </Flex>
+    </div>
+  );
+   
   // Tabs configs - TODO: move to separate comoponents when expand
   const connectionContent = (
     <>
       <ActionHeader title="Salesforce Connection"
         actions={['edit']} />
-      {userData.id && !sfConnected  ? <ConnectionForm user={userData} /> : <Note1Grey>Connection created</Note1Grey>}
+      {userData.id && !sfConnected  ? <ConnectionForm user={userData} /> : connectionCreated}
     </>
   );
   const configsContent = (
     <SubH2>Salesforce Accounts</SubH2>
   );
-
+   
   // Props for the tabs
   const settingsTabsProps = [
     {
@@ -85,6 +78,7 @@ const SettingsPage = () => {
       content: 'Content of Tab Pane 3',
     },
   ];
+   
   // Map props to tab layout
   const renderSettingsTabs = (
     <Tabs defaultActiveKey="1">
@@ -94,7 +88,7 @@ const SettingsPage = () => {
           spanSize: item.spanSize,
           tabName: item.tabName,
         };
-
+   
         return (
           <TabPane tab={item.tabName}
             key={item.tabNumber}>
@@ -105,7 +99,7 @@ const SettingsPage = () => {
       })}
     </Tabs>
   );
-
+   
   return (
     <Layout {...layoutProps}>
       <Row {...rowProps}>
@@ -141,5 +135,6 @@ const SettingsPage = () => {
     </Layout>
   );
 };
-
+   
 export default SettingsPage;
+   
