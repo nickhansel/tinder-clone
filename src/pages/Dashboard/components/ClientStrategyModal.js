@@ -18,14 +18,14 @@ const ClientStrategyModal = ({
     gql(deleteStrategy)
   );
 
-  const [updateNote, { loading: updating }] = useMutation(gql(updateStrategy));
+  const [updateClientStrategy, { loading: updating }] = useMutation(gql(updateStrategy));
 
-  const handleUpdateNote = (noteID, noteText) => {
-    updateNote({
+  const handleUpdateStrategy = (strategyID, strategyText) => {
+    updateClientStrategy({
       variables: {
         input: {
-          id: noteID,
-          description: noteText,
+          id: strategyID,
+          description: strategyText,
         },
       },
     });
@@ -67,13 +67,13 @@ const ClientStrategyModal = ({
   };
 
   const isLoading = loading || error;
-  const clientStrategys =
+  const clientStrategies =
     !isLoading && data.getClient ? data.getClient.strategy.items : [];
 
   const renderNotes = loading ? (
     <Loading />
   ) : (
-    clientStrategys.map((item, key) => {
+    clientStrategies.map((item, key) => {
       return (
         <div key={key}
           style={{ marginTop: 15 }}>
@@ -85,7 +85,7 @@ const ClientStrategyModal = ({
             note={item}
             deleteNote={handleDeleteStrategy}
             updating={updating}
-            updateNote={handleUpdateNote}
+            updateNote={handleUpdateStrategy}
           />
           <Divider />
         </div>

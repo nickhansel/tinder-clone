@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "files.exclude": {
     "amplify/.config": true,
     "amplify/**/*-parameters.json": true,
@@ -12,4 +13,7 @@
 =======
   "editor.tabSize": 2
 >>>>>>> added initial functionality for edit note flow
+=======
+  "editor.tabSize": 2,
+>>>>>>> changed variable names and added a timeout for loading the update
 }
