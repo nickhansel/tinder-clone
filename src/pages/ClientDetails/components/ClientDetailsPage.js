@@ -24,8 +24,8 @@ const NOTES_EACH_PAGE = 4;
 
 const ClientDetailsPage = ({ history, location }) => {
   const selectedClient = getIdFromLocation(location);
-  console.log(location);
-  console.log(selectedClient);
+  // console.log(location);
+  // console.log(selectedClient);
 
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: {

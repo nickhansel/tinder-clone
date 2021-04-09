@@ -1,7 +1,7 @@
 /*
    Settings Page
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Tabs, Col, Avatar } from 'antd';
 import {
   Layout,
@@ -20,12 +20,12 @@ import useCurrentUser from '../../../customHooks/useCurrentUser';
 import './styles.css';
 
 const { TabPane } = Tabs;
-   
+
 const SettingsPage = () => {
   const userData = useCurrentUser();
+  const [isNewTeamMemberModal, toggleNewTeamMemberModal] = useState(false);
   const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
-   
-   
+
   // Props
   const layoutProps = {
     title: 'Profile',
@@ -35,7 +35,7 @@ const SettingsPage = () => {
   const rowProps = {
     justify: 'center',
   };
-   
+
   const connectionCreated = (
     <div>
       <Note1Grey>Connection created</Note1Grey>
@@ -44,7 +44,7 @@ const SettingsPage = () => {
       </Flex>
     </div>
   );
-   
+
   // Tabs configs - TODO: move to separate comoponents when expand
   const connectionContent = (
     <>
@@ -56,7 +56,7 @@ const SettingsPage = () => {
   const configsContent = (
     <SubH2>Salesforce Accounts</SubH2>
   );
-   
+
   // Props for the tabs
   const settingsTabsProps = [
     {
@@ -78,7 +78,7 @@ const SettingsPage = () => {
       content: 'Content of Tab Pane 3',
     },
   ];
-   
+
   // Map props to tab layout
   const renderSettingsTabs = (
     <Tabs defaultActiveKey="1">
@@ -88,7 +88,6 @@ const SettingsPage = () => {
           spanSize: item.spanSize,
           tabName: item.tabName,
         };
-   
         return (
           <TabPane tab={item.tabName}
             key={item.tabNumber}>
@@ -99,7 +98,7 @@ const SettingsPage = () => {
       })}
     </Tabs>
   );
-   
+
   return (
     <Layout {...layoutProps}>
       <Row {...rowProps}>
@@ -135,6 +134,5 @@ const SettingsPage = () => {
     </Layout>
   );
 };
-   
+
 export default SettingsPage;
-   
