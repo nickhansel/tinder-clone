@@ -14,6 +14,7 @@ import {
 import { iconBack } from 'media/svg';
 import { UserOutlined } from '@ant-design/icons';
 import ConnectionForm from './ConnectionForm';
+import SettingsNewTeamMember from './SettingsNewTeamMember';
 import SyncClients from './SyncClients';
 import { TabLayout, InfoRow } from './layouts';
 import useCurrentUser from '../../../customHooks/useCurrentUser';
@@ -125,6 +126,7 @@ const SettingsPage = () => {
             className="details-card settings-team">
             <ActionHeader title="Add Team Member"
               actions={['add']} />
+            <SettingsNewTeamMember />
           </CardWrap>
         </Col>
       </Row>

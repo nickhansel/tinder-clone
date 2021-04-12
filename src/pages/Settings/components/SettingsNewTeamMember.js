@@ -1,22 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { createClientNote } from 'graphql/mutations';
-import { getClient } from 'graphql/queries';
+// import gql from 'graphql-tag';
+// import { useMutation, useQuery } from '@apollo/react-hooks';
+// import { createClientNote } from 'graphql/mutations';
+// import { getClient } from 'graphql/queries';
 import { Modal, Form, Input, Button, message } from 'antd';
-import { generateId } from 'utils';
+// import { generateId } from 'utils';
 import { ButtonCancel, ButtonConfirm } from 'common';
 import './styles.css';
 
-const { TextArea } = Input;
-
-const SettingsNewTeamMember = ({ isNewTeamMemberModal, handleToggle, client }) => {
-  const {
-    id,
-    accountId: { name: companyName },
-    contactId,
-  } = client;
+const SettingsNewTeamMember = () => {
   const [form] = Form.useForm();
 
   // const [addClientNote, { loading: creating, error }] = useMutation(
@@ -41,33 +34,37 @@ const SettingsNewTeamMember = ({ isNewTeamMemberModal, handleToggle, client }) =
   //   }
   // );
 
-  // const handleNewTeamMemberSubmit = (values) => {
-  //   addClientNote({
-  //     variables: {
-  //       input: {
-  //         id: generateId(),
-  //         clientNoteClientIdId: id,
-  //         clientNoteOwnerIdId: contactId.id,
-  //         title: values.title,
-  //         content: values.note_content,
-  //       },
-  //     },
-  //   });
+  const handleNewTeamMemberSubmit = (values) => {
+    // addClientNote({
+    //   variables: {
+    //     input: {
+    //       id: generateId(),
+    //       clientNoteClientIdId: id,
+    //       clientNoteOwnerIdId: contactId.id,
+    //       title: values.title,
+    //       content: values.note_content,
+    //     },
+    //   },
+    // });
 
-  //   message.success('Note created');
-  //   form.resetFields();
-  //   handleToggle();
-  // };
-  // const onFinishFailed = (errorInfo) => {
-  //   console.log('Failed:', errorInfo);
-  // };
+    message.success('Note created, but not to backend');
+    form.resetFields();
+    // handleToggle();
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
 
   const formStyle = {
     wrapperCol: { span: 24, offset: 0 },
     layout: 'vertical',
   };
 
-  const renderForm = (
+  const footerFormStyle = {
+    layout: 'horizontal',
+  };
+
+  return (
     <Form
       id='form-new-team-member'
       {...formStyle}
@@ -80,40 +77,41 @@ const SettingsNewTeamMember = ({ isNewTeamMemberModal, handleToggle, client }) =
       <Form.Item
         label='Username'
         name='username'
-        rules={[{ required: true, message: 'Please input new team member username' }]}>
+        rules={[
+          { required: true, message: 'Please Input New Team Member Username' },
+        ]}>
         <Input />
       </Form.Item>
       <Form.Item
         label='Email'
         name='email'
-        rules={[{ required: true, type: 'email', message: 'Please input new team member email address' }]}>
+        rules={[
+          {
+            required: true,
+            type: 'email',
+            message: 'Please Input A Valid New Team Member Email Address',
+          },
+        ]}>
         <Input />
       </Form.Item>
-    </Form>
-  );
 
-  return (
-    <Modal
-      visible={isNewTeamMemberModal}
-      title='Add Note'
-      className='modal__newnote'
-      width={644}
-      onCancel={() => handleToggle()}
-      footer={[
+      {/* <Form.Item {...footerFormStyle}>
         <ButtonCancel key='back'
-          onClick={() => handleToggle()}>
+          onClick={() => form.resetFields()}>
 					Cancel
-        </ButtonCancel>,
+        </ButtonCancel>
+      </Form.Item> */}
+
+      <Form.Item {...footerFormStyle}>
         <ButtonConfirm
-          form='form-new-note'
+          form='form-new-team-member'
           key='submit'
           htmlType='submit'
           type='primary'>
 					Confirm
-        </ButtonConfirm>,
-      ]}>
-      <div>{renderForm}</div>
-    </Modal>
+        </ButtonConfirm>
+      </Form.Item>
+    </Form>
   );
 };
 
