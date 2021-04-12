@@ -41,7 +41,7 @@ const SettingsNewTeamMember = ({ isNewTeamMemberModal, handleToggle, client }) =
   //   }
   // );
 
-  // const handleNewNoteSubmit = (values) => {
+  // const handleNewTeamMemberSubmit = (values) => {
   //   addClientNote({
   //     variables: {
   //       input: {
@@ -69,25 +69,25 @@ const SettingsNewTeamMember = ({ isNewTeamMemberModal, handleToggle, client }) =
 
   const renderForm = (
     <Form
-      id='form-new-note'
+      id='form-new-team-member'
       {...formStyle}
       form={form}
-      name='basic'
-      className='form__newnote'
+      name='new-team-member'
+      className='settings-new-team-member-form'
       initialValues={{ remember: true }}
-      onFinish={handleNewNoteSubmit}
+      onFinish={handleNewTeamMemberSubmit}
       onFinishFailed={onFinishFailed}>
       <Form.Item
-        label='Title'
-        name='title'
-        rules={[{ required: true, message: 'Please input note title' }]}>
+        label='Username'
+        name='username'
+        rules={[{ required: true, message: 'Please input new team member username' }]}>
         <Input />
       </Form.Item>
       <Form.Item
-        label='Note'
-        name='note_content'
-        rules={[{ required: true, message: 'Please note text' }]}>
-        <TextArea />
+        label='Email'
+        name='email'
+        rules={[{ required: true, type: 'email', message: 'Please input new team member email address' }]}>
+        <Input />
       </Form.Item>
     </Form>
   );

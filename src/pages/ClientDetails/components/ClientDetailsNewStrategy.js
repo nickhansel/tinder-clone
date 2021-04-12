@@ -130,8 +130,8 @@ const ClientDetailsNewStrategy = ({
         Account
       </span>
       <Note1Grey>
-        {`Select a strategy and fill out a gameplan to improve and strenghten
-        your realtionship with ${companyName}`}
+        {`Select a strategy and fill out a gameplan to improve and strengthen
+        your relationship with ${companyName}`}
       </Note1Grey>
     </div>
   );
