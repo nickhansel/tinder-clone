@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import { useMutation, useQuery } from '@apollo/react-hooks';
 // import { createClientNote } from 'graphql/mutations';
 // import { getClient } from 'graphql/queries';
-import { Modal, Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 // import { generateId } from 'utils';
 import { ButtonCancel, ButtonConfirm } from 'common';
 import './styles.css';
@@ -56,12 +56,12 @@ const SettingsNewTeamMember = () => {
   };
 
   const formStyle = {
-    wrapperCol: { span: 24, offset: 0 },
-    layout: 'vertical',
+    labelCol: { span: 4 },
+    wrapperCol: { span: 24, offset: 0 }
   };
 
   const footerFormStyle = {
-    layout: 'horizontal',
+    wrapperCol: { span: 24, offset: 4 }
   };
 
   return (
@@ -95,13 +95,6 @@ const SettingsNewTeamMember = () => {
         <Input />
       </Form.Item>
 
-      {/* <Form.Item {...footerFormStyle}>
-        <ButtonCancel key='back'
-          onClick={() => form.resetFields()}>
-					Cancel
-        </ButtonCancel>
-      </Form.Item> */}
-
       <Form.Item {...footerFormStyle}>
         <ButtonConfirm
           form='form-new-team-member'
@@ -110,6 +103,10 @@ const SettingsNewTeamMember = () => {
           type='primary'>
 					Confirm
         </ButtonConfirm>
+        <ButtonCancel key='back'
+          onClick={() => form.resetFields()}>
+					Reset
+        </ButtonCancel>
       </Form.Item>
     </Form>
   );

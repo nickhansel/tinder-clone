@@ -24,7 +24,6 @@ const { TabPane } = Tabs;
 
 const SettingsPage = () => {
   const userData = useCurrentUser();
-  const [isNewTeamMemberModal, toggleNewTeamMemberModal] = useState(false);
   const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
 
   // Props
