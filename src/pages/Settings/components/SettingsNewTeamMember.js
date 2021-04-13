@@ -61,7 +61,7 @@ const SettingsNewTeamMember = () => {
   };
 
   const footerFormStyle = {
-    wrapperCol: { span: 24, offset: 4 }
+    wrapperCol: { span: 20, offset: 6 }
   };
 
   return (
@@ -73,7 +73,8 @@ const SettingsNewTeamMember = () => {
       className='settings-new-team-member-form'
       initialValues={{ remember: true }}
       onFinish={handleNewTeamMemberSubmit}
-      onFinishFailed={onFinishFailed}>
+      onFinishFailed={onFinishFailed}
+      style={{ marginTop: 30, marginRight: 30 }}>
       <Form.Item
         label='Username'
         name='username'
@@ -103,8 +104,10 @@ const SettingsNewTeamMember = () => {
           type='primary'>
 					Confirm
         </ButtonConfirm>
-        <ButtonCancel key='back'
-          onClick={() => form.resetFields()}>
+        <ButtonCancel
+          key='back'
+          onClick={() => form.resetFields()}
+          style={{ marginLeft: 150, marginTop: 20 }}>
 					Reset
         </ButtonCancel>
       </Form.Item>
