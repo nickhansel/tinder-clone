@@ -9,6 +9,8 @@ import {
   BoldStyled,
 } from './styles';
 import { mainColors, mockMoods } from 'utils';
+import { Typography } from 'antd';
+import { ellipsis } from 'polished';
 
 const ClientCard = ({
   id,
@@ -26,9 +28,6 @@ const ClientCard = ({
   lastContact,
   strategy: { items: strategyItems },
 }) => {
-  if (companyName.length > 18) {
-    companyName = companyName.substring(0, 17);
-  }
   const score = parseFloat(healthScore);
   const isChamp = score > 4.5;
   const isImpatient = avatarId === 'impatientGirl';
@@ -62,8 +61,9 @@ const ClientCard = ({
       <div onClick={() => onNameClick(id)}>
         <SubH1>{clientName}</SubH1>
       </div>
+      <Note2>{position}</Note2>
       <Note2>
-        {position} at <BoldStyled>{companyName}</BoldStyled>
+        <BoldStyled ellipsis={ellipsis ? {rows: 1, expandable: true, symbol: 'more'}: false}>{companyName}</BoldStyled>
       </Note2>
       <Note2 {...noteProps}>{lastContact}</Note2>
       <DividerStyled />
