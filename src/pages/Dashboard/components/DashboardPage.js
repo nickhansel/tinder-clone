@@ -87,7 +87,7 @@ const DashboardPage = ({ history }) => {
     ? filterDataByMood(data.listClients.items, moodId)
     : [];
   const totalClients = clientsData.length;
-  console.log(clientsData);
+  // console.log(clientsData);
   const moodFilter = (
     <MoodFilter setMoodId={setMoodId}
       setFiltering={setFiltering} />
