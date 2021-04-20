@@ -2,7 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { getClient } from 'graphql/queries';
-import { deleteStrategy } from 'graphql/mutations';
+import { deleteStrategy, updateStrategy } from 'graphql/mutations';
 import { Modal, Divider } from 'antd';
 import { Note, Loading } from 'common';
 
@@ -17,6 +17,19 @@ const ClientStrategyModal = ({
   const [deleteAction, { loading: deleting }] = useMutation(
     gql(deleteStrategy)
   );
+
+  const [updateClientStrategy, { loading: updating }] = useMutation(gql(updateStrategy));
+
+  const handleUpdateStrategy = (strategyID, strategyText) => {
+    updateClientStrategy({
+      variables: {
+        input: {
+          id: strategyID,
+          description: strategyText,
+        },
+      },
+    });
+  };
 
   // Business logic
   const handleDeleteStrategy = (strategyId) => {
@@ -54,22 +67,25 @@ const ClientStrategyModal = ({
   };
 
   const isLoading = loading || error;
-  const clientStrategys =
+  const clientStrategies =
     !isLoading && data.getClient ? data.getClient.strategy.items : [];
 
   const renderNotes = loading ? (
     <Loading />
   ) : (
-    clientStrategys.map((item, key) => {
+    clientStrategies.map((item, key) => {
       return (
         <div key={key}
           style={{ marginTop: 15 }}>
           <Note
             height={95}
-            type="strategy"
+            type='strategy'
+            deleting={deleting}
             authorName={data.getClient.contactId.name}
             note={item}
             deleteNote={handleDeleteStrategy}
+            updating={updating}
+            updateNote={handleUpdateStrategy}
           />
           <Divider />
         </div>
