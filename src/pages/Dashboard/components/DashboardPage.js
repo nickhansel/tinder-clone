@@ -1,6 +1,6 @@
 /*
-   Dashboard Page 
- */
+  Dashboard Page 
+*/
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -17,6 +17,7 @@ import { Layout, Note2, Loading } from 'common';
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from '../constants';
 import { FlexContainer } from './styles';
 import { filterDataByMood, CURRENT_USER } from 'utils';
+import SearchInput from 'common/components/Layout/SearchInput';
 import './styles.css';
 
 const DashboardPage = ({ history }) => {
@@ -26,6 +27,8 @@ const DashboardPage = ({ history }) => {
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
   const [authUserData, setAuthUserData] = useState({});
+  const [searchString, setSearchString] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
@@ -115,6 +118,18 @@ const DashboardPage = ({ history }) => {
     total: totalClients,
   };
 
+  const handleChange = (event) => {
+    setSearchString(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  useEffect(() => {
+    setSearchResults(searchString);
+  });
+
   const renderClients = filtering ? (
     <div style={{ marginTop: 200 }}>
       <Loading />
@@ -130,6 +145,12 @@ const DashboardPage = ({ history }) => {
         <DashboardSort />
         <Pagination {...paginationProps} />
       </FlexContainer>
+      <SearchInput 
+        value={searchString}
+        onChange={handleChange}
+        onPressEnter={handleSubmit}/>
+      <h1>{searchString}</h1>
+      <h1>{searchResults}</h1>
       {renderClients}
     </Layout>
   );

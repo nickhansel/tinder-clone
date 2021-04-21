@@ -7,7 +7,7 @@ const SearchInput = () => {
   const inputProps = {
     placeholder: 'Search',
     prefix: <img src={iconSearch}
-      alt="seacrh icon" />,
+      alt="search icon" />,
   };
 
   return (

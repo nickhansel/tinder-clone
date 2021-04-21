@@ -97,7 +97,7 @@ const Layout = ({ prefix, children, title, extra = null }) => {
             <SubH1 style={{ lineHeight: 2 }}>{title}</SubH1>
           </Flex>
           <HeaderActions>
-            <SearchInput />
+            {/* <SearchInput /> */}
             <Profile />
             <SignOutButton history={history} />
           </HeaderActions>
