@@ -28,6 +28,7 @@ const DashboardPage = ({ history }) => {
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
   const [authUserData, setAuthUserData] = useState({});
   const [searchString, setSearchString] = useState('');
+  const [searching, setSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
   // get user from out db
@@ -90,11 +91,24 @@ const DashboardPage = ({ history }) => {
     ? filterDataByMood(data.listClients.items, moodId)
     : [];
   const totalClients = clientsData.length;
-  // console.log(clientsData);
   const moodFilter = (
     <MoodFilter setMoodId={setMoodId}
       setFiltering={setFiltering} />
   );
+
+  // useEffect(() => {
+  //   // const results = clientsData.filter(searchFilter);
+  //   // const results = clientsData;
+  //   const d = clientsData;
+  //   let results = [];
+  //   // for (let i = 0; i < d.length(); i++) {
+  //   //   if (i.name.includes(searchString)) {
+  //   //     results.push(i);
+  //   //   }
+  //   // }
+  //   setSearchResults(results);
+  //   console.log(d);
+  // }, [searchString]);
 
   const onChange = (page) => {
     // Pagination
@@ -109,6 +123,13 @@ const DashboardPage = ({ history }) => {
     minVal,
     maxVal,
   };
+  const searchingCardListProps = {
+    data: searchResults,
+    history,
+    minVal,
+    maxVal,
+  };
+
   const paginationProps = {
     current: page,
     defaultCurrent: 1,
@@ -121,14 +142,6 @@ const DashboardPage = ({ history }) => {
   const handleChange = (event) => {
     setSearchString(event.target.value);
   };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  useEffect(() => {
-    setSearchResults(searchString);
-  });
 
   const renderClients = filtering ? (
     <div style={{ marginTop: 200 }}>
@@ -147,10 +160,9 @@ const DashboardPage = ({ history }) => {
       </FlexContainer>
       <SearchInput 
         value={searchString}
-        onChange={handleChange}
-        onPressEnter={handleSubmit}/>
+        onChange={handleChange} />
       <h1>{searchString}</h1>
-      <h1>{searchResults}</h1>
+      {/* <h1>{searchResults}</h1> */}
       {renderClients}
     </Layout>
   );
