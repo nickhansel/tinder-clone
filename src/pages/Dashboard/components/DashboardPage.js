@@ -88,7 +88,7 @@ const DashboardPage = ({ history }) => {
 
   const isLoaded = !loading && !error;
   let clientsData = isLoaded // TODO change to API filtering
-    ? filterDataByMood(data.listClients.items, moodId)
+    ? filterDataByMood(data.listClients.items, moodId, searchString)
     : [];
   const totalClients = clientsData.length;
   const moodFilter = (
@@ -161,8 +161,6 @@ const DashboardPage = ({ history }) => {
       <SearchInput 
         value={searchString}
         onChange={handleChange} />
-      <h1>{searchString}</h1>
-      {/* <h1>{searchResults}</h1> */}
       {renderClients}
     </Layout>
   );
