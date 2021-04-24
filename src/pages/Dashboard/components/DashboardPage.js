@@ -28,8 +28,6 @@ const DashboardPage = ({ history }) => {
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
   const [authUserData, setAuthUserData] = useState({});
   const [searchString, setSearchString] = useState('');
-  const [searching, setSearching] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
@@ -96,20 +94,6 @@ const DashboardPage = ({ history }) => {
       setFiltering={setFiltering} />
   );
 
-  // useEffect(() => {
-  //   // const results = clientsData.filter(searchFilter);
-  //   // const results = clientsData;
-  //   const d = clientsData;
-  //   let results = [];
-  //   // for (let i = 0; i < d.length(); i++) {
-  //   //   if (i.name.includes(searchString)) {
-  //   //     results.push(i);
-  //   //   }
-  //   // }
-  //   setSearchResults(results);
-  //   console.log(d);
-  // }, [searchString]);
-
   const onChange = (page) => {
     // Pagination
     setPage(page);
@@ -119,12 +103,6 @@ const DashboardPage = ({ history }) => {
 
   const cardListProps = {
     data: clientsData,
-    history,
-    minVal,
-    maxVal,
-  };
-  const searchingCardListProps = {
-    data: searchResults,
     history,
     minVal,
     maxVal,
