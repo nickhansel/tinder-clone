@@ -31,12 +31,33 @@ const filterHelper = (data, moods) => {
 const searchFilterHelper = (data, searchTerm) => {
   const dataCopy = [...data];
   const filtered = dataCopy.filter((clientItem) => {
-    return clientItem.name.includes(searchTerm) || clientItem.accountId.name.includes(searchTerm);
+    // error checking for when something is null
+    // also allows you to return a clientItem if any piece is null
+    if (clientItem.position === null) { 
+      if (clientItem.name.includes(searchTerm) || clientItem.accountId.name.includes(searchTerm)) {
+        return clientItem;
+      }
+    } else if (clientItem.name === null) {
+      if (clientItem.position.includes(searchTerm) || clientItem.accountId.name.includes(searchTerm)) {
+        return clientItem;
+      }
+    } else if (clientItem.accountId.name === null) {
+      if (clientItem.position.includes(searchTerm) || clientItem.name.includes(searchTerm)
+      ) {
+        return clientItem;
+      }
+    } else {
+      return (
+        clientItem.name.includes(searchTerm) ||
+				clientItem.accountId.name.includes(searchTerm) ||
+				clientItem.position.includes(searchTerm)
+      );
+    }
   });
   return filtered;
 };
 
-export const filterDataByMood = (data, moodId, searchString) => {
+export const filterDataByMoodAndSearch = (data, moodId, searchString) => {
   if (searchString === '') {
     switch (moodId) {
       case 'all':

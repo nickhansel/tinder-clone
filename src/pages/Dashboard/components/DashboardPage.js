@@ -16,7 +16,7 @@ import DashboardSort from './DashboardSort';
 import { Layout, Note2, Loading } from 'common';
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from '../constants';
 import { FlexContainer } from './styles';
-import { filterDataByMood, CURRENT_USER } from 'utils';
+import { filterDataByMoodAndSearch, CURRENT_USER } from 'utils';
 import SearchInput from 'common/components/Layout/SearchInput';
 import './styles.css';
 
@@ -86,7 +86,7 @@ const DashboardPage = ({ history }) => {
 
   const isLoaded = !loading && !error;
   let clientsData = isLoaded // TODO change to API filtering
-    ? filterDataByMood(data.listClients.items, moodId, searchString)
+    ? filterDataByMoodAndSearch(data.listClients.items, moodId, searchString)
     : [];
   const totalClients = clientsData.length;
   const moodFilter = (
@@ -116,7 +116,7 @@ const DashboardPage = ({ history }) => {
     showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
     total: totalClients,
   };
-
+  
   const handleChange = (event) => {
     setSearchString(event.target.value);
   };
@@ -133,12 +133,11 @@ const DashboardPage = ({ history }) => {
     <Layout title={DASHBOARD_TITLE}
       extra={moodFilter}>
       <FlexContainer>
+        <SearchInput value={searchString}
+          onChange={handleChange} />
         <DashboardSort />
         <Pagination {...paginationProps} />
       </FlexContainer>
-      <SearchInput 
-        value={searchString}
-        onChange={handleChange} />
       {renderClients}
     </Layout>
   );
