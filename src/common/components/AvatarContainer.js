@@ -49,8 +49,8 @@ const AvatarContainer = ({
     </Tooltip>
   ) : null;
   const decisionMakerIcon = isDecisionMaker ? (
-    <Tooltip title="Decision Maker"
-      placement="topLeft">
+    <Tooltip title='Decision Maker'
+      placement='topLeft'>
       <img
         style={{
           height: 32,
@@ -60,7 +60,8 @@ const AvatarContainer = ({
           width: 32,
         }}
         src={iconStarMaker}
-        alt=""
+        alt=''
+        onClick={() => console.log('i clicked this')}
       />
     </Tooltip>
   ) : null;
