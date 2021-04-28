@@ -58,10 +58,13 @@ const AvatarContainer = ({
           position: 'absolute',
           top: isChamp ? 40 : 5,
           width: 32,
+          filter: 'grayscale(100%)',
         }}
         src={iconStarMaker}
         alt=''
         onClick={() => console.log('i clicked this')}
+        onMouseEnter={() => console.log('i am hovering on this')}
+        onMouseLeave={() => console.log('i am no longer hovering')}
       />
     </Tooltip>
   ) : null;
