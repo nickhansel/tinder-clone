@@ -10,9 +10,6 @@ import {
 } from './styles';
 import { mainColors, mockMoods } from 'utils';
 import { ellipsis } from 'polished';
-import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import { updateClient } from 'graphql/mutations';
 
 const ClientCard = ({
   id,
@@ -34,18 +31,6 @@ const ClientCard = ({
     <Badge key={index}
       strategy={strategyItem.badgeName} />
   ));
-  const [updateClientIsDecisionMaker] = useMutation(gql(updateClient));
-
-  const handleUpdateClientIsDecisionMaker = (clientID, isDecisionMakerBool) => {
-    updateClientIsDecisionMaker({
-      variables: {
-        input: {
-          id: clientID,
-          isDecisionMaker: isDecisionMakerBool,
-        },
-      },
-    });
-  };
 
   // Props
   const avatarProps = {
@@ -55,7 +40,6 @@ const ClientCard = ({
     isChamp,
     isImpatient,
     id: id,
-    updateClientIsDecisionMaker: handleUpdateClientIsDecisionMaker,
     clientName: clientName
   };
   if (onNameClick) {

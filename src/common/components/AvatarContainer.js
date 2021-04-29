@@ -15,6 +15,7 @@ const AvatarContainer = ({
   id,
   updateClientIsDecisionMaker,
   clientName,
+  fromClientDetails,
 }) => {
   const size = {
     full: 289,
@@ -24,7 +25,7 @@ const AvatarContainer = ({
   function confirmUpdate() {
     updateClientIsDecisionMaker(id, !isDecisionMaker);
   }
-
+  
   const newMailIcon = isImpatient ? (
     <Tooltip title='New Mail'
       placement='topLeft'>
@@ -41,6 +42,7 @@ const AvatarContainer = ({
       />
     </Tooltip>
   ) : null;
+
   const champIcon = isChamp ? (
     <Tooltip title='Champion'
       placement='topLeft'>
@@ -58,53 +60,76 @@ const AvatarContainer = ({
     </Tooltip>
   ) : null;
 
-  const decisionMakerIcon = isDecisionMaker ? (
-    <Popconfirm
-      title={`Remove ${clientName} as a Decision Maker?`}
-      onConfirm={confirmUpdate}
-      okText='Yes'
-      cancelText='Cancel'>
-      <Tooltip title='Decision Maker'
-        placement='bottomLeft'>
-        <img
-          style={{
-            height: 32,
-            left: 188,
-            position: 'absolute',
-            top: isChamp ? 40 : 5,
-            width: 32,
-            filter: 'grayscale(0%)',
-          }}
-          className='decision-maker-badge'
-          src={iconStarMaker}
-          alt=''
-        />
-      </Tooltip>
-    </Popconfirm>
-  ) : (
-    <Popconfirm
-      title={`Make ${clientName} a Decision Maker?`}
-      onConfirm={confirmUpdate}
-      okText='Yes'
-      cancelText='Cancel'>
-      <Tooltip title='Decision Maker'
-        placement='bottomLeft'>
-        <img
-          style={{
-            height: 32,
-            left: 188,
-            position: 'absolute',
-            top: isChamp ? 40 : 5,
-            width: 32,
-            filter: 'grayscale(100%)',
-          }}
-          className='decision-maker-badge'
-          src={iconStarMaker}
-          alt=''
-        />
-      </Tooltip>
-    </Popconfirm>
-  );
+  const decisionMakerIcon = fromClientDetails ? (
+    isDecisionMaker ? (
+      <Popconfirm
+        title={`Remove ${clientName} as a Decision Maker?`}
+        onConfirm={confirmUpdate}
+        okText='Yes'
+        cancelText='Cancel'>
+        <Tooltip title='Decision Maker'
+          placement='bottomLeft'>
+          <img
+            style={{
+              height: 32,
+              left: 188,
+              position: 'absolute',
+              top: isChamp ? 40 : 5,
+              width: 32,
+              filter: 'grayscale(0%)',
+              opacity: 0.7,
+            }}
+            className='decision-maker-badge-client-details-page'
+            src={iconStarMaker}
+            alt=''
+          />
+        </Tooltip>
+      </Popconfirm>
+    ) : (
+      <Popconfirm
+        title={`Make ${clientName} a Decision Maker?`}
+        onConfirm={confirmUpdate}
+        okText='Yes'
+        cancelText='Cancel'>
+        <Tooltip title='Decision Maker'
+          placement='bottomLeft'>
+          <img
+            style={{
+              height: 32,
+              left: 188,
+              position: 'absolute',
+              top: isChamp ? 40 : 5,
+              width: 32,
+              filter: 'grayscale(100%)',
+              opacity: 0.7,
+            }}
+            className='decision-maker-badge-client-details-page'
+            src={iconStarMaker}
+            alt=''
+          />
+        </Tooltip>
+      </Popconfirm>
+    )
+  ) : isDecisionMaker ? (
+    <Tooltip title='Decision Maker'
+      placement='bottomLeft'>
+      <img
+        style={{
+          height: 32,
+          left: 188,
+          position: 'absolute',
+          top: isChamp ? 40 : 5,
+          width: 32,
+          filter: 'grayscale(0%)',
+          opacity: 0.7,
+        }}
+        className='decision-maker-badge'
+        src={iconStarMaker}
+        alt=''
+      />
+    </Tooltip>
+  ) : null;
+
   return (
     <AvatarStyled style={{ height: size[mode], width: 230 }}>
       <div style={{ position: 'relative' }}>

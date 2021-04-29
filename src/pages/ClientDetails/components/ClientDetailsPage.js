@@ -113,8 +113,6 @@ const ClientDetailsPage = ({ history, location }) => {
       total: totalNotes,
     };
 
-    console.log(clientData.isDecisionMaker);
-
     return (
       <>
         <Row {...rowProps}>

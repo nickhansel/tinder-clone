@@ -72,3 +72,10 @@
 .decision-maker-badge:hover {
   filter: grayscale(100%) !important;
 }
+.decision-maker-badge:hover, .decision-maker-badge-client-details-page:hover {
+  opacity: 1 !important;
+}
+
+.decision-maker-badge-client-details-page:hover {
+  cursor: pointer;
+}
