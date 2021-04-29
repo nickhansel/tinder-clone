@@ -55,7 +55,8 @@ const ClientCard = ({
     isChamp,
     isImpatient,
     id: id,
-    updateClientIsDecisionMaker: handleUpdateClientIsDecisionMaker
+    updateClientIsDecisionMaker: handleUpdateClientIsDecisionMaker,
+    clientName: clientName
   };
   if (onNameClick) {
     avatarProps.onClick = () => onNameClick(id, clientName);

@@ -14,6 +14,7 @@ const AvatarContainer = ({
   isImpatient,
   id,
   updateClientIsDecisionMaker,
+  clientName,
 }) => {
   const size = {
     full: 289,
@@ -59,9 +60,8 @@ const AvatarContainer = ({
 
   const decisionMakerIcon = isDecisionMaker ? (
     <Popconfirm
-      title='Remove Decision Maker?'
+      title={`Remove ${clientName} as a Decision Maker?`}
       onConfirm={confirmUpdate}
-      // onCancel={() => console.log('i clicked this cancel')}
       okText='Yes'
       cancelText='Cancel'>
       <Tooltip title='Decision Maker'
@@ -83,7 +83,7 @@ const AvatarContainer = ({
     </Popconfirm>
   ) : (
     <Popconfirm
-      title='Make Decision Maker?'
+      title={`Make ${clientName} a Decision Maker?`}
       onConfirm={confirmUpdate}
       okText='Yes'
       cancelText='Cancel'>
@@ -105,7 +105,6 @@ const AvatarContainer = ({
       </Tooltip>
     </Popconfirm>
   );
-
   return (
     <AvatarStyled style={{ height: size[mode], width: 230 }}>
       <div style={{ position: 'relative' }}>
