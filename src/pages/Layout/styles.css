@@ -69,3 +69,6 @@
   border-bottom: 1px solid white;
   padding: 10px;
 }
+.decision-maker-badge:hover {
+  filter: grayscale(100%) !important;
+}

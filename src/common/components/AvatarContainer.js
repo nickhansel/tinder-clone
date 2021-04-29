@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from 'antd';
+import { Tooltip, Popconfirm } from 'antd';
 import { AvatarStyled } from './styles';
 import { greyBg } from 'media/images';
 import { iconStarMaker, iconCrown, iconNewMail } from 'media/svg';
+import './Layout/styles.css';
 
 const AvatarContainer = ({
   mood,
@@ -11,14 +12,21 @@ const AvatarContainer = ({
   isDecisionMaker,
   isChamp,
   isImpatient,
+  id,
+  updateClientIsDecisionMaker,
 }) => {
   const size = {
     full: 289,
     croped: 249,
   };
+
+  function confirmUpdate() {
+    updateClientIsDecisionMaker(id, !isDecisionMaker);
+  }
+
   const newMailIcon = isImpatient ? (
-    <Tooltip title="New Mail"
-      placement="topLeft">
+    <Tooltip title='New Mail'
+      placement='topLeft'>
       <img
         style={{
           height: 24,
@@ -28,13 +36,13 @@ const AvatarContainer = ({
           width: 24,
         }}
         src={iconNewMail}
-        alt=""
+        alt=''
       />
     </Tooltip>
   ) : null;
   const champIcon = isChamp ? (
-    <Tooltip title="Champion"
-      placement="topLeft">
+    <Tooltip title='Champion'
+      placement='topLeft'>
       <img
         style={{
           height: 32,
@@ -44,30 +52,59 @@ const AvatarContainer = ({
           width: 32,
         }}
         src={iconCrown}
-        alt=""
-      />
-    </Tooltip>
-  ) : null;
-  const decisionMakerIcon = isDecisionMaker ? (
-    <Tooltip title='Decision Maker'
-      placement='topLeft'>
-      <img
-        style={{
-          height: 32,
-          left: 188,
-          position: 'absolute',
-          top: isChamp ? 40 : 5,
-          width: 32,
-          filter: 'grayscale(100%)',
-        }}
-        src={iconStarMaker}
         alt=''
-        onClick={() => console.log('i clicked this')}
-        onMouseEnter={() => console.log('i am hovering on this')}
-        onMouseLeave={() => console.log('i am no longer hovering')}
       />
     </Tooltip>
   ) : null;
+
+  const decisionMakerIcon = isDecisionMaker ? (
+    <Popconfirm
+      title='Remove Decision Maker?'
+      onConfirm={confirmUpdate}
+      // onCancel={() => console.log('i clicked this cancel')}
+      okText='Yes'
+      cancelText='Cancel'>
+      <Tooltip title='Decision Maker'
+        placement='bottomLeft'>
+        <img
+          style={{
+            height: 32,
+            left: 188,
+            position: 'absolute',
+            top: isChamp ? 40 : 5,
+            width: 32,
+            filter: 'grayscale(0%)',
+          }}
+          className='decision-maker-badge'
+          src={iconStarMaker}
+          alt=''
+        />
+      </Tooltip>
+    </Popconfirm>
+  ) : (
+    <Popconfirm
+      title='Make Decision Maker?'
+      onConfirm={confirmUpdate}
+      okText='Yes'
+      cancelText='Cancel'>
+      <Tooltip title='Decision Maker'
+        placement='bottomLeft'>
+        <img
+          style={{
+            height: 32,
+            left: 188,
+            position: 'absolute',
+            top: isChamp ? 40 : 5,
+            width: 32,
+            filter: 'grayscale(100%)',
+          }}
+          className='decision-maker-badge'
+          src={iconStarMaker}
+          alt=''
+        />
+      </Tooltip>
+    </Popconfirm>
+  );
 
   return (
     <AvatarStyled style={{ height: size[mode], width: 230 }}>
@@ -77,7 +114,7 @@ const AvatarContainer = ({
         {decisionMakerIcon}
       </div>
       <img src={mood || greyBg}
-        alt="" />
+        alt='' />
     </AvatarStyled>
   );
 };
