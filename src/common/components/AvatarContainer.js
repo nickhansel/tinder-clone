@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip, Popconfirm } from 'antd';
+import { Tooltip } from 'antd';
 import { AvatarStyled } from './styles';
 import { greyBg } from 'media/images';
 import { iconStarMaker, iconCrown, iconNewMail } from 'media/svg';
 import './Layout/styles.css';
+import DecisionMakerIconToggle from 'common/components/DecisionMakerIconToggle';
 
 const AvatarContainer = ({
   mood,
@@ -62,53 +63,19 @@ const AvatarContainer = ({
 
   const decisionMakerIcon = fromClientDetails ? (
     isDecisionMaker ? (
-      <Popconfirm
-        title={`Remove ${clientName} as a Decision Maker?`}
-        onConfirm={confirmUpdate}
-        okText='Yes'
-        cancelText='Cancel'>
-        <Tooltip title='Decision Maker'
-          placement='bottomLeft'>
-          <img
-            style={{
-              height: 32,
-              left: 188,
-              position: 'absolute',
-              top: isChamp ? 40 : 5,
-              width: 32,
-              filter: 'grayscale(0%)',
-              opacity: 0.7,
-            }}
-            className='decision-maker-badge-client-details-page'
-            src={iconStarMaker}
-            alt=''
-          />
-        </Tooltip>
-      </Popconfirm>
+      <DecisionMakerIconToggle
+        clientName={clientName}
+        confirmUpdate={confirmUpdate}
+        isChamp={isChamp}
+        isToggleOn={true}
+      />
     ) : (
-      <Popconfirm
-        title={`Make ${clientName} a Decision Maker?`}
-        onConfirm={confirmUpdate}
-        okText='Yes'
-        cancelText='Cancel'>
-        <Tooltip title='Decision Maker'
-          placement='bottomLeft'>
-          <img
-            style={{
-              height: 32,
-              left: 188,
-              position: 'absolute',
-              top: isChamp ? 40 : 5,
-              width: 32,
-              filter: 'grayscale(100%)',
-              opacity: 0.7,
-            }}
-            className='decision-maker-badge-client-details-page'
-            src={iconStarMaker}
-            alt=''
-          />
-        </Tooltip>
-      </Popconfirm>
+      <DecisionMakerIconToggle
+        clientName={clientName}
+        confirmUpdate={confirmUpdate}
+        isChamp={isChamp}
+        isToggleOn={false}
+      />
     )
   ) : isDecisionMaker ? (
     <Tooltip title='Decision Maker'
