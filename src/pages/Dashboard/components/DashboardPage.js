@@ -13,8 +13,8 @@ import { Pagination } from 'antd';
 import DashboardClientList from './DashboardClientList';
 import MoodFilter from './DashboardMoodFilter';
 import DashboardSort from './DashboardSort';
-import { Layout, Note2, Loading } from 'common';
-import { DASHBOARD_TITLE, NUM_EACH_PAGE } from '../constants';
+import { Layout, Note2, Loading, ButtonConfirm } from 'common';
+import { DASHBOARD_TITLE } from '../constants';
 import { FlexContainer } from './styles';
 import { filterDataByMoodAndSearch, CURRENT_USER } from 'utils';
 import SearchInput from 'common/components/Layout/SearchInput';
@@ -25,7 +25,7 @@ const DashboardPage = ({ history }) => {
   const [filtering, setFiltering] = useState(false);
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
-  const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+  const [maxVal, setMaxVal] = useState(8);
   const [authUserData, setAuthUserData] = useState({});
   const [searchString, setSearchString] = useState('');
 
@@ -94,11 +94,12 @@ const DashboardPage = ({ history }) => {
       setFiltering={setFiltering} />
   );
 
+  const clientsPerPage = 8;
   const onChange = (page) => {
     // Pagination
     setPage(page);
-    setMinVal((page - 1) * NUM_EACH_PAGE);
-    setMaxVal(page * NUM_EACH_PAGE);
+    setMinVal((page - 1) * clientsPerPage);
+    setMaxVal(page * clientsPerPage);
   };
 
   const cardListProps = {
@@ -112,7 +113,7 @@ const DashboardPage = ({ history }) => {
     current: page,
     defaultCurrent: 1,
     onChange: onChange,
-    pageSize: 8,
+    pageSize: maxVal,
     showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
     total: totalClients,
   };
@@ -129,6 +130,14 @@ const DashboardPage = ({ history }) => {
     <DashboardClientList {...cardListProps} />
   );
 
+  function handleShowAllClick() {
+    setMaxVal(totalClients);
+  }
+
+  const renderShowAllButton = (
+    <ButtonConfirm onClick={handleShowAllClick}>Show All</ButtonConfirm>
+  );
+
   return (
     <Layout title={DASHBOARD_TITLE}
       extra={moodFilter}>
@@ -137,6 +146,7 @@ const DashboardPage = ({ history }) => {
           onChange={handleChange} />
         <DashboardSort />
         <Pagination {...paginationProps} />
+        {renderShowAllButton}
       </FlexContainer>
       {renderClients}
     </Layout>
