@@ -30,29 +30,14 @@ const filterHelper = (data, moods) => {
 
 const searchFilterHelper = (data, searchTerm) => {
   const dataCopy = [...data];
+  const lowerCaseSearch = searchTerm.toLowerCase();
   const filtered = dataCopy.filter((clientItem) => {
-    // error checking for when something is null
-    // also allows you to return a clientItem if any piece is null
-    if (clientItem.position === null) { 
-      if (clientItem.name.includes(searchTerm) || clientItem.accountId.name.includes(searchTerm)) {
-        return clientItem;
-      }
-    } else if (clientItem.name === null) {
-      if (clientItem.position.includes(searchTerm) || clientItem.accountId.name.includes(searchTerm)) {
-        return clientItem;
-      }
-    } else if (clientItem.accountId.name === null) {
-      if (clientItem.position.includes(searchTerm) || clientItem.name.includes(searchTerm)
-      ) {
-        return clientItem;
-      }
-    } else {
-      return (
-        clientItem.name.includes(searchTerm) ||
-				clientItem.accountId.name.includes(searchTerm) ||
-				clientItem.position.includes(searchTerm)
-      );
-    }
+    const { name, accountId, position } = clientItem;
+    return (
+      (Boolean(name) && clientItem.name.toLowerCase().includes(lowerCaseSearch)) ||
+			(Boolean(accountId.name) && accountId.name.toLowerCase().includes(lowerCaseSearch)) ||
+			(Boolean(position) && position.toLowerCase().includes(lowerCaseSearch))
+    );
   });
   return filtered;
 };

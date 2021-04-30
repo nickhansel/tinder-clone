@@ -3,7 +3,7 @@ import { Input } from 'antd';
 import { iconSearch } from 'media/svg';
 import { SearchInputStyled } from './styles';
 
-const SearchInput = ({value, onChange }) => {
+const SearchInput = ({ value, onChange }) => {
   const inputProps = {
     placeholder: 'Search',
     value: value,
