@@ -9,11 +9,11 @@ import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { listClientsDash, getUser } from 'graphql/queries';
 import { createUser as createUserMutation } from 'graphql/mutations';
-import { Pagination } from 'antd';
+import { Pagination, Button } from 'antd';
 import DashboardClientList from './DashboardClientList';
 import MoodFilter from './DashboardMoodFilter';
 import DashboardSort from './DashboardSort';
-import { Layout, Note2, Loading, ButtonConfirm } from 'common';
+import { Layout, Note2, Loading } from 'common';
 import { DASHBOARD_TITLE } from '../constants';
 import { FlexContainer } from './styles';
 import { filterDataByMoodAndSearch, CURRENT_USER } from 'utils';
@@ -135,7 +135,7 @@ const DashboardPage = ({ history }) => {
   }
 
   const renderShowAllButton = (
-    <ButtonConfirm onClick={handleShowAllClick}>Show All</ButtonConfirm>
+    <Button onClick={handleShowAllClick}>Show All</Button>
   );
 
   return (
@@ -145,8 +145,11 @@ const DashboardPage = ({ history }) => {
         <SearchInput value={searchString}
           onChange={handleChange} />
         <DashboardSort />
-        <Pagination {...paginationProps} />
-        {renderShowAllButton}
+        <div>
+          <Pagination {...paginationProps}
+            style={{ marginRight: 10 }}/>
+          {renderShowAllButton}
+        </div>
       </FlexContainer>
       {renderClients}
     </Layout>
