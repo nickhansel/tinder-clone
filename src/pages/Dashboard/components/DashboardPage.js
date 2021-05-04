@@ -1,6 +1,6 @@
 /*
-   Dashboard Page 
- */
+  Dashboard Page 
+*/
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -16,7 +16,8 @@ import DashboardSort from './DashboardSort';
 import { Layout, Note2, Loading } from 'common';
 import { DASHBOARD_TITLE, NUM_EACH_PAGE } from '../constants';
 import { FlexContainer } from './styles';
-import { filterDataByMood, CURRENT_USER } from 'utils';
+import { filterDataByMoodAndSearch, CURRENT_USER } from 'utils';
+import SearchInput from 'common/components/Layout/SearchInput';
 import './styles.css';
 
 const DashboardPage = ({ history }) => {
@@ -26,6 +27,7 @@ const DashboardPage = ({ history }) => {
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
   const [authUserData, setAuthUserData] = useState({});
+  const [searchString, setSearchString] = useState('');
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
@@ -84,10 +86,9 @@ const DashboardPage = ({ history }) => {
 
   const isLoaded = !loading && !error;
   let clientsData = isLoaded // TODO change to API filtering
-    ? filterDataByMood(data.listClients.items, moodId)
+    ? filterDataByMoodAndSearch(data.listClients.items, moodId, searchString)
     : [];
   const totalClients = clientsData.length;
-  // console.log(clientsData);
   const moodFilter = (
     <MoodFilter setMoodId={setMoodId}
       setFiltering={setFiltering} />
@@ -106,6 +107,7 @@ const DashboardPage = ({ history }) => {
     minVal,
     maxVal,
   };
+
   const paginationProps = {
     current: page,
     defaultCurrent: 1,
@@ -113,6 +115,10 @@ const DashboardPage = ({ history }) => {
     pageSize: 8,
     showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
     total: totalClients,
+  };
+  
+  const handleChange = (event) => {
+    setSearchString(event.target.value);
   };
 
   const renderClients = filtering ? (
@@ -127,6 +133,8 @@ const DashboardPage = ({ history }) => {
     <Layout title={DASHBOARD_TITLE}
       extra={moodFilter}>
       <FlexContainer>
+        <SearchInput value={searchString}
+          onChange={handleChange} />
         <DashboardSort />
         <Pagination {...paginationProps} />
       </FlexContainer>
