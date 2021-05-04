@@ -8,8 +8,11 @@ import { METRICS_STATE } from '../constants';
 const InsightsStrategy = ({ overallData }) => {
   const [stateWins, setState] = useState(false);
 
-  const handleToggle = () => {
-    setState(!stateWins);
+  const handleToggleAssigned = () => {
+    setState(false);
+  };
+  const handleToggleWins = () => {
+    setState(true);
   };
 
   // TODO add db data
@@ -96,7 +99,6 @@ const InsightsStrategy = ({ overallData }) => {
     return badgeDict;
   }
 
-  // console.log(overallData);
   let newBadgeDict = getBadges(overallData.listClients.items, currentBadges);
 
   const winsBadges = [
@@ -145,19 +147,17 @@ const InsightsStrategy = ({ overallData }) => {
     },
   };
 
-  let buttonName = METRICS_STATE.ASSIGNED;
   let title = 'Badges currently assigned';
   let progressColor = mainColors.brightBlue;
   let data = newBadgeDict;
 
   if (stateWins) {
-    buttonName = METRICS_STATE.WINS;
     title = 'Badge wins this Quarter';
     progressColor = mintGreen;
     data = winsBadges;
   }
 
-  const rederMetrics = data.map((badge) => (
+  const renderMetrics = data.map((badge) => (
     <SpaceBetween style={{ paddingBottom: 20 }}>
       <Flex style={{ width: 260 }}>
         <Badge strategy={badge.name} />
@@ -186,10 +186,13 @@ const InsightsStrategy = ({ overallData }) => {
     <div>
       <SpaceBetween>
         <SubH2>Strategy Based Metrics</SubH2>
-        <ButtonCharts onClick={handleToggle}>{buttonName}</ButtonCharts>
+        <div>
+          <ButtonCharts onClick={handleToggleAssigned}>Assigned</ButtonCharts>
+          <ButtonCharts onClick={handleToggleWins}>Wins</ButtonCharts>
+        </div>
       </SpaceBetween>
       <Note1Grey {...titleProps}>{title}</Note1Grey>
-      {rederMetrics}
+      {renderMetrics}
     </div>
   );
 };
