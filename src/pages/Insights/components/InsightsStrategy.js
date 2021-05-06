@@ -54,39 +54,47 @@ const InsightsStrategy = ({ overallData }) => {
     },
   ];
 
-  function getBadges(strategyData, badgeDict) {
+  function getBadges(strategyData, badgeDict, status) {
     let totalBadges = 0;
 
     for (let i = 0; i < strategyData.length; i++) {
       for (let j = 0; j < strategyData[i].strategy.items.length; j++) {
-        const { badgeName } = strategyData[i].strategy.items[j];
+        if (status === 'assigned') {
+          const { badgeName } = strategyData[i].strategy.items[j];
 
-        if (badgeName === BADGES.ATTENTION) {
-          totalBadges += 1;
-          badgeDict[0].score += 1;
-        } else if (
-          badgeName === BADGES.CONTACT
-        ) {
-          totalBadges += 1;
-          badgeDict[1].score += 1;
-        } else if (
-          badgeName === BADGES.FEATURE
-        ) {
-          totalBadges += 1;
-          badgeDict[2].score += 1;
-        } else if (badgeName === BADGES.BUG) {
-          totalBadges += 1;
-          badgeDict[3].score += 1;
-        } else if (
-          badgeName === BADGES.ESCALATION
-        ) {
-          totalBadges += 1;
-          badgeDict[4].score += 1;
-        } else if (
-          badgeName === BADGES.CUSTOM
-        ) {
-          totalBadges += 1;
-          badgeDict[5].score += 1;
+          if (badgeName === BADGES.ATTENTION) {
+            totalBadges += 1;
+            badgeDict[0].score += 1;
+          } else if (
+            badgeName === BADGES.CONTACT
+          ) {
+            totalBadges += 1;
+            badgeDict[1].score += 1;
+          } else if (
+            badgeName === BADGES.FEATURE
+          ) {
+            totalBadges += 1;
+            badgeDict[2].score += 1;
+          } else if (badgeName === BADGES.BUG) {
+            totalBadges += 1;
+            badgeDict[3].score += 1;
+          } else if (
+            badgeName === BADGES.ESCALATION
+          ) {
+            totalBadges += 1;
+            badgeDict[4].score += 1;
+          } else if (
+            badgeName === BADGES.CUSTOM
+          ) {
+            totalBadges += 1;
+            badgeDict[5].score += 1;
+          }
+        } else if (status === 'wins') {
+          // will add logic in the future when it is available in backend
+          continue;
+        } else if (status === 'losses') {
+          // will add logic in the future when it is available in backend
+          continue;
         }
       }
     }
@@ -98,7 +106,7 @@ const InsightsStrategy = ({ overallData }) => {
     return badgeDict;
   }
 
-  let newBadgeDict = getBadges(overallData.listClients.items, currentBadges);
+  let newBadgeDict = getBadges(overallData.listClients.items, currentBadges, 'assigned');
 
   const winsBadges = [
     {
@@ -139,7 +147,7 @@ const InsightsStrategy = ({ overallData }) => {
     },
   ];
 
-  // let newWinBadgeDict = getBadges(overallData.listClients.items, winsBadges);
+  let newWinBadgeDict = getBadges(overallData.listClients.items, winsBadges, 'wins');
 
   const lineProps = {
     style: {
@@ -155,7 +163,7 @@ const InsightsStrategy = ({ overallData }) => {
   if (stateWins) {
     title = 'Badge wins this Quarter';
     progressColor = mintGreen;
-    data = winsBadges;
+    data = newWinBadgeDict;
   }
 
   console.log(overallData.listClients.items);
