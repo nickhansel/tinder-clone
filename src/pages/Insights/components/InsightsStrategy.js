@@ -3,7 +3,6 @@ import { Progress } from 'antd';
 import { Note1Grey, Note1, SubH2, Flex, SpaceBetween, Badge } from 'common';
 import { BADGES, mainColors, mintGreen } from 'utils';
 import { ButtonCharts } from './styles';
-import { METRICS_STATE } from '../constants';
 
 const InsightsStrategy = ({ overallData }) => {
   const [stateWins, setState] = useState(false);
@@ -105,8 +104,8 @@ const InsightsStrategy = ({ overallData }) => {
     {
       name: BADGES.ATTENTION,
       title: 'Attention',
-      score: 10,
-      percent: 50,
+      score: 0,
+      percent: 0,
     },
     {
       name: BADGES.CONTACT,
@@ -117,28 +116,30 @@ const InsightsStrategy = ({ overallData }) => {
     {
       name: BADGES.FEATURE,
       title: 'New Feature',
-      score: 13,
-      percent: 18,
+      score: 0,
+      percent: 0,
     },
     {
       name: BADGES.BUG,
       title: 'Bug',
-      score: 16,
-      percent: 25,
+      score: 0,
+      percent: 0,
     },
     {
       name: BADGES.ESCALATION,
       title: 'Escalation',
-      score: 1,
-      percent: 3,
+      score: 0,
+      percent: 0,
     },
     {
       name: BADGES.CUSTOM,
       title: 'Custom',
-      score: 2,
-      percent: 6,
+      score: 0,
+      percent: 0,
     },
   ];
+
+  // let newWinBadgeDict = getBadges(overallData.listClients.items, winsBadges);
 
   const lineProps = {
     style: {
@@ -156,6 +157,8 @@ const InsightsStrategy = ({ overallData }) => {
     progressColor = mintGreen;
     data = winsBadges;
   }
+
+  console.log(overallData.listClients.items);
 
   const renderMetrics = data.map((badge) => (
     <SpaceBetween style={{ paddingBottom: 20 }}>
