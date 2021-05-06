@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 // import { useMutation, useQuery } from '@apollo/react-hooks';
 // import { createClientNote } from 'graphql/mutations';
 // import { getClient } from 'graphql/queries';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Switch, message } from 'antd';
 // import { generateId } from 'utils';
-import { ButtonCancel, ButtonConfirm } from 'common';
+import { ButtonCancel, ButtonConfirm, SpaceBetween } from 'common';
 import './styles.css';
 
 const SettingsNewTeamMember = () => {
@@ -95,21 +95,24 @@ const SettingsNewTeamMember = () => {
         ]}>
         <Input />
       </Form.Item>
-
+      <Form.Item label='Admin'>
+        <Switch />
+      </Form.Item>
       <Form.Item {...footerFormStyle}>
-        <ButtonConfirm
-          form='form-new-team-member'
-          key='submit'
-          htmlType='submit'
-          type='primary'>
-					Confirm
-        </ButtonConfirm>
-        <ButtonCancel
-          key='back'
-          onClick={() => form.resetFields()}
-          style={{ marginLeft: 150, marginTop: 20 }}>
-					Reset
-        </ButtonCancel>
+        <SpaceBetween>
+          <ButtonCancel
+            key='back'
+            onClick={() => form.resetFields()}>
+						Reset
+          </ButtonCancel>
+          <ButtonConfirm
+            form='form-new-team-member'
+            key='submit'
+            htmlType='submit'
+            type='primary'>
+						Confirm
+          </ButtonConfirm>
+        </SpaceBetween>
       </Form.Item>
     </Form>
   );
