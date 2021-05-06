@@ -8,7 +8,6 @@ import { Spin, Typography, Popconfirm, message } from 'antd';
 import { SubH2, SpaceBetween, Note1Grey, Badge, Flex } from 'common';
 import { iconTrash } from 'media/svg';
 import { CheckOutlined } from '@ant-design/icons';
-
 const { Paragraph } = Typography;
 
 const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNote, height, }) => {
@@ -49,6 +48,9 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
   }
 
   function confirmStrategyWin(e) {
+    // Logic will go here for strategy wins
+    // Move the Strategy from Assigned to Win or Loss and then delete it
+    // Possibly add to Archive instead of deleting
     toggleSpinning(false);
   }
 
@@ -75,6 +77,7 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
       </Paragraph>
     </div>
   );
+
   const renderDelete = (
     <Popconfirm
       title="Are you sure?"
@@ -105,7 +108,7 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
       <CheckOutlined
         onClick={() => toggleSpinning(true)}
         style={{ cursor: 'pointer', marginLeft: 5 }}
-        alt='note check icon'
+        alt='strategy check icon'
       />
     </Popconfirm>
   ) : null; ;
