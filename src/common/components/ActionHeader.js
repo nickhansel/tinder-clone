@@ -1,7 +1,7 @@
 /*
-   Reusable component to provide layout for header with an action
-   Takes header title and array of action names
- */
+  Reusable component to provide layout for header with an action
+  Takes header title and array of action names
+*/
 import React from 'react';
 import { SubH2, SpaceBetween } from 'common';
 import { Tooltip } from 'antd';
@@ -30,7 +30,7 @@ const ActionHeader = ({ title, actions }) => {
     add: {
       name: 'add',
       icon: iconAddCircle,
-      action: () => { console.log('clicked edit');} // TODO add actions
+      action: () => { console.log('clicked add');} // TODO add actions
     },
     delete: {
       name: 'delete',

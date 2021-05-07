@@ -9,7 +9,7 @@ import { Form, Input, Switch, message } from 'antd';
 import { ButtonCancel, ButtonConfirm, SpaceBetween } from 'common';
 import './styles.css';
 
-const SettingsNewTeamMember = () => {
+const SettingsNewTeamMember = ( props ) => {
   const [form] = Form.useForm();
 
   // const [addClientNote, { loading: creating, error }] = useMutation(
@@ -57,11 +57,11 @@ const SettingsNewTeamMember = () => {
 
   const formStyle = {
     labelCol: { span: 4 },
-    wrapperCol: { span: 24, offset: 0 }
+    wrapperCol: { span: 24, offset: 0 },
   };
 
   const footerFormStyle = {
-    wrapperCol: { span: 20, offset: 6 }
+    wrapperCol: { span: 20, offset: 6 },
   };
 
   return (
@@ -100,16 +100,17 @@ const SettingsNewTeamMember = () => {
       </Form.Item>
       <Form.Item {...footerFormStyle}>
         <SpaceBetween>
-          <ButtonCancel
-            key='back'
-            onClick={() => form.resetFields()}>
-						Reset
+          <ButtonCancel key='back'
+            onClick={props.handleToggleExisting}>
+						Cancel
           </ButtonCancel>
           <ButtonConfirm
             form='form-new-team-member'
             key='submit'
             htmlType='submit'
-            type='primary'>
+            type='primary'
+            // onClick={handleNewTeamMemberSubmit}
+            style={{ marginRight: 40 }}>
 						Confirm
           </ButtonConfirm>
         </SpaceBetween>
