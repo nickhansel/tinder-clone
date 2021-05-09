@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import { useMutation, useQuery } from '@apollo/react-hooks';
 // import { createClientNote } from 'graphql/mutations';
 // import { getClient } from 'graphql/queries';
-import { Form, Input, Switch, message } from 'antd';
+import { Form, Input, Switch, message, Row } from 'antd';
 // import { generateId } from 'utils';
 import { ButtonCancel, ButtonConfirm, SpaceBetween } from 'common';
 import './styles.css';
@@ -74,14 +74,25 @@ const SettingsNewTeamMember = ( props ) => {
       initialValues={{ remember: true }}
       onFinish={handleNewTeamMemberSubmit}
       onFinishFailed={onFinishFailed}
-      style={{ marginTop: 30, marginRight: 30 }}>
-      <Form.Item
-        label='Username'
-        name='username'
-        rules={[
-          { required: true, message: 'Please Input New Team Member Username' },
-        ]}>
-        <Input />
+      style={{ marginTop: 20, marginRight: 30 }}>
+      <Form.Item label='Full Name'
+        style={{ marginBottom: 0 }}>
+        <Form.Item
+          name='First Name'
+          rules={[{ required: true }]}
+          style={{ display: 'inline-block', width: 'calc(50% - 5px)' }}>
+          <Input placeholder='Input First Name' />
+        </Form.Item>
+        <Form.Item
+          name='Last Name'
+          rules={[{ required: true }]}
+          style={{
+            display: 'inline-block',
+            width: 'calc(50% - 5px)',
+            marginLeft: '8px',
+          }}>
+          <Input placeholder='Input Last Name' />
+        </Form.Item>
       </Form.Item>
       <Form.Item
         label='Email'
