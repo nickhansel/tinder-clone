@@ -1,6 +1,5 @@
 export const BRANCH_NAME = 'dashboard';
 export const DASHBOARD_TITLE = 'My Clients';
-export const NUM_EACH_PAGE = 8;
 
 export const MOOD_FILTER = [
   {

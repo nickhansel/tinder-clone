@@ -9,12 +9,12 @@ import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { listClientsDash, getUser } from 'graphql/queries';
 import { createUser as createUserMutation } from 'graphql/mutations';
-import { Pagination } from 'antd';
+import { Pagination, Button } from 'antd';
 import DashboardClientList from './DashboardClientList';
 import MoodFilter from './DashboardMoodFilter';
 import DashboardSort from './DashboardSort';
 import { Layout, Note2, Loading } from 'common';
-import { DASHBOARD_TITLE, NUM_EACH_PAGE } from '../constants';
+import { DASHBOARD_TITLE } from '../constants';
 import { FlexContainer } from './styles';
 import { filterDataByMoodAndSearch, CURRENT_USER } from 'utils';
 import SearchInput from 'common/components/Layout/SearchInput';
@@ -25,9 +25,13 @@ const DashboardPage = ({ history }) => {
   const [filtering, setFiltering] = useState(false);
   const [page, setPage] = useState(1);
   const [minVal, setMinVal] = useState(0);
-  const [maxVal, setMaxVal] = useState(NUM_EACH_PAGE);
+  const [maxVal, setMaxVal] = useState(8);
   const [authUserData, setAuthUserData] = useState({});
+<<<<<<< HEAD
   const [searchString, setSearchString] = useState('');
+=======
+  const [showAllTitleText, setShowAllTitleText] = useState('Show All');
+>>>>>>> added a toggle to the show all to allow for show less
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
@@ -94,11 +98,12 @@ const DashboardPage = ({ history }) => {
       setFiltering={setFiltering} />
   );
 
+  const clientsPerPage = 8;
   const onChange = (page) => {
     // Pagination
     setPage(page);
-    setMinVal((page - 1) * NUM_EACH_PAGE);
-    setMaxVal(page * NUM_EACH_PAGE);
+    setMinVal((page - 1) * clientsPerPage);
+    setMaxVal(page * clientsPerPage);
   };
 
   const cardListProps = {
@@ -112,7 +117,7 @@ const DashboardPage = ({ history }) => {
     current: page,
     defaultCurrent: 1,
     onChange: onChange,
-    pageSize: 8,
+    pageSize: maxVal,
     showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
     total: totalClients,
   };
@@ -129,6 +134,20 @@ const DashboardPage = ({ history }) => {
     <DashboardClientList {...cardListProps} />
   );
 
+  function handleShowAllClick() {
+    if (maxVal === 8) {
+      setMaxVal(totalClients);
+      setShowAllTitleText('Show Less');
+    } else if (maxVal === totalClients) {
+      setMaxVal(8);
+      setShowAllTitleText('Show All');
+    }
+  }
+
+  const renderShowAllButton = (
+    <Button onClick={handleShowAllClick}>{showAllTitleText}</Button>
+  );
+
   return (
     <Layout title={DASHBOARD_TITLE}
       extra={moodFilter}>
@@ -136,7 +155,11 @@ const DashboardPage = ({ history }) => {
         <SearchInput value={searchString}
           onChange={handleChange} />
         <DashboardSort />
-        <Pagination {...paginationProps} />
+        <div>
+          <Pagination {...paginationProps}
+            style={{ marginRight: 10 }}/>
+          {renderShowAllButton}
+        </div>
       </FlexContainer>
       {renderClients}
     </Layout>
