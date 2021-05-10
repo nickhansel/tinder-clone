@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import gql from 'graphql-tag';
 // import { useMutation, useQuery } from '@apollo/react-hooks';
-// import { createClientNote } from 'graphql/mutations';
-// import { getClient } from 'graphql/queries';
-import { Form, Input, Switch, message, Row } from 'antd';
+// import { createClientNote, updateTeam, createTeam } from 'graphql/mutations';
+// import { getClient, getTeam, listTeams } from 'graphql/queries';
+import { Form, Input, Switch, message } from 'antd';
 // import { generateId } from 'utils';
 import { ButtonCancel, ButtonConfirm, SpaceBetween } from 'common';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import './styles.css';
 
 const SettingsNewTeamMember = ( props ) => {
+  console.log(props);
   const [form] = Form.useForm();
 
   // const [addClientNote, { loading: creating, error }] = useMutation(
@@ -34,7 +36,7 @@ const SettingsNewTeamMember = ( props ) => {
   //   }
   // );
 
-  const handleNewTeamMemberSubmit = (values) => {
+  const handleNewTeamMemberSubmit = (e) => {
     // addClientNote({
     //   variables: {
     //     input: {
@@ -46,11 +48,16 @@ const SettingsNewTeamMember = ( props ) => {
     //     },
     //   },
     // });
+    console.log(e.firstName);
+    console.log(e.lastName);
+    console.log(e.email);
+    // the value is null if it is just left off so it should check for null and false
+    console.log(e.admin);
 
     message.success('Note created, but not to backend');
     form.resetFields();
-    // handleToggle();
   };
+  
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -78,13 +85,13 @@ const SettingsNewTeamMember = ( props ) => {
       <Form.Item label='Full Name'
         style={{ marginBottom: 0 }}>
         <Form.Item
-          name='First Name'
+          name='firstName'
           rules={[{ required: true }]}
           style={{ display: 'inline-block', width: 'calc(50% - 5px)' }}>
           <Input placeholder='Input First Name' />
         </Form.Item>
         <Form.Item
-          name='Last Name'
+          name='lastName'
           rules={[{ required: true }]}
           style={{
             display: 'inline-block',
@@ -106,8 +113,12 @@ const SettingsNewTeamMember = ( props ) => {
         ]}>
         <Input />
       </Form.Item>
-      <Form.Item label='Admin'>
-        <Switch />
+      <Form.Item label='Admin'
+        name='admin'>
+        <Switch
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
+        />
       </Form.Item>
       <Form.Item {...footerFormStyle}>
         <SpaceBetween>
