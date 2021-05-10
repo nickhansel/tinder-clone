@@ -27,7 +27,11 @@ const DashboardPage = ({ history }) => {
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(8);
   const [authUserData, setAuthUserData] = useState({});
+<<<<<<< HEAD
   const [searchString, setSearchString] = useState('');
+=======
+  const [showAllTitleText, setShowAllTitleText] = useState('Show All');
+>>>>>>> added a toggle to the show all to allow for show less
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
@@ -131,11 +135,17 @@ const DashboardPage = ({ history }) => {
   );
 
   function handleShowAllClick() {
-    setMaxVal(totalClients);
+    if (maxVal === 8) {
+      setMaxVal(totalClients);
+      setShowAllTitleText('Show Less');
+    } else if (maxVal === totalClients) {
+      setMaxVal(8);
+      setShowAllTitleText('Show All');
+    }
   }
 
   const renderShowAllButton = (
-    <Button onClick={handleShowAllClick}>Show All</Button>
+    <Button onClick={handleShowAllClick}>{showAllTitleText}</Button>
   );
 
   return (
