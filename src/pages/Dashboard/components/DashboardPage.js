@@ -27,11 +27,8 @@ const DashboardPage = ({ history }) => {
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(8);
   const [authUserData, setAuthUserData] = useState({});
-<<<<<<< HEAD
   const [searchString, setSearchString] = useState('');
-=======
   const [showAllTitleText, setShowAllTitleText] = useState('Show All');
->>>>>>> added a toggle to the show all to allow for show less
 
   // get user from out db
   const { data: userData } = useQuery(gql(getUser), {
