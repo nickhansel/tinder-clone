@@ -1,8 +1,6 @@
-
 /*
   Insights Page 
 */
-
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import gql from 'graphql-tag';
@@ -107,16 +105,16 @@ const InsightsPage = () => {
             {...clientTopBottom[0]} />
         </div>
         <CardContainer height={440}
-          width={335}
-          className='strategy-metrica'>
+          width={390}
+          className='strategy-metrics'>
           <InsightsStrategy {...insightsStrategyProps} />
         </CardContainer>
         <CardWrap height={440}
           className='insights-moods'>
           <InsightsMood clients={clientNames} />
         </CardWrap>
-        <CardContainer height={328}
-          width={400}
+        <CardContainer height={440}
+          width={390}
           className='Quarter-moods'>
           <InsightsQuarter />
         </CardContainer>
