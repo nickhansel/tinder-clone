@@ -70,6 +70,7 @@ type Strategy @model {
   ownerId: User @connection(name: "UserStrategy")
   title: String!
   description: String
+  status: String
 }
 
 type Avatar @model {

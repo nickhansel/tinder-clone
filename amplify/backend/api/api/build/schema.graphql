@@ -82,6 +82,7 @@ type Strategy {
   ownerId: User
   title: String!
   description: String
+  status: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -570,6 +571,7 @@ input ModelStrategyFilterInput {
   badgeName: ModelStringInput
   title: ModelStringInput
   description: ModelStringInput
+  status: ModelStringInput
   and: [ModelStrategyFilterInput]
   or: [ModelStrategyFilterInput]
   not: ModelStrategyFilterInput
@@ -580,6 +582,7 @@ input CreateStrategyInput {
   badgeName: String!
   title: String!
   description: String
+  status: String
   strategyClientIdId: ID
   strategyOwnerIdId: ID
 }
@@ -589,6 +592,7 @@ input UpdateStrategyInput {
   badgeName: String
   title: String
   description: String
+  status: String
   strategyClientIdId: ID
   strategyOwnerIdId: ID
 }
@@ -601,6 +605,7 @@ input ModelStrategyConditionInput {
   badgeName: ModelStringInput
   title: ModelStringInput
   description: ModelStringInput
+  status: ModelStringInput
   and: [ModelStrategyConditionInput]
   or: [ModelStrategyConditionInput]
   not: ModelStrategyConditionInput
