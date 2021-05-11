@@ -62,21 +62,12 @@ const AvatarContainer = ({
   ) : null;
 
   const decisionMakerIcon = fromClientDetails ? (
-    isDecisionMaker ? (
-      <DecisionMakerIconToggle
-        clientName={clientName}
-        confirmUpdate={confirmUpdate}
-        isChamp={isChamp}
-        isToggleOn={true}
-      />
-    ) : (
-      <DecisionMakerIconToggle
-        clientName={clientName}
-        confirmUpdate={confirmUpdate}
-        isChamp={isChamp}
-        isToggleOn={false}
-      />
-    )
+    <DecisionMakerIconToggle
+      clientName={clientName}
+      confirmUpdate={confirmUpdate}
+      isChamp={isChamp}
+      isToggleOn={isDecisionMaker}
+    />
   ) : isDecisionMaker ? (
     <Tooltip title='Decision Maker'
       placement='bottomLeft'>
