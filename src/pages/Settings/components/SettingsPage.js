@@ -26,14 +26,6 @@ const { TabPane } = Tabs;
 const SettingsPage = () => {
   const [stateAddTeamMember, setStateAddTeamMember] = useState(true);
 
-  const handleToggleAddTeamMember = () => {
-    setStateAddTeamMember(false);
-  };
-
-  const handleToggleExisting = () => {
-    setStateAddTeamMember(true);
-  };
-
   const userData = useCurrentUser();
   const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
 
@@ -117,7 +109,7 @@ const SettingsPage = () => {
         <SubH2>Existing Team Members</SubH2>
         <Tooltip title='Add Team Member'>
           <img
-            onClick={() => handleToggleAddTeamMember()}
+            onClick={() => setStateAddTeamMember(false)}
             style={{ cursor: 'pointer' }}
             src={iconAddCircle}
           />
@@ -130,7 +122,7 @@ const SettingsPage = () => {
       <SpaceBetween>
         <SubH2>Add Team Member</SubH2>
       </SpaceBetween>
-      <SettingsNewTeamMember handleToggleExisting={handleToggleExisting} />
+      <SettingsNewTeamMember handleToggle={setStateAddTeamMember}/>
     </CardWrap>
   );
 

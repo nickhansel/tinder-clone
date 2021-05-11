@@ -11,7 +11,7 @@ import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import './styles.css';
 
 const SettingsNewTeamMember = ( props ) => {
-  console.log(props);
+  // console.log(props.handleToggleExisting);
   const [form] = Form.useForm();
 
   // const [addClientNote, { loading: creating, error }] = useMutation(
@@ -57,7 +57,7 @@ const SettingsNewTeamMember = ( props ) => {
     message.success('Note created, but not to backend');
     form.resetFields();
   };
-  
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -123,7 +123,7 @@ const SettingsNewTeamMember = ( props ) => {
       <Form.Item {...footerFormStyle}>
         <SpaceBetween>
           <ButtonCancel key='back'
-            onClick={props.handleToggleExisting}>
+            onClick={() => props.handleToggle(true)}>
 						Cancel
           </ButtonCancel>
           <ButtonConfirm
