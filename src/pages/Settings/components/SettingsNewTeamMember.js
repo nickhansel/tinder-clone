@@ -48,11 +48,11 @@ const SettingsNewTeamMember = ( props ) => {
     //     },
     //   },
     // });
-    console.log(e.firstName);
-    console.log(e.lastName);
-    console.log(e.email);
-    // the value is null if it is just left off so it should check for null and false
-    console.log(e.admin);
+    // console.log(e.firstName);
+    // console.log(e.lastName);
+    // console.log(e.email);
+    // // the value is null if it is just left off so it should check for null and false
+    // console.log(e.admin);
 
     message.success('Note created, but not to backend');
     form.resetFields();
