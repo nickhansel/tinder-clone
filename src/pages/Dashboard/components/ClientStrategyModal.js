@@ -93,6 +93,8 @@ const ClientStrategyModal = ({
     })
   );
 
+  // console.log(clientStrategies);
+
   return (
     <Modal
       className="modal__client-startegys"

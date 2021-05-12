@@ -3,13 +3,10 @@
 */
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { listClientsDash } from 'graphql/queries';
-
+import { listClientsDash, listStrategys } from 'graphql/queries';
 import { Row } from 'antd';
-
 import InsightsOverallScore from './InsightsOverallScore';
 import InsightsMood from './InsightsMood';
 import InsightsQuarter from './InsightsQuarter';
@@ -38,7 +35,20 @@ const InsightsPage = () => {
   });
   let history = useHistory();
 
-  if (loading) {
+  // const { loadingStrategies, dataStrategies, errorStrategies } = useQuery(
+  //   gql(listStrategys),
+  //   {
+  //     filter: {
+  //       contactId: CURRENT_USER,
+  //     },
+  //   }
+  // );
+
+  const { loading: loadingStrategies, data: strategyData } = useQuery(
+    gql(listStrategys)
+  );
+
+  if (loading || loadingStrategies) {
     return (
       <Layout>
         <div style={{ marginTop: 200 }}>
@@ -89,7 +99,10 @@ const InsightsPage = () => {
 
   const insightsStrategyProps = {
     overallData: data,
+    overallStrategyData: strategyData,
   };
+
+  // console.log(strategyData.listStrategys.items);
 
   return (
     <Layout {...layoutProps}>
