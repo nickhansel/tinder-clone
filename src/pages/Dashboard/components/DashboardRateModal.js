@@ -33,13 +33,15 @@ const DashboardRateModal = ({
       width={682}
       closable={false}
       footer={[
-        <ButtonCancel style={{ width: BUTTON_WIDTH }}
+        <ButtonCancel 
+          key={1}
+          style={{ width: BUTTON_WIDTH }}
           onClick={handleFinish}>
           Skip
         </ButtonCancel>,
         <ButtonConfirm
+          key={2}
           style={{ marginLeft: 20, width: BUTTON_WIDTH }}
-          key="back"
           onClick={handleFinish}
         >
           Send Rating
@@ -69,6 +71,9 @@ const DashboardRateModal = ({
 DashboardRateModal.propTypes = {
   isRateModal: PropTypes.bool.isRequired,
   handleToggle: PropTypes.func.isRequired,
+  clientName: PropTypes.string,
+  clientId: PropTypes.string,
+  history: PropTypes.object,
 };
 
 export default DashboardRateModal;

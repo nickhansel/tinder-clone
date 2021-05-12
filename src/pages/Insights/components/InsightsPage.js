@@ -3,16 +3,19 @@
 */
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { listClientsDash } from 'graphql/queries';
+
 import { Row } from 'antd';
+
 import InsightsOverallScore from './InsightsOverallScore';
 import InsightsMood from './InsightsMood';
 import InsightsQuarter from './InsightsQuarter';
 import InsightsStrategy from './InsightsStrategy';
+import Layout from 'pages/Layout';
 import {
-  Layout,
   ClientCard,
   CardWrap,
   CardContainer,
@@ -20,6 +23,7 @@ import {
   SubH2,
   Loading,
 } from 'common';
+
 import { StyledSmileIcon } from './styles';
 import { iconSmile, iconSmileDown } from 'media/svg';
 import { clientNames, CURRENT_USER, findTopBottomClients } from 'utils';

@@ -97,7 +97,7 @@ const ClientStrategyModal = ({
     <Modal
       className="modal__client-startegys"
       visible={isBadgeModal}
-      title="Notes"
+      title="Strategies"
       onCancel={() => handleToggle(false, null)}
       footer={[]}
     >

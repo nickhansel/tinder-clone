@@ -25,12 +25,13 @@ const ClientProfile = ({
   name,
   position,
   accountId: { name: company, healthScore, contract, renewalDate },
-  contactId: { id: contactId },
+  contactId,
   isDecisionMaker,
   avatarId,
   strategy: { items: strategyItems },
   mood,
 }) => {
+  console.log(contactId)
   const [isBadgeModal, toggleBadgeModal] = useState(false);
   const clientMood = mockMoods[avatarId]; // TODO change to real data
   const [{ canDrop, isOver }, drop] = useDrop({
@@ -59,13 +60,16 @@ const ClientProfile = ({
     <>
       <ProfileSection
         header={<Note1Grey>Renewal Date</Note1Grey>}
-        content={[<Note1>{renewalDate}</Note1>]}
+        content={[<Note1 key='renewal'>{renewalDate}</Note1>]}
       />
       <Divider type="vertical"
         style={{ height: 56 }} />
       <ProfileSection
         header={<Note1Grey style={{ marginLeft: 20 }}>Contract</Note1Grey>}
-        content={[<Note1 style={{ marginLeft: 14 }}>${contract}/month</Note1>]}
+        content={[
+          <Note1 key='contract'
+            style={{ marginLeft: 14 }}>${contract}/month</Note1>
+        ]}
       />
     </>
   );
@@ -89,15 +93,19 @@ const ClientProfile = ({
       <div className="details-profile-info">
         <ProfileSection
           header={<SubH1>{name}</SubH1>}
-          content={[
-            <Note1Grey>{position}</Note1Grey>,
-            <Note2>
-              <b>{company}</b>
-            </Note2>,
-          ]}
-          extra={<img style={iconProps}
-            src={iconMenu}
-            alt="" />}
+          content={
+            [
+              <Note1Grey key={'position'}>{position}</Note1Grey>,
+              <Note2 key={'company'}>
+                <b>{company}</b>
+              </Note2>
+            ]
+          }
+          extra={
+            <img style={iconProps}
+              src={iconMenu}
+              alt="" />
+          }
         />
         <DividerStyled />
         <HealthMeter healthScore={healthScore} />

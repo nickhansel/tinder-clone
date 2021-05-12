@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import App from './App';
 import './index.css';
 import { ApolloLink } from 'apollo-link';
-import ApolloClient from 'apollo-client';
+import { ApolloClient, gql } from '@apollo/client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from 'apollo-link-http';
@@ -15,6 +15,14 @@ import Amplify from 'aws-amplify';
 import awsExports from './aws-exports';
 
 Amplify.configure(awsExports);
+
+const typeDefs = gql`
+  extend type Query {
+    isLoggedIn: Boolean
+    strategiesList: [ID!]
+    loggedInUserId: String
+  }
+`;
 
 const url = awsExports.aws_appsync_graphqlEndpoint;
 const region = awsExports.aws_appsync_region;
@@ -30,6 +38,7 @@ const link = ApolloLink.from([
 export const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
+  typeDefs,
 });
 
 ReactDOM.render(

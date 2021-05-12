@@ -4,10 +4,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import SignOutButton from 'auth/SignOutButton';
-import SearchInput from './SearchInput';
+
 import { Layout as AntLayout, Menu } from 'antd';
+
+import SignOutButton from 'auth/SignOutButton';
 import { SubH1, Profile, Flex } from 'common';
+import SidebarModal from '../Sidebar';
+
 import { BASE_URLS } from 'utils';
 import { iconPulse, iconGear, iconPerson, iconLogo } from 'media/svg';
 import {
@@ -50,6 +53,7 @@ const Layout = ({ prefix, children, title, extra = null }) => {
     <AntLayout>
       <Sider trigger={null}
         collapsible
+        className="menu-sidebar"
         collapsed={collapsed}>
         <div className="logo-side-bar">
           <img src={iconLogo}
@@ -104,6 +108,7 @@ const Layout = ({ prefix, children, title, extra = null }) => {
         {extra}
         <ContentContainer>{children}</ContentContainer>
       </AntLayout>
+      <SidebarModal />
     </AntLayout>
   );
 };

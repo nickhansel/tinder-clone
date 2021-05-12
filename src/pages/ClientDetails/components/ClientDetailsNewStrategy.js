@@ -32,7 +32,7 @@ const ClientDetailsNewStrategy = ({
   client: {
     id,
     accountId: { name: companyName },
-    contactId,
+    contactId = {},
   },
   selectedStrategy,
   setSelectedStrategy,
@@ -53,17 +53,17 @@ const ClientDetailsNewStrategy = ({
         });
         const { items } = data.getClient.strategy;
 
-        cache.writeQuery({
-          query: gql(getClient),
-          data: {
-            getClient: {
-              ...data.getClient,
-              strategy: {
-                items: items.concat([createStrategy]),
-              },
-            },
-          },
-        });
+        // cache.writeQuery({
+        //   query: gql(getClient),
+        //   data: {
+        //     getClient: {
+        //       ...data.getClient,
+        //       strategy: {
+        //         items: items.concat([createStrategy]),
+        //       },
+        //     },
+        //   },
+        // });
       },
     }
   );
@@ -215,6 +215,13 @@ const ClientDetailsNewStrategy = ({
 
 ClientDetailsNewStrategy.propTypes = {
   handleToggle: PropTypes.func.isRequired,
+  id: PropTypes.string,
+  companyName: PropTypes.string,
+  client: PropTypes.object,
+  contactId: PropTypes.string,
+  selectedStrategy: PropTypes.string,
+  setSelectedStrategy: PropTypes.func.isRequired,
+  isNewStrategyModal: PropTypes.bool,
 };
 
 export default ClientDetailsNewStrategy;
