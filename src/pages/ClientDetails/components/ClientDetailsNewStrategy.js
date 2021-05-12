@@ -79,6 +79,7 @@ const ClientDetailsNewStrategy = ({
           strategyOwnerIdId: contactId.id,
           title: values.title,
           description: values.strategy_note,
+          status: 'assigned',
         },
       },
     });

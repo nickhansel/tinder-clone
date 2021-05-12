@@ -194,7 +194,7 @@ const InsightsStrategy = ({ overallData, overallStrategyData }) => {
   }
 
   // console.log(overallData.listClients.items);
-  // console.log(overallStrategyData.listStrategys.items);
+  console.log(overallStrategyData.listStrategys.items);
 
   const renderMetrics = data.map((badge) => (
     <SpaceBetween style={{ paddingBottom: 20 }}>

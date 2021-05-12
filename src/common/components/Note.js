@@ -8,11 +8,18 @@ import { Spin, Typography, Popconfirm, message } from 'antd';
 import { SubH2, SpaceBetween, Note1Grey, Badge, Flex } from 'common';
 import { iconTrash } from 'media/svg';
 import { CheckOutlined } from '@ant-design/icons';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import { updateStrategy } from 'graphql/mutations';
 const { Paragraph } = Typography;
 
 const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNote, height, }) => {
   const [noteText, setNoteText] = useState(note.content || note.description);
   const [isSpinning, toggleSpinning] = useState(false);
+
+  const [updateStrategies, { loading: updatingStrategy }] = useMutation(
+    gql(updateStrategy)
+  );
 
   useEffect(() => {
     setNoteText(note.content || note.description);
@@ -40,18 +47,34 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
         message.success('Note Updated');
       }
     }, 1000);
-    
   }
 
   function cancel(e) {
     toggleSpinning(false);
   }
 
+  const handleUpdateStrategy = (noteID, statusText) => {
+    updateStrategies({
+      variables: {
+        input: {
+          id: noteID,
+          status: statusText,
+        },
+      },
+    });
+  };
+
   function confirmStrategyWin(e) {
     // Logic will go here for strategy wins
     // Move the Strategy from Assigned to Win or Loss and then delete it
     // Possibly add to Archive instead of deleting
+    handleUpdateStrategy(note.id, 'win');
     toggleSpinning(false);
+    setTimeout(function() {
+      if (!updatingStrategy) {
+        message.success('Congrats on the Win!');
+      }
+    }, 1000);
   }
 
   const paragraphProps = {
