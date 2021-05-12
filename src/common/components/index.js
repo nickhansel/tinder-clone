@@ -1,7 +1,6 @@
 /*
    Components export
  */
-import Layout from './Layout';
 import ResizableCard from './ResizableCard';
 import AvatarContainer from './AvatarContainer';
 import Badge from './Badge';
@@ -18,7 +17,6 @@ import StrategyIcons from './StrategyIcons';
 import ActionHeader from './ActionHeader';
 
 export {
-  Layout,
   ResizableCard,
   AvatarContainer,
   Badge,

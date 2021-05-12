@@ -5,19 +5,26 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Auth } from 'aws-amplify';
+
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { listClientsDash, getUser } from 'graphql/queries';
 import { createUser as createUserMutation } from 'graphql/mutations';
+
 import { Pagination, Button } from 'antd';
+
 import DashboardClientList from './DashboardClientList';
 import MoodFilter from './DashboardMoodFilter';
 import DashboardSort from './DashboardSort';
-import { Layout, Note2, Loading } from 'common';
+import SearchInput from 'pages/Layout/SearchInput';
+import { Note2, Loading } from 'common';
+import Layout from 'pages/Layout';
+
 import { DASHBOARD_TITLE } from '../constants';
 import { FlexContainer } from './styles';
 import { filterDataByMoodAndSearch, CURRENT_USER } from 'utils';
-import SearchInput from 'common/components/Layout/SearchInput';
+import { loggedInUserId } from '../../../cache.js';
+
 import './styles.css';
 
 const DashboardPage = ({ history }) => {
@@ -49,6 +56,7 @@ const DashboardPage = ({ history }) => {
         .then((data) => {
           if (data) {
             setAuthUserData(data);
+            loggedInUserId(data.id);
           }
         })
         .catch((err) => console.log('error: ', err));

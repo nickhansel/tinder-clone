@@ -2,22 +2,27 @@
    Settings Page
  */
 import React, { useState } from 'react';
+
 import { Row, Tabs, Col, Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
+import useCurrentUser from '../../../customHooks/useCurrentUser';
+
 import {
-  Layout,
   ActionHeader,
   SubH2,
   Note1Grey,
   CardWrap,
   Flex,
 } from 'common';
-import { iconBack } from 'media/svg';
-import { UserOutlined } from '@ant-design/icons';
+
 import ConnectionForm from './ConnectionForm';
 import SettingsNewTeamMember from './SettingsNewTeamMember';
 import SyncClients from './SyncClients';
+import Layout from 'pages/Layout';
+
 import { TabLayout, InfoRow } from './layouts';
-import useCurrentUser from '../../../customHooks/useCurrentUser';
+import { iconBack } from 'media/svg';
 import './styles.css';
 
 const { TabPane } = Tabs;

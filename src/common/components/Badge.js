@@ -47,6 +47,7 @@ const Badge = ({ strategy, size }) => {
 
 Badge.propTypes = {
   strategy: PropTypes.string.isRequired,
+  size: PropTypes.string
 };
 
 export default Badge;

@@ -2,7 +2,6 @@
    Components export
  */
 import {
-  Layout,
   ResizableCard,
   AvatarContainer,
   Badge,
@@ -20,7 +19,6 @@ import {
 } from './components';
 
 export {
-  Layout,
   ResizableCard,
   AvatarContainer,
   Badge,

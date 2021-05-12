@@ -9,7 +9,6 @@ import {
   BoldStyled,
 } from './styles';
 import { mainColors, mockMoods } from 'utils';
-import { Typography } from 'antd';
 import { ellipsis } from 'polished';
 
 const ClientCard = ({
@@ -17,14 +16,10 @@ const ClientCard = ({
   isDecisionMaker,
   avatarId,
   accountId: { healthScore, name: companyName },
-  // Account: {
-  //   Name: companyName,
-  //   LastActivityDate: lastContact
-  // },
   onNameClick,
   onBadgeClick,
   name: clientName,
-  position,
+  position = '',
   lastContact,
   strategy: { items: strategyItems },
 }) => {
@@ -61,11 +56,11 @@ const ClientCard = ({
       <div onClick={() => onNameClick(id)}>
         <SubH1>{clientName}</SubH1>
       </div>
-      <Note2>{position}</Note2>
+      <Note2>{position || 'N/A' }</Note2>
       <Note2>
         <BoldStyled ellipsis={ellipsis ? {rows: 1, expandable: true, symbol: 'more'}: false}>{companyName}</BoldStyled>
       </Note2>
-      <Note2 {...noteProps}>{lastContact}</Note2>
+      <Note2 {...noteProps}>{lastContact || 'Last activity:'}</Note2>
       <DividerStyled />
       <ContainerFlex>
         <HealthButton healthScore={parseFloat(healthScore)} />
@@ -76,12 +71,17 @@ const ClientCard = ({
 };
 
 ClientCard.propTypes = {
+  id: PropTypes.string,
+  isDecisionMaker: PropTypes.bool,
+  avatarId: PropTypes.string,
   name: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
+  position: PropTypes.string,
   accountId: PropTypes.object.isRequired,
   strategyItems: PropTypes.array,
   onNameClick: PropTypes.func,
   onBadgeClick: PropTypes.func,
+  lastContact: PropTypes.string,
+  strategy: PropTypes.object,
 };
 
 export default ClientCard;
