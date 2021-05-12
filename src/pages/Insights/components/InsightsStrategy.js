@@ -49,47 +49,80 @@ const InsightsStrategy = ({ overallData, overallStrategyData }) => {
 
   function getBadges(strategyData, badgeDict, status) {
     let totalBadges = 0;
-
-    for (let i = 0; i < strategyData.length; i++) {
-      for (let j = 0; j < strategyData[i].strategy.items.length; j++) {
-        if (status === 'assigned') {
-          const { badgeName } = strategyData[i].strategy.items[j];
-
-          if (badgeName === BADGES.ATTENTION) {
-            totalBadges += 1;
-            badgeDict[0].score += 1;
-          } else if (badgeName === BADGES.CONTACT) {
-            totalBadges += 1;
-            badgeDict[1].score += 1;
-          } else if (badgeName === BADGES.FEATURE) {
-            totalBadges += 1;
-            badgeDict[2].score += 1;
-          } else if (badgeName === BADGES.BUG) {
-            totalBadges += 1;
-            badgeDict[3].score += 1;
-          } else if (badgeName === BADGES.ESCALATION) {
-            totalBadges += 1;
-            badgeDict[4].score += 1;
-          } else if (badgeName === BADGES.CUSTOM) {
-            totalBadges += 1;
-            badgeDict[5].score += 1;
+    if (status === 'win') {
+      for (let i = 0; i < strategyData.length; i++) {
+        if (strategyData[i].clientId != null) {
+          if (strategyData[i].status === 'win') {
+            const { badgeName } = strategyData[i];
+            if (badgeName === BADGES.ATTENTION) {
+              totalBadges += 1;
+              badgeDict[0].score += 1;
+            } else if (badgeName === BADGES.CONTACT) {
+              totalBadges += 1;
+              badgeDict[1].score += 1;
+            } else if (badgeName === BADGES.FEATURE) {
+              totalBadges += 1;
+              badgeDict[2].score += 1;
+            } else if (badgeName === BADGES.BUG) {
+              totalBadges += 1;
+              badgeDict[3].score += 1;
+            } else if (badgeName === BADGES.ESCALATION) {
+              totalBadges += 1;
+              badgeDict[4].score += 1;
+            } else if (badgeName === BADGES.CUSTOM) {
+              totalBadges += 1;
+              badgeDict[5].score += 1;
+            }
           }
-        } else if (status === 'wins') {
-          // will add logic in the future when it is available in backend
-          continue;
         }
       }
+
+      badgeDict.forEach((element) => {
+        element.percent = (element.score / totalBadges) * 100;
+      });
+
+      return badgeDict;
+    } else if (status === 'assigned') {
+      for (let i = 0; i < strategyData.length; i++) {
+        if (strategyData[i].clientId != null) {
+          if (
+            strategyData[i].status === 'assigned' ||
+						strategyData[i].status === null
+          ) {
+            const { badgeName } = strategyData[i];
+            if (badgeName === BADGES.ATTENTION) {
+              totalBadges += 1;
+              badgeDict[0].score += 1;
+            } else if (badgeName === BADGES.CONTACT) {
+              totalBadges += 1;
+              badgeDict[1].score += 1;
+            } else if (badgeName === BADGES.FEATURE) {
+              totalBadges += 1;
+              badgeDict[2].score += 1;
+            } else if (badgeName === BADGES.BUG) {
+              totalBadges += 1;
+              badgeDict[3].score += 1;
+            } else if (badgeName === BADGES.ESCALATION) {
+              totalBadges += 1;
+              badgeDict[4].score += 1;
+            } else if (badgeName === BADGES.CUSTOM) {
+              totalBadges += 1;
+              badgeDict[5].score += 1;
+            }
+          }
+        }
+      }
+
+      badgeDict.forEach((element) => {
+        element.percent = (element.score / totalBadges) * 100;
+      });
+
+      return badgeDict;
     }
-
-    badgeDict.forEach((element) => {
-      element.percent = (element.score / totalBadges) * 100;
-    });
-
-    return badgeDict;
   }
 
   let newBadgeDict = getBadges(
-    overallData.listClients.items,
+    overallStrategyData.listStrategys.items,
     currentBadges,
     'assigned'
   );
@@ -133,48 +166,11 @@ const InsightsStrategy = ({ overallData, overallStrategyData }) => {
     },
   ];
 
-  function getWinBadges(strategyData, strategyWinDict) {
-    let totalWinBadges = 0;
-    for (let i = 0; i < strategyData.length; i++) {
-      if (strategyData[i].clientId != null) {
-        if (strategyData[i].status === 'win') {
-          const { badgeName } = strategyData[i];
-          if (badgeName === BADGES.ATTENTION) {
-            totalWinBadges += 1;
-            strategyWinDict[0].score += 1;
-          } else if (badgeName === BADGES.CONTACT) {
-            totalWinBadges += 1;
-            strategyWinDict[1].score += 1;
-          } else if (badgeName === BADGES.FEATURE) {
-            totalWinBadges += 1;
-            strategyWinDict[2].score += 1;
-          } else if (badgeName === BADGES.BUG) {
-            totalWinBadges += 1;
-            strategyWinDict[3].score += 1;
-          } else if (badgeName === BADGES.ESCALATION) {
-            totalWinBadges += 1;
-            strategyWinDict[4].score += 1;
-          } else if (badgeName === BADGES.CUSTOM) {
-            totalWinBadges += 1;
-            strategyWinDict[5].score += 1;
-          }
-        }
-      }
-    }
-    strategyWinDict.forEach((element) => {
-      element.percent = (element.score / totalWinBadges) * 100;
-    });
-
-    return strategyWinDict;
-  }
-
-  let newWinBadgeDict = getWinBadges(overallStrategyData.listStrategys.items, winsBadges);
-
-  // let newWinBadgeDict = getBadges(
-  //   overallData.listClients.items,
-  //   winsBadges,
-  //   'wins'
-  // );
+  let newWinBadgeDict = getBadges(
+    overallStrategyData.listStrategys.items,
+    winsBadges,
+    'win'
+  );
 
   const lineProps = {
     style: {
@@ -194,7 +190,7 @@ const InsightsStrategy = ({ overallData, overallStrategyData }) => {
   }
 
   // console.log(overallData.listClients.items);
-  console.log(overallStrategyData.listStrategys.items);
+  // console.log(overallStrategyData.listStrategys.items);
 
   const renderMetrics = data.map((badge) => (
     <SpaceBetween style={{ paddingBottom: 20 }}>
