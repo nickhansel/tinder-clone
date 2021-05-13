@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Progress } from 'antd';
 import { Note1Grey, Note1, SubH2, Flex, SpaceBetween, Badge } from 'common';
 import { BADGES, mainColors, mintGreen } from 'utils';
 import { ButtonCharts } from './styles';
 
-const InsightsStrategy = ({ overallData, overallStrategyData }) => {
+const InsightsStrategy = ({
+  overallAssignedStrategyData,
+  overallWinStrategyData,
+}) => {
   const [stateWins, setState] = useState(false);
 
   // TODO add db data
@@ -47,129 +51,48 @@ const InsightsStrategy = ({ overallData, overallStrategyData }) => {
     },
   ];
 
-  function getBadges(strategyData, badgeDict, status) {
+  const winsBadges = JSON.parse(JSON.stringify(currentBadges));
+
+  function getBadges(strategyData, badgeDict) {
     let totalBadges = 0;
-    if (status === 'win') {
-      for (let i = 0; i < strategyData.length; i++) {
-        if (strategyData[i].clientId != null) {
-          if (strategyData[i].status === 'win') {
-            const { badgeName } = strategyData[i];
-            if (badgeName === BADGES.ATTENTION) {
-              totalBadges += 1;
-              badgeDict[0].score += 1;
-            } else if (badgeName === BADGES.CONTACT) {
-              totalBadges += 1;
-              badgeDict[1].score += 1;
-            } else if (badgeName === BADGES.FEATURE) {
-              totalBadges += 1;
-              badgeDict[2].score += 1;
-            } else if (badgeName === BADGES.BUG) {
-              totalBadges += 1;
-              badgeDict[3].score += 1;
-            } else if (badgeName === BADGES.ESCALATION) {
-              totalBadges += 1;
-              badgeDict[4].score += 1;
-            } else if (badgeName === BADGES.CUSTOM) {
-              totalBadges += 1;
-              badgeDict[5].score += 1;
-            }
-          }
+    for (let i = 0; i < strategyData.listStrategys.items.length; i++) {
+      if (strategyData.listStrategys.items[i].clientId != null) {
+        const { badgeName } = strategyData.listStrategys.items[i];
+        if (badgeName === BADGES.ATTENTION) {
+          totalBadges += 1;
+          badgeDict[0].score += 1;
+        } else if (badgeName === BADGES.CONTACT) {
+          totalBadges += 1;
+          badgeDict[1].score += 1;
+        } else if (badgeName === BADGES.FEATURE) {
+          totalBadges += 1;
+          badgeDict[2].score += 1;
+        } else if (badgeName === BADGES.BUG) {
+          totalBadges += 1;
+          badgeDict[3].score += 1;
+        } else if (badgeName === BADGES.ESCALATION) {
+          totalBadges += 1;
+          badgeDict[4].score += 1;
+        } else if (badgeName === BADGES.CUSTOM) {
+          totalBadges += 1;
+          badgeDict[5].score += 1;
         }
       }
-
-      badgeDict.forEach((element) => {
-        element.percent = (element.score / totalBadges) * 100;
-      });
-
-      return badgeDict;
-    } else if (status === 'assigned') {
-      for (let i = 0; i < strategyData.length; i++) {
-        if (strategyData[i].clientId != null) {
-          if (
-            strategyData[i].status === 'assigned' ||
-						strategyData[i].status === null
-          ) {
-            const { badgeName } = strategyData[i];
-            if (badgeName === BADGES.ATTENTION) {
-              totalBadges += 1;
-              badgeDict[0].score += 1;
-            } else if (badgeName === BADGES.CONTACT) {
-              totalBadges += 1;
-              badgeDict[1].score += 1;
-            } else if (badgeName === BADGES.FEATURE) {
-              totalBadges += 1;
-              badgeDict[2].score += 1;
-            } else if (badgeName === BADGES.BUG) {
-              totalBadges += 1;
-              badgeDict[3].score += 1;
-            } else if (badgeName === BADGES.ESCALATION) {
-              totalBadges += 1;
-              badgeDict[4].score += 1;
-            } else if (badgeName === BADGES.CUSTOM) {
-              totalBadges += 1;
-              badgeDict[5].score += 1;
-            }
-          }
-        }
-      }
-
-      badgeDict.forEach((element) => {
-        element.percent = (element.score / totalBadges) * 100;
-      });
-
-      return badgeDict;
     }
+    badgeDict.forEach((element) => {
+      element.percent = (element.score / totalBadges) * 100;
+    });
+    return badgeDict;
   }
 
   let newBadgeDict = getBadges(
-    overallStrategyData.listStrategys.items,
+    overallAssignedStrategyData,
     currentBadges,
-    'assigned'
   );
 
-  const winsBadges = [
-    {
-      name: BADGES.ATTENTION,
-      title: 'Attention',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.CONTACT,
-      title: 'New Contact',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.FEATURE,
-      title: 'New Feature',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.BUG,
-      title: 'Bug',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.ESCALATION,
-      title: 'Escalation',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.CUSTOM,
-      title: 'Custom',
-      score: 0,
-      percent: 0,
-    },
-  ];
-
   let newWinBadgeDict = getBadges(
-    overallStrategyData.listStrategys.items,
+    overallWinStrategyData,
     winsBadges,
-    'win'
   );
 
   const lineProps = {
@@ -189,11 +112,9 @@ const InsightsStrategy = ({ overallData, overallStrategyData }) => {
     data = newWinBadgeDict;
   }
 
-  // console.log(overallData.listClients.items);
-  console.log(overallStrategyData.listStrategys.items);
-
   const renderMetrics = data.map((badge) => (
-    <SpaceBetween style={{ paddingBottom: 20 }}>
+    <SpaceBetween style={{ paddingBottom: 20 }}
+      key={badge.name}>
       <Flex style={{ width: 260 }}>
         <Badge strategy={badge.name} />
         <div style={{ width: '100%' }}>
@@ -230,6 +151,11 @@ const InsightsStrategy = ({ overallData, overallStrategyData }) => {
       {renderMetrics}
     </div>
   );
+};
+
+InsightsStrategy.propTypes = {
+  overallAssignedStrategyData: PropTypes.object,
+  overallWinStrategyData: PropTypes.object,
 };
 
 export default InsightsStrategy;

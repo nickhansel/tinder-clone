@@ -28,27 +28,43 @@ import { PAGE_TITLE } from '../constants';
 import './styles.css';
 
 const InsightsPage = () => {
-  const { loading, data, error } = useQuery(gql(listClientsDash), {
-    filter: {
-      contactId: CURRENT_USER,
-    },
-  });
+  const { loading, data, error } = useQuery(
+    gql(listClientsDash),
+    {
+      filter: {
+        contactId: CURRENT_USER,
+      },
+    }
+  );
   let history = useHistory();
 
-  // const { loadingStrategies, dataStrategies, errorStrategies } = useQuery(
-  //   gql(listStrategys),
-  //   {
-  //     filter: {
-  //       contactId: CURRENT_USER,
-  //     },
-  //   }
-  // );
+  const {
+    loading: loadingWinStrategies,
+    data: strategyWinData,
+  } = useQuery(gql(listStrategys), {
+    variables: {
+      filter: {
+        status: {
+          eq: 'win',
+        },
+      },
+    },
+  });
 
-  const { loading: loadingStrategies, data: strategyData } = useQuery(
-    gql(listStrategys)
-  );
+  const {
+    loading: loadingAssignedStrategies,
+    data: assignedStrategies,
+  } = useQuery(gql(listStrategys), {
+    variables: {
+      filter: {
+        status: {
+          eq: 'assigned',
+        },
+      },
+    },
+  });
 
-  if (loading || loadingStrategies) {
+  if ( loading || loadingWinStrategies || loadingAssignedStrategies) {
     return (
       <Layout>
         <div style={{ marginTop: 200 }}>
@@ -59,7 +75,9 @@ const InsightsPage = () => {
   }
 
   // get the Top and Bottom Client from formula in utils
-  const clientTopBottom = findTopBottomClients(data.listClients.items);
+  const clientTopBottom = findTopBottomClients(
+    data.listClients.items
+  );
 
   const layoutProps = {
     title: PAGE_TITLE,
@@ -69,10 +87,15 @@ const InsightsPage = () => {
     history.push(`clients/${clientId}`);
   };
 
-  const renderCardHeader = (backgroundColor, icon, title) => {
+  const renderCardHeader = (
+    backgroundColor,
+    icon,
+    title
+  ) => {
     return (
       <Flex>
-        <StyledSmileIcon style={{ backgroundColor }}>
+        <StyledSmileIcon
+          style={{ backgroundColor }}>
           <img src={icon}
             alt={`icon ${title}`} />
         </StyledSmileIcon>
@@ -98,39 +121,49 @@ const InsightsPage = () => {
   };
 
   const insightsStrategyProps = {
-    overallData: data,
-    overallStrategyData: strategyData,
+    overallAssignedStrategyData: assignedStrategies,
+    overallWinStrategyData: strategyWinData,
   };
-
-  // console.log(strategyData.listStrategys.items);
 
   return (
     <Layout {...layoutProps}>
       <Row justify='center'>
-        <CardWrap height={453}
+        <CardWrap
+          height={453}
           className='insights-overall'>
-          <InsightsOverallScore {...insightOverallScoreProps} />
+          <InsightsOverallScore
+            {...insightOverallScoreProps}
+          />
         </CardWrap>
         <div style={{ marginBottom: 15 }}>
           {HigherScoreHeader}
-          <ClientCard onNameClick={handleCardClick}
-            {...clientTopBottom[1]} />
+          <ClientCard
+            onNameClick={handleCardClick}
+            {...clientTopBottom[1]}
+          />
         </div>
         <div style={{ marginBottom: 15 }}>
           {LowestScoreHeader}
-          <ClientCard onNameClick={handleCardClick}
-            {...clientTopBottom[0]} />
+          <ClientCard
+            onNameClick={handleCardClick}
+            {...clientTopBottom[0]}
+          />
         </div>
-        <CardContainer height={440}
+        <CardContainer
+          height={440}
           width={390}
           className='strategy-metrics'>
-          <InsightsStrategy {...insightsStrategyProps} />
+          <InsightsStrategy
+            {...insightsStrategyProps}
+          />
         </CardContainer>
-        <CardWrap height={440}
+        <CardWrap
+          height={440}
           className='insights-moods'>
           <InsightsMood clients={clientNames} />
         </CardWrap>
-        <CardContainer height={440}
+        <CardContainer
+          height={440}
           width={390}
           className='Quarter-moods'>
           <InsightsQuarter />
