@@ -67,13 +67,14 @@ const ClientStrategyModal = ({
   };
 
   const isLoading = loading || error;
-  const clientStrategies =
-    !isLoading && data.getClient ? data.getClient.strategy.items : [];
+  const clientStrategiesAssigned = !isLoading && data.getClient
+  	? data.getClient.strategy.items.filter(item => item.status === 'assigned')
+  	: [];
 
   const renderNotes = loading ? (
     <Loading />
   ) : (
-    clientStrategies.map((item, key) => {
+    clientStrategiesAssigned.map((item, key) => {
       return (
         <div key={key}
           style={{ marginTop: 15 }}>
@@ -92,8 +93,6 @@ const ClientStrategyModal = ({
       );
     })
   );
-
-  // console.log(clientStrategies);
 
   return (
     <Modal

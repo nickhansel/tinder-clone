@@ -367,6 +367,7 @@ export const getClient = /* GraphQL */ `
           description
           createdAt
           updatedAt
+          status
         }
         nextToken
       }
@@ -448,6 +449,7 @@ export const listClientsDash = /* GraphQL */ `
             badgeName
             title
             description
+            status
           }
           nextToken
         }
