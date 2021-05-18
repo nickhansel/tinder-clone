@@ -10,7 +10,7 @@ import {
   iconCustom,
   iconAdd,
 } from 'media/svg';
-import { BudgeStyled } from './styles';
+import { BadgeStyled } from './styles';
 import { capitalizeFirstLetter } from 'utils';
 
 const statusData = {
@@ -36,12 +36,12 @@ const Badge = ({ strategy, size }) => {
   };
 
   return (
-    <BudgeStyled style={style}>
+    <BadgeStyled style={style}>
       <Tooltip title={capitalizeFirstLetter(strategy)}>
         <img src={statusData[strategy]}
-          alt="health score" />
+          alt='health score' />
       </Tooltip>
-    </BudgeStyled>
+    </BadgeStyled>
   );
 };
 

@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 import { useDrop } from 'react-dnd';
-import { Row, Divider } from 'antd';
+import { Row, Divider, Tooltip } from 'antd';
 import {
   AvatarContainer,
   SubH1,
@@ -22,6 +22,8 @@ import { iconMenu } from 'media/svg';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { updateClient } from 'graphql/mutations';
+import { BadgeStyled } from '../../../common/components/styles';
+import { FolderOutlined } from '@ant-design/icons';
 
 const ClientProfile = ({
   id,
@@ -34,7 +36,7 @@ const ClientProfile = ({
   strategy: { items: strategyItems },
   mood,
 }) => {
-  console.log(contactId)
+  // console.log(contactId)
   const [isBadgeModal, toggleBadgeModal] = useState(false);
   const clientMood = mockMoods[avatarId]; // TODO change to real data
   const [{ canDrop, isOver }, drop] = useDrop({
@@ -134,7 +136,21 @@ const ClientProfile = ({
             content={[]} />
         </Row>
         <DividerStyled />
-        <Row onClick={() => toggleBadgeModal(true)}>{renderBadges}</Row>
+        <Row>
+          <div onClick={() => toggleBadgeModal(true)}>{renderBadges}</div>
+					<span>
+						<BadgeStyled
+							style={{ height: 32, width: 32, backgroundColor: '#ebebeb' }}>
+							<Tooltip title={'Archive'}>
+								<FolderOutlined
+									onClick={() => toggleBadgeModal(true)}
+									style={{ cursor: 'pointer' }}
+									alt='Archive Icon'
+								/>
+							</Tooltip>
+						</BadgeStyled>
+					</span>
+        </Row>
       </div>
       <ClientStrategyModal
         handleToggle={toggleBadgeModal}

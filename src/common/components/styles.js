@@ -1,6 +1,6 @@
 /*
-   styled components for shared components 
- */
+  styled components for shared components 
+*/
 
 import styled, { css } from 'styled-components';
 import { Divider } from 'antd';
@@ -40,7 +40,7 @@ export const AvatarStyled = styled.div`
   }
 `;
 
-export const BudgeStyled = styled.button`
+export const BadgeStyled = styled.button`
   ${sharedButtonStyles};
   background-color: ${mainColors.white};
   border-radius: 50%;
