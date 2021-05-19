@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Progress } from 'antd';
 import { Note1Grey, Note1, SubH2, Flex, SpaceBetween, Badge } from 'common';
 import { BADGES, mainColors, mintGreen } from 'utils';
 import { ButtonCharts } from './styles';
 
-const InsightsStrategy = ({ overallData }) => {
+const InsightsStrategy = ({
+  overallAssignedStrategyData,
+  overallWinStrategyData,
+}) => {
   const [stateWins, setState] = useState(false);
-
-  const handleToggleAssigned = () => {
-    setState(false);
-  };
-  const handleToggleWins = () => {
-    setState(true);
-  };
 
   // TODO add db data
   const currentBadges = [
@@ -54,100 +51,49 @@ const InsightsStrategy = ({ overallData }) => {
     },
   ];
 
-  function getBadges(strategyData, badgeDict, status) {
+  const winsBadges = JSON.parse(JSON.stringify(currentBadges));
+
+  function getBadges(strategyData, badgeDict) {
     let totalBadges = 0;
-
-    for (let i = 0; i < strategyData.length; i++) {
-      for (let j = 0; j < strategyData[i].strategy.items.length; j++) {
-        if (status === 'assigned') {
-          const { badgeName } = strategyData[i].strategy.items[j];
-
-          if (badgeName === BADGES.ATTENTION) {
-            totalBadges += 1;
-            badgeDict[0].score += 1;
-          } else if (
-            badgeName === BADGES.CONTACT
-          ) {
-            totalBadges += 1;
-            badgeDict[1].score += 1;
-          } else if (
-            badgeName === BADGES.FEATURE
-          ) {
-            totalBadges += 1;
-            badgeDict[2].score += 1;
-          } else if (badgeName === BADGES.BUG) {
-            totalBadges += 1;
-            badgeDict[3].score += 1;
-          } else if (
-            badgeName === BADGES.ESCALATION
-          ) {
-            totalBadges += 1;
-            badgeDict[4].score += 1;
-          } else if (
-            badgeName === BADGES.CUSTOM
-          ) {
-            totalBadges += 1;
-            badgeDict[5].score += 1;
-          }
-        } else if (status === 'wins') {
-          // will add logic in the future when it is available in backend
-          continue;
-        } else if (status === 'losses') {
-          // will add logic in the future when it is available in backend
-          continue;
+    for (let i = 0; i < strategyData.listStrategys.items.length; i++) {
+      if (strategyData.listStrategys.items[i].clientId != null) {
+        const { badgeName } = strategyData.listStrategys.items[i];
+        if (badgeName === BADGES.ATTENTION) {
+          totalBadges += 1;
+          badgeDict[0].score += 1;
+        } else if (badgeName === BADGES.CONTACT) {
+          totalBadges += 1;
+          badgeDict[1].score += 1;
+        } else if (badgeName === BADGES.FEATURE) {
+          totalBadges += 1;
+          badgeDict[2].score += 1;
+        } else if (badgeName === BADGES.BUG) {
+          totalBadges += 1;
+          badgeDict[3].score += 1;
+        } else if (badgeName === BADGES.ESCALATION) {
+          totalBadges += 1;
+          badgeDict[4].score += 1;
+        } else if (badgeName === BADGES.CUSTOM) {
+          totalBadges += 1;
+          badgeDict[5].score += 1;
         }
       }
     }
-
     badgeDict.forEach((element) => {
       element.percent = (element.score / totalBadges) * 100;
     });
-
     return badgeDict;
   }
 
-  let newBadgeDict = getBadges(overallData.listClients.items, currentBadges, 'assigned');
+  let newBadgeDict = getBadges(
+    overallAssignedStrategyData,
+    currentBadges,
+  );
 
-  const winsBadges = [
-    {
-      name: BADGES.ATTENTION,
-      title: 'Attention',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.CONTACT,
-      title: 'New Contact',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.FEATURE,
-      title: 'New Feature',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.BUG,
-      title: 'Bug',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.ESCALATION,
-      title: 'Escalation',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.CUSTOM,
-      title: 'Custom',
-      score: 0,
-      percent: 0,
-    },
-  ];
-
-  let newWinBadgeDict = getBadges(overallData.listClients.items, winsBadges, 'wins');
+  let newWinBadgeDict = getBadges(
+    overallWinStrategyData,
+    winsBadges,
+  );
 
   const lineProps = {
     style: {
@@ -166,10 +112,9 @@ const InsightsStrategy = ({ overallData }) => {
     data = newWinBadgeDict;
   }
 
-  console.log(overallData.listClients.items);
-
   const renderMetrics = data.map((badge) => (
-    <SpaceBetween style={{ paddingBottom: 20 }}>
+    <SpaceBetween style={{ paddingBottom: 20 }}
+      key={badge.name}>
       <Flex style={{ width: 260 }}>
         <Badge strategy={badge.name} />
         <div style={{ width: '100%' }}>
@@ -198,14 +143,19 @@ const InsightsStrategy = ({ overallData }) => {
       <SpaceBetween>
         <SubH2>Strategy Based Metrics</SubH2>
         <div>
-          <ButtonCharts onClick={handleToggleAssigned}>Assigned</ButtonCharts>
-          <ButtonCharts onClick={handleToggleWins}>Wins</ButtonCharts>
+          <ButtonCharts onClick={() => setState(false)}>Assigned</ButtonCharts>
+          <ButtonCharts onClick={() => setState(true)}>Wins</ButtonCharts>
         </div>
       </SpaceBetween>
       <Note1Grey {...titleProps}>{title}</Note1Grey>
       {renderMetrics}
     </div>
   );
+};
+
+InsightsStrategy.propTypes = {
+  overallAssignedStrategyData: PropTypes.object,
+  overallWinStrategyData: PropTypes.object,
 };
 
 export default InsightsStrategy;

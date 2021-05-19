@@ -994,6 +994,7 @@ export const createStrategy = /* GraphQL */ `
     createStrategy(input: $input, condition: $condition) {
       id
       badgeName
+      status
       clientId {
         id
         accountId {
@@ -1069,6 +1070,7 @@ export const updateStrategy = /* GraphQL */ `
     updateStrategy(input: $input, condition: $condition) {
       id
       badgeName
+      status
       clientId {
         id
         accountId {

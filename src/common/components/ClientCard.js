@@ -27,7 +27,10 @@ const ClientCard = ({
   const isChamp = score > 4.5;
   const isImpatient = avatarId === 'impatientGirl';
   const clientMood = mockMoods[avatarId];
-  const renderBadges = strategyItems.map((strategyItem, index) => (
+
+  const assignedStrategies = strategyItems.filter(item => item.status === 'assigned');
+
+  const renderBadges = assignedStrategies.map((strategyItem, index) => (
     <Badge key={index}
       strategy={strategyItem.badgeName} />
   ));
