@@ -1,6 +1,6 @@
 /*
-   Client Profile
- */
+  Client Profile
+*/
 
 import React, { useState } from 'react';
 import { useDrop } from 'react-dnd';
@@ -19,6 +19,9 @@ import ProfileSection from './ProfileSection';
 import ClientStrategyModal from 'pages/Dashboard/components/ClientStrategyModal';
 import { mockMoods } from 'utils/mock';
 import { iconMenu } from 'media/svg';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { updateClient } from 'graphql/mutations';
 
 const ClientProfile = ({
   id,
@@ -49,6 +52,19 @@ const ClientProfile = ({
 
   const score = parseFloat(healthScore);
   const isChamp = score > 4.5;
+
+  const [updateClientIsDecisionMaker] = useMutation(gql(updateClient));
+
+	const handleUpdateClientIsDecisionMaker = (clientID, isDecisionMakerBool) => {
+		updateClientIsDecisionMaker({
+			variables: {
+				input: {
+					id: clientID,
+					isDecisionMaker: isDecisionMakerBool,
+				},
+			},
+		});
+	};
 
   // Components render
   const renderBadges = strategyItems.map((item, index) => (
@@ -88,6 +104,10 @@ const ClientProfile = ({
           isDecisionMaker={isDecisionMaker}
           mood={clientMood}
           mode="full"
+          id={id}
+          updateClientIsDecisionMaker={handleUpdateClientIsDecisionMaker}
+          clientName={name}
+          fromClientDetails={true}
         />
       </div>
       <div className="details-profile-info">

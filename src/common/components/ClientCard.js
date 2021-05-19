@@ -38,7 +38,9 @@ const ClientCard = ({
     mode: 'croped',
     isDecisionMaker,
     isChamp,
-    isImpatient
+    isImpatient,
+    id: id,
+    clientName: clientName
   };
   if (onNameClick) {
     avatarProps.onClick = () => onNameClick(id, clientName);

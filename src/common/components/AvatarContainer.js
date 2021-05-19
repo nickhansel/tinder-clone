@@ -4,6 +4,9 @@ import { Tooltip } from 'antd';
 import { AvatarStyled } from './styles';
 import { greyBg } from 'media/images';
 import { iconStarMaker, iconCrown, iconNewMail } from 'media/svg';
+// import './Layout/styles.css';
+import '../../pages/Layout/styles.css';
+import DecisionMakerIconToggle from 'common/components/DecisionMakerIconToggle';
 
 const AvatarContainer = ({
   mood,
@@ -11,14 +14,23 @@ const AvatarContainer = ({
   isDecisionMaker,
   isChamp,
   isImpatient,
+  id,
+  updateClientIsDecisionMaker,
+  clientName,
+  fromClientDetails,
 }) => {
   const size = {
     full: 289,
     croped: 249,
   };
+
+  function confirmUpdate() {
+    updateClientIsDecisionMaker(id, !isDecisionMaker);
+  }
+  
   const newMailIcon = isImpatient ? (
-    <Tooltip title="New Mail"
-      placement="topLeft">
+    <Tooltip title='New Mail'
+      placement='topLeft'>
       <img
         style={{
           height: 24,
@@ -28,13 +40,14 @@ const AvatarContainer = ({
           width: 24,
         }}
         src={iconNewMail}
-        alt=""
+        alt=''
       />
     </Tooltip>
   ) : null;
+
   const champIcon = isChamp ? (
-    <Tooltip title="Champion"
-      placement="topLeft">
+    <Tooltip title='Champion'
+      placement='topLeft'>
       <img
         style={{
           height: 32,
@@ -44,13 +57,21 @@ const AvatarContainer = ({
           width: 32,
         }}
         src={iconCrown}
-        alt=""
+        alt=''
       />
     </Tooltip>
   ) : null;
-  const decisionMakerIcon = isDecisionMaker ? (
-    <Tooltip title="Decision Maker"
-      placement="topLeft">
+
+  const decisionMakerIcon = fromClientDetails ? (
+    <DecisionMakerIconToggle
+      clientName={clientName}
+      confirmUpdate={confirmUpdate}
+      isChamp={isChamp}
+      isToggleOn={isDecisionMaker}
+    />
+  ) : isDecisionMaker ? (
+    <Tooltip title='Decision Maker'
+      placement='bottomLeft'>
       <img
         style={{
           height: 32,
@@ -58,9 +79,12 @@ const AvatarContainer = ({
           position: 'absolute',
           top: isChamp ? 40 : 5,
           width: 32,
+          filter: 'grayscale(0%)',
+          opacity: 0.7,
         }}
+        className='decision-maker-badge'
         src={iconStarMaker}
-        alt=""
+        alt=''
       />
     </Tooltip>
   ) : null;
@@ -73,7 +97,7 @@ const AvatarContainer = ({
         {decisionMakerIcon}
       </div>
       <img src={mood || greyBg}
-        alt="" />
+        alt='' />
     </AvatarStyled>
   );
 };
