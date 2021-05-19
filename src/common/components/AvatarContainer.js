@@ -4,7 +4,8 @@ import { Tooltip } from 'antd';
 import { AvatarStyled } from './styles';
 import { greyBg } from 'media/images';
 import { iconStarMaker, iconCrown, iconNewMail } from 'media/svg';
-import './Layout/styles.css';
+// import './Layout/styles.css';
+import '../../pages/Layout/styles.css';
 import DecisionMakerIconToggle from 'common/components/DecisionMakerIconToggle';
 
 const AvatarContainer = ({

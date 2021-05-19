@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip, Popconfirm } from 'antd';
 import { iconStarMaker } from 'media/svg';
-import './Layout/styles.css';
+import '../../pages/Layout/styles.css';
 
 const DecisionMakerIconToggle = ({ clientName, confirmUpdate, isChamp, isToggleOn }) => {
   const popConfirmTitle = isToggleOn ? `Remove ${clientName} as a Decision Maker?` : `Make ${clientName} a Decision Maker?`;
