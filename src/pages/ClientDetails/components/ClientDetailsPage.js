@@ -4,13 +4,10 @@
 import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { getClient } from 'graphql/queries';
-
 import { Row, Pagination, Tooltip } from 'antd';
-
 import ClientDetailsNewNote from './ClientDetailsNewNote';
 import ClientDetailsNewStrategy from './ClientDetailsNewStrategy';
 import ClientDetailsNotesList from './ClientDetailsNotesList';
@@ -19,7 +16,6 @@ import ClientDetailsTouchPoints from './ClientDetailsTouchPoints';
 import ClientDetailsToolbox from './ClientDetailsToolbox';
 import { Note2, H3, CardWrap, Loading } from 'common';
 import Layout from 'pages/Layout';
-
 import { RowPagination } from './styles';
 import { iconBack, iconAddCircle } from 'media/svg';
 import './styles.css';

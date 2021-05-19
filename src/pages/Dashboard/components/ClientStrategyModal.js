@@ -10,6 +10,7 @@ const ClientStrategyModal = ({
   selectedClientId,
   handleToggle,
   isBadgeModal,
+  showWins,
 }) => {
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: { id: selectedClientId },
@@ -18,7 +19,9 @@ const ClientStrategyModal = ({
     gql(deleteStrategy)
   );
 
-  const [updateClientStrategy, { loading: updating }] = useMutation(gql(updateStrategy));
+  const [updateClientStrategy, { loading: updating }] = useMutation(
+    gql(updateStrategy)
+  );
 
   const handleUpdateStrategy = (strategyID, strategyText) => {
     updateClientStrategy({
@@ -67,14 +70,17 @@ const ClientStrategyModal = ({
   };
 
   const isLoading = loading || error;
-  const clientStrategiesAssigned = !isLoading && data.getClient
-  	? data.getClient.strategy.items.filter(item => item.status === 'assigned')
-  	: [];
+  let strategyBadges = [];
+  if (!isLoading && data.getClient && !showWins) {
+    strategyBadges = data.getClient.strategy.items.filter((item) => item.status === 'assigned');
+  } else if (!isLoading && data.getClient && showWins) {
+    strategyBadges = data.getClient.strategy.items.filter((item) => item.status === 'win');
+  }
 
   const renderNotes = loading ? (
     <Loading />
   ) : (
-    clientStrategiesAssigned.map((item, key) => {
+    strategyBadges.map((item, key) => {
       return (
         <div key={key}
           style={{ marginTop: 15 }}>
@@ -96,12 +102,11 @@ const ClientStrategyModal = ({
 
   return (
     <Modal
-      className="modal__client-startegys"
+      className='modal__client-startegys'
       visible={isBadgeModal}
-      title="Strategies"
+      title='Strategies'
       onCancel={() => handleToggle(false, null)}
-      footer={[]}
-    >
+      footer={[]}>
       {renderNotes}
     </Modal>
   );

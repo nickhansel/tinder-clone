@@ -1,18 +1,18 @@
 /*
   Client Profile
 */
-
 import React, { useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { Row, Divider, Tooltip } from 'antd';
 import {
-  AvatarContainer,
-  SubH1,
-  Note1,
-  Note2,
-  Note1Grey,
-  Badge,
-  DividerStyled,
+	AvatarContainer,
+	SubH1,
+	Note1,
+	Note2,
+	Note1Grey,
+	Badge,
+	DividerStyled,
+	SpaceBetween,
 } from 'common';
 import HealthMeter from './HealthMeter';
 import ProfileSection from './ProfileSection';
@@ -24,6 +24,8 @@ import gql from 'graphql-tag';
 import { updateClient } from 'graphql/mutations';
 import { BadgeStyled } from '../../../common/components/styles';
 import { FolderOutlined } from '@ant-design/icons';
+import InsightArchiveModal from '../../Insights/components/InsightArchiveModal';
+import { assignedBadgesList } from '../../../cache';
 
 const ClientProfile = ({
   id,
@@ -38,6 +40,7 @@ const ClientProfile = ({
 }) => {
   // console.log(contactId)
   const [isBadgeModal, toggleBadgeModal] = useState(false);
+  const [winBadges, toggleWinModal] = useState(false);
   const clientMood = mockMoods[avatarId]; // TODO change to real data
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: 'icon',
@@ -50,8 +53,8 @@ const ClientProfile = ({
       canDrop: monitor.canDrop(),
     }),
   });
-  const isActive = canDrop && isOver;
 
+  const isActive = canDrop && isOver;
   const score = parseFloat(healthScore);
   const isChamp = score > 4.5;
 
@@ -68,11 +71,19 @@ const ClientProfile = ({
 		});
 	};
 
+  // const assignedBadges = ;
+  const archiveBadges = strategyItems.filter((item) => item.status === 'win' || item.status === 'loss');
+
+	assignedBadgesList(
+		strategyItems.filter((item) => item.status === 'assigned')
+	);
+
+	console.log(assignedBadgesList());
+
   // Components render
-  const renderBadges = strategyItems.map((item, index) => (
-    <Badge key={index}
-      strategy={item.badgeName} />
-  ));
+  const renderBadges = assignedBadgesList().map((item, index) => (
+		<Badge key={index} strategy={item.badgeName} />
+	));
 
   const sectionHeader = (
     <>
@@ -98,67 +109,72 @@ const ClientProfile = ({
   };
 
   return (
-    <Row justify="center">
-      <div ref={drop}
-        style={{ opacity: isActive ? 0.5 : 1 }}>
-        <AvatarContainer
-          isChamp={isChamp}
-          isDecisionMaker={isDecisionMaker}
-          mood={clientMood}
-          mode="full"
-          id={id}
-          updateClientIsDecisionMaker={handleUpdateClientIsDecisionMaker}
-          clientName={name}
-          fromClientDetails={true}
-        />
-      </div>
-      <div className="details-profile-info">
-        <ProfileSection
-          header={<SubH1>{name}</SubH1>}
-          content={
-            [
-              <Note1Grey key={'position'}>{position}</Note1Grey>,
-              <Note2 key={'company'}>
-                <b>{company}</b>
-              </Note2>
-            ]
-          }
-          extra={
-            <img style={iconProps}
-              src={iconMenu}
-              alt="" />
-          }
-        />
-        <DividerStyled />
-        <HealthMeter healthScore={healthScore} />
-        <Row>
-          <ProfileSection header={sectionHeader}
-            content={[]} />
-        </Row>
-        <DividerStyled />
-        <Row>
-          <div onClick={() => toggleBadgeModal(true)}>{renderBadges}</div>
-					<span>
+		<Row justify='center'>
+			<div ref={drop} style={{ opacity: isActive ? 0.5 : 1 }}>
+				<AvatarContainer
+					isChamp={isChamp}
+					isDecisionMaker={isDecisionMaker}
+					mood={clientMood}
+					mode='full'
+					id={id}
+					updateClientIsDecisionMaker={handleUpdateClientIsDecisionMaker}
+					clientName={name}
+					fromClientDetails={true}
+				/>
+			</div>
+			<div className='details-profile-info'>
+				<ProfileSection
+					header={<SubH1>{name}</SubH1>}
+					content={[
+						<Note1Grey key={'position'}>{position}</Note1Grey>,
+						<Note2 key={'company'}>
+							<b>{company}</b>
+						</Note2>,
+					]}
+					extra={<img style={iconProps} src={iconMenu} alt='' />}
+				/>
+				<DividerStyled />
+				<HealthMeter healthScore={healthScore} />
+				<Row>
+					<ProfileSection header={sectionHeader} content={[]} />
+				</Row>
+				<DividerStyled />
+				<SpaceBetween>
+					<div
+						style={{ cursor: 'pointer' }}
+						onClick={() => toggleBadgeModal(true)}>
+						{renderBadges}
+					</div>
+					<div style={{ float: 'right' }}>
 						<BadgeStyled
-							style={{ height: 32, width: 32, backgroundColor: '#ebebeb' }}>
+							style={{
+								height: 32,
+								width: 32,
+								backgroundColor: '#ebebeb',
+								cursor: 'pointer',
+							}}
+							onClick={() => toggleWinModal(true)}>
 							<Tooltip title={'Archive'}>
-								<FolderOutlined
-									onClick={() => toggleBadgeModal(true)}
-									style={{ cursor: 'pointer' }}
-									alt='Archive Icon'
-								/>
+								<FolderOutlined alt='Archive Icon' />
 							</Tooltip>
 						</BadgeStyled>
-					</span>
-        </Row>
-      </div>
-      <ClientStrategyModal
-        handleToggle={toggleBadgeModal}
-        isBadgeModal={isBadgeModal}
-        selectedClientId={id}
-      />
-    </Row>
-  );
+					</div>
+				</SpaceBetween>
+			</div>
+			<ClientStrategyModal
+				handleToggle={toggleBadgeModal}
+				isBadgeModal={isBadgeModal}
+				selectedClientId={id}
+				showWins={winBadges}
+			/>
+			<InsightArchiveModal
+				archiveData={archiveBadges}
+				handleToggle={toggleWinModal}
+				isArchiveModal={winBadges}
+				clientName={name}
+			/>
+		</Row>
+	);
 };
 
 export default ClientProfile;

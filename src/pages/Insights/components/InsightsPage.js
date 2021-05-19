@@ -1,16 +1,17 @@
 /*
   Insights Page 
 */
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { listClientsDash, listStrategys } from 'graphql/queries';
-import { Row } from 'antd';
+import { Row, Col, Tooltip } from 'antd';
 import InsightsOverallScore from './InsightsOverallScore';
 import InsightsMood from './InsightsMood';
 import InsightsQuarter from './InsightsQuarter';
 import InsightsStrategy from './InsightsStrategy';
+import InsightArchiveModal from './InsightArchiveModal';
 import Layout from 'pages/Layout';
 import {
   ClientCard,
@@ -19,12 +20,15 @@ import {
   Flex,
   SubH2,
   Loading,
+  SpaceBetween,
+  SubH1,
 } from 'common';
-
 import { StyledSmileIcon } from './styles';
 import { iconSmile, iconSmileDown } from 'media/svg';
 import { clientNames, CURRENT_USER, findTopBottomClients } from 'utils';
 import { PAGE_TITLE } from '../constants';
+import { BadgeStyled } from '../../../common/components/styles';
+import { FolderOutlined } from '@ant-design/icons';
 import './styles.css';
 
 const InsightsPage = () => {
@@ -38,6 +42,10 @@ const InsightsPage = () => {
   );
   let history = useHistory();
 
+  const [isWinModal, toggleWinModal] = useState(
+    false
+  );
+
   const {
     loading: loadingWinStrategies,
     data: strategyWinData,
@@ -46,6 +54,19 @@ const InsightsPage = () => {
       filter: {
         status: {
           eq: 'win',
+        },
+      },
+    },
+  });
+
+  const {
+    loading: loadingCombinedStrategies,
+    data: strategyCombinedData,
+  } = useQuery(gql(listStrategys), {
+    variables: {
+      filter: {
+        status: {
+          ne: 'assigned',
         },
       },
     },
@@ -64,7 +85,12 @@ const InsightsPage = () => {
     },
   });
 
-  if ( loading || loadingWinStrategies || loadingAssignedStrategies) {
+  if (
+    loading ||
+		loadingWinStrategies ||
+		loadingAssignedStrategies ||
+		loadingCombinedStrategies
+  ) {
     return (
       <Layout>
         <div style={{ marginTop: 200 }}>
@@ -120,57 +146,93 @@ const InsightsPage = () => {
     totalClients: data.listClients.items.length,
   };
 
+  const filteredStrategyWinData = strategyWinData.listStrategys.items.filter(
+    (item) => item.clientId != null
+  );
+
+  const filteredStrategyCombinedData = strategyCombinedData.listStrategys.items.filter(
+    (item) => item.clientId != null
+  );
+
   const insightsStrategyProps = {
     overallAssignedStrategyData: assignedStrategies,
     overallWinStrategyData: strategyWinData,
   };
 
-  return (
-    <Layout {...layoutProps}>
-      <Row justify='center'>
-        <CardWrap
-          height={453}
-          className='insights-overall'>
-          <InsightsOverallScore
-            {...insightOverallScoreProps}
-          />
-        </CardWrap>
-        <div style={{ marginBottom: 15 }}>
-          {HigherScoreHeader}
-          <ClientCard
-            onNameClick={handleCardClick}
-            {...clientTopBottom[1]}
-          />
+  return loading ||
+		loadingWinStrategies ||
+		loadingAssignedStrategies ||
+		loadingCombinedStrategies ? (
+      <Layout>
+        <div style={{ marginTop: 200 }}>
+          <Loading />
         </div>
-        <div style={{ marginBottom: 15 }}>
-          {LowestScoreHeader}
-          <ClientCard
-            onNameClick={handleCardClick}
-            {...clientTopBottom[0]}
+      </Layout>
+    ) : (
+      <Layout {...layoutProps}>
+        <Row justify='center'>
+          <CardWrap height={453}
+            className='insights-overall'>
+            <InsightsOverallScore {...insightOverallScoreProps} />
+          </CardWrap>
+          <div style={{ marginBottom: 15 }}>
+            {HigherScoreHeader}
+            <ClientCard onNameClick={handleCardClick}
+              {...clientTopBottom[1]} />
+          </div>
+          <div style={{ marginBottom: 15 }}>
+            {LowestScoreHeader}
+            <ClientCard onNameClick={handleCardClick}
+              {...clientTopBottom[0]} />
+          </div>
+          <CardContainer height={440}
+            width={390}
+            className='strategy-metrics'>
+            <InsightsStrategy {...insightsStrategyProps} />
+          </CardContainer>
+          <CardWrap height={440}
+            className='insights-moods'>
+            <InsightsMood clients={clientNames} />
+          </CardWrap>
+          <Col>
+            <CardContainer height={320}
+              width={390}
+              className='Quarter-moods'>
+              <InsightsQuarter />
+            </CardContainer>
+            <CardContainer height={95}
+              width={390}
+              className='insights-moods'>
+              <SpaceBetween>
+                <SubH1>
+								Overall Client Wins: {filteredStrategyWinData.length}
+                </SubH1>
+                <div style={{ float: 'right' }}>
+                  <BadgeStyled
+                    style={{
+                      height: 32,
+                      width: 32,
+                      backgroundColor: '#ebebeb',
+                      cursor: 'pointer',
+                    }}
+                    onClick={() => toggleWinModal(true)}>
+                    <Tooltip title={'Archive'}>
+                      <FolderOutlined alt='Archive Icon' />
+                    </Tooltip>
+                  </BadgeStyled>
+                </div>
+              </SpaceBetween>
+            </CardContainer>
+          </Col>
+          <InsightArchiveModal
+            archiveData={filteredStrategyCombinedData}
+            handleToggle={toggleWinModal}
+            isArchiveModal={isWinModal}
+            clientName={null}
           />
-        </div>
-        <CardContainer
-          height={440}
-          width={390}
-          className='strategy-metrics'>
-          <InsightsStrategy
-            {...insightsStrategyProps}
-          />
-        </CardContainer>
-        <CardWrap
-          height={440}
-          className='insights-moods'>
-          <InsightsMood clients={clientNames} />
-        </CardWrap>
-        <CardContainer
-          height={440}
-          width={390}
-          className='Quarter-moods'>
-          <InsightsQuarter />
-        </CardContainer>
-      </Row>
-    </Layout>
-  );
+        </Row>
+      </Layout>
+    );
 };
 
 export default InsightsPage;

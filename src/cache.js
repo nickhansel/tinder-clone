@@ -7,3 +7,5 @@ export const loggedInUserId = makeVar();
 
 // Initializes to an empty array
 export const strategiesList = makeVar([]);
+export const assignedStrategiesList = makeVar([]);
+export const assignedBadgesList = makeVar([]);

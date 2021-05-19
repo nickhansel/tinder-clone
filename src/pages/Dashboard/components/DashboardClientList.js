@@ -51,6 +51,7 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
         handleToggle={handleBadgeToggle}
         isBadgeModal={isBadgeModal}
         selectedClientId={selectedClientId}
+        showWins={false}
       />
     </>
   );
