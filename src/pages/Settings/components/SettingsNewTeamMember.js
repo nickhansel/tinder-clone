@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import gql from 'graphql-tag';
 // import { useMutation, useQuery } from '@apollo/react-hooks';
-// import { createClientNote } from 'graphql/mutations';
-// import { getClient } from 'graphql/queries';
-import { Form, Input, Button, message } from 'antd';
+// import { createClientNote, updateTeam, createTeam } from 'graphql/mutations';
+// import { getClient, getTeam, listTeams } from 'graphql/queries';
+import { Form, Input, Switch, message } from 'antd';
 // import { generateId } from 'utils';
-import { ButtonCancel, ButtonConfirm } from 'common';
+import { ButtonCancel, ButtonConfirm, SpaceBetween } from 'common';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import './styles.css';
 
-const SettingsNewTeamMember = () => {
+const SettingsNewTeamMember = ( props ) => {
+  // console.log(props.handleToggleExisting);
   const [form] = Form.useForm();
 
   // const [addClientNote, { loading: creating, error }] = useMutation(
@@ -34,7 +36,7 @@ const SettingsNewTeamMember = () => {
   //   }
   // );
 
-  const handleNewTeamMemberSubmit = (values) => {
+  const handleNewTeamMemberSubmit = (e) => {
     // addClientNote({
     //   variables: {
     //     input: {
@@ -46,22 +48,27 @@ const SettingsNewTeamMember = () => {
     //     },
     //   },
     // });
+    // console.log(e.firstName);
+    // console.log(e.lastName);
+    // console.log(e.email);
+    // // the value is null if it is just left off so it should check for null and false
+    // console.log(e.admin);
 
     message.success('Note created, but not to backend');
     form.resetFields();
-    // handleToggle();
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
   const formStyle = {
     labelCol: { span: 4 },
-    wrapperCol: { span: 24, offset: 0 }
+    wrapperCol: { span: 24, offset: 0 },
   };
 
   const footerFormStyle = {
-    wrapperCol: { span: 20, offset: 6 }
+    wrapperCol: { span: 20, offset: 6 },
   };
 
   return (
@@ -74,14 +81,25 @@ const SettingsNewTeamMember = () => {
       initialValues={{ remember: true }}
       onFinish={handleNewTeamMemberSubmit}
       onFinishFailed={onFinishFailed}
-      style={{ marginTop: 30, marginRight: 30 }}>
-      <Form.Item
-        label='Username'
-        name='username'
-        rules={[
-          { required: true, message: 'Please Input New Team Member Username' },
-        ]}>
-        <Input />
+      style={{ marginTop: 20, marginRight: 30 }}>
+      <Form.Item label='Full Name'
+        style={{ marginBottom: 0 }}>
+        <Form.Item
+          name='firstName'
+          rules={[{ required: true }]}
+          style={{ display: 'inline-block', width: 'calc(50% - 5px)' }}>
+          <Input placeholder='Input First Name' />
+        </Form.Item>
+        <Form.Item
+          name='lastName'
+          rules={[{ required: true }]}
+          style={{
+            display: 'inline-block',
+            width: 'calc(50% - 5px)',
+            marginLeft: '8px',
+          }}>
+          <Input placeholder='Input Last Name' />
+        </Form.Item>
       </Form.Item>
       <Form.Item
         label='Email'
@@ -95,21 +113,29 @@ const SettingsNewTeamMember = () => {
         ]}>
         <Input />
       </Form.Item>
-
+      <Form.Item label='Admin'
+        name='admin'>
+        <Switch
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
+        />
+      </Form.Item>
       <Form.Item {...footerFormStyle}>
-        <ButtonConfirm
-          form='form-new-team-member'
-          key='submit'
-          htmlType='submit'
-          type='primary'>
-					Confirm
-        </ButtonConfirm>
-        <ButtonCancel
-          key='back'
-          onClick={() => form.resetFields()}
-          style={{ marginLeft: 150, marginTop: 20 }}>
-					Reset
-        </ButtonCancel>
+        <SpaceBetween>
+          <ButtonCancel key='back'
+            onClick={() => props.handleToggle(true)}>
+						Cancel
+          </ButtonCancel>
+          <ButtonConfirm
+            form='form-new-team-member'
+            key='submit'
+            htmlType='submit'
+            type='primary'
+            // onClick={handleNewTeamMemberSubmit}
+            style={{ marginRight: 40 }}>
+						Confirm
+          </ButtonConfirm>
+        </SpaceBetween>
       </Form.Item>
     </Form>
   );
