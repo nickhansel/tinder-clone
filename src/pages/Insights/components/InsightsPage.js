@@ -1,7 +1,7 @@
 /*
   Insights Page 
 */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -30,6 +30,11 @@ import { PAGE_TITLE } from '../constants';
 import { BadgeStyled } from '../../../common/components/styles';
 import { FolderOutlined } from '@ant-design/icons';
 import './styles.css';
+import {
+  loggedInUserId,
+  strategiesList,
+  assignedStrategiesList,
+} from '../../../cache.js';
 
 const InsightsPage = () => {
   const { loading, data, error } = useQuery(
@@ -58,6 +63,37 @@ const InsightsPage = () => {
       },
     },
   });
+
+  // const {
+  //   loading: loadingCombinedStrategies,
+  //   data: strategyCombinedData,
+  // } = useQuery(gql(listStrategys), {
+  //   variables: {
+  //     filter: {
+  //       status: {
+  //         eq: ['win', 'loss']
+  //       },
+  //     },
+  //   },
+  // });
+
+  // const {
+  // 	loading: loadingCombinedStrategies,
+  // 	data: strategyCombinedData,
+  // } = useQuery(gql(listStrategys), {
+  // 	variables: {
+  // 		filter: {
+  // 			status: {
+  // 				eq: 'win',
+  // 			},
+  //       or: {
+  //         status: {
+  //           eq: 'loss',
+  //         }
+  //       }
+  // 		},
+  // 	},
+  // });
 
   const {
     loading: loadingCombinedStrategies,
@@ -149,6 +185,10 @@ const InsightsPage = () => {
   const filteredStrategyWinData = strategyWinData.listStrategys.items.filter(
     (item) => item.clientId != null
   );
+
+  console.log(strategyCombinedData);
+  console.log(loggedInUserId());
+  console.log(strategiesList());
 
   const filteredStrategyCombinedData = strategyCombinedData.listStrategys.items.filter(
     (item) => item.clientId != null

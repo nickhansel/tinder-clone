@@ -9,6 +9,8 @@ const InsightArchiveModal = ({
   clientName,
 }) => {
   // console.log(archiveData);
+  // const { clientId = {} } = item;
+  // item.clientId ? item.clientId.name || something here
 
   const renderNotes = (
     archiveData.map((item, key) => {

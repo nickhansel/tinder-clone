@@ -6,7 +6,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { getClient } from 'graphql/queries';
+import { getClient, listStrategys } from 'graphql/queries';
 import { Row, Pagination, Tooltip } from 'antd';
 import ClientDetailsNewNote from './ClientDetailsNewNote';
 import ClientDetailsNewStrategy from './ClientDetailsNewStrategy';
@@ -28,18 +28,32 @@ const ClientDetailsPage = ({ history, location }) => {
   // console.log(location);
   // console.log(selectedClient);
 
-  const { loading, data, error } = useQuery(gql(getClient), {
-    variables: {
-      id: selectedClient,
-    },
-  });
-
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
   const [page, setPage] = useState(1);
   const [isNewNoteModal, toggleNewNoteModal] = useState(false);
   const [isNewStrategyModal, toggleNewStrategyModal] = useState(false);
   const [selectedStrategy, setSelectedStrategy] = useState(null);
+
+  const { loading, data, error } = useQuery(gql(getClient), {
+    variables: {
+      id: selectedClient,
+    },
+  });
+
+  const {
+    loading: loadingStrategies,
+    data: strategyData,
+    error: strategyError,
+  } = useQuery(gql(listStrategys), {
+    variables: {
+      filter: {
+        clientId: {
+          eq: selectedClient,
+        },
+      },
+    },
+  });
 
   // Get client from db in future
   const [touchPoints, setPoints] = useState(touchPointsMock);
@@ -63,6 +77,12 @@ const ClientDetailsPage = ({ history, location }) => {
     noteId: { items: notesData },
   } = clientData;
   const totalNotes = 0 || notesData.length;
+
+  const isStratLoaded = !loadingStrategies && !strategyError;
+  const clientStrategyData = isStratLoaded && strategyData ? strategyData : {};
+
+  console.log(strategyError);
+  console.log(strategyData);
 
   // Props
   const layoutProps = {

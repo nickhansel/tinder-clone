@@ -71,7 +71,8 @@ const ClientProfile = ({
 		});
 	};
 
-  // const assignedBadges = ;
+	console.log(strategyItems);
+
   const archiveBadges = strategyItems.filter((item) => item.status === 'win' || item.status === 'loss');
 
 	assignedBadgesList(
