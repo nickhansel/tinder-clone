@@ -2,85 +2,42 @@
   Empava Notes
 */
 import React, { useState, useEffect } from 'react';
+
 import moment from 'moment';
-import { Spin, Typography, Popconfirm, message } from 'antd';
-import { SubH2, SpaceBetween, Note1Grey, Badge, Flex } from 'common';
-import { iconTrash } from 'media/svg';
-import { CheckOutlined } from '@ant-design/icons';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
-import { updateStrategy } from 'graphql/mutations';
+import { Spin, Typography } from 'antd';
+import { Note1Grey, Badge, Flex, ActionHeader } from 'common';
+import { alertWithOffset as alertWithOffset } from 'utils';
+
 const { Paragraph } = Typography;
 
-const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNote, height, }) => {
+const Note = ({ 
+  // deleting,
+  authorName,
+  note,
+  // deleteNote,
+  updating,
+  // updateNote,
+  height,
+  noteUpdateAction,
+  headerActions = false,
+  additionalContent = null
+}) => {
   const [noteText, setNoteText] = useState(note.content || note.description);
   const [isSpinning, toggleSpinning] = useState(false);
-
-  const [updateStrategies, { loading: updatingStrategy }] = useMutation(
-    gql(updateStrategy)
-  );
 
   useEffect(() => {
     setNoteText(note.content || note.description);
   }, [note]);
 
-  // Delete on
-  function confirm(e) {
-    deleteNote(note.id);
-
-    // give time for a note to delete
-    setTimeout(function() {
-      if (!deleting) {
-        message.success('Deleted');
-        toggleSpinning(false);
-      }
-    }, 1000);
-  }
-
-  // updates note in backend and sets note text for state, and adds an alert on successful post
-  function confirmUpdate(updatedText) {
+  // updates note in backend and sets note text for state
+  function confirmNoteUpdate(updatedText) {
     setNoteText(updatedText);
-    updateNote(note.id, updatedText);
-    setTimeout(function() {
-      if (!updating) {
-        message.success('Note Updated');
-      }
-    }, 1000);
-  }
+    noteUpdateAction(note.id, updatedText);
 
-  function cancel(e) {
-    toggleSpinning(false);
-  }
-
-  const handleUpdateStrategy = (noteID, statusText) => {
-    updateStrategies({
-      variables: {
-        input: {
-          id: noteID,
-          status: statusText,
-        },
-      },
-    });
-  };
-
-  function confirmStrategyWin(e) {
-    handleUpdateStrategy(note.id, 'win');
-    toggleSpinning(false);
-    setTimeout(function() {
-      if (!updatingStrategy) {
-        message.success('Congrats on the Win!');
-      }
-    }, 1000);
-  }
-
-  function confirmStrategyLoss(e) {
-    handleUpdateStrategy(note.id, 'loss');
-    toggleSpinning(false);
-    setTimeout(function() {
-      if (!updatingStrategy) {
-        message.success('Sorry about the Loss');
-      }
-    }, 1000);
+    alertWithOffset(
+      updating,
+      'Note Updated',
+    );
   }
 
   const paragraphProps = {
@@ -101,99 +58,49 @@ const Note = ({ type, deleting, authorName, note, deleteNote, updating, updateNo
     <div>
       <Paragraph
         {...paragraphProps}
-        editable={{ onChange: confirmUpdate }}>
+        editable={{ onChange: confirmNoteUpdate }}>
         {noteText}
       </Paragraph>
     </div>
   );
 
-  const renderDelete = (
-    <Popconfirm
-      title="Are you sure?"
-      onConfirm={confirm}
-      onCancel={cancel}
-      okText="Ok"
-      cancelText="Cancel"
-    >
-      <img
-        onClick={() => toggleSpinning(true)}
-        style={{ cursor: 'pointer', marginLeft: 5 }}
-        src={iconTrash}
-        alt="note trash icon"
-      />
-    </Popconfirm>
-  );
-
-  const renderBadge =
-    type === 'strategy' || type === 'archive' ? <Badge size="lrg"
+  const headerIcon = note.badgeName ? 
+    <Badge size="lrg"
       strategy={note.badgeName} /> : null;
 
-  const renderCheckMark =
-		type === 'strategy' ? (
-		  <Popconfirm
-		    title='Was this strategy implemented successfully?'
-		    onConfirm={confirmStrategyWin}
-		    onCancel={confirmStrategyLoss}
-		    okText='Yes'
-		    cancelText='No'>
-		    <CheckOutlined
-		      style={{ cursor: 'pointer', marginLeft: 5 }}
-		      alt='strategy check icon'
-		    />
-		  </Popconfirm>
-		) : null;
-
-  return note.status === 'win' ? (
+  const renderWin = note.status === 'win' ? (
     <div>
-      <Spin spinning={isSpinning}>
-        <SpaceBetween>
-          <Flex>
-            {renderBadge}
-            <div>
-              <SubH2>{note.title}</SubH2>
-              <Note1Grey>
-                <div>
-                  <span>
-										Created: {moment(note.createdAt).format('MM/D/YYYY hh:mm')} by{' '}
-                  </span>
-                  <span style={{ color: '#052F7B' }}>{authorName}</span>
-                </div>
-                <div>
-                  <span>
-										Win: {moment(note.updatedAt).format('MM/D/YYYY hh:mm')} by{' '}
-                  </span>
-                  <span style={{ color: '#052F7B' }}>{authorName}</span>
-                </div>
-              </Note1Grey>
-            </div>
-          </Flex>
-        </SpaceBetween>
-        {Section}
-      </Spin>
+      <span>
+        Win: {moment(note.updatedAt).format('MM/D/YYYY hh:mm')} by
+      </span>
+      <span style={{ color: '#052F7B' }}> {authorName}</span>
     </div>
-  ) : (
+  ) : null;
+  
+  const renderAdditionalActions = headerActions ? (
+    <ActionHeader
+      title={note.title}
+      actions={headerActions} 
+      id={note.id}
+      toggleSpinning={toggleSpinning}
+      headerIcon={headerIcon}
+    />
+  ) : null;
+
+  return (
     <div>
       <Spin spinning={isSpinning}>
-        <SpaceBetween>
-          <Flex>
-            {renderBadge}
-            <div>
-              <SubH2>{note.title}</SubH2>
-              <Note1Grey>
-                <div>
-                  <span>
-										Created: {moment(note.createdAt).format('MM/D/YYYY hh:mm')} by{' '}
-                  </span>
-                  <span style={{ color: '#052F7B' }}>{authorName}</span>
-                </div>
-              </Note1Grey>
-            </div>
-          </Flex>
-          <div>
-            {renderCheckMark}
-            {renderDelete}
-          </div>
-        </SpaceBetween>
+        {renderAdditionalActions}
+        <Flex>
+          <Note1Grey>
+            <span>
+              Created: {moment(note.createdAt).format('MM/D/YYYY hh:mm')} by
+            </span>
+            <span style={{ color: '#052F7B' }}> {authorName}</span>
+            {renderWin}
+          </Note1Grey>
+          {additionalContent}
+        </Flex>
         {Section}
       </Spin>
     </div>

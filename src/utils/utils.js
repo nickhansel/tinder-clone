@@ -163,7 +163,7 @@ export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const findTopBottomClients = (arr) => {
+export const findMinMaxClients = (arr) => {
   let min = arr[0];
   let max = arr[0];
 

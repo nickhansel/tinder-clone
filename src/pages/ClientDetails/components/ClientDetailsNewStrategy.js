@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
@@ -17,6 +17,7 @@ import {
 } from 'common';
 import { BADGES, mainColors, generateId } from 'utils';
 import { STRATEGY_MESSAGES } from '../constants';
+import { loggedInUserId } from '../../../cache';
 
 const { TextArea } = Input;
 const badgeNames = Object.values(BADGES);
@@ -32,7 +33,6 @@ const ClientDetailsNewStrategy = ({
   client: {
     id,
     accountId: { name: companyName },
-    contactId = {},
   },
   selectedStrategy,
   setSelectedStrategy,
@@ -52,18 +52,26 @@ const ClientDetailsNewStrategy = ({
           },
         });
         const { items } = data.getClient.strategy;
+        const newItems = [...items, createStrategy];
+        delete data.getClient.strategy;
 
-        // cache.writeQuery({
-        //   query: gql(getClient),
-        //   data: {
-        //     getClient: {
-        //       ...data.getClient,
-        //       strategy: {
-        //         items: items.concat([createStrategy]),
-        //       },
-        //     },
-        //   },
-        // });
+        cache.writeQuery({
+          query: gql(getClient),
+          variables: {
+            id,
+          },
+          data: {
+            getClient: {
+              __typename: 'Client',
+              ...data.getClient,
+              strategy: {
+                __typename: 'Strategy',
+                items: newItems,
+                nextToken: null
+              },
+            },
+          },
+        });
       },
     }
   );
@@ -76,14 +84,20 @@ const ClientDetailsNewStrategy = ({
           id: generateId(),
           badgeName: selectedStrategy,
           strategyClientIdId: id,
-          strategyOwnerIdId: contactId.id,
+          strategyOwnerIdId: loggedInUserId(),
           title: values.title,
-          description: values.strategy_note,
+          description: values.description,
           status: 'assigned',
         },
       },
     });
-    message.success('Strategy created');
+
+    if (!creating && !error) {
+      message.success('Strategy created');
+    } else if (!creating && error) {
+      message.error(error);
+    }
+
     form.resetFields();
     handleToggle(false);
   };
@@ -109,14 +123,14 @@ const ClientDetailsNewStrategy = ({
       <Form.Item
         label="Title"
         name="title"
-        rules={[{ required: true, message: 'Please input note title' }]}
+        rules={[{ required: true, message: 'Please input strategy title' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="Note"
-        name="strategy_note"
-        rules={[{ required: true, message: 'Please note text' }]}
+        label="Description"
+        name="description"
+        rules={[{ required: true, message: 'Please strategy description' }]}
       >
         <TextArea />
       </Form.Item>

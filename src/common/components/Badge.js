@@ -37,9 +37,9 @@ const Badge = ({ strategy, size }) => {
 
   return (
     <BadgeStyled style={style}>
-      <Tooltip title={capitalizeFirstLetter(strategy)}>
+      <Tooltip title={capitalizeFirstLetter(strategy || '')}>
         <img src={statusData[strategy]}
-          alt='health score' />
+          alt={`badge ${strategy}`} />
       </Tooltip>
     </BadgeStyled>
   );

@@ -42,6 +42,7 @@
 .ant-layout {
   height: 100%;
   min-height: 900px !important;
+  min-width: 1200px;
 }
 
 .ant-avatar {
@@ -72,10 +73,10 @@
 .decision-maker-badge:hover {
   filter: grayscale(100%) !important;
 }
-.decision-maker-badge:hover, .decision-maker-badge-client-details-page:hover {
+.decision-maker-badge:hover, .decision-maker__toggle:hover {
   opacity: 1 !important;
 }
 
-.decision-maker-badge-client-details-page:hover {
+.decision-maker__toggle:hover {
   cursor: pointer;
 }

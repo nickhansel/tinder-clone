@@ -4,20 +4,14 @@
 
 import React, { useState } from 'react';
 import { Row } from 'antd';
-import { ClientCard } from 'common';
-import ClientStrategyModal from './ClientStrategyModal';
 import DashboardRateModal from './DashboardRateModal';
+import { Client } from '../../sharedComponents';
 
 const DashboardClientList = ({ data, minVal, maxVal, history }) => {
-  const [isBadgeModal, toggleBadgeModal] = useState(false);
   const [isRateModal, toggleRateModal] = useState(false);
   const [selectedClientId, setSelectedClient] = useState(null);
   const [selectedClientName, setSelectedClientName] = useState(null);
 
-  const handleBadgeToggle = (state, id) => {
-    toggleBadgeModal(state);
-    setSelectedClient(id);
-  };
   const handleRateToggle = (id, clientName) => {
     setSelectedClientName(clientName);
     setSelectedClient(id);
@@ -27,15 +21,15 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   return (
     <>
       <Row justify="center">
-        {data.length > 0 &&
+        {data.length &&
             data
               .slice(minVal, maxVal)
               .map((client, index) => (
-                <ClientCard
+                <Client
                   key={index}
-                  {...client}
+                  client={client}
                   onNameClick={handleRateToggle}
-                  onBadgeClick={handleBadgeToggle}
+                  setSelectedClient={setSelectedClient}
                 />
               ))}
       </Row>
@@ -45,13 +39,6 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
         history={history}
         handleToggle={handleRateToggle}
         isRateModal={isRateModal}
-      />
-      <ClientStrategyModal
-        data={data}
-        handleToggle={handleBadgeToggle}
-        isBadgeModal={isBadgeModal}
-        selectedClientId={selectedClientId}
-        showWins={false}
       />
     </>
   );

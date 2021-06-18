@@ -25,7 +25,7 @@ const DecisionMakerIconToggle = ({ clientName, confirmUpdate, isChamp, isToggleO
             filter: greyscale,
             opacity: 0.7,
           }}
-          className='decision-maker-badge-client-details-page'
+          className='decision-maker__toggle'
           src={iconStarMaker}
           alt=''
         />

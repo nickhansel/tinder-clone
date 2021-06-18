@@ -1,11 +1,10 @@
-import { InMemoryCache, Reference, makeVar } from '@apollo/client';
+/*
+* This file contains data that can be cached and reused accross the application
+* to add a new item it needs to be defined here and added to typeDefs in index.js
+* to set data pass a data to cache loggedInUserId(data)
+* when no data is passed the cache would be returned loggedInUserId()
+*/
+import { makeVar } from '@apollo/client';
 
-// Initializes to true if localStorage includes a 'token' key,
-// false otherwise
-export const isLoggedInVar = makeVar(!!localStorage.getItem('token'));
+// helper that can be used across the app to get the current user id
 export const loggedInUserId = makeVar();
-
-// Initializes to an empty array
-export const strategiesList = makeVar([]);
-export const assignedStrategiesList = makeVar([]);
-export const assignedBadgesList = makeVar([]);

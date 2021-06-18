@@ -3,8 +3,8 @@ import { SubH2, Direction, SpaceBetween } from 'common';
 import { SubH2Blue } from './styles';
 
 const InsightsMood = ({ clients }) => {
-  const renderMoodList = clients.map((client) => (
-    <SpaceBetween>
+  const renderMoodList = clients.map((client, key) => (
+    <SpaceBetween key={key}>
       <SubH2Blue>{client.name}</SubH2Blue>
       <Direction direction={client.change} />
     </SpaceBetween>

@@ -3,10 +3,12 @@
 */
 
 import React from 'react';
+
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { deleteClientNote, updateClientNote } from 'graphql/mutations';
 import { getClient } from 'graphql/queries';
+
 import { Note, CardWrap } from 'common';
 
 const ClientDetailsNotesList = ({
@@ -20,7 +22,6 @@ const ClientDetailsNotesList = ({
   const [deleteNote, { loading: deleting }] = useMutation(
     gql(deleteClientNote)
   );
-
   const [updateNote, { loading: updating }] = useMutation(
     gql(updateClientNote)
   );
@@ -51,6 +52,9 @@ const ClientDetailsNotesList = ({
 
       client.writeQuery({
         query: gql(getClient),
+        variables: {
+          id: selectedClient,
+        },
         data: {
           __typename: 'Client',
           getClient: {
@@ -72,24 +76,34 @@ const ClientDetailsNotesList = ({
       update: updateCache,
     });
   };
+  const headerActions = [
+    {
+      name: 'delete',
+      action: handleDeleteNote,
+      processing: deleting,
+      onConfirm: 'Deleted',
+      confirmData: '',
+      cancelData: '',
+      resolveTitle: 'Are you sure?',
+    },
+  ];
 
   return (
     <>
       {notesData &&
-				notesData.length > 0 &&
-				notesData.slice(minVal, maxVal).map((note, index) => (
-				  <CardWrap {...noteProps}
-				    key={index}>
-				    <Note
-				      deleting={deleting}
-				      authorName={authorName}
-				      note={note}
-				      deleteNote={handleDeleteNote}
-				      updating={updating}
-				      updateNote={handleUpdateNote}
-				    />
-				  </CardWrap>
-				))}
+        notesData.length > 0 &&
+        notesData.slice(minVal, maxVal).map((note, index) => (
+          <CardWrap {...noteProps}
+            key={index}>
+            <Note
+              authorName={authorName}
+              note={note}
+              updating={updating}
+              noteUpdateAction={handleUpdateNote}
+              headerActions={headerActions}
+            />
+          </CardWrap>
+        ))}
     </>
   );
 };

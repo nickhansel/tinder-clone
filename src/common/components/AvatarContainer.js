@@ -9,15 +9,15 @@ import '../../pages/Layout/styles.css';
 import DecisionMakerIconToggle from 'common/components/DecisionMakerIconToggle';
 
 const AvatarContainer = ({
-  mood,
-  mode = 'croped',
+  clientName,
+  fromClientDetails,
+  handleUpdateClient,
+  id,
   isDecisionMaker,
   isChamp,
   isImpatient,
-  id,
-  updateClientIsDecisionMaker,
-  clientName,
-  fromClientDetails,
+  mood,
+  mode = 'croped',
 }) => {
   const size = {
     full: 289,
@@ -25,7 +25,7 @@ const AvatarContainer = ({
   };
 
   function confirmUpdate() {
-    updateClientIsDecisionMaker(id, !isDecisionMaker);
+    handleUpdateClient(id, { isDecisionMaker: !isDecisionMaker });
   }
   
   const newMailIcon = isImpatient ? (
@@ -74,13 +74,13 @@ const AvatarContainer = ({
       placement='bottomLeft'>
       <img
         style={{
+          filter: 'grayscale(0%)',
           height: 32,
           left: 188,
+          opacity: 0.7,
           position: 'absolute',
           top: isChamp ? 40 : 5,
           width: 32,
-          filter: 'grayscale(0%)',
-          opacity: 0.7,
         }}
         className='decision-maker-badge'
         src={iconStarMaker}
