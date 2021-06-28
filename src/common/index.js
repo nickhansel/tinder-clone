@@ -7,7 +7,6 @@ import {
   Badge,
   CardContainer,
   CardWrap,
-  ClientCard,
   Direction,
   DragDropContainer,
   HealthButton,
@@ -15,7 +14,8 @@ import {
   Note,
   Profile,
   StrategyIcons,
-  ActionHeader
+  ActionHeader,
+  ArchiveActionIcon,
 } from './components';
 
 export {
@@ -24,7 +24,6 @@ export {
   Badge,
   CardContainer,
   CardWrap,
-  ClientCard,
   DragDropContainer,
   Direction,
   HealthButton,
@@ -33,6 +32,7 @@ export {
   Profile,
   StrategyIcons,
   ActionHeader,
+  ArchiveActionIcon,
 };
 
 // Styled Components

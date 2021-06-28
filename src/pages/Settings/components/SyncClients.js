@@ -20,61 +20,25 @@ const jsforce = require('jsforce');
 const SyncClients = ({ userData }) => {
   const [accountId, setAccountId ] = useState(null);
   const [clientId, setClientId ] = useState(null);
+
   const [createClient, { loading: creatingClient }] = useMutation(
     gql(createClientMutation));
   const [createAccount, { loading: creatingAccount }] = useMutation(
     gql(createAccountMutation));
+    
   const { data: account = {}, loading } = useQuery(gql(getAccount), {
     variables: { id: accountId },
   });
   const { data: client = {}, loadingClient } = useQuery(gql(getClient), {
     variables: { id: clientId },
   });
-
-  // get user from out db
-  // const { data: client = {} } = useQuery(gql(getClient), {
-  //   variables: { id: 0 },
-  // });
-  // // get user from out db
-  // const { data: account = {} } = useQuery(gql(getAccount), {
-  //   variables: { id: 0 },
-  // });
-
-  // async function handleCreateAccountsAndClients(message) {
-  //   const userExists = await prisma.$exists.user({
-  //     authorId: data.authorId
-  //   });
-    
-  //   if (!userExists) {
-  //     await prisma.createMessage({
-  //       content: data.content,
-  //       author: {
-  //         create: {
-  //           authorId: data.authorId
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     await prisma.createMessage({
-  //       content: data.content,
-  //       author: {
-  //         connect: {
-  //           authorId: data.authorId
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
     
   const handleCreateAccountsAndClients = (data) => {
-    console.log('here')
     data.forEach((item) => {
       setAccountId(item.AccountId);
       setClientId(item.Id);
 
       if (!loading && !account) {
-        console.log("account");
-        console.log(account);
         try {
           createAccount({
             variables: {
@@ -132,8 +96,6 @@ const SyncClients = ({ userData }) => {
           .select('*, Account.*') // asterisk means all fields in specified level are targeted.
           .execute(function(err, records) {
             if (records) {
-              console.log("records");
-              console.log(records);
               handleCreateAccountsAndClients(records);
             }
           });

@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /*
   Dashboard Page 
 */
@@ -22,9 +23,8 @@ import Layout from 'pages/Layout';
 
 import { DASHBOARD_TITLE } from '../constants';
 import { FlexContainer } from './styles';
-import { filterDataByMoodAndSearch, CURRENT_USER } from 'utils';
+import { filterDataByMoodAndSearch } from 'utils';
 import { loggedInUserId } from '../../../cache.js';
-
 import './styles.css';
 
 const DashboardPage = ({ history }) => {
@@ -37,11 +37,12 @@ const DashboardPage = ({ history }) => {
   const [searchString, setSearchString] = useState('');
   const [showAllTitleText, setShowAllTitleText] = useState('Show All');
 
-  // get user from out db
+  // get user from our db
   const { data: userData } = useQuery(gql(getUser), {
     variables: { id: authUserData.id },
   });
 
+  // Query to create user in db if registered for a first time
   const [createUser, { loading: creatingUser }] = useMutation(
     gql(createUserMutation), { 
       refetchQueries: [{
@@ -61,7 +62,7 @@ const DashboardPage = ({ history }) => {
         })
         .catch((err) => console.log('error: ', err));
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (userData && userData.getUser === null) {
@@ -79,7 +80,7 @@ const DashboardPage = ({ history }) => {
 
   const { loading, data, error } = useQuery(gql(listClientsDash), {
     filter: {
-      teamId: userData && userData.team ? userData.team.id : CURRENT_USER
+      teamId: userData && userData.team ? userData.team.id : loggedInUserId()
     },
   });
 
@@ -94,9 +95,10 @@ const DashboardPage = ({ history }) => {
   }
 
   const isLoaded = !loading && !error;
-  let clientsData = isLoaded // TODO change to API filtering
+  let clientsData = isLoaded // TODO change to API filtering - filterDataByMoodAndSearch is a mock functions
     ? filterDataByMoodAndSearch(data.listClients.items, moodId, searchString)
     : [];
+
   const totalClients = clientsData.length;
   const moodFilter = (
     <MoodFilter setMoodId={setMoodId}
@@ -123,7 +125,7 @@ const DashboardPage = ({ history }) => {
     defaultCurrent: 1,
     onChange: onChange,
     pageSize: maxVal,
-    showTotal: (total) => <Note2>Total {totalClients} clients</Note2>,
+    showTotal: () => <Note2>Total {totalClients} clients</Note2>,
     total: totalClients,
   };
   
@@ -150,16 +152,21 @@ const DashboardPage = ({ history }) => {
   }
 
   const renderShowAllButton = (
-    <Button onClick={handleShowAllClick}>{showAllTitleText}</Button>
+    <Button 
+      onClick={handleShowAllClick}>
+      {showAllTitleText}
+    </Button>
   );
 
   return (
     <Layout title={DASHBOARD_TITLE}
       extra={moodFilter}>
       <FlexContainer>
-        <SearchInput value={searchString}
-          onChange={handleChange} />
-        <DashboardSort />
+        <div>
+          <SearchInput value={searchString}
+            onChange={handleChange} />
+          <DashboardSort />
+        </div>
         <div>
           <Pagination {...paginationProps}
             style={{ marginRight: 10 }}/>

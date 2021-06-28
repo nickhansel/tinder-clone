@@ -290,6 +290,94 @@ export const listAccounts = /* GraphQL */ `
     }
   }
 `;
+export const getClientStrategysEq = (status) =>  /* GraphQL */ `
+  query GetClient($id: ID!) {
+    getClient(id: $id) {
+      id
+      contactId {
+        id
+        name
+      }
+      strategy (filter: {
+        status: {
+          eq: ${status}
+        }
+      }) {
+        items {
+          id
+          badgeName
+          title
+          description
+          createdAt
+          updatedAt
+          status
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const getClientStrategysNot = (status) =>  /* GraphQL */ `
+  query GetClient($id: ID!) {
+    getClient(id: $id) {
+      id
+      name
+      contactId {
+        id
+        name
+      }
+      strategy (filter: {
+        status: {
+          ne: ${status}
+        }
+      }) {
+        items {
+          id
+          badgeName
+          title
+          description
+          createdAt
+          updatedAt
+          status
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listStrategysNot = () => /* GraphQL */ `
+  query ListStrategys(
+    $filter: ModelStrategyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStrategys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        badgeName
+        status
+        clientId {
+          id
+          isDecisionMaker
+          name
+          position
+          lastContact
+          createdAt
+          updatedAt
+        }
+        ownerId {
+          id
+          isAdmin
+        }
+        title
+        description
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getClient = /* GraphQL */ `
   query GetClient($id: ID!) {
     getClient(id: $id) {

@@ -2,98 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Progress } from 'antd';
 import { Note1Grey, Note1, SubH2, Flex, SpaceBetween, Badge } from 'common';
-import { BADGES, mainColors, mintGreen } from 'utils';
+import { mainColors, mintGreen, aggregateBadges } from 'utils';
 import { ButtonCharts } from './styles';
 
 const InsightsStrategy = ({
-  overallAssignedStrategyData,
-  overallWinStrategyData,
+  assignedStrategies = {},
+  strategyWinData = {},
 }) => {
-  const [stateWins, setState] = useState(false);
+  const [isWinsSelected, setState] = useState(false);
 
-  // TODO add db data
-  const currentBadges = [
-    {
-      name: BADGES.ATTENTION,
-      title: 'Attention',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.CONTACT,
-      title: 'New Contact',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.FEATURE,
-      title: 'New Feature',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.BUG,
-      title: 'Bug',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.ESCALATION,
-      title: 'Escalation',
-      score: 0,
-      percent: 0,
-    },
-    {
-      name: BADGES.CUSTOM,
-      title: 'Custom',
-      score: 0,
-      percent: 0,
-    },
-  ];
-
-  const winsBadges = JSON.parse(JSON.stringify(currentBadges));
-
-  function getBadges(strategyData, badgeDict) {
-    let totalBadges = 0;
-    for (let i = 0; i < strategyData.listStrategys.items.length; i++) {
-      if (strategyData.listStrategys.items[i].clientId != null) {
-        const { badgeName } = strategyData.listStrategys.items[i];
-        if (badgeName === BADGES.ATTENTION) {
-          totalBadges += 1;
-          badgeDict[0].score += 1;
-        } else if (badgeName === BADGES.CONTACT) {
-          totalBadges += 1;
-          badgeDict[1].score += 1;
-        } else if (badgeName === BADGES.FEATURE) {
-          totalBadges += 1;
-          badgeDict[2].score += 1;
-        } else if (badgeName === BADGES.BUG) {
-          totalBadges += 1;
-          badgeDict[3].score += 1;
-        } else if (badgeName === BADGES.ESCALATION) {
-          totalBadges += 1;
-          badgeDict[4].score += 1;
-        } else if (badgeName === BADGES.CUSTOM) {
-          totalBadges += 1;
-          badgeDict[5].score += 1;
-        }
-      }
-    }
-    badgeDict.forEach((element) => {
-      element.percent = (element.score / totalBadges) * 100;
-    });
-    return badgeDict;
-  }
-
-  let newBadgeDict = getBadges(
-    overallAssignedStrategyData,
-    currentBadges,
-  );
-
-  let newWinBadgeDict = getBadges(
-    overallWinStrategyData,
-    winsBadges,
-  );
+  const badgesAssignedMap = aggregateBadges(assignedStrategies.items); 
+  const badgesWinsMap = aggregateBadges(strategyWinData.items);  
 
   const lineProps = {
     style: {
@@ -104,32 +23,38 @@ const InsightsStrategy = ({
 
   let title = 'Badges currently assigned';
   let progressColor = mainColors.brightBlue;
-  let data = newBadgeDict;
+  let data = badgesAssignedMap;
 
-  if (stateWins) {
+  if (isWinsSelected) {
     title = 'Badge wins this Quarter';
     progressColor = mintGreen;
-    data = newWinBadgeDict;
+    data = badgesWinsMap;
   }
 
-  const renderMetrics = data.map((badge) => (
-    <SpaceBetween style={{ paddingBottom: 20 }}
-      key={badge.name}>
-      <Flex style={{ width: 260 }}>
-        <Badge strategy={badge.name} />
-        <div style={{ width: '100%' }}>
-          <Note1 {...lineProps}>{badge.title}</Note1>
-          <Progress
-            showInfo={false}
-            strokeWidth={12}
-            strokeColor={progressColor}
-            percent={badge.percent}
-          />
-        </div>
-      </Flex>
-      <Note1>{badge.score}</Note1>
-    </SpaceBetween>
-  ));
+  const renderMetrics = data.map((badge) => {
+    const { name, score } = badge;
+
+    return (
+      <SpaceBetween style={{ paddingBottom: 20 }}
+        key={name}>
+        <Flex style={{ width: 260 }}>
+          <Badge strategy={name} />
+          <div style={{ width: '100%' }}>
+            <Note1 {...lineProps}>
+              {name.replace(/^\w/, (c) => c.toUpperCase())}
+            </Note1>
+            <Progress
+              showInfo={false}
+              strokeWidth={12}
+              strokeColor={progressColor}
+              percent={score / data.length * 100}
+            />
+          </div>
+        </Flex>
+        <Note1>{score}</Note1>
+      </SpaceBetween>
+    );
+  });
 
   // Props
   const titleProps = {

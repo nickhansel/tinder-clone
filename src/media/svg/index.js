@@ -29,6 +29,7 @@ import iconUp from './icon-up.svg';
 import iconSort from './icon-sort.svg';
 import iconStarMaker from './icon-star-maker.svg';
 import iconStar from './icon-star.svg';
+import iconCheckmark from './checkmark.svg';
 
 export {
   iconAddCircle,
@@ -62,4 +63,5 @@ export {
   iconSort,
   iconStarMaker,
   iconStar,
+  iconCheckmark,
 };

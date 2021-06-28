@@ -2,24 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+
 import { ApolloProvider } from '@apollo/react-hooks';
-import App from './App';
-import './index.css';
 import { ApolloLink } from 'apollo-link';
 import { ApolloClient, gql } from '@apollo/client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from 'apollo-link-http';
+
+import { createAuthLink } from 'aws-appsync-auth-link';
 import { AUTH_TYPE } from 'aws-appsync';
 import Amplify from 'aws-amplify';
 import awsExports from './aws-exports';
 
+import App from './App';
+import './index.css';
+
 Amplify.configure(awsExports);
 
+// TODO: add often used queries to cache
 const typeDefs = gql`
   extend type Query {
-    isLoggedIn: Boolean
-    strategiesList: [ID!]
     loggedInUserId: String
   }
 `;

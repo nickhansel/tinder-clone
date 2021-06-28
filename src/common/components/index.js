@@ -6,7 +6,6 @@ import AvatarContainer from './AvatarContainer';
 import Badge from './Badge';
 import CardContainer from './CardContainer';
 import CardWrap from './CardWrap';
-import ClientCard from './ClientCard';
 import Direction from './Direction';
 import DragDropContainer from './DragDropContainer';
 import HealthButton from './HealthButton';
@@ -15,6 +14,7 @@ import Note from './Note';
 import Profile from './Profile';
 import StrategyIcons from './StrategyIcons';
 import ActionHeader from './ActionHeader';
+import ArchiveActionIcon from './ArchiveActionIcon';
 
 export {
   ResizableCard,
@@ -22,7 +22,6 @@ export {
   Badge,
   CardContainer,
   CardWrap,
-  ClientCard,
   DragDropContainer,
   Direction,
   HealthButton,
@@ -31,4 +30,5 @@ export {
   Profile,
   StrategyIcons,
   ActionHeader,
+  ArchiveActionIcon,
 };

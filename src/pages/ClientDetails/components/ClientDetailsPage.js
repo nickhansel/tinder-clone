@@ -1,14 +1,12 @@
+/* eslint-disable react/display-name */
 /*
   Client Page
 */
 import React, { useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { getClient } from 'graphql/queries';
-
 import { Row, Pagination, Tooltip } from 'antd';
 
 import ClientDetailsNewNote from './ClientDetailsNewNote';
@@ -17,8 +15,8 @@ import ClientDetailsNotesList from './ClientDetailsNotesList';
 import ClientProfile from './ClientDetailsProfile';
 import ClientDetailsTouchPoints from './ClientDetailsTouchPoints';
 import ClientDetailsToolbox from './ClientDetailsToolbox';
-import { Note2, H3, CardWrap, Loading } from 'common';
 import Layout from 'pages/Layout';
+import { Note2, H3, CardWrap, Loading } from 'common';
 
 import { RowPagination } from './styles';
 import { iconBack, iconAddCircle } from 'media/svg';
@@ -27,17 +25,8 @@ import { touchPointsMock, getIdFromLocation } from 'utils';
 
 const NOTES_EACH_PAGE = 4;
 
-const ClientDetailsPage = ({ history, location }) => {
+const ClientDetailsPage = ({ location }) => {
   const selectedClient = getIdFromLocation(location);
-  // console.log(location);
-  // console.log(selectedClient);
-
-  const { loading, data, error } = useQuery(gql(getClient), {
-    variables: {
-      id: selectedClient,
-    },
-  });
-
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(NOTES_EACH_PAGE);
   const [page, setPage] = useState(1);
@@ -45,7 +34,11 @@ const ClientDetailsPage = ({ history, location }) => {
   const [isNewStrategyModal, toggleNewStrategyModal] = useState(false);
   const [selectedStrategy, setSelectedStrategy] = useState(null);
 
-  // Get client from db in future
+  const { loading, data, error } = useQuery(gql(getClient), {
+    variables: {
+      id: selectedClient,
+    },
+  });
   const [touchPoints, setPoints] = useState(touchPointsMock);
 
   if (loading) {
@@ -109,7 +102,7 @@ const ClientDetailsPage = ({ history, location }) => {
       defaultCurrent: 1,
       onChange: onPageChange,
       pageSize: NOTES_EACH_PAGE,
-      showTotal: (total) => <Note2>Total {totalNotes} notes</Note2>,
+      showTotal: () => <Note2>Total {totalNotes} notes</Note2>,
       total: totalNotes,
     };
 
@@ -170,7 +163,7 @@ const ClientDetailsPage = ({ history, location }) => {
 
   return (
     <Layout {...layoutProps}>
-      <DndProvider backend={HTML5Backend}>{renderContent()}</DndProvider>
+      {renderContent()}
     </Layout>
   );
 };

@@ -1,8 +1,9 @@
 /*
-  Layout component
+  Sidebar component - displays all data for notes, strategies and todos
+  ( at the moment only notes present ) 
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Layout } from 'antd';
 import moment from 'moment';
 
@@ -11,25 +12,15 @@ import { useQuery } from '@apollo/react-hooks';
 import { listStrategys } from 'graphql/queries';
 import { Badge } from 'common';
 
-import { loggedInUserId, strategiesList } from '../../../cache.js';
 import './styles.css';
   
 const { Sider } = Layout;
   
 const SidebarModal = () => {
   const [collapsedTodo, setCollapsedTodo] = useState(true);
-  const userId = loggedInUserId();
 
   // get user from out db
-  const { data } = useQuery(gql(listStrategys)
-    // ,{ variables: {   TODO: update filter to use ownerId
-    //   filter: {
-    //     // ownerId: {
-    //     //   eq: userId
-    //     // }
-    //   }
-    // }}
-  );
+  const { data } = useQuery(gql(listStrategys));
   const strategies = data ? data.listStrategys.items : [];
 
   const renderStrategiesList = strategies.map((item, index) => {
@@ -46,12 +37,6 @@ const SidebarModal = () => {
       </div>
     );
   });
-
-  useEffect(() => {
-    if (data && data.listStrategys) {
-      strategiesList(data.listStrategys.items);
-    }
-  }, [data]);
 
   return (
     <Sider

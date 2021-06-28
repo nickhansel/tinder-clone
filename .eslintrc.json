@@ -28,6 +28,7 @@
     "DEBUG": false
   },
   "rules": {
+    "react/prop-types": 0,
     "react/jsx-fragments": ["off"],
     "ember-suave/no-const-outside-module-scope": "off",
     "ember-suave/require-access-in-comments": "off",

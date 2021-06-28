@@ -10,50 +10,10 @@ import { ButtonCancel, ButtonConfirm, SpaceBetween } from 'common';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import './styles.css';
 
-const SettingsNewTeamMember = ( props ) => {
-  // console.log(props.handleToggleExisting);
+const SettingsNewTeamMember = ({ handleToggle }) => {
   const [form] = Form.useForm();
 
-  // const [addClientNote, { loading: creating, error }] = useMutation(
-  //   gql(createClientNote),
-  //   {
-  //     update(cache, { data: { createClientNote } }) {
-  //       const { items } = client.noteId;
-
-  //       cache.writeQuery({
-  //         query: gql(getClient),
-  //         data: {
-  //           __typename: 'Client',
-  //           getClient: {
-  //             ...client,
-  //             noteId: {
-  //               items: [createClientNote].concat(items),
-  //             },
-  //           },
-  //         },
-  //       });
-  //     },
-  //   }
-  // );
-
-  const handleNewTeamMemberSubmit = (e) => {
-    // addClientNote({
-    //   variables: {
-    //     input: {
-    //       id: generateId(),
-    //       clientNoteClientIdId: id,
-    //       clientNoteOwnerIdId: contactId.id,
-    //       title: values.title,
-    //       content: values.note_content,
-    //     },
-    //   },
-    // });
-    // console.log(e.firstName);
-    // console.log(e.lastName);
-    // console.log(e.email);
-    // // the value is null if it is just left off so it should check for null and false
-    // console.log(e.admin);
-
+  const handleSubmit = () => {
     message.success('Note created, but not to backend');
     form.resetFields();
   };
@@ -76,10 +36,10 @@ const SettingsNewTeamMember = ( props ) => {
       id='form-new-team-member'
       {...formStyle}
       form={form}
-      name='new-team-member'
+      name='newMember'
       className='settings-new-team-member-form'
       initialValues={{ remember: true }}
-      onFinish={handleNewTeamMemberSubmit}
+      onFinish={handleSubmit}
       onFinishFailed={onFinishFailed}
       style={{ marginTop: 20, marginRight: 30 }}>
       <Form.Item label='Full Name'
@@ -88,7 +48,7 @@ const SettingsNewTeamMember = ( props ) => {
           name='firstName'
           rules={[{ required: true }]}
           style={{ display: 'inline-block', width: 'calc(50% - 5px)' }}>
-          <Input placeholder='Input First Name' />
+          <Input placeholder='Input first name' />
         </Form.Item>
         <Form.Item
           name='lastName'
@@ -98,7 +58,7 @@ const SettingsNewTeamMember = ( props ) => {
             width: 'calc(50% - 5px)',
             marginLeft: '8px',
           }}>
-          <Input placeholder='Input Last Name' />
+          <Input placeholder='Input last name' />
         </Form.Item>
       </Form.Item>
       <Form.Item
@@ -108,7 +68,7 @@ const SettingsNewTeamMember = ( props ) => {
           {
             required: true,
             type: 'email',
-            message: 'Please Input A Valid New Team Member Email Address',
+            message: 'Please input a valid email',
           },
         ]}>
         <Input />
@@ -123,7 +83,7 @@ const SettingsNewTeamMember = ( props ) => {
       <Form.Item {...footerFormStyle}>
         <SpaceBetween>
           <ButtonCancel key='back'
-            onClick={() => props.handleToggle(true)}>
+            onClick={() => handleToggle(true)}>
 						Cancel
           </ButtonCancel>
           <ButtonConfirm
@@ -131,7 +91,7 @@ const SettingsNewTeamMember = ( props ) => {
             key='submit'
             htmlType='submit'
             type='primary'
-            // onClick={handleNewTeamMemberSubmit}
+            onClick={handleSubmit}
             style={{ marginRight: 40 }}>
 						Confirm
           </ButtonConfirm>

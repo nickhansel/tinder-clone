@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+/*
+* Insights Overall Score component
+* contains a chart illustrating client health scores by year/month
+*/
+import React, { useEffect } from 'react';
 import { Chart } from 'chart.js';
 import { SubH1, BoldStyled, SpaceBetween, Flex } from 'common';
 import { ButtonCharts } from './styles';

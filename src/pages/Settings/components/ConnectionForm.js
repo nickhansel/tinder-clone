@@ -30,7 +30,8 @@ const ConnectionForm = ({ user }) => {
   
   // Business logic
   const handleSubmit = (values) => {
-    createTeamAction(values, createTeam, user.id, linkUserTeam);
+    createTeamAction(values, createTeam, user.id, linkUserTeam);  // TODO: change to hitting the Lambda function 
+   
 
     message.success('Connected team created');
     form.resetFields();

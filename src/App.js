@@ -4,8 +4,6 @@ import Router from './Router';
 
 class App extends Component {
   render() {
-    // console.log('this.props app');
-    // console.log(this.props);
     return (
       <div>
         <GlobalStyle />

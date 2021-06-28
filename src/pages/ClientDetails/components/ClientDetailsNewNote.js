@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation} from '@apollo/react-hooks';
 import { createClientNote } from 'graphql/mutations';
 import { getClient } from 'graphql/queries';
-import { Modal, Form, Input, Button, message } from 'antd';
+import { Modal, Form, Input, message } from 'antd';
 import { generateId } from 'utils';
 import { ButtonCancel, ButtonConfirm } from 'common';
 import './styles.css';
@@ -12,14 +12,10 @@ import './styles.css';
 const { TextArea } = Input;
 
 const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
-  const {
-    id,
-    accountId: { name: companyName },
-    contactId,
-  } = client;
+  const { id, contactId } = client;
   const [form] = Form.useForm();
 
-  const [addClientNote, { loading: creating, error }] = useMutation(
+  const [addClientNote] = useMutation(
     gql(createClientNote),
     {
       update(cache, { data: { createClientNote } }) {
@@ -27,15 +23,17 @@ const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
 
         cache.writeQuery({
           query: gql(getClient),
-          data: {
-            __typename: 'Client',
-            getClient: {
-              ...client,
-              noteId: {
-                items: [createClientNote].concat(items),
-              },
+          id, 
+          // data: {
+          __typename: 'Client',
+          // id,
+          getClient: {
+            ...client,
+            noteId: {
+              items: [createClientNote].concat(items),
             },
           },
+          // },
         });
       },
     }

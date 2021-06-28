@@ -120,10 +120,10 @@
 }
 
 /* modal client strategys */
-.modal__client-startegys .ant-modal-footer {
+.modal__client-startegies .ant-modal-footer {
   border-top: none !important;
 }
-.modal__client-startegys .ant-modal-body {
+.modal__client-startegies .ant-modal-body {
   padding: 0px 24px;
 }
 

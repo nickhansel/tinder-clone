@@ -48,12 +48,22 @@ const SettingsPage = () => {
     </div>
   );
 
+  function temporaryAction() {
+    console.log('action');
+  }
+  const headerActions = [
+    {
+      name: 'edit',
+      action: temporaryAction,
+      processing: temporaryAction,
+    },
+  ];
   // Tabs configs - TODO: move to separate comoponents when expand
   const connectionContent = (
     <>
       <ActionHeader title="Salesforce Connection"
-        actions={['edit']} />
-      {userData.id && !sfConnected  ? <ConnectionForm user={userData} /> : connectionCreated}
+        actions={headerActions} />
+      <ConnectionForm user={userData} /> 
     </>
   );
   const configsContent = (
@@ -132,7 +142,7 @@ const SettingsPage = () => {
         <Col span={12}>
           <CardWrap className='details-card settings-profile'>
             <ActionHeader title='Basic Info'
-              actions={['edit']} />
+              actions={headerActions} />
             <Flex>
               <Avatar size='large'
                 icon={<UserOutlined />} />
