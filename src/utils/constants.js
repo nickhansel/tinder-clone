@@ -35,5 +35,5 @@ export const STRATEGIES = {
 };
 
 export const LAYOUT_SIZES = {
-  MAX_CONTENT_WIDTH: 1500,
+  MAX_CONTENT_WIDTH: 1400,
 };

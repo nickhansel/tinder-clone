@@ -51,24 +51,32 @@
 
 /* TODO sidebar */
 .todos-sidebar.ant-layout-sider-dark{
-  background-color: #f9cd35!important;
+  background-color: #f9cd35 !important;
 }
 
-.todos__container {
-  background: #edeeee;
+.ant-collapse-content > .ant-collapse-content-box  {
+  background: #f9cd35;
+  padding: 5px !important;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  line-height: 2.8 !important;
+}
+
+.sidebar__container {
+  background: white;
   color: black;
   height: 100%;
-  margin: 15px;
   max-height: 985px;
   overflow: hidden;
   overflow-y: scroll;
-  padding: 6px;
-  width: 90%;
+  padding: 4px;
+  width: 100%;
 }
 
 .todos__entry {
   border-bottom: 1px solid white;
-  padding: 10px;
+  padding: 5px;
 }
 .decision-maker-badge:hover {
   filter: grayscale(100%) !important;

@@ -20,7 +20,8 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
   
   return (
     <>
-      <Row justify="center">
+      <Row justify="space-around"
+        style={{maxWidth: 1300}}>
         {data.length &&
             data
               .slice(minVal, maxVal)
