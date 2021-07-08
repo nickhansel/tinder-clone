@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import { Modal } from 'antd';
 
-import Strategies from './Strategies';
+import Strategies from '../Strategies';
 
 const ClientStrategyModal = ({
   selectedClientId,

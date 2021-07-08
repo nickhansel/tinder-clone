@@ -7,13 +7,13 @@ import React, { useState } from 'react';
 
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { listStrategys } from 'graphql/queries';
+import { listStrategys, listClientNotes } from 'graphql/queries';
 
-import moment from 'moment';
 import { Layout, Collapse } from 'antd';
 
-import Strategies from 'pages/sharedComponents/Client/Strategies';
-import { Badge } from 'common';
+import Strategies from 'pages/sharedComponents/Strategies';
+import Notes from 'pages/sharedComponents/Notes';
+
 import './styles.css';
   
 const { Sider } = Layout;
@@ -26,9 +26,11 @@ function callback(key) {
 const SidebarModal = () => {
   const [collapsedTodo, setCollapsedTodo] = useState(true);
 
-  // get user from out db
   const { data: strategiesData, loading } = useQuery(gql(listStrategys));
   const strategies = strategiesData ? strategiesData.listStrategys.items : [];
+
+  const { data: notesData, loading: loadingNotes } = useQuery(gql(listClientNotes));
+  const notes = notesData ? notesData.listClientNotes.items : [];
 
   return (
     <Sider
@@ -51,7 +53,11 @@ const SidebarModal = () => {
         </Panel>
         <Panel header="Notes"
           key="2">
-          <p>notes</p>
+          <div className="sidebar__container">
+            <Notes
+              data={notes}
+              loading={loadingNotes} />
+          </div>
         </Panel>
         <Panel header="Todo"
           key="3">
