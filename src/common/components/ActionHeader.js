@@ -18,6 +18,7 @@ const ActionHeader = ({
   toggleSpinning = () => {},
   headerIcon
 }) => {
+  console.log({actions})
   const actionsMap = {
     edit: {
       name: 'edit',
@@ -96,7 +97,7 @@ const ActionHeader = ({
           style={{ cursor: 'pointer', maxWidth: 50 }}
           src={icon}
           alt={name}
-          onClick={() => toggleSpinning(true)}
+          onClick={() => hasConfirm ? toggleSpinning(true) : item.action()}
         />
       </Tooltip> 
     );

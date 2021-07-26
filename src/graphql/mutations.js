@@ -65,9 +65,11 @@ export const createTeam = /* GraphQL */ `
           id
           name
           email
-        
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
@@ -108,6 +110,9 @@ export const updateTeam = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
@@ -148,12 +153,17 @@ export const deleteTeam = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         nextToken
       }
       renewalDate
+      sfKey
+      sfUsername
       createdAt
       updatedAt
     }
@@ -176,6 +186,8 @@ export const createUser = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -183,12 +195,17 @@ export const createUser = /* GraphQL */ `
       email
       profileImg
       isAdmin
+      salesforceKey
+      salesforceSecret
+      salesforcePassword
       clients {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -209,32 +226,28 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
+      clientRatings {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       clientStrategies {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
         nextToken
       }
       createdAt
-      updatedAt
-    }
-  }
-`;
-export const linkUserTeam = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    updateUser(input: $input, condition: $condition) {
-      id
-      team {
-        id
-      }
       updatedAt
     }
   }
@@ -256,6 +269,8 @@ export const updateUser = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -263,12 +278,17 @@ export const updateUser = /* GraphQL */ `
       email
       profileImg
       isAdmin
+      salesforceKey
+      salesforceSecret
+      salesforcePassword
       clients {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -289,12 +309,22 @@ export const updateUser = /* GraphQL */ `
         }
         nextToken
       }
+      clientRatings {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       clientStrategies {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -322,6 +352,8 @@ export const deleteUser = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -329,12 +361,17 @@ export const deleteUser = /* GraphQL */ `
       email
       profileImg
       isAdmin
+      salesforceKey
+      salesforceSecret
+      salesforcePassword
       clients {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -355,12 +392,22 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      clientRatings {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       clientStrategies {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -388,6 +435,8 @@ export const createAccount = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -398,9 +447,11 @@ export const createAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -431,6 +482,8 @@ export const updateAccount = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -441,9 +494,11 @@ export const updateAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -474,6 +529,8 @@ export const deleteAccount = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -484,9 +541,11 @@ export const deleteAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -507,12 +566,15 @@ export const createClient = /* GraphQL */ `
   ) {
     createClient(input: $input, condition: $condition) {
       id
+      salutation
       accountId {
         id
         team {
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -532,6 +594,8 @@ export const createClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -539,10 +603,16 @@ export const createClient = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -563,17 +633,27 @@ export const createClient = /* GraphQL */ `
         }
         nextToken
       }
+      ratingId {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       isDecisionMaker
       avatarId
       salesforceId
-      name
       email
+      name
       strategy {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -593,12 +673,15 @@ export const updateClient = /* GraphQL */ `
   ) {
     updateClient(input: $input, condition: $condition) {
       id
+      salutation
       accountId {
         id
         team {
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -618,6 +701,8 @@ export const updateClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -625,10 +710,16 @@ export const updateClient = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -649,17 +740,27 @@ export const updateClient = /* GraphQL */ `
         }
         nextToken
       }
+      ratingId {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       isDecisionMaker
       avatarId
       salesforceId
-      name
       email
+      name
       strategy {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -679,12 +780,15 @@ export const deleteClient = /* GraphQL */ `
   ) {
     deleteClient(input: $input, condition: $condition) {
       id
+      salutation
       accountId {
         id
         team {
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -704,6 +808,8 @@ export const deleteClient = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -711,10 +817,16 @@ export const deleteClient = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -735,17 +847,27 @@ export const deleteClient = /* GraphQL */ `
         }
         nextToken
       }
+      ratingId {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       isDecisionMaker
       avatarId
       salesforceId
-      name
       email
+      name
       strategy {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -767,6 +889,7 @@ export const createClientNote = /* GraphQL */ `
       id
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -782,15 +905,22 @@ export const createClientNote = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -806,6 +936,8 @@ export const createClientNote = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -813,10 +945,16 @@ export const createClientNote = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -843,6 +981,7 @@ export const updateClientNote = /* GraphQL */ `
       id
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -858,15 +997,22 @@ export const updateClientNote = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -882,6 +1028,8 @@ export const updateClientNote = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -889,10 +1037,16 @@ export const updateClientNote = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -919,6 +1073,7 @@ export const deleteClientNote = /* GraphQL */ `
       id
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -934,15 +1089,22 @@ export const deleteClientNote = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -958,6 +1120,8 @@ export const deleteClientNote = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -965,10 +1129,16 @@ export const deleteClientNote = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -986,17 +1156,16 @@ export const deleteClientNote = /* GraphQL */ `
     }
   }
 `;
-export const createStrategy = /* GraphQL */ `
-  mutation CreateStrategy(
-    $input: CreateStrategyInput!
-    $condition: ModelStrategyConditionInput
+export const createClientRating = /* GraphQL */ `
+  mutation CreateClientRating(
+    $input: CreateClientRatingInput!
+    $condition: ModelClientRatingConditionInput
   ) {
-    createStrategy(input: $input, condition: $condition) {
+    createClientRating(input: $input, condition: $condition) {
       id
-      badgeName
-      status
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -1012,15 +1181,22 @@ export const createStrategy = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -1036,6 +1212,8 @@ export const createStrategy = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -1043,10 +1221,284 @@ export const createStrategy = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      score
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateClientRating = /* GraphQL */ `
+  mutation UpdateClientRating(
+    $input: UpdateClientRatingInput!
+    $condition: ModelClientRatingConditionInput
+  ) {
+    updateClientRating(input: $input, condition: $condition) {
+      id
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      score
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteClientRating = /* GraphQL */ `
+  mutation DeleteClientRating(
+    $input: DeleteClientRatingInput!
+    $condition: ModelClientRatingConditionInput
+  ) {
+    deleteClientRating(input: $input, condition: $condition) {
+      id
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      score
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createStrategy = /* GraphQL */ `
+  mutation CreateStrategy(
+    $input: CreateStrategyInput!
+    $condition: ModelStrategyConditionInput
+  ) {
+    createStrategy(input: $input, condition: $condition) {
+      id
+      badgeName
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -1057,6 +1509,7 @@ export const createStrategy = /* GraphQL */ `
       }
       title
       description
+      status
       createdAt
       updatedAt
     }
@@ -1070,9 +1523,9 @@ export const updateStrategy = /* GraphQL */ `
     updateStrategy(input: $input, condition: $condition) {
       id
       badgeName
-      status
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -1088,15 +1541,22 @@ export const updateStrategy = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -1112,6 +1572,8 @@ export const updateStrategy = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -1119,10 +1581,16 @@ export const updateStrategy = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -1133,6 +1601,7 @@ export const updateStrategy = /* GraphQL */ `
       }
       title
       description
+      status
       createdAt
       updatedAt
     }
@@ -1148,6 +1617,7 @@ export const deleteStrategy = /* GraphQL */ `
       badgeName
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -1163,15 +1633,22 @@ export const deleteStrategy = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -1187,17 +1664,25 @@ export const deleteStrategy = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
         name
-        email        
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -1208,6 +1693,7 @@ export const deleteStrategy = /* GraphQL */ `
       }
       title
       description
+      status
       createdAt
       updatedAt
     }
@@ -1257,6 +1743,22 @@ export const deleteAvatar = /* GraphQL */ `
       Animation
       mood
       createdAt
+      updatedAt
+    }
+  }
+`;
+// CUSTOM
+
+export const linkUserTeam = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      team {
+        id
+      }
       updatedAt
     }
   }

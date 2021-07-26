@@ -52,6 +52,9 @@ export const getTeam = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
@@ -91,34 +94,6 @@ export const listTeams = /* GraphQL */ `
     }
   }
 `;
-export const getUserConfigs = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      team {
-        id
-        name
-        sfKey
-        sfUsername
-        account {
-          nextToken
-        }
-        teamMembers {
-          nextToken
-        }
-        renewalDate
-        createdAt
-        updatedAt
-      }
-      name
-      email
-      profileImg
-      isAdmin
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -126,8 +101,6 @@ export const getUser = /* GraphQL */ `
       team {
         id
         name
-        sfKey
-        sfUsername
         account {
           nextToken
         }
@@ -135,6 +108,8 @@ export const getUser = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -142,12 +117,17 @@ export const getUser = /* GraphQL */ `
       email
       profileImg
       isAdmin
+      salesforceKey
+      salesforceSecret
+      salesforcePassword
       clients {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -168,12 +148,22 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      clientRatings {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       clientStrategies {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -197,6 +187,8 @@ export const listUsers = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -204,10 +196,16 @@ export const listUsers = /* GraphQL */ `
         email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -234,6 +232,8 @@ export const getAccount = /* GraphQL */ `
           nextToken
         }
         renewalDate
+        sfKey
+        sfUsername
         createdAt
         updatedAt
       }
@@ -244,9 +244,11 @@ export const getAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -273,6 +275,8 @@ export const listAccounts = /* GraphQL */ `
           id
           name
           renewalDate
+          sfKey
+          sfUsername
           createdAt
           updatedAt
         }
@@ -290,6 +294,595 @@ export const listAccounts = /* GraphQL */ `
     }
   }
 `;
+export const getClient = /* GraphQL */ `
+  query GetClient($id: ID!) {
+    getClient(id: $id) {
+      id
+      salutation
+      accountId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        renewalDate
+        contract
+        healthScore
+        accountMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      contactId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      noteId {
+        items {
+          id
+          content
+          title
+          lastInterationSore
+          isInteractionNote
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ratingId {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isDecisionMaker
+      avatarId
+      salesforceId
+      email
+      name
+      strategy {
+        items {
+          id
+          badgeName
+          title
+          description
+          status
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      position
+      lastContact
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listClients = /* GraphQL */ `
+  query ListClients(
+    $filter: ModelClientFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getClientNote = /* GraphQL */ `
+  query GetClientNote($id: ID!) {
+    getClientNote(id: $id) {
+      id
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      title
+      lastInterationSore
+      isInteractionNote
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listClientNotes = /* GraphQL */ `
+  query ListClientNotes(
+    $filter: ModelClientNoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClientNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        clientId {
+          id
+          salutation
+          isDecisionMaker
+          avatarId
+          salesforceId
+          email
+          name
+          position
+          lastContact
+          createdAt
+          updatedAt
+        }
+        ownerId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        content
+        title
+        lastInterationSore
+        isInteractionNote
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getClientRating = /* GraphQL */ `
+  query GetClientRating($id: ID!) {
+    getClientRating(id: $id) {
+      id
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      score
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listClientRatings = /* GraphQL */ `
+  query ListClientRatings(
+    $filter: ModelClientRatingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClientRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        clientId {
+          id
+          salutation
+          isDecisionMaker
+          avatarId
+          salesforceId
+          email
+          name
+          position
+          lastContact
+          createdAt
+          updatedAt
+        }
+        ownerId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        score
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getStrategy = /* GraphQL */ `
+  query GetStrategy($id: ID!) {
+    getStrategy(id: $id) {
+      id
+      badgeName
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      title
+      description
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStrategys = /* GraphQL */ `
+  query ListStrategys(
+    $filter: ModelStrategyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStrategys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        badgeName
+        clientId {
+          id
+          salutation
+          isDecisionMaker
+          avatarId
+          salesforceId
+          email
+          name
+          position
+          lastContact
+          createdAt
+          updatedAt
+        }
+        ownerId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        title
+        description
+        status
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAvatar = /* GraphQL */ `
+  query GetAvatar($id: ID!) {
+    getAvatar(id: $id) {
+      id
+      gender
+      link
+      Animation
+      mood
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAvatars = /* GraphQL */ `
+  query ListAvatars(
+    $filter: ModelAvatarFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAvatars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        gender
+        link
+        Animation
+        mood
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+
+// CUSTOM
 export const getClientStrategysEq = (status) =>  /* GraphQL */ `
   query GetClient($id: ID!) {
     getClient(id: $id) {
@@ -378,140 +971,7 @@ export const listStrategysNot = () => /* GraphQL */ `
     }
   }
 `;
-export const getClient = /* GraphQL */ `
-  query GetClient($id: ID!) {
-    getClient(id: $id) {
-      id
-      accountId {
-        id
-        team {
-          id
-          name
-          renewalDate
-          createdAt
-          updatedAt
-        }
-        name
-        renewalDate
-        contract
-        healthScore
-        accountMembers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      contactId {
-        id
-        team {
-          id
-          name
-          renewalDate
-          createdAt
-          updatedAt
-        }
-        name
-        email
-        profileImg
-        isAdmin
-        clients {
-          nextToken
-        }
-        clientNotes {
-          items {
-            title
-            content
-            createdAt
-          }
-          nextToken
-        }
-        clientStrategies {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      noteId {
-        items {
-          id
-          content
-          title
-          lastInterationSore
-          isInteractionNote
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      isDecisionMaker
-      avatarId
-      salesforceId
-      name
-      strategy {
-        items {
-          id
-          badgeName
-          title
-          description
-          createdAt
-          updatedAt
-          status
-        }
-        nextToken
-      }
-      position
-      lastContact
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listClients = /* GraphQL */ `
-  query ListClients(
-    $filter: ModelClientFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        accountId {
-          id
-          name
-          renewalDate
-          contract
-          healthScore
-          createdAt
-          updatedAt
-        }
-        contactId {
-          id
-          name
-          email
-          profileImg
-          isAdmin
-          createdAt
-          updatedAt
-        }
-        noteId {
-          nextToken
-        }
-        isDecisionMaker
-        avatarId
-        salesforceId
-        name
-        strategy {
-          nextToken
-        }
-        position
-        lastContact
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
+
 export const listClientsDash = /* GraphQL */ `
   query ListClients(
     $filter: ModelClientFilterInput
@@ -543,321 +1003,6 @@ export const listClientsDash = /* GraphQL */ `
         }
         position
         lastContact
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getClientNote = /* GraphQL */ `
-  query GetClientNote($id: ID!) {
-    getClientNote(id: $id) {
-      id
-      clientId {
-        id
-        accountId {
-          id
-          name
-          renewalDate
-          contract
-          healthScore
-          createdAt
-          updatedAt
-        }
-        contactId {
-          id
-          name
-          email
-          profileImg
-          isAdmin
-          createdAt
-          updatedAt
-        }
-        noteId {
-          nextToken
-        }
-        isDecisionMaker
-        avatarId
-        salesforceId
-        name
-        strategy {
-          nextToken
-        }
-        position
-        lastContact
-        createdAt
-        updatedAt
-      }
-      ownerId {
-        id
-        team {
-          id
-          name
-          renewalDate
-          createdAt
-          updatedAt
-        }
-        name
-        email
-        profileImg
-        isAdmin
-        clients {
-          nextToken
-        }
-        clientNotes {
-          nextToken
-        }
-        clientStrategies {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      title
-      lastInterationSore
-      isInteractionNote
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listClientNotes = /* GraphQL */ `
-  query ListClientNotes(
-    $filter: ModelClientNoteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listClientNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        clientId {
-          id
-          isDecisionMaker
-          avatarId
-          salesforceId
-          name
-          position
-          lastContact
-          createdAt
-          updatedAt
-        }
-        ownerId {
-          id
-          name
-          email
-          profileImg
-          isAdmin
-          createdAt
-          updatedAt
-        }
-        content
-        title
-        lastInterationSore
-        isInteractionNote
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const listClientNotesDetails = /* GraphQL */ `
-  query ListClientNotes(
-    $filter: ModelClientNoteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listClientNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        clientId {
-          id
-        }
-        ownerId {
-          id
-          name
-        }
-        content
-        title
-        lastInterationSore
-        isInteractionNote
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getStrategy = /* GraphQL */ `
-  query GetStrategy($id: ID!) {
-    getStrategy(id: $id) {
-      id
-      badgeName
-      clientId {
-        id
-        accountId {
-          id
-          name
-          renewalDate
-          contract
-          healthScore
-          createdAt
-          updatedAt
-        }
-        contactId {
-          id
-          name
-          email
-          profileImg
-          isAdmin
-          createdAt
-          updatedAt
-        }
-        noteId {
-          nextToken
-        }
-        isDecisionMaker
-        avatarId
-        salesforceId
-        name
-        strategy {
-          nextToken
-        }
-        position
-        lastContact
-        createdAt
-        updatedAt
-      }
-      ownerId {
-        id
-        team {
-          id
-          name
-          renewalDate
-          createdAt
-          updatedAt
-        }
-        name
-        email
-        profileImg
-        isAdmin
-        clients {
-          nextToken
-        }
-        clientNotes {
-          nextToken
-        }
-        clientStrategies {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      title
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listClientStrategys = /* GraphQL */ `
-  query ListStrategys(
-    $filter: ModelStrategyFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listStrategys(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        badgeName
-        status
-        clientId(filter: { id: { eq: $clientId } }) {
-          id
-        }
-        ownerId(filter: { id: { eq: $clientId } }) {
-          id
-        }
-        ownerId {
-          id
-          name
-        }
-        title
-        description
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const listStrategys = /* GraphQL */ `
-  query ListStrategys(
-    $filter: ModelStrategyFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listStrategys(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        badgeName
-        status
-        clientId {
-          id
-          isDecisionMaker
-          avatarId
-          salesforceId
-          name
-          position
-          lastContact
-          createdAt
-          updatedAt
-        }
-        ownerId {
-          id
-          name
-          email
-          profileImg
-          isAdmin
-          createdAt
-          updatedAt
-        }
-        title
-        description
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getAvatar = /* GraphQL */ `
-  query GetAvatar($id: ID!) {
-    getAvatar(id: $id) {
-      id
-      gender
-      link
-      Animation
-      mood
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listAvatars = /* GraphQL */ `
-  query ListAvatars(
-    $filter: ModelAvatarFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAvatars(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        gender
-        link
-        Animation
-        mood
         createdAt
         updatedAt
       }

@@ -7,16 +7,14 @@ import { Row, Tabs, Col, Avatar, Tooltip } from 'antd';
 import {
   ActionHeader,
   SubH2,
-  Note1Grey,
   CardWrap,
   Flex,
   SpaceBetween
 } from 'common';
 import { iconBack, iconAddCircle } from 'media/svg';
 import { UserOutlined } from '@ant-design/icons';
-import ConnectionForm from './ConnectionForm';
 import SettingsNewTeamMember from './SettingsNewTeamMember';
-import SyncClients from './SyncClients';
+import ConnectionCard from './ConnectionCard';
 import Layout from 'pages/Layout';
 import { TabLayout, InfoRow } from './layouts';
 import './styles.css';
@@ -24,10 +22,13 @@ import './styles.css';
 const { TabPane } = Tabs;
 
 const SettingsPage = () => {
-  const [stateAddTeamMember, setStateAddTeamMember] = useState(true);
+  // TODO: Add team members logic
+  // const [stateAddTeamMember, setStateAddTeamMember] = useState(true);
 
   const userData = useCurrentUser();
-  const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
+  console.log("userData.team");
+  console.log(userData);
+  const sfConnected = userData.team &&  userData.team.sfKey ? Boolean(userData.team.sfKey) : false;
 
   // Props
   const layoutProps = {
@@ -39,15 +40,7 @@ const SettingsPage = () => {
     justify: 'center',
   };
 
-  const connectionCreated = (
-    <div>
-      <Note1Grey>Connection created</Note1Grey>
-      <Flex>You can Sync Clients now  -&gt; &nbsp;&nbsp;  
-        <SyncClients userData={userData} />
-      </Flex>
-    </div>
-  );
-
+  // TODO: change to actuall action
   function temporaryAction() {
     console.log('action');
   }
@@ -58,14 +51,7 @@ const SettingsPage = () => {
       processing: temporaryAction,
     },
   ];
-  // Tabs configs - TODO: move to separate comoponents when expand
-  const connectionContent = (
-    <>
-      <ActionHeader title="Salesforce Connection"
-        actions={headerActions} />
-      <ConnectionForm user={userData} /> 
-    </>
-  );
+
   const configsContent = (
     <SubH2>Salesforce Accounts</SubH2>
   );
@@ -76,7 +62,11 @@ const SettingsPage = () => {
       tabName: 'Company Info',
       tabNumber: '1',
       spanSize: 24,
-      content: connectionContent,
+      content: (
+        <ConnectionCard
+          sfConnected={sfConnected}
+          userData={userData}  />
+      ),
     },
     {
       tabName: 'Configurations',
@@ -112,27 +102,12 @@ const SettingsPage = () => {
     </Tabs>
   );
 
-  const renderAddTeamMember = stateAddTeamMember ? (
+  const renderActivityCard = (
     <CardWrap height={320}
-      className='details-card settings-team'>
+      className='details-card'>
       <SpaceBetween>
-        <SubH2>Existing Team Members</SubH2>
-        <Tooltip title='Add Team Member'>
-          <img
-            onClick={() => setStateAddTeamMember(false)}
-            style={{ cursor: 'pointer' }}
-            src={iconAddCircle}
-          />
-        </Tooltip>
+        <SubH2>Last Activity</SubH2>
       </SpaceBetween>
-    </CardWrap>
-  ) : (
-    <CardWrap height={320}
-      className='details-card settings-team'>
-      <SpaceBetween>
-        <SubH2>Add Team Member</SubH2>
-      </SpaceBetween>
-      <SettingsNewTeamMember handleToggle={setStateAddTeamMember}/>
     </CardWrap>
   );
 
@@ -159,7 +134,7 @@ const SettingsPage = () => {
             </Flex>
           </CardWrap>
         </Col>
-        <Col span={12}>{renderAddTeamMember}</Col>
+        <Col span={12}>{renderActivityCard}</Col>
       </Row>
       <Row {...rowProps}>{renderSettingsTabs}</Row>
     </Layout>

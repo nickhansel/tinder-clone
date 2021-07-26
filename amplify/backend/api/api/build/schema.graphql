@@ -29,6 +29,7 @@ type User {
   salesforcePassword: String
   clients(filter: ModelClientFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientConnection
   clientNotes(filter: ModelClientNoteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientNoteConnection
+  clientRatings(filter: ModelClientRatingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientRatingConnection
   clientStrategies(filter: ModelStrategyFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStrategyConnection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -48,9 +49,11 @@ type Account {
 
 type Client {
   id: ID!
+  salutation: String
   accountId: Account
   contactId: User
   noteId(filter: ModelClientNoteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientNoteConnection
+  ratingId(filter: ModelClientRatingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelClientRatingConnection
   isDecisionMaker: Boolean
   avatarId: String
   salesforceId: ID
@@ -71,6 +74,15 @@ type ClientNote {
   title: String
   lastInterationSore: Int
   isInteractionNote: Boolean
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ClientRating {
+  id: ID!
+  clientId: Client
+  ownerId: User
+  score: Int
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -214,6 +226,8 @@ type Query {
   listClients(filter: ModelClientFilterInput, limit: Int, nextToken: String): ModelClientConnection
   getClientNote(id: ID!): ClientNote
   listClientNotes(filter: ModelClientNoteFilterInput, limit: Int, nextToken: String): ModelClientNoteConnection
+  getClientRating(id: ID!): ClientRating
+  listClientRatings(filter: ModelClientRatingFilterInput, limit: Int, nextToken: String): ModelClientRatingConnection
   getStrategy(id: ID!): Strategy
   listStrategys(filter: ModelStrategyFilterInput, limit: Int, nextToken: String): ModelStrategyConnection
   getAvatar(id: ID!): Avatar
@@ -253,6 +267,9 @@ type Mutation {
   createClientNote(input: CreateClientNoteInput!, condition: ModelClientNoteConditionInput): ClientNote
   updateClientNote(input: UpdateClientNoteInput!, condition: ModelClientNoteConditionInput): ClientNote
   deleteClientNote(input: DeleteClientNoteInput!, condition: ModelClientNoteConditionInput): ClientNote
+  createClientRating(input: CreateClientRatingInput!, condition: ModelClientRatingConditionInput): ClientRating
+  updateClientRating(input: UpdateClientRatingInput!, condition: ModelClientRatingConditionInput): ClientRating
+  deleteClientRating(input: DeleteClientRatingInput!, condition: ModelClientRatingConditionInput): ClientRating
   createStrategy(input: CreateStrategyInput!, condition: ModelStrategyConditionInput): Strategy
   updateStrategy(input: UpdateStrategyInput!, condition: ModelStrategyConditionInput): Strategy
   deleteStrategy(input: DeleteStrategyInput!, condition: ModelStrategyConditionInput): Strategy
@@ -287,6 +304,9 @@ type Subscription {
   onCreateClientNote: ClientNote @aws_subscribe(mutations: ["createClientNote"])
   onUpdateClientNote: ClientNote @aws_subscribe(mutations: ["updateClientNote"])
   onDeleteClientNote: ClientNote @aws_subscribe(mutations: ["deleteClientNote"])
+  onCreateClientRating: ClientRating @aws_subscribe(mutations: ["createClientRating"])
+  onUpdateClientRating: ClientRating @aws_subscribe(mutations: ["updateClientRating"])
+  onDeleteClientRating: ClientRating @aws_subscribe(mutations: ["deleteClientRating"])
   onCreateStrategy: Strategy @aws_subscribe(mutations: ["createStrategy"])
   onUpdateStrategy: Strategy @aws_subscribe(mutations: ["updateStrategy"])
   onDeleteStrategy: Strategy @aws_subscribe(mutations: ["deleteStrategy"])
@@ -456,6 +476,7 @@ type ModelClientConnection {
 
 input ModelClientFilterInput {
   id: ModelIDInput
+  salutation: ModelStringInput
   isDecisionMaker: ModelBooleanInput
   avatarId: ModelStringInput
   salesforceId: ModelIDInput
@@ -470,6 +491,7 @@ input ModelClientFilterInput {
 
 input CreateClientInput {
   id: ID
+  salutation: String
   isDecisionMaker: Boolean
   avatarId: String
   salesforceId: ID
@@ -483,6 +505,7 @@ input CreateClientInput {
 
 input UpdateClientInput {
   id: ID!
+  salutation: String
   isDecisionMaker: Boolean
   avatarId: String
   salesforceId: ID
@@ -499,6 +522,7 @@ input DeleteClientInput {
 }
 
 input ModelClientConditionInput {
+  salutation: ModelStringInput
   isDecisionMaker: ModelBooleanInput
   avatarId: ModelStringInput
   salesforceId: ModelIDInput
@@ -559,6 +583,44 @@ input ModelClientNoteConditionInput {
   and: [ModelClientNoteConditionInput]
   or: [ModelClientNoteConditionInput]
   not: ModelClientNoteConditionInput
+}
+
+type ModelClientRatingConnection {
+  items: [ClientRating]
+  nextToken: String
+}
+
+input ModelClientRatingFilterInput {
+  id: ModelIDInput
+  score: ModelIntInput
+  and: [ModelClientRatingFilterInput]
+  or: [ModelClientRatingFilterInput]
+  not: ModelClientRatingFilterInput
+}
+
+input CreateClientRatingInput {
+  id: ID
+  score: Int
+  clientRatingClientIdId: ID
+  clientRatingOwnerIdId: ID
+}
+
+input UpdateClientRatingInput {
+  id: ID!
+  score: Int
+  clientRatingClientIdId: ID
+  clientRatingOwnerIdId: ID
+}
+
+input DeleteClientRatingInput {
+  id: ID
+}
+
+input ModelClientRatingConditionInput {
+  score: ModelIntInput
+  and: [ModelClientRatingConditionInput]
+  or: [ModelClientRatingConditionInput]
+  not: ModelClientRatingConditionInput
 }
 
 type ModelStrategyConnection {

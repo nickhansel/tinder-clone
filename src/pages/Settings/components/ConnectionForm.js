@@ -7,20 +7,19 @@ import {
   linkUserTeam as linkUserTeamMutation
 } from 'graphql/mutations';
 import { Form, Input, message } from 'antd';
-import { ButtonConfirm, SpaceEnd, Loading } from 'common';
+import { ButtonConfirm, ButtonCancel, SpaceEnd, Loading } from 'common';
 import createTeamAction from '../actions/createTeamAction';
 import './styles.css';
 
 
 const formStyle = {
-  wrapperCol: { span: 14, offset: 0 },
   layout: 'vertical'
 };
-const tailLayout = {
-  wrapperCol: { offset: 0, span: 14 },
-};
+// const tailLayout = {
+//   wrapperCol: { offset: 0, span: 14 },
+// };
 
-const ConnectionForm = ({ user }) => {
+const ConnectionForm = ({ user, toggleEdit, isEdit }) => {
   const [form] = Form.useForm();
 
   const [createTeam, { loading }] = useMutation(
@@ -32,13 +31,17 @@ const ConnectionForm = ({ user }) => {
   const handleSubmit = (values) => {
     createTeamAction(values, createTeam, user.id, linkUserTeam);  // TODO: change to hitting the Lambda function 
    
-
-    message.success('Connected team created');
+    message.success('Connection created');
     form.resetFields();
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo); // TODO: output error message
   };
+  const handleCancel = () => {
+    toggleEdit(false);
+    form.resetFields();
+  };
+
 
   // spinner
   if (loading || loadingLink) {
@@ -49,6 +52,14 @@ const ConnectionForm = ({ user }) => {
     );
   }
 
+  const connectValues = {};
+  
+  if (isEdit) {
+    connectValues.username = user?.team?.sfUsername;
+    connectValues.token = user?.team?.sfKey;
+    connectValues.password = user?.team?.sfKey;
+  }
+
   return (
     <div>
       <Form
@@ -57,7 +68,11 @@ const ConnectionForm = ({ user }) => {
         form={form}
         name="basic"
         className="form__new_team"
-        initialValues={{ remember: true }}
+        initialValues={{ 
+          remember: true,
+          teamName: user?.team?.name,
+          ...connectValues
+        }}
         onFinish={handleSubmit}
         onFinishFailed={onFinishFailed}
       >
@@ -87,17 +102,23 @@ const ConnectionForm = ({ user }) => {
           name="password"
           rules={[{ required: true, message: 'Please input salesforce password' }]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
-        <Form.Item {...tailLayout}>
+        <Form.Item>
           <SpaceEnd>
             <ButtonConfirm
+              style={{ marginRight: 20 }}
               form="form-new-team"
               key="submit"
               htmlType="submit"
               type="primary" >
                 Confirm
             </ButtonConfirm>
+            <ButtonCancel
+              onClick={() => handleCancel()}
+              key="back" >
+                Cancel
+            </ButtonCancel>
           </SpaceEnd>
         </Form.Item>
       </Form>

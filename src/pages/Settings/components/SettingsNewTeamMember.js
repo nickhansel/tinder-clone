@@ -1,20 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import gql from 'graphql-tag';
-// import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 // import { createClientNote, updateTeam, createTeam } from 'graphql/mutations';
 // import { getClient, getTeam, listTeams } from 'graphql/queries';
 import { Form, Input, Switch, message } from 'antd';
-// import { generateId } from 'utils';
+import { generateId } from 'utils';
+import gql from 'graphql-tag';
+import { createUser as createUserMutation } from 'graphql/mutations';
 import { ButtonCancel, ButtonConfirm, SpaceBetween } from 'common';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { loggedInUserId } from 'cache.js';
 import './styles.css';
 
 const SettingsNewTeamMember = ({ handleToggle }) => {
   const [form] = Form.useForm();
+  // const [createUser, { loading: creatingUser }] = useMutation(
+  //   gql(createUserMutation), { 
+  //     refetchQueries: [{
+  //       query: gql(getUser),
+  //       variables: { id: authUserData ? authUserData.id : '' },
+  //     }]
+  //   });
 
-  const handleSubmit = () => {
-    message.success('Note created, but not to backend');
+  const handleSubmit = (values) => {
+    message.success('User created');
     form.resetFields();
   };
 
@@ -42,24 +51,29 @@ const SettingsNewTeamMember = ({ handleToggle }) => {
       onFinish={handleSubmit}
       onFinishFailed={onFinishFailed}
       style={{ marginTop: 20, marginRight: 30 }}>
-      <Form.Item label='Full Name'
-        style={{ marginBottom: 0 }}>
-        <Form.Item
-          name='firstName'
-          rules={[{ required: true }]}
-          style={{ display: 'inline-block', width: 'calc(50% - 5px)' }}>
-          <Input placeholder='Input first name' />
-        </Form.Item>
-        <Form.Item
-          name='lastName'
-          rules={[{ required: true }]}
-          style={{
-            display: 'inline-block',
-            width: 'calc(50% - 5px)',
-            marginLeft: '8px',
-          }}>
-          <Input placeholder='Input last name' />
-        </Form.Item>
+      <Form.Item
+        label='Username'
+        name='username'
+        rules={[
+          {
+            required: true,
+            type: 'username',
+            message: 'Please input a username',
+          },
+        ]}>
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label='Password'
+        name='password'
+        rules={[
+          {
+            required: true,
+            type: 'password',
+            message: 'Please input a password',
+          },
+        ]}>
+        <Input  />
       </Form.Item>
       <Form.Item
         label='Email'

@@ -25,6 +25,7 @@ type User @model {
   salesforcePassword: String
   clients: [Client] @connection(name: "UserClient")
   clientNotes: [ClientNote] @connection(name: "UserNote")
+  clientRatings: [ClientRating] @connection(name: "UserRating")
   clientStrategies: [Strategy] @connection(name: "UserStrategy")
 }
 
@@ -40,9 +41,11 @@ type Account @model {
 
 type Client @model {
   id: ID!
+  salutation: String
   accountId: Account @connection(name: "AccountClient")
   contactId: User @connection(name: "UserClient")
   noteId: [ClientNote] @connection(name: "ClientNote")
+  ratingId: [ClientRating] @connection(name: "ClientRating")
   isDecisionMaker: Boolean
   avatarId: String
   salesforceId: ID
@@ -61,6 +64,13 @@ type ClientNote @model {
   title: String
   lastInterationSore: Int
   isInteractionNote: Boolean
+}
+
+type ClientRating @model {
+  id: ID!
+  clientId: Client @connection(name: "ClientRating")
+  ownerId: User @connection(name: "UserRating")
+  score: Int
 }
 
 type Strategy @model {

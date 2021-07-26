@@ -62,7 +62,7 @@ const Notes = ({
         data.map((note, index) => (
           <div key={index}>
             <Note
-              authorName={note.authorName}
+              authorName={note.ownerId.name}
               note={note}
               updating={updating}
               noteUpdateAction={handleUpdateNote}

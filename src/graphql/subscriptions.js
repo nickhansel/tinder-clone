@@ -55,6 +55,9 @@ export const onCreateTeam = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
@@ -92,6 +95,9 @@ export const onUpdateTeam = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
@@ -129,6 +135,9 @@ export const onDeleteTeam = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
@@ -162,15 +171,20 @@ export const onCreateUser = /* GraphQL */ `
         updatedAt
       }
       name
-      ema
+      email
       profileImg
       isAdmin
+      salesforceKey
+      salesforceSecret
+      salesforcePassword
       clients {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -191,12 +205,22 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
+      clientRatings {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       clientStrategies {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -227,15 +251,20 @@ export const onUpdateUser = /* GraphQL */ `
         updatedAt
       }
       name
-      ema
+      email
       profileImg
       isAdmin
+      salesforceKey
+      salesforceSecret
+      salesforcePassword
       clients {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -256,12 +285,22 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
+      clientRatings {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       clientStrategies {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -292,15 +331,20 @@ export const onDeleteUser = /* GraphQL */ `
         updatedAt
       }
       name
-      ema
+      email
       profileImg
       isAdmin
+      salesforceKey
+      salesforceSecret
+      salesforcePassword
       clients {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -321,12 +365,22 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      clientRatings {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       clientStrategies {
         items {
           id
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -363,9 +417,11 @@ export const onCreateAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -405,9 +461,11 @@ export const onUpdateAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -447,9 +505,11 @@ export const onDeleteAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
+          salutation
           isDecisionMaker
           avatarId
           salesforceId
+          email
           name
           position
           lastContact
@@ -467,6 +527,7 @@ export const onCreateClient = /* GraphQL */ `
   subscription OnCreateClient {
     onCreateClient {
       id
+      salutation
       accountId {
         id
         team {
@@ -500,13 +561,19 @@ export const onCreateClient = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -527,9 +594,19 @@ export const onCreateClient = /* GraphQL */ `
         }
         nextToken
       }
+      ratingId {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       isDecisionMaker
       avatarId
       salesforceId
+      email
       name
       strategy {
         items {
@@ -537,6 +614,7 @@ export const onCreateClient = /* GraphQL */ `
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -553,6 +631,7 @@ export const onUpdateClient = /* GraphQL */ `
   subscription OnUpdateClient {
     onUpdateClient {
       id
+      salutation
       accountId {
         id
         team {
@@ -586,13 +665,19 @@ export const onUpdateClient = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -613,9 +698,19 @@ export const onUpdateClient = /* GraphQL */ `
         }
         nextToken
       }
+      ratingId {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       isDecisionMaker
       avatarId
       salesforceId
+      email
       name
       strategy {
         items {
@@ -623,6 +718,7 @@ export const onUpdateClient = /* GraphQL */ `
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -639,6 +735,7 @@ export const onDeleteClient = /* GraphQL */ `
   subscription OnDeleteClient {
     onDeleteClient {
       id
+      salutation
       accountId {
         id
         team {
@@ -672,13 +769,19 @@ export const onDeleteClient = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -699,9 +802,19 @@ export const onDeleteClient = /* GraphQL */ `
         }
         nextToken
       }
+      ratingId {
+        items {
+          id
+          score
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       isDecisionMaker
       avatarId
       salesforceId
+      email
       name
       strategy {
         items {
@@ -709,6 +822,7 @@ export const onDeleteClient = /* GraphQL */ `
           badgeName
           title
           description
+          status
           createdAt
           updatedAt
         }
@@ -727,6 +841,7 @@ export const onCreateClientNote = /* GraphQL */ `
       id
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -742,15 +857,22 @@ export const onCreateClientNote = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -772,13 +894,19 @@ export const onCreateClientNote = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -802,6 +930,7 @@ export const onUpdateClientNote = /* GraphQL */ `
       id
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -817,15 +946,22 @@ export const onUpdateClientNote = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -847,13 +983,19 @@ export const onUpdateClientNote = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -877,6 +1019,7 @@ export const onDeleteClientNote = /* GraphQL */ `
       id
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -892,15 +1035,22 @@ export const onDeleteClientNote = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -922,13 +1072,19 @@ export const onDeleteClientNote = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -946,13 +1102,13 @@ export const onDeleteClientNote = /* GraphQL */ `
     }
   }
 `;
-export const onCreateStrategy = /* GraphQL */ `
-  subscription OnCreateStrategy {
-    onCreateStrategy {
+export const onCreateClientRating = /* GraphQL */ `
+  subscription OnCreateClientRating {
+    onCreateClientRating {
       id
-      badgeName
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -968,15 +1124,22 @@ export const onCreateStrategy = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -998,13 +1161,278 @@ export const onCreateStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      score
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateClientRating = /* GraphQL */ `
+  subscription OnUpdateClientRating {
+    onUpdateClientRating {
+      id
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      score
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteClientRating = /* GraphQL */ `
+  subscription OnDeleteClientRating {
+    onDeleteClientRating {
+      id
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
+          nextToken
+        }
+        clientStrategies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      score
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateStrategy = /* GraphQL */ `
+  subscription OnCreateStrategy {
+    onCreateStrategy {
+      id
+      badgeName
+      clientId {
+        id
+        salutation
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+          createdAt
+          updatedAt
+        }
+        contactId {
+          id
+          name
+          email
+          profileImg
+          isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
+          createdAt
+          updatedAt
+        }
+        noteId {
+          nextToken
+        }
+        ratingId {
+          nextToken
+        }
+        isDecisionMaker
+        avatarId
+        salesforceId
+        email
+        name
+        strategy {
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      ownerId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        profileImg
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        clients {
+          nextToken
+        }
+        clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -1015,6 +1443,7 @@ export const onCreateStrategy = /* GraphQL */ `
       }
       title
       description
+      status
       createdAt
       updatedAt
     }
@@ -1027,6 +1456,7 @@ export const onUpdateStrategy = /* GraphQL */ `
       badgeName
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -1042,15 +1472,22 @@ export const onUpdateStrategy = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -1072,13 +1509,19 @@ export const onUpdateStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -1089,6 +1532,7 @@ export const onUpdateStrategy = /* GraphQL */ `
       }
       title
       description
+      status
       createdAt
       updatedAt
     }
@@ -1101,6 +1545,7 @@ export const onDeleteStrategy = /* GraphQL */ `
       badgeName
       clientId {
         id
+        salutation
         accountId {
           id
           name
@@ -1116,15 +1561,22 @@ export const onDeleteStrategy = /* GraphQL */ `
           email
           profileImg
           isAdmin
+          salesforceKey
+          salesforceSecret
+          salesforcePassword
           createdAt
           updatedAt
         }
         noteId {
           nextToken
         }
+        ratingId {
+          nextToken
+        }
         isDecisionMaker
         avatarId
         salesforceId
+        email
         name
         strategy {
           nextToken
@@ -1146,13 +1598,19 @@ export const onDeleteStrategy = /* GraphQL */ `
           updatedAt
         }
         name
-        emai
+        email
         profileImg
         isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
         clients {
           nextToken
         }
         clientNotes {
+          nextToken
+        }
+        clientRatings {
           nextToken
         }
         clientStrategies {
@@ -1163,6 +1621,7 @@ export const onDeleteStrategy = /* GraphQL */ `
       }
       title
       description
+      status
       createdAt
       updatedAt
     }

@@ -14,8 +14,10 @@ import {
 } from 'graphql/queries';
 import {  Loading } from 'common';
 import './styles.css';
+import { getDataFromTree } from 'react-apollo';
 
 const jsforce = require('jsforce');
+const CONNECTION_URL = 'https://zqlo9kka34.execute-api.us-east-2.amazonaws.com/default/SF-API';
 
 const SyncClients = ({ userData }) => {
   const [accountId, setAccountId ] = useState(null);
@@ -81,25 +83,31 @@ const SyncClients = ({ userData }) => {
 
   const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
 
+  async function getData(sfUsername, sfKey, query) {
+    const data = fetch(`${URL}?sfUsername=${sfUsername}&sfKey=${sfKey}&query=${query}`);
+    console.log(data);
+  }
+
   const handleSyncClick = () => {
     if (sfConnected) {
       const { sfUsername, sfKey } = userData.team;
+      getData(sfUsername, sfKey, '*, Account.*');
 
       // Salesforce connection test
-      var conn = new jsforce.Connection();
-      conn.login(sfUsername, sfKey, function(error) {
-        if (error) { 
-          return console.error(error); 
-        }
+      // var conn = new jsforce.Connection();
+      // conn.login(sfUsername, sfKey, function(error) {
+      //   if (error) { 
+      //     return console.error(error); 
+      //   }
         
-        conn.sobject('Contact')
-          .select('*, Account.*') // asterisk means all fields in specified level are targeted.
-          .execute(function(err, records) {
-            if (records) {
-              handleCreateAccountsAndClients(records);
-            }
-          });
-      });
+      //   conn.sobject('Contact')
+      //     .select('*, Account.*') // asterisk means all fields in specified level are targeted.
+      //     .execute(function(err, records) {
+      //       if (records) {
+      //         handleCreateAccountsAndClients(records);
+      //       }
+      //     });
+      // });
     }
   };
 
