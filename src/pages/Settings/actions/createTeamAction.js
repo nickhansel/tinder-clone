@@ -2,7 +2,6 @@ import { generateId } from 'utils';
 
 const createTeamAction = (newData, createTeam, userId, linkUserTeam) => {
   const { teamName, username, password, token } = newData;
-
   const teamId = generateId();
 
   createTeam({

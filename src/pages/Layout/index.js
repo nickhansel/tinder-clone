@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Layout as AntLayout, Menu } from 'antd';
+import { Layout as AntLayout, Menu, Space } from 'antd';
 
 import SignOutButton from 'auth/SignOutButton';
 import { SubH1, Profile, Flex } from 'common';
@@ -101,8 +101,10 @@ const Layout = ({ prefix, children, title, extra = null }) => {
             <SubH1 style={{ lineHeight: 2 }}>{title}</SubH1>
           </Flex>
           <HeaderActions>
-            <Profile />
-            <SignOutButton history={history} />
+            <Space size="middle">
+              <Profile />
+              <SignOutButton history={history} />
+            </Space>
           </HeaderActions>
         </HeaderStyled>
         {extra}

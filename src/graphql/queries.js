@@ -123,7 +123,6 @@ export const getUser = /* GraphQL */ `
       clients {
         items {
           id
-          salutation
           isDecisionMaker
           avatarId
           salesforceId
@@ -143,15 +142,6 @@ export const getUser = /* GraphQL */ `
           title
           lastInterationSore
           isInteractionNote
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      clientRatings {
-        items {
-          id
-          score
           createdAt
           updatedAt
         }
@@ -244,7 +234,6 @@ export const getAccount = /* GraphQL */ `
       accountMembers {
         items {
           id
-          salutation
           isDecisionMaker
           avatarId
           salesforceId
@@ -298,7 +287,6 @@ export const getClient = /* GraphQL */ `
   query GetClient($id: ID!) {
     getClient(id: $id) {
       id
-      salutation
       accountId {
         id
         team {
@@ -344,9 +332,6 @@ export const getClient = /* GraphQL */ `
         clientNotes {
           nextToken
         }
-        clientRatings {
-          nextToken
-        }
         clientStrategies {
           nextToken
         }
@@ -360,15 +345,6 @@ export const getClient = /* GraphQL */ `
           title
           lastInterationSore
           isInteractionNote
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      ratingId {
-        items {
-          id
-          score
           createdAt
           updatedAt
         }
@@ -406,8 +382,7 @@ export const listClients = /* GraphQL */ `
   ) {
     listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        id
-        salutation
+        i
         accountId {
           id
           name
@@ -458,7 +433,7 @@ export const getClientNote = /* GraphQL */ `
       id
       clientId {
         id
-        salutation
+        nsalutatio
         accountId {
           id
           name
@@ -552,7 +527,6 @@ export const listClientNotes = /* GraphQL */ `
         id
         clientId {
           id
-          salutation
           isDecisionMaker
           avatarId
           salesforceId
@@ -591,8 +565,7 @@ export const getClientRating = /* GraphQL */ `
     getClientRating(id: $id) {
       id
       clientId {
-        id
-        salutation
+        i
         accountId {
           id
           name
@@ -683,7 +656,6 @@ export const listClientRatings = /* GraphQL */ `
         id
         clientId {
           id
-          salutation
           isDecisionMaker
           avatarId
           salesforceId
@@ -720,8 +692,7 @@ export const getStrategy = /* GraphQL */ `
       id
       badgeName
       clientId {
-        id
-        salutation
+        i
         accountId {
           id
           name
@@ -815,7 +786,6 @@ export const listStrategys = /* GraphQL */ `
         badgeName
         clientId {
           id
-          salutation
           isDecisionMaker
           avatarId
           salesforceId
@@ -972,6 +942,7 @@ export const listStrategysNot = () => /* GraphQL */ `
   }
 `;
 
+
 export const listClientsDash = /* GraphQL */ `
   query ListClients(
     $filter: ModelClientFilterInput
@@ -1010,3 +981,48 @@ export const listClientsDash = /* GraphQL */ `
     }
   }
 `;
+
+/* GraphQL */
+export const listClientsByUser = (user) => { `
+  query ListClients(
+    $filter: ModelClientFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        accountId {
+          id
+          name
+          renewalDate
+          contract
+          healthScore
+        }
+        contactId(filter: {
+          id: {
+            eq: ${user}
+          }
+        })   
+        isDecisionMaker
+        avatarId
+        name
+        strategy {
+          items {
+            id
+            badgeName
+            title
+            description
+            status
+          }
+          nextToken
+        }
+        position
+        lastContact
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`}

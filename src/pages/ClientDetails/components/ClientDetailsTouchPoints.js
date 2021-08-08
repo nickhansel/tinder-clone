@@ -2,12 +2,18 @@
    Client Touch Points
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from 'antd';
 import { SubH2, Note1Grey, Flex, DividerStyled } from 'common';
 import ClientDetailsPointsModal from './ClientDetailsPointsModal';
 import { iconMail } from 'media/svg';
+import gmailApi from 'react-gmail';
+
+// const CLIENT_ID = '767353220010-h8nui7vm4oenkds05v7vov7g6cffgh0d.apps.googleusercontent.com';
+// const API_KEY = 'VvfuSxwGGg3wSUG2STm0ZU4x';
+// const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+// const DISCOVERY_DOCS =  ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'];
 
 const { Paragraph } = Typography;
 
@@ -20,6 +26,16 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
   const paragraphProps = {
     ellipsis: { rows: 2, expandable: true, symbol: 'more' },
   };
+
+  const getMessages = () => {
+    gmailApi.getMessages(true, 5).then(res => {
+      console.log(gmailApi.normalizeData(res));
+    });
+  };
+
+  useEffect(() => {
+    getMessages();
+  }, []);
 
   const renderTouchPoints = (
     <>

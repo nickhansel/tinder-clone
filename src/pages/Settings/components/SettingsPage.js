@@ -12,7 +12,7 @@ import {
   SpaceBetween
 } from 'common';
 import { iconBack, iconAddCircle } from 'media/svg';
-import { UserOutlined } from '@ant-design/icons';
+import avatar from 'media/images/profile.png';
 import SettingsNewTeamMember from './SettingsNewTeamMember';
 import ConnectionCard from './ConnectionCard';
 import Layout from 'pages/Layout';
@@ -110,7 +110,8 @@ const SettingsPage = () => {
       </SpaceBetween>
     </CardWrap>
   );
-
+  console.log("userData")
+  console.log(userData)
   return (
     <Layout {...layoutProps}>
       <Row {...rowProps}>
@@ -120,7 +121,7 @@ const SettingsPage = () => {
               actions={headerActions} />
             <Flex>
               <Avatar size='large'
-                icon={<UserOutlined />} />
+                src={avatar} />
               <div>
                 <InfoRow name='Username:'
                   data={userData.name} />

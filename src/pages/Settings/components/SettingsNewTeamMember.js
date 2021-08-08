@@ -14,6 +14,7 @@ import './styles.css';
 
 const SettingsNewTeamMember = ({ handleToggle }) => {
   const [form] = Form.useForm();
+  // TODO: add team logic
   // const [createUser, { loading: creatingUser }] = useMutation(
   //   gql(createUserMutation), { 
   //     refetchQueries: [{

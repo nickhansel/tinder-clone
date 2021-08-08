@@ -8,7 +8,7 @@ import { Auth } from 'aws-amplify';
 const SignOutButton = ({ history }) => {
   return (
     <span
-      style={{ lineHeight: '40px' }}
+      style={{ lineHeight: '40px', paddingRight: 30 }}
       onClick={() => {
         Auth.signOut()
           .then(() => {

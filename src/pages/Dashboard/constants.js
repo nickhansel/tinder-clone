@@ -1,6 +1,8 @@
 export const BRANCH_NAME = 'dashboard';
 export const DASHBOARD_TITLE = 'My Clients';
 
+export const PAGE_SIZE = 8;
+
 export const MOOD_FILTER = [
   {
     id: 'all',

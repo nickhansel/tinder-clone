@@ -15,9 +15,6 @@ import './styles.css';
 const formStyle = {
   layout: 'vertical'
 };
-// const tailLayout = {
-//   wrapperCol: { offset: 0, span: 14 },
-// };
 
 const ConnectionForm = ({ user, toggleEdit, isEdit }) => {
   const [form] = Form.useForm();
@@ -29,10 +26,12 @@ const ConnectionForm = ({ user, toggleEdit, isEdit }) => {
   
   // Business logic
   const handleSubmit = (values) => {
+    console.log(values)
     createTeamAction(values, createTeam, user.id, linkUserTeam);  // TODO: change to hitting the Lambda function 
    
     message.success('Connection created');
     form.resetFields();
+    toggleEdit(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo); // TODO: output error message

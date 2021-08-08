@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import { createClientRating } from 'graphql/mutations';
 import { Modal } from 'antd';
 import { ButtonConfirm, ButtonCancel, Text } from 'common';
 import Rater from './Rater';
 import { FlexRate, FlexRateWord, TextArea, RateModalTitle } from './styles';
+import { generateId } from 'utils';
 import './styles.css';
 
 const BUTTON_WIDTH = 140;
@@ -14,8 +18,23 @@ const DashboardRateModal = ({
   clientName,
   clientId,
   history,
+  userId,
 }) => {
+  const [value, setValue ] = useState(0);
+  const [addClientRating] = useMutation(gql(createClientRating));
+  
   const handleFinish = () => {
+    addClientRating({
+      variables: {
+        input: {
+          id: generateId(),
+          clientRatingClientIdId: clientId,
+          clientRatingOwnerIdId: userId,
+          score: value,
+        },
+      },
+    });
+
     history.push(`clients/${clientId}`);
     handleToggle(false);
   };
@@ -51,7 +70,8 @@ const DashboardRateModal = ({
       <div>
         <div>
           <FlexRate>
-            <Rater />
+            <Rater value={value}
+              setValue={setValue} />
             <FlexRateWord>
               <Text {...textProps}>Very bad</Text>
               <Text {...textProps}>Very good</Text>

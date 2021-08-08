@@ -7,7 +7,7 @@ import { Row } from 'antd';
 import DashboardRateModal from './DashboardRateModal';
 import { Client } from '../../sharedComponents';
 
-const DashboardClientList = ({ data, minVal, maxVal, history }) => {
+const DashboardClientList = ({ data, userId, minVal, maxVal, history }) => {
   const [isRateModal, toggleRateModal] = useState(false);
   const [selectedClientId, setSelectedClient] = useState(null);
   const [selectedClientName, setSelectedClientName] = useState(null);
@@ -37,6 +37,7 @@ const DashboardClientList = ({ data, minVal, maxVal, history }) => {
       <DashboardRateModal
         clientName={selectedClientName}
         clientId={selectedClientId}
+        userId={userId}
         history={history}
         handleToggle={handleRateToggle}
         isRateModal={isRateModal}
