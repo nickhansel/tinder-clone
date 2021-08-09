@@ -311,6 +311,7 @@ export const getClient = /* GraphQL */ `
   query GetClient($id: ID!) {
     getClient(id: $id) {
       id
+      salutation
       accountId {
         id
         team {
@@ -361,6 +362,13 @@ export const getClient = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      ratingId {
+        items {
+          id
+          score
+        }
+        nextToken
       }
       noteId {
         items {

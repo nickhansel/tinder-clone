@@ -42,7 +42,6 @@ const ClientCard = ({
   const isImpatient = clientMood === 'impatientGirl';
   const rating = getSum(ratingId);
   const suffix = SALUTATION_CONF[salutation] ? SALUTATION_CONF[salutation] : 'Boy';
-  console.log(`${getHealthScore(rating)}${suffix}`)
   const clientMood = MOOD_CONFIG[`${getHealthScore(rating)}${suffix}`];
   const healthScore = rating && rating != 'NaN' ? rating : 3.8;
 
@@ -58,7 +57,7 @@ const ClientCard = ({
     isDecisionMaker,
     mood: clientMood,
     mode: 'croped',
-    isChamp: rating ? rating > 4.5 : false,
+    isChamp: rating ? rating > 4.6 : false,
     isImpatient,
   };
 

@@ -26,22 +26,30 @@ import ClientStrategyModal from 'pages/sharedComponents/Client/ClientStrategyMod
 import { ArchiveActionIcon } from 'common';
 import { ArchiveModal } from 'pages/sharedComponents';
 import { iconMenu } from 'media/svg';
+import { getHealthScore, getSum } from 'utils';
 import { MOOD_CONFIG } from 'utils/mock';
 
+const SALUTATION_CONF = {
+  'Ms.': 'Girl',
+  'Mr.': 'Boy'
+};
 const ClientProfile = ({
   id,
+  selectedClient,
   name,
+  ratingId,
   position,
-  accountId: { 
-    name: company,
-    healthScore,
-    contract,
-    renewalDate
-  },
+  salutation,
+  accountId,
   isDecisionMaker,
-  avatarId,
 }) => {
-  const clientMood = MOOD_CONFIG[avatarId]; // TODO: change to real data
+  // TODO: change to real data
+  const isImpatient = clientMood === 'impatientGirl';
+  const rating = getSum(ratingId);
+  const suffix = SALUTATION_CONF[salutation] ? SALUTATION_CONF[salutation] : 'Boy';
+  const clientMood = MOOD_CONFIG[`${getHealthScore(rating)}${suffix}`];
+  const healthScore = rating && rating != 'NaN' ? rating : 3.8;
+
   // react hooks
   const [isBadgeModal, toggleBadgeModal] = useState(false);
   const [isArchiveModal, toggleArchiveModal] = useState(false);
@@ -94,7 +102,7 @@ const ClientProfile = ({
         header={<Note1Grey>Renewal Date</Note1Grey>}
         content={[
           <Note1 key='renewal'>
-            {renewalDate}
+            {accountId?.renewalDate}
           </Note1>
         ]}
       />
@@ -108,7 +116,7 @@ const ClientProfile = ({
         content={[
           <Note1 key='contract'
             style={{ marginLeft: 14 }}>
-              ${contract}/month
+              ${accountId?.contract}/month
           </Note1>
         ]}
       />
@@ -128,7 +136,7 @@ const ClientProfile = ({
           fromClientDetails={true}
           handleUpdateClient={handleUpdateClient}
           id={id}
-          isChamp={healthScore > 4.5}
+          isChamp={healthScore > 4.6}
           isDecisionMaker={isDecisionMaker}
           mood={clientMood}
           mode='full'
@@ -142,7 +150,7 @@ const ClientProfile = ({
               {position}
             </Note1Grey>,
             <Note2 key={'company'}>
-              <b>{company}</b>
+              <b>{accountId?.name}</b>
             </Note2>,
           ]}
           extra={<img style={iconProps}
@@ -170,13 +178,13 @@ const ClientProfile = ({
       <ClientStrategyModal
         handleToggle={toggleBadgeModal}
         isBadgeModal={isBadgeModal}
-        selectedClientId={id}
+        selectedClientId={selectedClient}
         strategies={items}
       />
       <ArchiveModal
         handleToggle={toggleArchiveModal}
         isArchiveModal={isArchiveModal}
-        selectedClientId={id}
+        selectedClientId={selectedClient}
         clientName={name}
         data={dataArchive.getClient?.strategy}
         loading={loading}

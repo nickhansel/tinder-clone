@@ -23,7 +23,6 @@ const AvatarContainer = ({
     full: 289,
     croped: 249,
   };
-  console.log({mood})
   function confirmUpdate() {
     handleUpdateClient(id, { isDecisionMaker: !isDecisionMaker });
   }

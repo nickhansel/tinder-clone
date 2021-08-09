@@ -32,7 +32,7 @@ const formStyle = {
 const ClientDetailsNewStrategy = ({
   client: {
     id,
-    accountId: { name: companyName },
+    accountId,
   },
   selectedStrategy,
   setSelectedStrategy,
@@ -141,12 +141,12 @@ const ClientDetailsNewStrategy = ({
   const modalTitle = (
     <div>
       <span>
-        Assign a Strategy Badge to the <BoldStyled>{companyName}</BoldStyled>{' '}
+        Assign a Strategy Badge to the <BoldStyled>{accountId?.name}</BoldStyled>{' '}
         Account
       </span>
       <Note1Grey>
         {`Select a strategy and fill out a gameplan to improve and strengthen
-        your relationship with ${companyName}`}
+        your relationship with ${accountId?.name}`}
       </Note1Grey>
     </div>
   );
@@ -174,7 +174,7 @@ const ClientDetailsNewStrategy = ({
   });
   const renderStrategyMessage = (
     <TextInfo style={{ padding: '14px 0px 0px 14px' }}>
-      {selected ? STRATEGY_MESSAGES[selected]['message'](companyName) : null}
+      {selected ? STRATEGY_MESSAGES[selected]['message'](accountId?.name) : null}
     </TextInfo>
   );
 

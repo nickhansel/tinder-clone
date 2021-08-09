@@ -121,7 +121,7 @@ export const getHealthLen = (healthScore) => {
 Calculate the code for the health score
 */
 export const getHealthScore = (healthScore) => {
-  if (healthScore >= 4.9) return 'champ';
+  if (healthScore > 4.5) return 'champ';
 
   let healthCode = 'happy';
 
@@ -178,6 +178,7 @@ export const generateId = () => {
 export const getSum = (ratingId) => {
   function sum(items) {
     let sum = 0;
+    if (!items) return sum;
   
     items.forEach((item) => {
       sum += parseInt(item['score']);

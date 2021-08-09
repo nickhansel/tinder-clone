@@ -40,6 +40,7 @@ const ClientDetailsPage = ({ location }) => {
     },
   });
   const [touchPoints, setPoints] = useState(touchPointsMock);
+  console.log({data});
 
   if (loading) {
     return (
@@ -53,13 +54,14 @@ const ClientDetailsPage = ({ location }) => {
 
   const isLoaded = !loading && !error;
   const clientData = isLoaded && data ? data.getClient : {};
+  console.log({clientData});
   const {
     accountId,
     name,
     contactId,
-    noteId: { items: notesData },
+    noteId,
   } = clientData;
-  const totalNotes = 0 || notesData.length;
+  const totalNotes = 0 || noteId?.items.length;
 
   // Props
   const layoutProps = {
@@ -92,7 +94,7 @@ const ClientDetailsPage = ({ location }) => {
     const noteListProps = {
       noteProps,
       selectedClient,
-      notesData: notesData,
+      notesData: noteId?.items,
       minVal,
       maxVal,
       authorName: contactId ? contactId.name : '',
@@ -111,7 +113,7 @@ const ClientDetailsPage = ({ location }) => {
         <Row {...rowProps}>
           <Row {...rowProps}>
             <CardWrap className='details-card details-profile'>
-              <ClientProfile {...clientData} />
+              <ClientProfile selectedClient={selectedClient} {...clientData} />
             </CardWrap>
             <CardWrap height={320}
               className='details-card details-touch'>

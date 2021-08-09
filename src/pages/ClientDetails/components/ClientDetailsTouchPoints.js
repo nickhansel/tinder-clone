@@ -28,9 +28,9 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
   };
 
   const getMessages = () => {
-    gmailApi.getMessages(true, 5).then(res => {
-      console.log(gmailApi.normalizeData(res));
-    });
+    // gmailApi.getMessages(true, 5).then(res => {
+    //   console.log(gmailApi.normalizeData(res));
+    // });
   };
 
   useEffect(() => {
