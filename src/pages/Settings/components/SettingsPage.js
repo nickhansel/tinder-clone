@@ -26,15 +26,12 @@ const SettingsPage = () => {
   // const [stateAddTeamMember, setStateAddTeamMember] = useState(true);
 
   const userData = useCurrentUser();
-  console.log("userData.team");
-  console.log(userData);
   const sfConnected = userData.team &&  userData.team.sfKey ? Boolean(userData.team.sfKey) : false;
 
   // Props
   const layoutProps = {
     title: 'Profile',
-    prefix: <img src={iconBack}
-      alt="" />,
+    prefix: <img src={iconBack} alt="go back" />,
   };
   const rowProps = {
     justify: 'center',
@@ -59,9 +56,8 @@ const SettingsPage = () => {
   // Props for the tabs
   const settingsTabsProps = [
     {
-      tabName: 'Company Info',
+      tabName: 'Salesforce Connection',
       tabNumber: '1',
-      spanSize: 24,
       content: (
         <ConnectionCard
           sfConnected={sfConnected}
@@ -69,15 +65,13 @@ const SettingsPage = () => {
       ),
     },
     {
-      tabName: 'Configurations',
+      tabName: 'Email Connection',
       tabNumber: '2',
-      spanSize: 24,
       content: configsContent,
     },
     {
       tabName: 'Payment',
       tabNumber: '3',
-      spanSize: 24,
       content: 'Content of Tab Pane 3',
     },
   ];
@@ -88,9 +82,9 @@ const SettingsPage = () => {
       {settingsTabsProps.map((item, key) => {
         const tabProps = {
           content: item.content,
-          spanSize: item.spanSize,
           tabName: item.tabName,
         };
+
         return (
           <TabPane tab={item.tabName}
             key={item.tabNumber}>
@@ -103,30 +97,24 @@ const SettingsPage = () => {
   );
 
   const renderActivityCard = (
-    <CardWrap height={320}
-      className='details-card'>
+    <CardWrap height={320} className='details-card'>
       <SpaceBetween>
         <SubH2>Last Activity</SubH2>
       </SpaceBetween>
     </CardWrap>
   );
-  console.log("userData")
-  console.log(userData)
+
   return (
     <Layout {...layoutProps}>
       <Row {...rowProps}>
-        <Col span={12}>
+        <Col span={11}>
           <CardWrap className='details-card settings-profile'>
-            <ActionHeader title='Basic Info'
-              actions={headerActions} />
+            <ActionHeader title='Basic Info' actions={headerActions} />
             <Flex>
-              <Avatar size='large'
-                src={avatar} />
+              <Avatar size='large' src={avatar} />
               <div>
-                <InfoRow name='Username:'
-                  data={userData.name} />
-                <InfoRow name='Email:'
-                  data={userData.email} />
+                <InfoRow name='Username:' data={userData.name} />
+                <InfoRow name='Email:' data={userData.email} />
                 <InfoRow
                   name='Team:'
                   data={userData.team ? userData.team.name : 'Not created'}
@@ -135,9 +123,11 @@ const SettingsPage = () => {
             </Flex>
           </CardWrap>
         </Col>
-        <Col span={12}>{renderActivityCard}</Col>
+        <Col span={11}>{renderActivityCard}</Col>
       </Row>
-      <Row {...rowProps}>{renderSettingsTabs}</Row>
+      <Row {...rowProps}>
+        <Col span={22}>{renderSettingsTabs}</Col>
+      </Row>
     </Layout>
   );
 };

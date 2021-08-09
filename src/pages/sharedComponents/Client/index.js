@@ -22,7 +22,7 @@ const Client = ({
   // gQL queries
   const { data = {}, loading } = useQuery(
     gql(getClientStrategysEq(`"assigned"`)), {
-      variables: { id: client.id },
+      variables: { id: client?.id },
     }
   );
   const { items = [] } =  data.getClient ? data.getClient.strategy : {};

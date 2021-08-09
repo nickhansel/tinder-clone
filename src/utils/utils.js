@@ -118,6 +118,32 @@ export const getHealthLen = (healthScore) => {
 };
 
 /*
+Calculate the code for the health score
+*/
+export const getHealthScore = (healthScore) => {
+  if (healthScore >= 4.9) return 'champ';
+
+  let healthCode = 'happy';
+
+  if (healthScore < 4 && healthScore >= 3.8) {
+    healthCode = 'curious';
+  }
+  if (healthScore < 3.8) {
+    healthCode = 'indiff';
+  }
+
+  if (healthScore < 3.2) {
+    healthCode = 'impatient';
+  }
+
+  if (healthScore < 2.1) {
+    healthCode = 'sad';
+  }
+
+  return healthCode;
+};
+
+/*
 Calculate the code for the health based on health score
 */
 export const getHealthCode = (healthScore) => {
@@ -149,6 +175,20 @@ export const generateId = () => {
   );
 };
 
+export const getSum = (ratingId) => {
+  function sum(items) {
+    let sum = 0;
+  
+    items.forEach((item) => {
+      sum += parseInt(item['score']);
+    });
+  
+    return sum;
+  }
+
+  return (sum(ratingId?.items) / ratingId?.items.length).toFixed(1);
+};
+
 export const getAvg = (data) => {
   const total = data.reduce((acc, c) => acc + c, 0);
   return Math.floor(total / data.length);
@@ -164,6 +204,7 @@ export const capitalizeFirstLetter = (string) => {
 };
 
 export const findMinMaxClients = (arr) => {
+  if (!arr || !arr.length) return [false, false];
   let min = arr[0];
   let max = arr[0];
 
@@ -172,5 +213,6 @@ export const findMinMaxClients = (arr) => {
     min = v.accountId.healthScore < min.accountId.healthScore ? v : min;
     max = v.accountId.healthScore > max.accountId.healthScore ? v : max;
   }
+
   return [min, max];
 };

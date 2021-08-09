@@ -19,13 +19,13 @@ import { Note2, Loading } from 'common';
 // local helpers etc
 import { FlexContainer } from './styles';
 import { filterDataByMoodAndSearch } from 'utils';
-import { loggedInUserId } from '../../../cache.js';
+import { loggedInUserId, currentUser } from '../../../cache.js';
 import { PAGE_SIZE } from '../constants';
 import './styles.css';
 
 const DashboardClients = ({ userData, filtering, moodId, userLoading, history }) => {
-  const { getUser: { id: userId, clients } } = userData;
-  const totalClients = clientsData?.length;
+  const { getUser: { id: userId, clients: { items: clients } } } = userData;
+  const totalClients = clients?.length;
   
   // paggination configs
   const [page, setPage] = useState(1);
@@ -39,9 +39,6 @@ const DashboardClients = ({ userData, filtering, moodId, userLoading, history })
   let clientsData = !userLoading // TODO change to API filtering - filterDataByMoodAndSearch is a mock functions
     ? filterDataByMoodAndSearch(clients, moodId, searchString)
     : [];
-
-  console.log('id ' + loggedInUserId());
-
 
   const onPaginationChange = (page) => {
     // Pagination
@@ -71,7 +68,7 @@ const DashboardClients = ({ userData, filtering, moodId, userLoading, history })
   } 
 
   if (!totalClients) {
-    history.push('/settings');
+    // TODO: add a note to add salesforce connection
   }
 
   function handleShowAllClick() {
@@ -118,6 +115,8 @@ const DashboardClients = ({ userData, filtering, moodId, userLoading, history })
     </div>
   );
 };
+
+// https://zqlo9kka34.execute-api.us-east-2.amazonaws.com/default/SF-API?sfUsername=asiya@empava.io&sfKey=EmpavaDev216rbCEQ5DZh84dRgeG2h8tGor&query=*,Account.*
 
 DashboardClients.propTypes = {
   userData: PropTypes.object

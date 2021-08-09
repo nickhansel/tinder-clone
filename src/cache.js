@@ -8,3 +8,4 @@ import { makeVar } from '@apollo/client';
 
 // helper that can be used across the app to get the current user id
 export const loggedInUserId = makeVar();
+export const currentUser = makeVar({});

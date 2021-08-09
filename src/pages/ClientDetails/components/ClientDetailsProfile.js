@@ -26,7 +26,7 @@ import ClientStrategyModal from 'pages/sharedComponents/Client/ClientStrategyMod
 import { ArchiveActionIcon } from 'common';
 import { ArchiveModal } from 'pages/sharedComponents';
 import { iconMenu } from 'media/svg';
-import { mockMoods } from 'utils/mock';
+import { MOOD_CONFIG } from 'utils/mock';
 
 const ClientProfile = ({
   id,
@@ -41,7 +41,7 @@ const ClientProfile = ({
   isDecisionMaker,
   avatarId,
 }) => {
-  const clientMood = mockMoods[avatarId]; // TODO: change to real data
+  const clientMood = MOOD_CONFIG[avatarId]; // TODO: change to real data
   // react hooks
   const [isBadgeModal, toggleBadgeModal] = useState(false);
   const [isArchiveModal, toggleArchiveModal] = useState(false);

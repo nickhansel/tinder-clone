@@ -4,13 +4,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+// graphql imports
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { listClientsDash, listStrategys } from 'graphql/queries';
+import { listStrategys } from 'graphql/queries';
 
+// ant design imports
 import { Row, Col, Tooltip } from 'antd';
 import { FolderOutlined } from '@ant-design/icons';
 
+// local components
 import InsightsOverallScore from './InsightsOverallScore';
 import InsightsMood from './InsightsMood';
 import InsightsQuarter from './InsightsQuarter';
@@ -26,20 +29,19 @@ import {
   SpaceBetween,
   SubH1,
 } from 'common';
+
+// local helpers
 import { clientNames, findMinMaxClients } from 'utils';
 import { PAGE_TITLE } from '../constants';
 import { iconSmile, iconSmileDown } from 'media/svg';
 import { BadgeStyled } from 'common/components/styles';
 import { StyledSmileIcon } from './styles';
 import './styles.css';
-import { loggedInUserId } from 'cache.js';
+import useCurrentUser from '../../../customHooks/useCurrentUser';
 
 const InsightsPage = () => {
-  const { loading, data } = useQuery(gql(listClientsDash), {
-    filter: {
-      contactId: loggedInUserId(), // TODO: add auth to only get current user's clients
-    },
-  });
+  const userData = useCurrentUser();
+  const { clients } = userData;
   const history = useHistory();
   const [isArchiveModal, toggleArchiveModal] = useState(false);
 
@@ -82,7 +84,7 @@ const InsightsPage = () => {
     }
   );
 
-  if (loading || loadingWin || loadingAssigned || loadingArchive) {
+  if (loadingWin || loadingAssigned || loadingArchive) {
     return (
       <Layout>
         <div style={{ marginTop: 200 }}>
@@ -94,9 +96,9 @@ const InsightsPage = () => {
 
   // get the Top and Bottom Client from formula in utils
   const [clientLowestScore, clientHighestScore] = findMinMaxClients(
-    data.listClients.items
+    clients?.items
   );
-
+  console.log({clientLowestScore});
   const layoutProps = {
     title: PAGE_TITLE,
   };
@@ -109,7 +111,8 @@ const InsightsPage = () => {
     return (
       <Flex>
         <StyledSmileIcon style={{ backgroundColor }}>
-          <img src={icon} alt={`icon ${title}`} />
+          <img src={icon}
+            alt={`icon ${title}`} />
         </StyledSmileIcon>
         <SubH2>{title}</SubH2>
       </Flex>
@@ -126,10 +129,12 @@ const InsightsPage = () => {
     iconSmileDown,
     'Client with Lowest Score'
   );
+  
+  console.log({clients});
 
   const insightOverallScoreProps = {
-    overallData: data,
-    totalClients: data.listClients.items.length,
+    overallData: clients?.items,
+    totalClients: clients?.items.length,
   };
   const insightsStrategyProps = {
     assignedStrategies: assignedStrategies.listStrategys,
@@ -140,17 +145,17 @@ const InsightsPage = () => {
     <Layout {...layoutProps}>
       <Row justify="center">
         <CardWrap
-          height={453}
+          height={478}
           className="insights-overall">
           <InsightsOverallScore {...insightOverallScoreProps} />
         </CardWrap>
-        <div style={{ marginBottom: 15 }}>
+        <div style={{ marginTop: 5 }}>
           {HigherScoreHeader}
           <Client
             client={clientHighestScore}
             onNameClick={handleCardClick} />
         </div>
-        <div style={{ marginBottom: 15 }}>
+        <div style={{ marginTop: 5 }}>
           {LowestScoreHeader}
           <Client
             client={clientLowestScore}
@@ -158,7 +163,7 @@ const InsightsPage = () => {
         </div>
         <CardContainer
           height={440}
-          width={390}
+          width={410}
           className="strategy-metrics">
           <InsightsStrategy {...insightsStrategyProps} />
         </CardContainer>

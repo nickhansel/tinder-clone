@@ -8,11 +8,11 @@ import { SubH1, BoldStyled, SpaceBetween, Flex } from 'common';
 import { ButtonCharts } from './styles';
 import { getAvg } from 'utils';
 
-const InsightsOverallScore = ({ overallData, totalClients }) => {
+const InsightsOverallScore = ({ overallData = [], totalClients }) => {
   const healthScores = [];
 
   // get the health scores from the API call and push to the new array
-  overallData.listClients.items.forEach((element) => {
+  overallData.forEach((element) => {
     healthScores.push(parseFloat(element.accountId.healthScore));
   });
 

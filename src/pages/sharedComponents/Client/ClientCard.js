@@ -17,27 +17,36 @@ import {
   DividerStyled,
   BoldStyled,
 } from 'common/components/styles';
-import { mainColors, mockMoods } from 'utils';
+import { mainColors, getHealthScore, getSum } from 'utils';
+import { MOOD_CONFIG } from 'utils/mock';
 import { ellipsis } from 'polished';
 
+const SALUTATION_CONF = {
+  'Ms.': 'Girl',
+  'Mr.': 'Boy'
+};
 const ClientCard = ({
   // client data
+  accountId,
+  dataStrategies,
   id,
   isDecisionMaker,
-  avatarId,
-  accountId: { healthScore, name: companyName },
-  name: clientName,
-  position = '',
+  salutation,
   lastContact,
-  dataStrategies,
-  // actions
+  name: clientName,
   onNameClick,
   onBadgeClick,
+  position = '',
+  ratingId,
 }) => {
-  const isImpatient = avatarId === 'impatientGirl';
-  const clientMood = mockMoods[avatarId];
+  const isImpatient = clientMood === 'impatientGirl';
+  const rating = getSum(ratingId);
+  const suffix = SALUTATION_CONF[salutation] ? SALUTATION_CONF[salutation] : 'Boy';
+  console.log(`${getHealthScore(rating)}${suffix}`)
+  const clientMood = MOOD_CONFIG[`${getHealthScore(rating)}${suffix}`];
+  const healthScore = rating && rating != 'NaN' ? rating : 3.8;
 
-  const renderBadges = dataStrategies.map((strategyItem, index) => (
+  const renderBadges = dataStrategies?.map((strategyItem, index) => (
     <Badge key={index}
       strategy={strategyItem.badgeName} />
   ));
@@ -49,7 +58,7 @@ const ClientCard = ({
     isDecisionMaker,
     mood: clientMood,
     mode: 'croped',
-    isChamp: healthScore > 4.5,
+    isChamp: rating ? rating > 4.5 : false,
     isImpatient,
   };
 
@@ -76,13 +85,13 @@ const ClientCard = ({
           ellipsis={ellipsis 
             ? {rows: 1, expandable: true, symbol: 'more'} 
             : false}>
-          {companyName}
+          {accountId?.name}
         </BoldStyled>
       </Note2>
       <Note2 {...noteProps}>{lastContact || 'Last activity:'}</Note2>
       <DividerStyled />
       <ContainerFlex>
-        <HealthButton healthScore={parseFloat(healthScore)} />
+        <HealthButton healthScore={healthScore} />
         <div {...badgeProps}>{renderBadges}</div>
       </ContainerFlex>
     </ClientCardStyled>

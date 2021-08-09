@@ -40,6 +40,7 @@ const SyncClients = ({ userData }) => {
       setClientId(item.Id);
 
       if (!loading && !account) {
+
         try {
           createAccount({
             variables: {
@@ -69,7 +70,7 @@ const SyncClients = ({ userData }) => {
                 salutation: item.Salutation,
                 avatarId: item.Salutation === 'Mr'? 'curiousBoy' : 'curiousGirl',
                 lastContact: item.LastActivityDate,
-                clientContactId: userData.id
+                clientContactIdId: userData.id
               }
             }
           });
@@ -84,22 +85,19 @@ const SyncClients = ({ userData }) => {
   const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
 
   async function getData(sfUsername, sfKey, query) {
-    console.log(`${CONNECTION_URL}?sfUsername=${sfUsername}&sfKey=${sfKey}&query=${query}`)
-    const data = await fetch(`${CONNECTION_URL}?sfUsername=${sfUsername}&sfKey=${sfKey}&query=${query}`);
-
-
-    console.log('----');
-    console.log(data.respose);
-    console.log(data.json());
-
-    return data.json();
+    await fetch(`${CONNECTION_URL}?sfUsername=${sfUsername}&sfKey=${sfKey}&query=${query}`).then(response => response.json()).then(data => {
+      handleCreateAccountsAndClients(data);
+    });
   }
 
   function handleSyncClick() {
     if (sfConnected) {
       const { sfUsername, sfKey } = userData.team;
-      const dd = getData(sfUsername, sfKey, '*, Account.*');
-      console.log(dd);
+      getData(sfUsername, sfKey, '*, Account.*');
+      // setTimeout(() => {
+      //   console.log({sfData});
+      //   handleCreateAccountsAndClients(sfData);
+      // }, 5000);
     }
   };
 

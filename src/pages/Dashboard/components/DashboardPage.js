@@ -18,7 +18,7 @@ import { Loading } from 'common';
 import Layout from 'pages/Layout';
 
 import { DASHBOARD_TITLE } from '../constants';
-import { loggedInUserId } from '../../../cache.js';
+import { loggedInUserId, currentUser } from '../../../cache.js';
 import './styles.css';
 
 const DashboardPage = ({ history }) => {
@@ -30,7 +30,8 @@ const DashboardPage = ({ history }) => {
   const { data: userData } = useQuery(gql(getUser), {
     variables: { id: authUserData.id },
   });
-
+  console.log({here: authUserData.id })
+  console.log({here: userData})
   // Query to create user in db if registered for a first time
   const [createUser, { loading }] = useMutation(
     gql(createUserMutation), { 
@@ -46,6 +47,7 @@ const DashboardPage = ({ history }) => {
         .then((data) => {
           if (data) {
             setAuthUserData(data);
+            currentUser({...data});
             loggedInUserId(data.id);
           }
         })
@@ -67,7 +69,7 @@ const DashboardPage = ({ history }) => {
     }
   }, [userData]);
 
-  if (loading || !userData) {
+  if (!userData) {
     return (
       <Layout>
         <div style={{ marginTop: 200 }}>
@@ -81,7 +83,6 @@ const DashboardPage = ({ history }) => {
     <MoodFilter setMoodId={setMoodId}
       setFiltering={setFiltering} />
   );
-  console.log({userData});
   return (
     <Layout title={DASHBOARD_TITLE}
       extra={moodFilter}>

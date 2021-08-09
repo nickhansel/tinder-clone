@@ -123,9 +123,33 @@ export const getUser = /* GraphQL */ `
       clients {
         items {
           id
+          accountId {
+            id
+            name
+            renewalDate
+            contract
+            healthScore
+          }
+          contactId {
+            id
+            name
+            email
+            profileImg
+            isAdmin
+            salesforceKey
+            salesforceSecret
+            salesforcePassword
+          }
+          ratingId {
+            items {
+              id
+              score
+            }
+          }
           isDecisionMaker
           avatarId
           salesforceId
+          salutation
           email
           name
           position
@@ -382,7 +406,7 @@ export const listClients = /* GraphQL */ `
   ) {
     listClients(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        i
+        id
         accountId {
           id
           name
@@ -999,7 +1023,7 @@ export const listClientsByUser = (user) => { `
           contract
           healthScore
         }
-        contactId(filter: {
+        contactId  (filter: {
           id: {
             eq: ${user}
           }

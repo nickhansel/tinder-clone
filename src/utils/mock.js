@@ -239,15 +239,18 @@ export const mockData = [
 
 const STORAGE_URL = 'https://empava-storage.s3.amazonaws.com/';
 
-export const mockMoods = {
+export const MOOD_CONFIG = {
   happyBoy: `${STORAGE_URL}boy_happy.gif`,
   sadBoy: `${STORAGE_URL}boy_sad.gif`,
   champBoy: `${STORAGE_URL}boy_champ.gif`,
   indiffBoy: `${STORAGE_URL}boy_indifferent.gif`,
+  indiffGirl: `${STORAGE_URL}boy_indifferent.gif`,
   champGirl: `${STORAGE_URL}girl_champ.gif`,
   happyGirl: `${STORAGE_URL}girl_happy.gif`,
   impatientGirl: `${STORAGE_URL}girl_impatient.gif`,
+  impatientBoy: `${STORAGE_URL}boy_indifferent.gif`,
   curiousGirl: `${STORAGE_URL}girl_curious.gif`,
+  curiousBoy: `${STORAGE_URL}boy_happy.gif`,
 };
 export const touchPointsMock = [
   {
