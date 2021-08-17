@@ -5,52 +5,74 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from 'antd';
-import { SubH2, Note1Grey, Flex, DividerStyled } from 'common';
+import moment from 'moment';
 import ClientDetailsPointsModal from './ClientDetailsPointsModal';
+import { SubH2, Note1Grey, Flex, DividerStyled, Note1, TextInfo } from 'common';
 import { iconMail } from 'media/svg';
-import gmailApi from 'react-gmail';
-
-// const CLIENT_ID = '767353220010-h8nui7vm4oenkds05v7vov7g6cffgh0d.apps.googleusercontent.com';
-// const API_KEY = 'VvfuSxwGGg3wSUG2STm0ZU4x';
-// const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
-// const DISCOVERY_DOCS =  ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'];
+import useCurrentUser from '../../../customHooks/useCurrentUser';
+import { Loading } from 'common';
+import { URL } from 'utils';
 
 const { Paragraph } = Typography;
+const sfSignatureLength = 120;
 
-const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
+const ClientDetailsTouchPoints = ({ authorName, client }) => {
   const [isModalOpen, togglePointsModal] = useState(false);
+  const [touchPoints, setTouchPoints] = useState([]);
+  const [isDataLoading, setIsLoading] = useState(false);
+  const userData = useCurrentUser();
 
-  const styleAuthor = {
-    color: '#115CE5',
-  };
   const paragraphProps = {
     ellipsis: { rows: 2, expandable: true, symbol: 'more' },
   };
 
-  const getMessages = () => {
-    // gmailApi.getMessages(true, 5).then(res => {
-    //   console.log(gmailApi.normalizeData(res));
-    // });
-  };
+  // get emails sent to the client
+  async function getData(sfUsername, sfKey) {
+    const emailQuery = `SELECT Headers, MessageDate, Status, TextBody, Subject FROM EmailMessage WHERE ToAddress='${client.email}'`;
+    const authPath = `?sfUsername=${sfUsername}&sfKey=${sfKey}&query=`;
+
+    await fetch(`${URL.QUERY}${authPath}${emailQuery}`).then(response => response.json()).then(data => {
+      setTouchPoints(data.records);
+      setIsLoading(false);
+    });
+  }
 
   useEffect(() => {
-    getMessages();
-  }, []);
+    const { team } = userData;
+    console.log({team});
 
-  const renderTouchPoints = (
+    if (team) {
+      setIsLoading(true);
+      getData(team?.sfUsername, team?.sfKey);
+    }
+  }, [userData]);
+
+
+  const renderTouchPoints = isDataLoading ? (
+    <div style={{ marginTop: 80 }}>
+      <Loading />
+    </div> 
+  ) : (
     <>
       {touchPoints.map((point, index) => {
+        let message = point.TextBody.trim();
+        
+        if (message.includes('Powered by Salesforce')) {
+          message = message.substring(0, message.length - sfSignatureLength);
+        }
+
         return (
           <span key={index}>
             <Flex>
               <img src={iconMail}
                 alt="icon mail last touch points" />
+              <Note1 style={{ padding: '0px 8px' }}>Subject: {point.Subject}</Note1>
               <Note1Grey style={{ padding: '0px 8px' }}>
-                {point.createdAt} by{' '}
+                {moment(new Date(point.MessageDate)).format('MMMM Do YYYY')} by{' '}
               </Note1Grey>
-              <span style={{ ...styleAuthor }}>{authorName}</span>
+              <TextInfo>{authorName}</TextInfo>
             </Flex>
-            <Paragraph {...paragraphProps}>{point.text}</Paragraph>
+            <Paragraph {...paragraphProps}>{message}</Paragraph>
           </span>
         );
       })}
@@ -63,9 +85,9 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
     width: '100%',
   };
   const actionTextStyle = {
-    margin: 0,
     color: '#14709F',
     cursor: 'pointer',
+    margin: 0,
   };
   const renderAction = (
     <div style={{ ...actionWrapperStyle }}>
@@ -106,7 +128,7 @@ const ClientDetailsTouchPoints = ({ authorName, touchPoints }) => {
 
 ClientDetailsTouchPoints.propTypes = {
   authorName: PropTypes.string.isRequired,
-  touchPoints: PropTypes.array.isRequired,
+  client: PropTypes.object.isRequired,
 };
 
 export default ClientDetailsTouchPoints;

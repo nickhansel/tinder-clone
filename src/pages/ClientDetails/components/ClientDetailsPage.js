@@ -21,7 +21,7 @@ import { Note2, H3, CardWrap, Loading } from 'common';
 import { RowPagination } from './styles';
 import { iconBack, iconAddCircle } from 'media/svg';
 import './styles.css';
-import { touchPointsMock, getIdFromLocation } from 'utils';
+import { getIdFromLocation } from 'utils';
 
 const NOTES_EACH_PAGE = 4;
 
@@ -39,8 +39,6 @@ const ClientDetailsPage = ({ location }) => {
       id: selectedClient,
     },
   });
-  const [touchPoints, setPoints] = useState(touchPointsMock);
-  console.log({data});
 
   if (loading) {
     return (
@@ -54,7 +52,6 @@ const ClientDetailsPage = ({ location }) => {
 
   const isLoaded = !loading && !error;
   const clientData = isLoaded && data ? data.getClient : {};
-  console.log({clientData});
   const {
     accountId,
     name,
@@ -119,7 +116,7 @@ const ClientDetailsPage = ({ location }) => {
               className='details-card details-touch'>
               <ClientDetailsTouchPoints
                 authorName={contactId ? contactId.name : ''}
-                touchPoints={touchPoints}
+                client={clientData}
               />
             </CardWrap>
             <CardWrap className='details-card details-toolbox'>

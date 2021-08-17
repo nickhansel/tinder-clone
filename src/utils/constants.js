@@ -1,3 +1,8 @@
+export const URL = {
+  QUERY: 'https://7k6pixue3f.execute-api.us-east-2.amazonaws.com/default/SF-query',
+  OBJECT: 'https://zqlo9kka34.execute-api.us-east-2.amazonaws.com/default/SF-API',
+};
+
 export const CARD_SIZES = {
   CARD_SM_WIDTH: 400,
   CARD_SM_HEIGHT: 350,

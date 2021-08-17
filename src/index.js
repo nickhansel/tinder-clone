@@ -23,7 +23,7 @@ Amplify.configure(awsExports);
 const typeDefs = gql`
   extend type Query {
     loggedInUserId: String
-    currentUser: Array
+    currentUser: Object
   }
 `;
 

@@ -26,7 +26,6 @@ const ConnectionForm = ({ user, toggleEdit, isEdit }) => {
   
   // Business logic
   const handleSubmit = (values) => {
-    console.log(values)
     createTeamAction(values, createTeam, user.id, linkUserTeam);  // TODO: change to hitting the Lambda function 
    
     message.success('Connection created');

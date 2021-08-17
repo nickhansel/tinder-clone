@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
-import {  message } from 'antd';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { message } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import {
   createClient as createClientMutation,
   createAccount as createAccountMutation,
@@ -12,15 +12,15 @@ import {
   getClient,
   getAccount,
 } from 'graphql/queries';
-import {  Loading } from 'common';
+import { Loading } from 'common';
+import { URL } from 'utils';
 import './styles.css';
 
-const CONNECTION_URL = 'https://zqlo9kka34.execute-api.us-east-2.amazonaws.com/default/SF-API';
-
-const SyncClients = ({ userData }) => {
+const SyncClients = ({ userData, setClientsTotal }) => {
   const [ accountId, setAccountId ] = useState(null);
   const [ clientId, setClientId ] = useState(null);
   const [ sfData, setSfData ] = useState([]);
+  const [ sfLoading, setSfLoading ] = useState(false);
 
   const [createClient, { loading: creatingClient }] = useMutation(
     gql(createClientMutation));
@@ -40,7 +40,6 @@ const SyncClients = ({ userData }) => {
       setClientId(item.Id);
 
       if (!loading && !account) {
-
         try {
           createAccount({
             variables: {
@@ -85,24 +84,25 @@ const SyncClients = ({ userData }) => {
   const sfConnected = userData.team ? Boolean(userData.team.sfKey) : false;
 
   async function getData(sfUsername, sfKey, query) {
-    await fetch(`${CONNECTION_URL}?sfUsername=${sfUsername}&sfKey=${sfKey}&query=${query}`).then(response => response.json()).then(data => {
+    const AUTH = `?sfUsername=${sfUsername}&sfKey=${sfKey}&query=${query}`;
+
+    await fetch(`${URL.OBJECT}${AUTH}`).then(response => response.json()).then(data => {
+      setSfLoading(false);
+      setClientsTotal(data.length);
       handleCreateAccountsAndClients(data);
     });
   }
 
   function handleSyncClick() {
     if (sfConnected) {
+      setSfLoading(true);
       const { sfUsername, sfKey } = userData.team;
       getData(sfUsername, sfKey, '*, Account.*');
-      // setTimeout(() => {
-      //   console.log({sfData});
-      //   handleCreateAccountsAndClients(sfData);
-      // }, 5000);
     }
   };
 
   // spinner
-  if (creatingClient || creatingAccount || loadingClient || loading) {
+  if (creatingClient || creatingAccount || loadingClient || loading || sfLoading) {
     return (
       <div style={{ marginTop: 80 }}>
         <Loading />

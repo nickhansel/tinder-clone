@@ -13,6 +13,7 @@ const ConnectionCard = ({
 }) => {
   const [loading, setIsLoading] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [clientsTotal, setClientsTotal] = useState(false);
 
   useEffect(() => {
     setIsLoading(false);
@@ -40,14 +41,18 @@ const ConnectionCard = ({
       processing: deleteAction,
     },
   ];
+  const clientsMessage = clientsTotal ? `Total Clients: ${clientsTotal}` : '';
 
   const connectionCreated = (
-    <div>
-      <Note1Grey>Connection created</Note1Grey>
-      <Note1Grey>Salesforce Username: {userData?.team?.sfUsername} </Note1Grey>
-      <Flex>You can Sync Clients now  -&gt; &nbsp;&nbsp;  
-        <SyncClients userData={userData} />
+    <div style={{ marginTop: 10 }}>
+      <Flex style={{ color: '#052f7b' }}>You can Sync Clients now  -&gt; &nbsp;&nbsp;  
+        <SyncClients userData={userData} setClientsTotal={setClientsTotal} />
       </Flex>
+      <div style={{ marginTop: 15 }}>
+        <Note1Grey>Connection created</Note1Grey>
+        <Note1Grey>Salesforce Username: {userData?.team?.sfUsername} </Note1Grey>
+        <Note1Grey>{clientsMessage}</Note1Grey>
+      </div>
     </div>
   );
 
@@ -76,6 +81,8 @@ const ConnectionCard = ({
 };
 
 ConnectionCard.propTypes = {
+  sfConnected: PropTypes.bool,
+  userData: PropTypes.object,
 };
 
 export default ConnectionCard;
