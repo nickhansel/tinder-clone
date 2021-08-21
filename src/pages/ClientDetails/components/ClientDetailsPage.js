@@ -2,7 +2,7 @@
 /*
   Client Page
 */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -33,12 +33,28 @@ const ClientDetailsPage = ({ location }) => {
   const [isNewNoteModal, toggleNewNoteModal] = useState(false);
   const [isNewStrategyModal, toggleNewStrategyModal] = useState(false);
   const [selectedStrategy, setSelectedStrategy] = useState(null);
+  const [clientData, setClientData] = useState({});
+  const [notesData, setClientNotes] = useState({});
 
   const { loading, data, error } = useQuery(gql(getClient), {
     variables: {
       id: selectedClient,
     },
   });
+
+  useEffect(() => {
+    if (!loading && !error) {
+      setClientData(data.getClient);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (clientData.noteId) {
+      console.log('updating')
+      console.log(clientData)
+      setClientNotes(clientData.noteId);
+    }
+  }, [clientData]);
 
   if (loading) {
     return (
@@ -50,15 +66,12 @@ const ClientDetailsPage = ({ location }) => {
     );
   }
 
-  const isLoaded = !loading && !error;
-  const clientData = isLoaded && data ? data.getClient : {};
   const {
     accountId,
     name,
     contactId,
-    noteId,
   } = clientData;
-  const totalNotes = 0 || noteId?.items.length;
+  const totalNotes = 0 || notesData.items?.length;
 
   // Props
   const layoutProps = {
@@ -91,7 +104,9 @@ const ClientDetailsPage = ({ location }) => {
     const noteListProps = {
       noteProps,
       selectedClient,
-      notesData: noteId?.items,
+      client: clientData,
+      setClientData,
+      notesData: notesData?.items,
       minVal,
       maxVal,
       authorName: contactId ? contactId.name : '',
@@ -146,6 +161,7 @@ const ClientDetailsPage = ({ location }) => {
         </Row>
         <ClientDetailsNewNote
           client={clientData}
+          setClientData={setClientData}
           isNewNoteModal={isNewNoteModal}
           handleToggle={() => toggleNewNoteModal(false)}
         />

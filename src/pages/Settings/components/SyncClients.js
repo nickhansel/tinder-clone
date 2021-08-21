@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { message } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import {
   createClient as createClientMutation,
@@ -27,10 +28,10 @@ const SyncClients = ({ userData, setClientsTotal }) => {
   const [createAccount, { loading: creatingAccount }] = useMutation(
     gql(createAccountMutation));
     
-  const { data: account = {}, loading } = useQuery(gql(getAccount), {
+  let [ callAccount, { called: calledAccount, data: account = null, loading: loadingAccount }] = useLazyQuery(gql(getAccount), {
     variables: { id: accountId },
   });
-  const { data: client = {}, loadingClient } = useQuery(gql(getClient), {
+  let [ callClient, { called: calledClient, data: client = null, loading: loadingClient }] = useLazyQuery(gql(getClient), {
     variables: { id: clientId },
   });
     
@@ -38,8 +39,11 @@ const SyncClients = ({ userData, setClientsTotal }) => {
     data.forEach((item) => {
       setAccountId(item.AccountId);
       setClientId(item.Id);
-
-      if (!loading && !account) {
+      callAccount();
+      console.log(calledAccount);
+  
+      if (calledAccount && account === null) {
+        console.log("here 1")
         try {
           createAccount({
             variables: {
@@ -56,8 +60,10 @@ const SyncClients = ({ userData, setClientsTotal }) => {
           console.log(e);
         }
       }
-      if (!loadingClient && !client) {
+      console.log(client)
+      if (client === null) {
         try {
+          console.log("here 2")
           createClient({
             variables: {
               input: {
@@ -95,14 +101,15 @@ const SyncClients = ({ userData, setClientsTotal }) => {
 
   function handleSyncClick() {
     if (sfConnected) {
-      setSfLoading(true);
       const { sfUsername, sfKey } = userData.team;
+    
+      setSfLoading(true);
       getData(sfUsername, sfKey, '*, Account.*');
     }
   };
 
   // spinner
-  if (creatingClient || creatingAccount || loadingClient || loading || sfLoading) {
+  if (creatingClient || creatingAccount || loadingClient || loadingAccount || sfLoading) {
     return (
       <div style={{ marginTop: 80 }}>
         <Loading />

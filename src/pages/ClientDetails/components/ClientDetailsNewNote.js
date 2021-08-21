@@ -11,47 +11,35 @@ import './styles.css';
 
 const { TextArea } = Input;
 
-const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client }) => {
+const ClientDetailsNewNote = ({ isNewNoteModal, handleToggle, client , setClientData}) => {
   const { id, contactId } = client;
   const [form] = Form.useForm();
 
-  const [addClientNote] = useMutation(
-    gql(createClientNote),
-    {
-      update(cache, { data: { createClientNote } }) {
-        const { items } = client.noteId;
-
-        cache.writeQuery({
-          query: gql(getClient),
-          id, 
-          // data: {
-          __typename: 'Client',
-          // id,
-          getClient: {
-            ...client,
-            noteId: {
-              items: [createClientNote].concat(items),
-            },
-          },
-          // },
-        });
-      },
-    }
-  );
+  const [addClientNote] = useMutation(gql(createClientNote));
 
   const handleNewNoteSubmit = (values) => {
+    const newNote = {
+      id: generateId(),
+      clientNoteClientIdId: id,
+      clientNoteOwnerIdId: contactId.id,
+      title: values.title,
+      content: values.note_content,
+    };
     addClientNote({
       variables: {
-        input: {
-          id: generateId(),
-          clientNoteClientIdId: id,
-          clientNoteOwnerIdId: contactId.id,
-          title: values.title,
-          content: values.note_content,
-        },
+        input: {...newNote},
       },
     });
 
+    const notes = client.noteId?.items;
+    const updatedClient = {
+      ...client,
+      noteId: {
+        items: [...notes, newNote]
+      }
+    };
+    console.log({updatedClient});
+    setClientData(updatedClient);
     message.success('Note created');
     form.resetFields();
     handleToggle();

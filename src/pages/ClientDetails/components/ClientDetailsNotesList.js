@@ -7,13 +7,13 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { deleteClientNote, updateClientNote } from 'graphql/mutations';
-import { getClient } from 'graphql/queries';
 
 import { Note, CardWrap } from 'common';
 
 const ClientDetailsNotesList = ({
   noteProps,
-  selectedClient,
+  setClientData,
+  client,
   notesData,
   minVal,
   maxVal,
@@ -25,6 +25,7 @@ const ClientDetailsNotesList = ({
   const [updateNote, { loading: updating }] = useMutation(
     gql(updateClientNote)
   );
+
 
   const handleUpdateNote = (noteID, noteText) => {
     updateNote({
@@ -39,42 +40,26 @@ const ClientDetailsNotesList = ({
 
   // Business logic
   const handleDeleteNote = (noteId) => {
-    const updateCache = (client) => {
-      const data = client.readQuery({
-        query: gql(getClient),
-        variables: {
-          id: selectedClient,
-        },
-      });
-      const newItems = data.getClient.noteId.items.filter(
-        (note) => note.id !== noteId
-      );
-
-      client.writeQuery({
-        query: gql(getClient),
-        variables: {
-          id: selectedClient,
-        },
-        data: {
-          __typename: 'Client',
-          getClient: {
-            ...data.getClient,
-            noteId: {
-              items: newItems,
-            },
-          },
-        },
-      });
+    const newItems = notesData.filter(
+      (note) => note.id !== noteId
+    );
+    const newClientData = {
+      ...client,
+      noteId: {
+        items: [...newItems]
+      }
     };
-
     deleteNote({
       variables: {
         input: {
           id: noteId,
         },
       },
-      update: updateCache,
     });
+
+    if (!deleting) {
+      setClientData(newClientData);
+    }
   };
   const headerActions = [
     {
