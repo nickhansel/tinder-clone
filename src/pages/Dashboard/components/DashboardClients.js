@@ -40,11 +40,12 @@ const DashboardClients = ({ userData, filtering, moodId, userLoading, history })
     ? filterDataByMoodAndSearch(clients, moodId, searchString)
     : [];
 
+  const clientsPerPage = 8;
   const onPaginationChange = (page) => {
     // Pagination
     setPage(page);
-    setMinVal((page - 1) * PAGE_SIZE);
-    setMaxVal(page * PAGE_SIZE);
+    setMinVal((page - 1) * clientsPerPage);
+    setMaxVal(page * clientsPerPage);
   };
 
   const cardListProps = {
@@ -72,10 +73,13 @@ const DashboardClients = ({ userData, filtering, moodId, userLoading, history })
   }
 
   function handleShowAllClick() {
-    if (maxVal === 8) {
+    if (maxVal % clientsPerPage === 0) {
+      setMinVal(0);
       setMaxVal(totalClients);
       setShowAllTitleText('Show Less');
     } else if (maxVal === totalClients) {
+      setPage(1);
+      setMinVal(0);
       setMaxVal(8);
       setShowAllTitleText('Show All');
     }
@@ -92,7 +96,7 @@ const DashboardClients = ({ userData, filtering, moodId, userLoading, history })
     current: page,
     defaultCurrent: 1,
     onChange: onPaginationChange,
-    pageSize: maxVal,
+    pageSize: clientsPerPage,
     showTotal: () => <Note2>Total {totalClients} clients</Note2>,
     total: totalClients,
   };
