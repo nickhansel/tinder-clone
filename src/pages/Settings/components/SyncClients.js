@@ -39,9 +39,12 @@ const SyncClients = ({ userData, setClientsTotal }) => {
     data.forEach((item) => {
       setAccountId(item.AccountId);
       setClientId(item.Id);
+      console.log({accountId})
+      console.log({clientId})
       callAccount();
-      console.log(calledAccount);
-  
+      console.log({calledAccount});
+      console.log("account")
+      console.log(account)
       if (calledAccount && account === null) {
         console.log("here 1")
         try {
@@ -60,8 +63,10 @@ const SyncClients = ({ userData, setClientsTotal }) => {
           console.log(e);
         }
       }
-      console.log(client)
-      if (client === null) {
+      callClient();
+      console.log({calledClient})
+      console.log({client})
+      if (calledClient && client === null) {
         try {
           console.log("here 2")
           createClient({

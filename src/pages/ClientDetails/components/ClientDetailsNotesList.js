@@ -20,8 +20,22 @@ const ClientDetailsNotesList = ({
   authorName,
 }) => {
   const [deleteNote, { loading: deleting }] = useMutation(
-    gql(deleteClientNote)
+    gql(deleteClientNote), {
+      onCompleted({deleteClientNote}) {
+        const newItems = notesData.filter(
+          (note) => note.id !== deleteClientNote.id
+        );
+        const newClientData = {
+          ...client,
+          noteId: {
+            items: [...newItems]
+          }
+        };
+        setClientData(newClientData);
+      }
+    }
   );
+
   const [updateNote, { loading: updating }] = useMutation(
     gql(updateClientNote)
   );
@@ -40,15 +54,6 @@ const ClientDetailsNotesList = ({
 
   // Business logic
   const handleDeleteNote = (noteId) => {
-    const newItems = notesData.filter(
-      (note) => note.id !== noteId
-    );
-    const newClientData = {
-      ...client,
-      noteId: {
-        items: [...newItems]
-      }
-    };
     deleteNote({
       variables: {
         input: {
@@ -56,10 +61,6 @@ const ClientDetailsNotesList = ({
         },
       },
     });
-
-    if (!deleting) {
-      setClientData(newClientData);
-    }
   };
   const headerActions = [
     {

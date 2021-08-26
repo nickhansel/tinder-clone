@@ -18,7 +18,6 @@ const ActionHeader = ({
   toggleSpinning = () => {},
   headerIcon
 }) => {
-  console.log({actions})
   const actionsMap = {
     edit: {
       name: 'edit',

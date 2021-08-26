@@ -98,7 +98,7 @@ const InsightsPage = () => {
   const [clientLowestScore, clientHighestScore] = findMinMaxClients(
     clients?.items
   );
-  console.log({clientLowestScore});
+  console.log({clientHighestScore});
   const layoutProps = {
     title: PAGE_TITLE,
   };
@@ -129,8 +129,6 @@ const InsightsPage = () => {
     iconSmileDown,
     'Client with Lowest Score'
   );
-  
-  console.log({clients});
 
   const insightOverallScoreProps = {
     overallData: clients?.items,

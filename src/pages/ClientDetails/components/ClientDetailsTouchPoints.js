@@ -39,7 +39,6 @@ const ClientDetailsTouchPoints = ({ authorName, client }) => {
 
   useEffect(() => {
     const { team } = userData;
-    console.log({team});
 
     if (team) {
       setIsLoading(true);

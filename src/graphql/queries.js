@@ -889,9 +889,75 @@ export const getClientStrategysEq = (status) =>  /* GraphQL */ `
   query GetClient($id: ID!) {
     getClient(id: $id) {
       id
+      isDecisionMaker
+      avatarId
+      salesforceId
+      email
+      name
+      position
+      lastContact
+      createdAt
+      updatedAt
+      accountId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        renewalDate
+        contract
+        healthScore
+        createdAt
+        updatedAt
+      }
+      contactId {
+        id
+        team {
+          id
+          name
+          renewalDate
+          sfKey
+          sfUsername
+          createdAt
+          updatedAt
+        }
+        name
+        email
+        isAdmin
+        salesforceKey
+        salesforceSecret
+        salesforcePassword
+        createdAt
+        updatedAt
+      }
       contactId {
         id
         name
+      }
+      ratingId {
+        items {
+          id
+          score
+        }
+        nextToken
+      }
+      noteId {
+        items {
+          id
+          content
+          title
+          lastInterationSore
+          isInteractionNote
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       strategy (filter: {
         status: {

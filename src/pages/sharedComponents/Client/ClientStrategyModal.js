@@ -14,6 +14,8 @@ const ClientStrategyModal = ({
   handleToggle,
   isBadgeModal,
   strategies,
+  setClientData,
+  clientData,
   loading,
 }) => {
   return (
@@ -24,6 +26,8 @@ const ClientStrategyModal = ({
       onCancel={() => handleToggle(false, null)}
       footer={[]}>
       <Strategies
+        setClientData={setClientData}
+        clientData={clientData}
         data={strategies}
         selectedClientId={selectedClientId}
         loading={loading} />

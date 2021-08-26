@@ -58,7 +58,7 @@ const Hero = () => {
           <MainHeaderText justify="center">
             <h1>Empowering Client Relationships.</h1>
             <p>
-              Empava brings your client realtionships into the digital era with
+              Empava brings your client relationships into the digital era with
               powerful visual and interactive tools to keep engagement up and
               relationships strong
             </p>

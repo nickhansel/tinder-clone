@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { createStrategy } from 'graphql/mutations';
-import { getClient } from 'graphql/queries';
 import { Modal, Row, Form, Input, Divider, Col, message } from 'antd';
 import {
   TextInfo,
@@ -30,6 +29,7 @@ const formStyle = {
 };
 
 const ClientDetailsNewStrategy = ({
+  client,
   client: {
     id,
     accountId,
@@ -38,41 +38,23 @@ const ClientDetailsNewStrategy = ({
   setSelectedStrategy,
   isNewStrategyModal,
   handleToggle,
+  assignedStrategies,
+  setClientData
 }) => {
   const [form] = Form.useForm();
 
   const [addStrategy, { loading: creating, error }] = useMutation(
-    gql(createStrategy),
-    {
-      update(cache, { data: { createStrategy } }) {
-        const data = cache.readQuery({
-          query: gql(getClient),
-          variables: {
-            id,
-          },
-        });
-        const { items } = data.getClient.strategy;
-        const newItems = [...items, createStrategy];
-        delete data.getClient.strategy;
-
-        cache.writeQuery({
-          query: gql(getClient),
-          variables: {
-            id,
-          },
-          data: {
-            getClient: {
-              __typename: 'Client',
-              ...data.getClient,
-              strategy: {
-                __typename: 'Strategy',
-                items: newItems,
-                nextToken: null
-              },
-            },
-          },
-        });
-      },
+    gql(createStrategy), {
+      onCompleted({createStrategy}) {
+        const newItems = [...assignedStrategies, createStrategy];
+        const newClientData = {
+          ...client,
+          strategy: {
+            items: [...newItems]
+          }
+        };
+        setClientData(newClientData);
+      }
     }
   );
 

@@ -51,12 +51,12 @@
 
 /* TODO sidebar */
 .todos-sidebar.ant-layout-sider-dark{
-  background-color: #f9cd35 !important;
+  background-color: rgb(32 205 174) !important;
 }
 
 .ant-collapse-content > .ant-collapse-content-box  {
-  background: #f9cd35;
-  padding: 5px !important;
+  background: rgb(32 205 174);
+  padding: 8px !important;
 }
 
 .ant-collapse > .ant-collapse-item > .ant-collapse-header {

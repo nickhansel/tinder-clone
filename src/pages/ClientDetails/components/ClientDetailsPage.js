@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { getClient } from 'graphql/queries';
+import { getClient, getClientStrategysEq } from 'graphql/queries';
 import { Row, Pagination, Tooltip } from 'antd';
 
 import ClientDetailsNewNote from './ClientDetailsNewNote';
@@ -21,7 +21,7 @@ import { Note2, H3, CardWrap, Loading } from 'common';
 import { RowPagination } from './styles';
 import { iconBack, iconAddCircle } from 'media/svg';
 import './styles.css';
-import { getIdFromLocation } from 'utils';
+import { getIdFromLocation, sortByDate } from 'utils';
 
 const NOTES_EACH_PAGE = 4;
 
@@ -36,22 +36,21 @@ const ClientDetailsPage = ({ location }) => {
   const [clientData, setClientData] = useState({});
   const [notesData, setClientNotes] = useState({});
 
-  const { loading, data, error } = useQuery(gql(getClient), {
-    variables: {
-      id: selectedClient,
-    },
-  });
-
+  const { data, loading, error: errorAssigned } = useQuery(
+    gql(getClientStrategysEq(`"assigned"`)), {
+      variables: { id: selectedClient },
+    }
+  );
+  
   useEffect(() => {
-    if (!loading && !error) {
+    console.log(data)
+    if (!errorAssigned && data) {
       setClientData(data.getClient);
     }
   }, [data]);
 
   useEffect(() => {
-    if (clientData.noteId) {
-      console.log('updating')
-      console.log(clientData)
+    if (clientData?.noteId) {
       setClientNotes(clientData.noteId);
     }
   }, [clientData]);
@@ -106,7 +105,7 @@ const ClientDetailsPage = ({ location }) => {
       selectedClient,
       client: clientData,
       setClientData,
-      notesData: notesData?.items,
+      notesData: sortByDate(notesData?.items),
       minVal,
       maxVal,
       authorName: contactId ? contactId.name : '',
@@ -125,7 +124,11 @@ const ClientDetailsPage = ({ location }) => {
         <Row {...rowProps}>
           <Row {...rowProps}>
             <CardWrap className='details-card details-profile'>
-              <ClientProfile selectedClient={selectedClient} {...clientData} />
+              <ClientProfile
+                setClientData={setClientData}
+                selectedClient={selectedClient}
+                assignedStrategies={clientData?.strategy?.items || []}
+                clientData={clientData} />
             </CardWrap>
             <CardWrap height={320}
               className='details-card details-touch'>
@@ -167,7 +170,9 @@ const ClientDetailsPage = ({ location }) => {
         />
         <ClientDetailsNewStrategy
           client={clientData}
+          setClientData={setClientData}
           selectedStrategy={selectedStrategy}
+          assignedStrategies={clientData?.strategy?.items || []}
           setSelectedStrategy={setSelectedStrategy}
           isNewStrategyModal={isNewStrategyModal}
           handleToggle={() => toggleNewStrategyModal(false)}

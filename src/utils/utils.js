@@ -3,6 +3,7 @@
 */
 import { mockData } from './mock';
 import { mintGreen, roseRed, mustardYellow } from 'utils';
+import moment from 'moment';
 
 /*
   Temporary helper to search for client based on location
@@ -206,14 +207,36 @@ export const capitalizeFirstLetter = (string) => {
 
 export const findMinMaxClients = (arr) => {
   if (!arr || !arr.length) return [false, false];
-  let min = arr[0];
-  let max = arr[0];
+  let min = Infinity;
+  let minClient = {};
+  let max = -Infinity;
+  let maxClient = {};
 
   for (let i = 0, len = arr.length; i < len; i++) {
-    let v = arr[i];
-    min = v.accountId.healthScore < min.accountId.healthScore ? v : min;
-    max = v.accountId.healthScore > max.accountId.healthScore ? v : max;
+    let client = arr[i];
+    const rating = getSum(client.ratingId);
+    const healthScore = rating && rating != 'NaN' ? rating : 3.8;
+
+    if (healthScore < min) {
+      min = healthScore;
+      minClient = client;
+    }
+    if (healthScore > max) {
+      max = healthScore;
+      maxClient = client;
+    }
   }
 
-  return [min, max];
+  return [minClient, maxClient];
+};
+
+export const sortByDate = (items) => {
+  if (!items && !items?.length) return items;
+
+  return items.sort((a, b) => {
+    if (moment(b.updatedAt).isBefore(a.updatedAt)) {
+      return -1;
+    } 
+    return 1;
+  });
 };

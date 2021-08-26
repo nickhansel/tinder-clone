@@ -38,7 +38,7 @@ const SidebarModal = () => {
       className="todos-sidebar"
       collapsedWidth={0}
       width={400}
-      zeroWidthTriggerStyle={{ right: 35, top: '50%', background: '#e5dc699c' }}
+      zeroWidthTriggerStyle={{ right: 35, top: '50%', background: 'rgb(32 205 174)' }}
       onCollapse={ () => setCollapsedTodo(!collapsedTodo)}
       collapsed={collapsedTodo}>
       <Collapse
@@ -58,10 +58,6 @@ const SidebarModal = () => {
               data={notes}
               loading={loadingNotes} />
           </div>
-        </Panel>
-        <Panel header="Todo"
-          key="3">
-          <p>todo</p>
         </Panel>
       </Collapse>,
     </Sider>

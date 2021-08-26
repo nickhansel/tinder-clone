@@ -3,10 +3,10 @@
 */
 import React, { useState } from 'react';
 
-import { useMutation, useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { updateClient as updateClientMutation } from 'graphql/mutations';
-import { getClientStrategysNot, getClientStrategysEq } from 'graphql/queries';
+import { getClientStrategysNot } from 'graphql/queries';
 
 import { Row, Divider } from 'antd';
 
@@ -34,15 +34,21 @@ const SALUTATION_CONF = {
   'Mr.': 'Boy'
 };
 const ClientProfile = ({
-  id,
   selectedClient,
-  name,
-  ratingId,
-  position,
-  salutation,
-  accountId,
-  isDecisionMaker,
+  assignedStrategies,
+  setClientData,
+  clientData,
 }) => {
+  const {
+    id,
+    name,
+    ratingId,
+    position,
+    salutation,
+    accountId,
+    isDecisionMaker,
+  } = clientData;
+
   // TODO: change to real data
   const isImpatient = clientMood === 'impatientGirl';
   const rating = getSum(ratingId);
@@ -55,21 +61,12 @@ const ClientProfile = ({
   const [isArchiveModal, toggleArchiveModal] = useState(false);
 
   // gQL queries
-  const { data: dataAssigned = {} } = useQuery(
-    gql(getClientStrategysEq(`"assigned"`)), {
-      variables: { id },
-    }
-  );
   const [ loadArchive, { data: dataArchive = {}, loading }] = useLazyQuery(
     gql(getClientStrategysNot(`"assigned"`)), {
       variables: { id },
     }
   );
   const [updateClient] = useMutation(gql(updateClientMutation));
-
-  const { items = [] } =  dataAssigned.getClient 
-    ? dataAssigned.getClient.strategy 
-    : {};
 
   // gQL Mutations
   const handleUpdateClient = (id, newData) => {
@@ -91,7 +88,7 @@ const ClientProfile = ({
   };
 
   // // Components render
-  const renderBadges = items.map((item, index) => (
+  const renderBadges = assignedStrategies.map((item, index) => (
     <Badge key={index}
       strategy={item.badgeName} />
   ));
@@ -179,7 +176,9 @@ const ClientProfile = ({
         handleToggle={toggleBadgeModal}
         isBadgeModal={isBadgeModal}
         selectedClientId={selectedClient}
-        strategies={items}
+        strategies={assignedStrategies}
+        setClientData={setClientData}
+        clientData={clientData}
       />
       <ArchiveModal
         handleToggle={toggleArchiveModal}

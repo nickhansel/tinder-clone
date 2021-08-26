@@ -37,12 +37,15 @@ const link = ApolloLink.from([
   createAuthLink({ url, region, auth }),
   createHttpLink({ uri: url }),
 ]);
-
+const defaultOptions = {
+  watchQuery: { fetchPolicy:  'cache-and-network'  },
+};
 export const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
   typeDefs,
-});
+  // defaultOptions,
+}); 
 
 ReactDOM.render(
   <ApolloProvider client={client}>

@@ -16,10 +16,26 @@ import { Note, Loading } from 'common';
 const Strategies = ({
   data,
   loading,
+  clientData,
+  setClientData
 }) => {
   // gQL mutations
   const [deleteAction, { loading: deleting }] = useMutation(
-    gql(deleteStrategy)
+    gql(deleteStrategy), {
+      onCompleted({deleteStrategy}) {
+        const newStartegies = data.filter((item) => item.id != deleteStrategy.id);
+
+        const newClientData = {
+          ...clientData,
+          strategy: {
+            items: [...newStartegies]
+          }
+        };
+        if (setClientData) {
+          setClientData(newClientData);
+        }
+      }
+    }
   );
   const [updateClientStrategy, { loading: updating }] = useMutation(
     gql(updateStrategy)
@@ -45,11 +61,7 @@ const Strategies = ({
       },
     });
   };
-  
-  if (loading) {
-    return <Loading />;
-  }
-  
+
   const headerActionsConfig = [
     {
       name: 'resolve',
